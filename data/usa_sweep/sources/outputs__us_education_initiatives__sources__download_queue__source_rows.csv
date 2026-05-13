@@ -1,0 +1,2 @@
+source_id,initiative_id,repository,url,retrieval_mode,target_path,status,priority,_source_file,_source_line_estimate
+src_careerwise_primary_site,careerwise-colorado-youth-apprenticeship,official_program_site,https://www.careerwiseusa.org/research-insights,manual_html_capture,C:\Users\tfreestone\Code\athsrueas\Open_Data\outputs\us_education_initiatives\sources\raw\official\careerwise\careerwise_research_archive.html,downloaded,medium,outputs/us_education_initiatives/sources/download_queue.csv,20

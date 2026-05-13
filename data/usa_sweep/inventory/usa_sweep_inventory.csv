@@ -1,0 +1,40 @@
+category,source_file,output_file,record_count
+usa_rows,Education Initiatives/education_initiatives.csv,records/Education Initiatives__education_initiatives__usa_rows.csv,8
+source_rows,Education Initiatives/education_initiatives.csv,sources/Education Initiatives__education_initiatives__source_rows.csv,2
+source_rows,Education Initiatives/initiative_sources.csv,sources/Education Initiatives__initiative_sources__source_rows.csv,8
+usa_rows,outputs/educational_inequality_map/phase1_world_bank/jurisdictions.csv,records/outputs__educational_inequality_map__phase1_world_bank__jurisdictions__usa_rows.csv,1
+usa_rows,outputs/educational_inequality_map/phase1_world_bank/observations.csv,records/outputs__educational_inequality_map__phase1_world_bank__observations__usa_rows.csv,150
+source_rows,outputs/us_education_initiatives/sources/download_queue.csv,sources/outputs__us_education_initiatives__sources__download_queue__source_rows.csv,1
+source_rows,outputs/us_education_initiatives/state_outcomes/state_year_indicator_catalog.csv,sources/outputs__us_education_initiatives__state_outcomes__state_year_indicator_catalog__source_rows.csv,1
+usa_rows,outputs/us_education_initiatives/subspace/initiatives.flat.csv,records/outputs__us_education_initiatives__subspace__initiatives.flat__usa_rows.csv,8
+source_rows,outputs/us_education_initiatives/subspace/initiatives.flat.csv,sources/outputs__us_education_initiatives__subspace__initiatives.flat__source_rows.csv,3
+source_manifest,outputs/us_education_initiatives/sources/source_manifest.json,sources/outputs__us_education_initiatives__sources__source_manifest.json,1
+source_manifest,outputs/us_education_initiatives/subspace/catalog.json,sources/outputs__us_education_initiatives__subspace__catalog.json,1
+source_manifest,outputs/us_education_initiatives/subspace/initiatives.bundle.json,sources/outputs__us_education_initiatives__subspace__initiatives.bundle.json,1
+source_manifest,outputs/us_education_initiatives/state_outcomes/runs/state_outcomes_latest.json,sources/outputs__us_education_initiatives__state_outcomes__runs__state_outcomes_latest.json,1
+source_manifest,outputs/us_education_initiatives/sources/runs/latest.json,sources/outputs__us_education_initiatives__sources__runs__latest.json,1
+source_manifest,outputs/educational_inequality_map/raw/2026-03-30/nces_piaac_us/manifest.json,sources/outputs__educational_inequality_map__raw__2026-03-30__nces_piaac_us__manifest.json,1
+source_manifest,outputs/educational_inequality_map/raw/2026-03-30/geoboundaries/manifest.json,sources/outputs__educational_inequality_map__raw__2026-03-30__geoboundaries__manifest.json,1
+source_manifest,outputs/educational_inequality_map/phase1_world_bank/manifest.json,sources/outputs__educational_inequality_map__phase1_world_bank__manifest.json,1
+text_hit,README.md,,1
+text_hit,TASKLIST.md,,1
+text_hit,docs/exemplar-datarepublican.md,,1
+text_hit,examples/sample_dataset.json,,1
+text_hit,docs/Bounties/educational-inequality-map-adult-skills-backfill.md,,1
+text_hit,docs/Bounties/official-bounty-suggestions.md,,1
+text_hit,docs/Bounties/public-data-accessibility-project.md,,1
+text_hit,Education Initiatives/subspace/manifest.json,,1
+text_hit,outputs/educational_inequality_map/raw/2026-03-30/geoboundaries/api/gbOpen_ALL_ADM0.json,,1
+text_hit,outputs/educational_inequality_map/raw/2026-03-30/giga/api/locations_countries.json,,1
+text_hit,outputs/educational_inequality_map/raw/worldbank/2026-03-30/country/page-001.json,,1
+text_hit,outputs/educational_inequality_map/raw/worldbank/2026-03-30/indicator/NY.GDP.PCAP.KD/page-001.json,,1
+text_hit,outputs/educational_inequality_map/raw/worldbank/2026-03-30/indicator/SE.ADT.LITR.ZS/page-001.json,,1
+text_hit,outputs/educational_inequality_map/raw/worldbank/2026-03-30/indicator/SE.PRM.CMPT.ZS/page-001.json,,1
+text_hit,outputs/educational_inequality_map/raw/worldbank/2026-03-30/indicator/SE.XPD.TOTL.GB.ZS/page-001.json,,1
+text_hit,outputs/educational_inequality_map/raw/worldbank/2026-03-30/indicator/SE.XPD.TOTL.GD.ZS/page-001.json,,1
+text_hit,outputs/educational_inequality_map/raw/worldbank/2026-03-30/indicator/SP.POP.TOTL/page-001.json,,1
+text_hit,outputs/us_education_initiatives/subspace/initiatives.bundle.json,,1
+text_hit,outputs/us_education_initiatives/sources/runs/download_run_20260502-010405.json,,1
+text_hit,outputs/us_education_initiatives/sources/runs/download_run_20260504-140809.json,,1
+text_hit,outputs/us_education_initiatives/sources/runs/download_run_20260504-141132.json,,1
+text_hit,src/open_data/data-sources.json,,1

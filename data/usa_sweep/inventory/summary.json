@@ -1,0 +1,11 @@
+{
+  "generated_from": "C:\\Users\\tfreestone\\Code\\athsrueas\\Open_Data",
+  "output_root": "C:\\Users\\tfreestone\\Code\\athsrueas\\edudash\\data\\usa_sweep",
+  "total_inventory_rows": 39,
+  "categories": {
+    "usa_rows": 4,
+    "source_rows": 5,
+    "source_manifest": 8,
+    "text_hit": 22
+  }
+}
