@@ -1,0 +1,4 @@
+source_id,source_name,scope,release_date,source_url,notes
+worldbank_edstats_phase1,World Bank EdStats API,USA country-year metrics,2026-03-30,https://api.worldbank.org/v2/,Backbone metrics and observations filtered to USA.
+geoboundaries_adm0,geoBoundaries ADM0 (simplified),USA boundary geometry,2026-03-30,https://www.geoboundaries.org/api/current/gbOpen/ALL/ADM0/,Single-country polygon for map rendering.
+nces_piaac_2023,NCES PIAAC 2023 national results,USA adult skills context,2026-03-31,https://nces.ed.gov/surveys/piaac/2023/national_results.asp,Staged as reference source record pending ontology mapping.

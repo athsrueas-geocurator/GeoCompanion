@@ -1,0 +1,2 @@
+"jurisdiction_id","name","jurisdiction_type","iso2_code","iso3_code","world_bank_region","world_bank_income_group","capital_city","longitude","latitude","status","source_system","source_snapshot_date"
+"jurisdiction/USA","United States","country","US","USA","North America","High income","Washington D.C.","-77.032","38.8895","active","WorldBank_EdStats","2026-03-30"
