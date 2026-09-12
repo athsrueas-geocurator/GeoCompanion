@@ -1,0 +1,86 @@
+.location-view h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin: 16px 0;
+}
+.location-view > p {
+  max-width: 760px;
+  line-height: 1.6;
+}
+.location-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 18px 0;
+  font-size: 14px;
+}
+.location-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 230px;
+  gap: 22px;
+}
+.geo-leaflet {
+  height: 450px;
+  width: 100%;
+  border: 1px solid #c8d6d1;
+  border-radius: 12px;
+  z-index: 0;
+}
+.location-list {
+  max-height: 450px;
+  overflow: auto;
+}
+.location-list label {
+  display: grid;
+  gap: 8px;
+}
+.location-list input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+}
+.location-list button {
+  width: 100%;
+  text-align: left;
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  margin-top: 10px;
+  border: 1px solid #d6dfda;
+  border-radius: 8px;
+  background: white;
+}
+.location-list button[aria-pressed='true'] {
+  background: #e5efe9;
+  border-color: #195f55;
+}
+.location-list span {
+  font-size: 12px;
+}
+.location-records {
+  padding: 22px 0;
+}
+.location-records li {
+  margin: 12px 0;
+  line-height: 1.5;
+}
+.location-view .leaflet-control-attribution {
+  font-size: 11px;
+}
+.location-view .muted {
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media (max-width: 760px) {
+  .location-layout {
+    grid-template-columns: 1fr;
+  }
+  .geo-leaflet {
+    height: 340px;
+  }
+  .location-list {
+    max-height: 260px;
+  }
+}

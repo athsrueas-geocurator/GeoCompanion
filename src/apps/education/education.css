@@ -1,0 +1,271 @@
+.study-panel .section-title {
+  padding: 0 0 18px;
+}
+.study-panel .filters {
+  padding: 20px 0 12px;
+}
+.study-panel > p {
+  margin: 12px 0;
+}
+.book-notes > p {
+  margin: 16px 0;
+}
+.book-notes .curation-path {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 26px;
+}
+.book-notes article p {
+  margin: 12px 0;
+}
+.curation-focus p {
+  margin: 16px 0;
+}
+@media (max-width: 600px) {
+  .book-notes .curation-path {
+    grid-template-columns: 1fr;
+  }
+  .forest-chart {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    overflow: visible;
+  }
+  .forest-labels {
+    display: grid;
+  }
+  .forest-chart svg {
+    min-width: 0;
+  }
+  .forest-labels span {
+    font-size: 14px;
+  }
+  .forest-labels small {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+}
+.dataset-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.dataset-strip article {
+  border: 1px solid var(--line, #dce2e0);
+  padding: 24px;
+  border-radius: 10px;
+}
+.dataset-strip h2 {
+  font-size: 21px;
+}
+.dataset-strip p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.study-panel {
+  padding: 28px;
+}
+.study-panel .filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+.study-legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 14px;
+  color: #176b59;
+}
+.study-legend span + span {
+  color: #535acb;
+}
+.forest-chart {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  margin: 32px 0 0;
+  align-items: start;
+}
+.forest-labels {
+  display: grid;
+  grid-auto-rows: 64px;
+  padding-top: 12px;
+}
+.forest-labels span {
+  font-size: 16px;
+}
+.forest-labels small {
+  display: block;
+  font-size: 14px;
+}
+.forest-chart svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.study-table {
+  overflow: auto;
+  margin: 25px 0;
+}
+.study-table table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 740px;
+  font-size: 14px;
+  text-align: left;
+}
+.study-table caption {
+  text-align: left;
+  padding: 12px 0;
+  font-weight: 600;
+}
+.study-table th,
+.study-table td {
+  border-bottom: 1px solid #dae0df;
+  padding: 14px 12px;
+  vertical-align: top;
+}
+.study-table small {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+}
+.curation-focus {
+  max-width: 820px;
+  border-left: 5px solid #176b59;
+  padding: 28px 36px;
+  background: #f0f6f3;
+  margin: 24px 0 36px;
+}
+.curation-focus blockquote {
+  font-family: Georgia, serif;
+  font-size: 34px;
+  line-height: 1.3;
+  margin: 20px 0;
+}
+.curation-focus p,
+.curation-path p {
+  font-size: 17px;
+  line-height: 1.7;
+}
+.curation-path {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  margin-bottom: 36px;
+}
+.curation-path article {
+  border-top: 1px solid #cbd4cf;
+  padding-top: 20px;
+}
+.curation-path h2 {
+  font-size: 24px;
+  line-height: 1.3;
+}
+.curation-path .number {
+  font-size: 14px;
+  color: #176b59;
+}
+.curation-path button {
+  margin-top: 12px;
+}
+.study-panel .caveat p {
+  font-size: 16px;
+  line-height: 1.65;
+}
+@media (max-width: 1000px) {
+  .dataset-strip,
+  .curation-path {
+    grid-template-columns: 1fr;
+  }
+  .forest-chart {
+    grid-template-columns: 130px minmax(0, 1fr);
+  }
+  .forest-labels small {
+    font-size: 12px;
+  }
+  .study-panel {
+    padding: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .forest-chart {
+    display: block;
+    overflow-x: auto;
+  }
+  .forest-labels {
+    display: none;
+  }
+  .forest-chart svg {
+    min-width: 600px;
+    height: auto;
+  }
+  .curation-focus {
+    padding: 22px;
+  }
+  .curation-focus blockquote {
+    font-size: 28px;
+  }
+}
+
+/* Keep row labels and marker geometry intact at every viewport width. */
+.forest-scroll {
+  overflow-x: auto;
+  margin-top: 24px;
+}
+.forest-chart {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  min-width: 650px;
+  margin: 0;
+  overflow: visible;
+}
+.forest-labels {
+  display: grid;
+  grid-auto-rows: 64px;
+  padding-top: 12px;
+}
+.forest-labels span {
+  font-size: 14px;
+}
+.forest-labels small {
+  font-size: 12px;
+}
+.forest-chart svg {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  font-family: inherit;
+}
+.forest-axis {
+  min-width: 650px;
+  text-align: center;
+  font-size: 13px;
+  color: #536b6c;
+  margin: 0 0 14px !important;
+  padding-left: 180px;
+}
+.study-panel .study-legend {
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .forest-chart {
+    min-width: 0;
+    grid-template-columns: 105px minmax(0, 1fr);
+  }
+  .forest-labels span {
+    font-size: 12px;
+  }
+  .forest-labels small {
+    font-size: 11px;
+    max-width: 95px;
+  }
+  .forest-axis {
+    min-width: 0;
+    padding-left: 105px;
+    font-size: 11px;
+  }
+}

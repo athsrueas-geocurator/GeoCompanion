@@ -1,0 +1,27 @@
+# Local secrets, environment variants, and editor copies
+.env
+.env.*
+!.env.example
+.env*~
+.env*.bak
+.env*.swp
+.env*.swo
+.dev.vars
+.dev.vars.*
+
+# Dependencies, build outputs, local tooling, and scratch work
+node_modules/
+dist/
+.wrangler/
+work/
+.playwright-mcp/
+
+# Local inspection, drafts and host-specific artifacts
+*.log
+coverage/
+.DS_Store
+
+# Unpublished writing and local account observations
+EDITORIAL_DRAFTS.md
+BOOK_CURATION.md
+BILLING.md

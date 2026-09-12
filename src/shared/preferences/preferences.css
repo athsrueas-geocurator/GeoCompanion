@@ -1,0 +1,123 @@
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.preferences-page {
+  max-width: 900px;
+  padding: 40px 24px 60px;
+}
+.preferences-page h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+.pref-section {
+  background: white;
+  border: 1px solid #cbd8d2;
+  border-radius: 10px;
+  padding: 25px;
+  margin: 24px 0;
+}
+.pref-section h2 {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+.pref-section p,
+.followed p {
+  line-height: 1.65;
+  margin: 12px 0;
+}
+.pref-section label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 18px 0;
+  font-size: 1rem;
+}
+.pref-section input,
+.pref-section select {
+  padding: 12px;
+  border: 1px solid #aabbba;
+  border-radius: 6px;
+  font: inherit;
+  min-width: 0;
+  width: 100%;
+  background: white;
+  color: #243638;
+}
+.pref-help {
+  color: #52655f;
+  font-size: 0.875rem;
+}
+.pref-warning {
+  background: #fff3de;
+  color: #714d12;
+  padding: 14px;
+  border-radius: 6px;
+}
+.profile-list {
+  list-style: none;
+  padding: 0;
+}
+.profile-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid #d5dfda;
+  padding: 18px 0;
+}
+.profile-list li > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.profile-list small {
+  display: block;
+  font-size: 0.8rem;
+  color: #596d67;
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+.profile-list button {
+  flex-shrink: 0;
+}
+.pref-tag {
+  font-size: 0.8rem;
+  margin-left: 12px;
+  background: #e7f1e9;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.followed ul {
+  padding-left: 20px;
+}
+.followed li {
+  margin: 14px 0;
+}
+.profile-list a {
+  font-size: 0.95rem;
+}
+@media (max-width: 760px) {
+  header:has(.header-actions) {
+    height: auto;
+    min-height: 68px;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 16px 20px;
+  }
+  .header-actions {
+    flex-wrap: wrap;
+  }
+  .preferences-page {
+    padding: 28px 16px;
+  }
+  .pref-section {
+    padding: 18px;
+  }
+  .profile-list li {
+    align-items: flex-start;
+  }
+  .profile-list button {
+    font-size: 0.875rem;
+  }
+}

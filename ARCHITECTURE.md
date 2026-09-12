@@ -1,0 +1,80 @@
+# How Geo Companion works
+
+This document describes the implemented system. Proposed infrastructure is explicitly separated below. Feature-specific documents contain the exact query contracts.
+
+## Runtime and ownership
+
+```mermaid
+flowchart LR
+  Author[Editor selects exact writing] --> Publisher[geo_publisher: research and authorized writes]
+  Reference[Education-Initiatives reference] --> Publisher
+  Publisher --> Geo[Geo graph and content]
+  Build[GeoCompanion source / Vite build] --> CF[Cloudflare Pages: dist only]
+  CF --> Browser[Browser: React app]
+  Browser -->|public GraphQL reads| Geo
+  Browser -->|avatar images| IPFS[Pinata IPFS gateway]
+  Browser -->|visible map tiles| OSM[OpenStreetMap]
+  Browser <--> Local[Local preferences and expiring map cache]
+```
+
+There is no application server or wallet in this repository's runtime. Geo reads use `https://api-testnet.geobrowser.io/graphql`. This is testnet, not an implied production-network integration. Frontend bundles contain public space/property IDs, never wallet or Cloudflare secrets.
+
+## Startup and navigation
+
+1. `index.html` loads [main.tsx](src/main.tsx), which mounts React and the shared preferences provider.
+2. [App.tsx](src/app/App.tsx) reads the hash through [routes.mjs](src/app/routes.mjs). Root shows the selector; education and outreach modules are lazy imports. Unknown routes show a missing-page screen. Legacy education fragments remain supported.
+3. The selected app owns its navigation and transient state. Switching apps unmounts the previous app. Shared preferences survive via the provider and local storage.
+4. [Brand.tsx](src/shared/branding/Brand.tsx) supplies the same triangle everywhere. Selector icons read the primary space's scoped Avatar relation and image IPFS URL. Missing or failed images fall back to the triangle; a cover is not silently substituted.
+
+The two available apps are intentionally registered in the shell. Their space avatars are dynamic. This is separate from the Connections view's dynamically discovered space list.
+
+## Feature-to-data contracts
+
+| Screen / component | Adapter | Operation and boundary |
+| --- | --- | --- |
+| EducationDashboard | [education-live.mjs](src/apps/education/education-live.mjs) | Space- and study-filtered estimate query; parse typed values, preserve units and uncertainty before plotting |
+| Curation | [curation-live.mjs](src/apps/education/curation-live.mjs) | Discover profile Posts, fetch selected post, read scoped Blocks and references, order positions lexicographically; resolve book names in Books space |
+| DebateBoard | [debates.mjs](src/apps/education/debates.mjs) | Discover education-related debate-tagged claims, then batch public counts; missing counts stay unavailable |
+| ConnectionExplorer | [connection-data.mjs](src/apps/education/connection-data.mjs) | Follow selected relation kinds from education/profile roots; group shared targets, preserve distinct source records, resolve actual space names |
+| LocationMap | [location-data.mjs](src/apps/education/location-data.mjs) | Page education location edges, deduplicate places, query Places-scoped coordinates, reject invalid/conflicting points |
+| Atlas and questions | [data.mjs](src/apps/education/data.mjs) | Validate and search `/data/education.json`, a bundled reference snapshot |
+| Preferences and follows | [profile-search.mjs](src/shared/preferences/profile-search.mjs) | Name/ID queries narrow on input; verify personal spaces; save chosen IDs rather than a hardcoded identity list |
+| Selector icons | [space-icons.mjs](src/shared/branding/space-icons.mjs) | Space-scoped Avatar and IPFS URL lookup; only immutable CID image URLs accepted |
+| OutreachMap | [OutreachMap.tsx](src/apps/outreach/OutreachMap.tsx) | Lazy Leaflet basemap centered on Indianapolis; no operational dataset query or service pins yet |
+
+Query text, schema IDs and parsing rules stay with the feature adapter because these contracts differ. Presentation components handle selection, loading, errors and rendering. Tests exercise malformed data, scoping-related transforms, pagination and cache behavior rather than duplicating screen copy.
+
+## Caching and network flow
+
+| Data | Cache / retention | Refresh behavior |
+| --- | --- | --- |
+| STAR estimates and debate results | Module memory, 1 minute | User refresh bypasses cache, with short cooldown |
+| Profile search | Memory, 5 minutes, at most 50 query entries | Debounced input and abortable requests |
+| Curation reads | Memory, 5 minutes, at most 30 query entries | Explicit refresh bypasses cache |
+| Connections | Memory, 5 minutes, at most 40 query entries | Bounded cursor batches and explicit load more |
+| Space icons | Memory, 5 minutes | Revisit after expiry; browser caches immutable image bytes |
+| Education locations | Local storage, fresh for 1 hour, retained up to 7 days | Refresh on stale load; prior results can remain visible on failure |
+| Preferences and local drafts | Local storage until changed/cleared | No automatic publication or server synchronization |
+| Map tiles and static assets | Normal HTTP caching | Only visible tiles; no offline tile prefetch |
+
+No background polling or VM proxy is added by these components. Cache policies are currently feature-specific, not one universal cache. Canonical profile writing is not bundled or persisted as a silent fallback. The map cache is public derived data, distinct from saved user preferences.
+
+## Rendering and safety
+
+Remote data is untrusted. Curation uses React Markdown with HTML skipped; links are restricted to HTTP(S), and inline content images are links rather than automatic large downloads. Map labels use text nodes. Invalid or incomplete graph responses yield explicit errors or missing-data states. Unknown values are not converted into zero or false. Source details and limitations belong where they affect interpretation; infrastructure diagnostics stay out of visitor copy.
+
+`public/_headers` restricts script, connection and image origins. The only application API destination is Geo; map images go to OSM and avatars to the selected IPFS gateway. Required map attribution remains visible. Adding a provider requires reviewing both code and CSP.
+
+## Publisher integration
+
+[geo_publisher](https://github.com/athsrueas-geocurator/geo_publisher) owns research, mapping, deduplication, authorization and transaction verification. GeoCompanion owns read adapters, presentation and frontend deployment. See [PUBLISHER_HANDOFF.md](PUBLISHER_HANDOFF.md) and the publisher's [dashboard contract](https://github.com/athsrueas-geocurator/geo_publisher/blob/main/docs/education-dashboard-data-contract.md).
+
+Publication flow: agree on dataset membership and existing ontology → publisher prepares and verifies authorized writes → inspect real API responses → implement bounded adapter and meaningful tests → render loading/empty/error states → verify browser destinations and deploy. New content matching an existing contract should appear through refresh/discovery without a frontend release; a new schema or application tool still requires code changes.
+
+Outreach belongs in the user-approved Public good space, but space membership alone is insufficient. The future reader must constrain exact directory dataset membership, service/program/location identity and public-location status. Do not expose private encampments, infer opening hours or label stale schedules as available today. See [outreach specification](https://github.com/athsrueas-geocurator/geo_publisher/blob/main/docs/indianapolis-outreach-directory.md).
+
+## Deployment and planned infrastructure
+
+`npm run build` produces static `dist/`. `scripts/deploy.mjs` explicitly reads only Cloudflare deployment values from the local `.env`, checks the output, and uploads `dist/` to the existing Pages project. GitHub is source control; a Git push is not a verified Pages deployment. See [DEPLOYMENT.md](DEPLOYMENT.md).
+
+`linux-cloud` is not serving app requests, scheduled aggregates or public forwarding for this implementation. A conservative collector that publishes small immutable partitions is proposed in [LOW_EGRESS_PROTOCOL.md](LOW_EGRESS_PROTOCOL.md), not implemented. There is no guaranteed zero-cost claim, spending cap or operational service implied by that design.

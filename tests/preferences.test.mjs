@@ -1,0 +1,65 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {
+  emptyPreferences,
+  parseProfileId,
+  addProfile,
+  removeProfile,
+  readPreferences,
+  writePreferences,
+  PREFERENCES_KEY,
+} from '../src/shared/preferences/preference-storage.mjs';
+const a = 'a'.repeat(32),
+  b = 'b'.repeat(32);
+test('identity input rejects lookalike domains and content links', () => {
+  assert.equal(parseProfileId(`https://www.geobrowser.io/space/${a}`), a);
+  assert.equal(parseProfileId(a.toUpperCase()), a);
+  for (const url of [
+    `https://www.geobrowser.io.evil.test/space/${a}`,
+    `https://www.geobrowser.io/space/${a}/${b}`,
+    'javascript:alert(1)',
+  ])
+    assert.throws(() => parseProfileId(url));
+});
+test('save only IDs, deduplicate and clear removed default', () => {
+  let p = addProfile(emptyPreferences(), a);
+  p = addProfile(p, b);
+  assert.throws(() => addProfile(p, a));
+  assert.deepEqual(p.profiles, [a, b]);
+  assert.equal(removeProfile(p, a).defaultProfileId, null);
+  let raw;
+  assert.equal(
+    writePreferences(
+      {
+        setItem: (k, v) => {
+          assert.equal(k, PREFERENCES_KEY);
+          raw = v;
+        },
+      },
+      p,
+    ),
+    '',
+  );
+  assert.deepEqual(readPreferences({ getItem: () => raw }).value, p);
+  assert.equal(raw.includes('name'), false);
+});
+test('corrupt and unavailable storage surface errors without crashing', () => {
+  assert.ok(readPreferences({ getItem: () => '{bad' }).error);
+  assert.ok(
+    readPreferences({
+      getItem: () => {
+        throw Error();
+      },
+    }).error,
+  );
+  assert.ok(
+    writePreferences(
+      {
+        setItem: () => {
+          throw Error();
+        },
+      },
+      emptyPreferences(),
+    ),
+  );
+});
