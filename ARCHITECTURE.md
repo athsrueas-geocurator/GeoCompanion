@@ -2,11 +2,9 @@
 
 This document describes the implemented system. Proposed infrastructure is explicitly separated below. Feature-specific documents contain the exact query contracts.
 
-Next design: [living Geo collections and readers](docs/LIVING_GEO_DESIGN.md) replaces fixed selection with native collection discovery and handles edits, removals and changed relationships. It is proposed, not deployed.
+This describes current source, not an automatic deployment of every committed change. Start with the [README teaching tour](README.md#a-tour-from-publication-to-pixels) for query and transformation examples. [DEPLOYMENT.md](DEPLOYMENT.md) records the actual hosted release.
 
-September 12 local implementation: the Questions route now uses `Questions.tsx` and `question-data.mjs` to traverse the original Questions dataset's native ordered collection. It reads actual Question/Answer types separately from Claim debates. `shared/geo` provides its coalesced, four-concurrent-request reader, two-minute bounded memory cache and collection pagination. Other adapters still use their existing policies. All 21 Questions, search, empty Answers and mobile dark rendering were checked locally; production remains the release recorded in DEPLOYMENT.md.
-
-The local dashboard route now uses `DatasetExplorer.tsx`/`dataset-data.mjs`: ordered native catalog membership (25 verified entries), dataset Blocks, result Collection items, scoped typed fields and published methods text. It retains an initial grade/arm percentile-point plot using live dimension names and verified study identity. Generic result reading supports additional families; chart generalization and comprehensive edit handling remain in progress. The older STAR component is currently unused, awaiting cleanup after validation.
+The [living Geo design](docs/LIVING_GEO_DESIGN.md) is partially implemented. Native Questions, ordered dataset catalog/result reads, dynamic relationship filters and membership-aware references are in the current source. The September 12 browser check observed 27 catalog entries and all 21 original Questions. Older per-feature readers, block capability handling, broader comparisons and outreach integration remain unfinished; see the [README gap assessment](README.md#weaknesses-and-planned-improvements).
 
 ## Runtime and ownership
 
@@ -42,11 +40,12 @@ The two available apps are intentionally registered in the shell. Their space av
 | Screen / component | Adapter | Operation and boundary |
 | --- | --- | --- |
 | DatasetExplorer | [dataset-data.mjs](src/apps/education/dataset-data.mjs) | Native ordered catalog and result collection reads; typed fields, methods blocks and compatible grade/arm plot |
-| Curation | [curation-live.mjs](src/apps/education/curation-live.mjs) | Discover profile Posts, fetch selected post, read scoped Blocks and references, order positions lexicographically; resolve book names in Books space |
-| DebateBoard | [argument-data.mjs](src/apps/education/argument-data.mjs), [debates.mjs](src/apps/education/debates.mjs) | Default scoped research-question discovery and on-demand argument neighborhoods; separate legacy Public conversations tab retains tagged discovery/counts. See [dynamic contract](docs/DYNAMIC_ARGUMENTS.md) |
+| Curation | [curation-live.mjs](src/apps/education/curation-live.mjs) | Discover profile Posts, fetch selected post, read scoped Blocks and references, order positions lexicographically; resolve reference destinations through actual space membership |
+| DebateBoard | [argument-data.mjs](src/apps/education/argument-data.mjs), [debates.mjs](src/apps/education/debates.mjs) | Scoped non-factual Claim discovery and on-demand argument neighborhoods; Public responses uses classified Claim pagination and separate response counts, without title-keyword/tag discovery. See [dynamic contract](docs/DYNAMIC_ARGUMENTS.md) |
 | ConnectionExplorer | [connection-data.mjs](src/apps/education/connection-data.mjs) | Follow selected relation kinds from education/profile roots; group shared targets, preserve distinct source records, resolve actual space names |
 | LocationMap | [location-data.mjs](src/apps/education/location-data.mjs) | Page education location edges, deduplicate places, query Places-scoped coordinates, reject invalid/conflicting points |
-| Atlas and questions | [atlas-live.mjs](src/apps/education/atlas-live.mjs), [LiveAtlas.tsx](src/apps/education/LiveAtlas.tsx) | Space-scoped paginated Geo programs, studies and non-factual claims; selection loads linked claims; five-minute bounded memory cache; no bundled snapshot |
+| Evidence atlas | [atlas-live.mjs](src/apps/education/atlas-live.mjs), [LiveAtlas.tsx](src/apps/education/LiveAtlas.tsx) | Scoped program/study reads and linked Claims; no bundled snapshot |
+| Questions | [question-data.mjs](src/apps/education/question-data.mjs), [Questions.tsx](src/apps/education/Questions.tsx) | Native ordered Question collection and actual Answer targets; shared reader, separate from Claim debates |
 | Preferences and follows | [profile-search.mjs](src/shared/preferences/profile-search.mjs) | Name/ID queries narrow on input; verify personal spaces; save chosen IDs rather than a hardcoded identity list |
 | Selector icons | [space-icons.mjs](src/shared/branding/space-icons.mjs) | Space-scoped Avatar and IPFS URL lookup; only immutable CID image URLs accepted |
 | OutreachMap | [OutreachMap.tsx](src/apps/outreach/OutreachMap.tsx) | Lazy Leaflet basemap centered on Indianapolis; no operational dataset query or service pins yet |
@@ -57,7 +56,8 @@ Query text, schema IDs and parsing rules stay with the feature adapter because t
 
 | Data | Cache / retention | Refresh behavior |
 | --- | --- | --- |
-| STAR estimates and debate results | Module memory, 1 minute | User refresh bypasses cache, with short cooldown |
+| Dataset/Question reads and shared references | Shared memory reader, 2 minutes, 128 entries and estimated 4 MiB serialized values; 4 concurrent requests | Explicit invalidation and generation guards; dashboard/Questions use the shared reader |
+| Public response counts | Feature memory, 1 minute | Explicit refresh; no claim of instant updates |
 | Research questions and argument pages | Shared module memory, 5 minutes, 64 parsed pages; identical in-flight reads shared | On demand only; Refresh clears pages; no persistent content cache |
 | Profile search | Memory, 5 minutes, at most 50 query entries | Debounced input and abortable requests |
 | Curation reads | Memory, 5 minutes, at most 30 query entries | Explicit refresh bypasses cache |
@@ -91,4 +91,4 @@ Outreach belongs in the user-approved Public good space, but space membership al
 
 `npm run build` produces static `dist/`. `scripts/deploy.mjs` explicitly reads only Cloudflare deployment values from the local `.env`, checks the output, and uploads `dist/` to the existing Pages project. GitHub is source control; a Git push is not a verified Pages deployment. See [DEPLOYMENT.md](DEPLOYMENT.md).
 
-`linux-cloud` is not serving app requests, scheduled aggregates or public forwarding for this implementation. A conservative collector that publishes small immutable partitions is proposed in [LOW_EGRESS_PROTOCOL.md](LOW_EGRESS_PROTOCOL.md), not implemented. There is no guaranteed zero-cost claim, spending cap or operational service implied by that design.
+`linux-cloud` is not serving app requests, scheduled aggregates or public forwarding for this implementation. A conservative ongoing collector is proposed in [LOW_EGRESS_PROTOCOL.md](LOW_EGRESS_PROTOCOL.md), not deployed as an app dependency. A separate bounded metadata-upload experiment exists in Open_Data; see DEPLOYMENT.md for that distinction. There is no guaranteed zero-cost claim, spending cap or operational service implied by that design.

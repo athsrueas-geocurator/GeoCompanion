@@ -1,8 +1,10 @@
 # Documentation index
 
-[Living Geo design](LIVING_GEO_DESIGN.md): proposed native collections, edit-aware readers, capability-based views, caching and staged implementation.
+[README teaching tour](../README.md#a-tour-from-publication-to-pixels): concrete code examples, how to build a similar dynamic app, current weaknesses and planned improvements.
 
-[Hardcoded content audit](HARDCODED_CONTENT_AUDIT.md): remaining fixed study selections, reference destinations and discovery rules, with prioritized Geo-query replacements.
+[Living Geo design](LIVING_GEO_DESIGN.md): partially implemented native collections, edit-aware readers, capability-based views, caching and staged work.
+
+[Hardcoded content audit](HARDCODED_CONTENT_AUDIT.md): historical baseline findings and prioritized replacements. Use the README and TODO for current completion status.
 
 [Dynamic questions and arguments](DYNAMIC_ARGUMENTS.md): static discovery rules, live graph semantics, browser computation, cache limits and publisher contract.
 
