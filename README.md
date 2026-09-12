@@ -99,7 +99,7 @@ export async function resultPage(id, previous = null) {
 }
 ```
 
-Block metadata reads only type and data-source relationships, so a large collection does not exhaust its metadata limit by including members there. Explicit Collection data source blocks become tables, typed Text blocks become notes, and unsupported blocks retain Geo links.
+Block metadata reads only type and data-source relationships, so a large collection does not exhaust its metadata limit by including members there. Explicit Collection data source blocks become tables, typed Text blocks become notes, Image entities can load on request, and unsupported blocks retain Geo links. See the [SDK and block-support study](docs/GEO_BLOCK_SUPPORT.md) for current limits.
 
 `edgeWindow` reads at most four new pages per action. `hydrateResults` fetches unique member records in batches of 50 and resolves Study membership where needed for chart checks. The UI exposes Load more and withholds a comparison plot while collection coverage is partial. This bounds new membership reads; it does **not** impose a total byte budget on all detail requests.
 

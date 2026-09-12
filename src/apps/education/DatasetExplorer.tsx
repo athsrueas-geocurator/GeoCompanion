@@ -18,6 +18,7 @@ import useRevalidation from '../../shared/geo/useRevalidation';
 import GeoReference from '../../shared/geo/GeoReference';
 import { resultFacets, selectedFacet } from './result-facets.mjs';
 import { blockKind } from './block-capabilities.mjs';
+import DatasetImage from './DatasetImage';
 type RecordRow = {
   id: string;
   name: string;
@@ -299,6 +300,7 @@ function Dataset({ id, tick }: { id: string; tick: number }) {
   }, [id, tick]);
   const tables = blocks.filter((b) => blockKind(b) === 'collection'),
     notes = blocks.filter((b) => blockKind(b) === 'text'),
+    images = blocks.filter((b) => blockKind(b) === 'image'),
     other = blocks.filter((b) =>
       ['unsupported', 'unavailable'].includes(blockKind(b)),
     );
@@ -348,6 +350,9 @@ function Dataset({ id, tick }: { id: string; tick: number }) {
           </ul>
         </section>
       )}
+      {images.map((b) => (
+        <DatasetImage key={b.id} record={b} />
+      ))}
       {!busy && !error && !blocks.length && (
         <p>No readable content blocks are linked to this dataset.</p>
       )}

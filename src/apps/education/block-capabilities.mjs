@@ -6,6 +6,8 @@ export const BLOCK = {
   source: '1f69cc9880d444abad493df6a7b15ee4',
   collection: '1295037a5d9c4d09b27c5502654b9177',
   markdown: 'e3e363d1dd294ccb8e6ff3b76d99bc33',
+  image: 'ba4e41460010499da0a3caaa7f579d0e',
+  imageUrl: '8a743832c0944a62b6650c3cc2f9c7bc',
 };
 export function blockKind(record) {
   if (record.unavailable) return 'unavailable';
@@ -21,6 +23,7 @@ export function blockKind(record) {
     return sources.size === 1 && sources.has(BLOCK.collection)
       ? 'collection'
       : 'unsupported';
+  if (types.has(BLOCK.image)) return 'image';
   if (
     types.has(BLOCK.text) &&
     record.fields.some(

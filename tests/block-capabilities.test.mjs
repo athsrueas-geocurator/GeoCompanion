@@ -31,6 +31,7 @@ test('explicit collection classification does not depend on names or loaded memb
   );
 });
 test('text and unfamiliar blocks never silently become result tables', () => {
+  assert.equal(blockKind(record([rel(BLOCK.types, BLOCK.image)])), 'image');
   assert.equal(
     blockKind(
       record(

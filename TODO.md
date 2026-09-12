@@ -17,6 +17,9 @@
 
 # TODO
 
+- [x] September 12: study installed SDK 0.20.3 and upstream block/image renderer; census all 90 blocks in 27 catalog datasets (no unsupported kinds observed). Add click-to-load IPFS Image entity blocks; synthetic browser response verified 0 requests before click / 1 after, retaining eight STAR results. See docs/GEO_BLOCK_SUPPORT.md.
+- [ ] Implement saved filter/view semantics and bounded query/relation-source blocks based on upstream contracts; current collection view is not an exact replica of every Geo table setting.
+
 - [x] September 12: explicit block capability detection, lightweight type/source metadata reads, unsupported-content links and retained unavailable catalog/block entries. Browser intercepted-read tests verified changed-source and missing-dataset recovery; build, formatting and 62 tests pass. See EDUCATION_DASHBOARDS.md.
 
 - [x] September 12 local checkpoint: derive grouped result filters from published named relationships instead of fixed grade/arm/comparator IDs. Preserve role+target identity and unique loaded-record counts; rename/removal/role tests pass. Browser Head Start filter reduced four records to one; 390px had no overflow. Build and 59 tests pass. EDUCATION_DASHBOARDS.md now describes current implementation instead of retired static/editorial behavior. Not deployed.
