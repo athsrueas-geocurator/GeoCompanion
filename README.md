@@ -18,7 +18,7 @@ This is also an experiment in what an agent can help one person orchestrate. The
 
 Build a small interface around a living knowledge graph: keep canonical content and relationships in Geo, fetch bounded slices in the browser, and derive useful views locally. Deploy interface changes when application behavior changes; ordinary edits to supported data should appear after refresh without a rebuild.
 
-**This README describes source on `main`, reviewed September 12, 2026. It is not a claim that every change is deployed.** The latest verified Pages release is `7889e066`, built from `ef778c4`, including collection, reference, filtering and block-capability improvements. See [Deployment](DEPLOYMENT.md) for verified hosting observations. The endpoint currently used is Geo **testnet**.
+**This README describes source on `main`, reviewed September 12, 2026. It is not a claim that every change is deployed.** The latest verified Pages release is `17c8ed73`, built from `d4f77b9`, including image support with a saved bandwidth preference and the earlier collection, reference, filtering and block-capability improvements. See [Deployment](DEPLOYMENT.md) for verified hosting observations. The endpoint currently used is Geo **testnet**.
 
 | Feature | Current source behavior | Important boundary |
 | --- | --- | --- |

@@ -5,12 +5,18 @@ The existing Cloudflare Pages project is `geocompanion`, production branch `main
 - Public site: https://geocompanion.dpdns.org/
 - Pages address: https://geocompanion.pages.dev/
 - Source: [GeoCompanion](https://github.com/athsrueas-geocurator/GeoCompanion)
-- Current frontend release: `7889e066` (September 12, 2026), source `ef778c4`, asset `index-DUCQLzRM.js`; native catalog/Questions, dynamic filters, reference handling and explicit block capabilities.
+- Current frontend release: `17c8ed73` (September 12, 2026), source `d4f77b9`, asset `index-CwxKWLOa.js`; includes image support and the saved bandwidth preference.
 - Coordination Worker: `https://geocompanion-coordination.thomasfreestone.workers.dev`, version `305ce72b-16f5-495e-a2eb-15b564513896`; HTTPS health and room creation verified.
 
 Previous `648e6635` frontend verification: HTTPS 200 on the custom domain with `index-DiLjdSRM.js`; hosted research view returns 40 questions, including the six Krueger–Hanushek positions. Economic parent displays two supporting arguments and one opposing argument. Local checks cover 320/390/1280px, dark/light, shared Questions dialog/Escape, live search and cached return navigation. All 43 tests, formatting and build pass. See [dynamic argument contract](docs/DYNAMIC_ARGUMENTS.md). Deployment used the reviewed working tree based on `a985218`, with the implementation committed immediately afterward; no Worker, wallet or VM changes.
 
-## Current frontend verification — `7889e066`
+## Current frontend verification — `17c8ed73`
+
+Deployed source `d4f77b9` through the dist-only script. Custom-domain HTTPS returned 200 with `index-CwxKWLOa.js`. Production Preferences displayed automatic images by default; switching to ask mode survived reload, and the original setting was restored after the check. The 390px dark layout had no document overflow or in-app alerts. Existing CSP-blocked Cloudflare beacon console entries remain unrelated to the change.
+
+Local build, formatting and 63 tests passed. A synthetic browser Image-block response verified automatic downloading and, after saving ask mode and reloading, zero image requests before clicking and one afterward. No synthetic content was written to Geo. This includes the previous image renderer; no Worker, publisher or VM changes.
+
+## Previous frontend verification — `7889e066`
 
 Deployed source `ef778c4` through the existing dist-only script. Production custom-domain HTTPS returned 200 and the expected `index-DUCQLzRM.js` asset. Browser checks returned 27 datasets, eight STAR records with no in-app alerts, and 21 native Questions. 390px light and 1280px dark dashboard checks found no document overflow. Geo reads remain direct to `api-testnet.geobrowser.io`; no VM request path was observed. The existing Cloudflare-injected analytics beacon remains blocked by CSP and produces a console entry; the application reads succeeded.
 
