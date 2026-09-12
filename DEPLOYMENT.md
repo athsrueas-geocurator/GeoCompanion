@@ -37,3 +37,12 @@ Optional sessions and opt-in aggregate counts run on Cloudflare Workers, SQLite-
 No VM app endpoint is involved. The proposed linux-cloud collector remains unimplemented. Caddy permissions on psi-ai-agent apply only to that separate host. Free-tier eligibility requires current provider and billing checks; budget alerts are not spending caps.
 
 [Historical observations](docs/DEPLOYMENT_HISTORY.md) are retained for traceability, not current instructions.
+
+## Open Data Discovery experiment
+
+September 12, 2026: a separate 120-second experiment in the local sibling
+`Open_Data/experiments/discovery-smoke/` exercised Linux-to-Cloudflare compressed
+metadata uploads and compact queries. It used uniquely named temporary Workers/D1
+resources, not the production coordination service. See that experiment's
+`last-result.json` for measurements and cleanup status. No discovery UI or ongoing
+VM service was deployed; Geo reconciliation and publication receipts remain planned.
