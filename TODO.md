@@ -242,3 +242,12 @@ Budget alerts alone do not enforce the $0 target. If the chosen configuration ca
 ## Repository organization
 
 - [x] Separate app shell, shared components, education and outreach modules. Add formatting commands and current architecture/development guides. Build, 28 adapter tests and formatting checks passed; local routes verified.
+
+## User-selected experiments
+
+Details and open decisions: [Ideas to explore](docs/EXPERIMENTS.md). Recording these ideas does not enable telemetry or deploy a service.
+
+- [ ] Explore temporary shared Geo entity/map selection sessions using tiny coordination messages, without files or screen video.
+- [ ] Explore offline outreach directory access, starting with a browser-only approach.
+- [ ] Explore a bounded agent research/checking queue on linux-cloud, with compact status and Geo publication through the existing publisher.
+- [ ] Explore search/selection telemetry for editorial planning and public aggregate insights; define collection, visitor controls, retention and publication boundaries first.
