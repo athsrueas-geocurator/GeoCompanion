@@ -136,6 +136,8 @@ Ordinary reading may show cached content while revalidating, but successful remo
 
 ## Publisher handoff requirements
 
+Every confirmed missing-data dependency must be recorded in the publisher's [canonical queue](../../geo-publisher/publishing_queue.md), not only in frontend TODOs. Record the affected screen, scoped read evidence, missing entities/relationships/properties, original source paths, destination and acceptance checks. Unresolved schema contracts are verification tasks until absence is established. Reuse existing publications; do not turn adapter limitations or unsupported charts into requests to duplicate data. Missing research or personally authored material remains explicitly pending rather than being invented.
+
 Inventory existing structures before creating or republishing anything:
 
 1. Education catalog and ordered dataset/result collections: IDs, asserting spaces and complete cursor queries. Reuse native collection membership instead of a duplicate companion-only study list.

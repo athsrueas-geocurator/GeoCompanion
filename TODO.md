@@ -17,6 +17,10 @@
 
 # TODO
 
+- [x] September 12 local checkpoint: result collections use ordered cursor pages, at most four new 25-edge pages per action, with explicit Load more controls. Partial collections do not produce a comparison chart. Continuation/context/cursor tests pass; all 56 tests and build pass. Other collection entry points still need per-action bounds.
+- [x] Dataset detail references now use the shared membership-aware resolver. Browser delayed-response test verified that changing target/membership cannot render the old destination. Live STAR retained eight records; newly published Head Start appeared as dataset 27 with six selectable blocks and no app code change. Not deployed.
+- [x] Receive draft outreach query contract and distinguish missing publication from adapter gaps: publisher's scoped census found zero destination Datasets; eight intake rows are not published services. See [contract](../geo-publisher/docs/indianapolis-outreach-query-contract.md). Operational mappings, public coordinates and publication remain queued.
+
 - [x] September 12 local checkpoint: replace Public conversations title-keyword/tag discovery with native classified Claim pagination and rename tab Public responses. Expansion reads actual arguments/sources; remove dormant published-reading-list state while retaining local drafts. Browser verified 40 Claims and response counts; 54 tests/build pass. Broader cross-space discovery remains pending.
 
 - [x] September 12 local checkpoint: remove retired STAR-only component/adapter and empty public editorial JSON; retain the static-publication guard without unreachable writer code. Replacement plot-contract tests cover zero/missing values and edited unit/study/comparator/estimand. All 53 tests and build pass.
@@ -33,14 +37,14 @@
 - [ ] Finish migrating remaining adapters to the shared reader; bound collection discovery per user action, add broader capability-based datasets, and verify live removal/refresh behavior across screens before claiming living-graph integration complete.
 
 - [x] September 12: design edit-aware Geo collection discovery and view capabilities. Verified native STAR collection structure and Question/Answers identities through read-only API calls; see [living Geo design](docs/LIVING_GEO_DESIGN.md). Implementation remains pending.
-- [ ] Prove native result-collection discovery on STAR, replacing fixed grade/arm lists with linked concepts; validate rename, reorder, removal and incomplete-field behavior before extending to a second family.
+- [x] Prove native result-collection discovery on STAR with linked grade/arm concepts; reader/order/plot tests and browser removal/unit-change cases passed. Reading First, Perry, coaching and Head Start collections use the same reader; chart support stays limited to validated semantics.
 - [ ] Implement scoped shared request/cache lifecycle and verified reference contexts incrementally, including refresh generations and deletion handling, following the living Geo design.
 
 - [x] September 12: audit remaining hardcoded content and discovery constraints against source baseline `eba5e11`. See [prioritized audit](docs/HARDCODED_CONTENT_AUDIT.md); this records findings, not completed migrations.
-- [ ] Resolve reference destination spaces from verified membership/provenance in curation, atlas and Connections instead of fixed or first-space assumptions.
-- [ ] Verify the publisher's canonical Question/Answers contract after its original-question identity review; add question discovery separately from non-factual debate Claims.
+- [x] Resolve reference destinations from verified membership in curation, atlas, Connections and dataset details; ambiguous spaces offer a choice. Browser reference and late-response cases verified September 12.
+- [x] Verify native Question/Answers contract and integrate independent question discovery; 21 original Questions read in published order, with no fabricated Answers.
 - [ ] Add a verified editor-maintained Geo collection contract for featured curation selection; preserve user authorship and explicit selection.
-- [ ] Retire unused empty public editorial JSON, unreachable importer write code and dormant published-reading-list state after checking their remaining consumers.
+- [x] Retire unused empty public editorial JSON, unreachable importer write code and dormant published-reading-list state; build and tests passed September 12.
 
 Use `[x]` only for completed work with evidence. Add dates and concise verification notes as items are finished. Historical suggestions in the pasted conversation are not completion evidence.
 

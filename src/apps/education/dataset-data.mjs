@@ -3,7 +3,12 @@ import {
   EDUCATION_CATALOG,
 } from '../../config/geo.mjs';
 import { geoReader } from '../../shared/geo/client.mjs';
-import { completeEdges, REL, validId } from '../../shared/geo/collections.mjs';
+import {
+  completeEdges,
+  edgeWindow,
+  REL,
+  validId,
+} from '../../shared/geo/collections.mjs';
 export const DATASET = '0c4babfb43893486af827341bbf32e09';
 export const F = {
   name: 'a126ca530c8e48d5b88882c734c38935',
@@ -134,6 +139,14 @@ export async function datasetCatalog() {
 }
 export async function resultRows(id) {
   const edges = await completeEdges(SPACE, id, REL.item);
+  return hydrateResults(edges);
+}
+/** @param {string} id @param {any} previous */
+export async function resultPage(id, previous = null) {
+  const page = await edgeWindow(SPACE, id, REL.item, previous);
+  return { page, rows: await hydrateResults(page.edges) };
+}
+async function hydrateResults(edges) {
   const ids = [...new Set(edges.map((e) => e.toEntityId))];
   const records = new Map((await datasetRecords(ids)).map((r) => [r.id, r]));
   const related = [

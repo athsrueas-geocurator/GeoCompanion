@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Markdown from 'react-markdown';
 import {
   datasetCatalog,
   datasetBlocks,
-  resultRows,
+  resultPage,
   field,
   estimate,
   F,
@@ -15,6 +15,7 @@ import './live-atlas.css';
 import './dataset-explorer.css';
 import CollectionPlot from './CollectionPlot';
 import useRevalidation from '../../shared/geo/useRevalidation';
+import GeoReference from '../../shared/geo/GeoReference';
 type RecordRow = {
   id: string;
   name: string;
@@ -117,28 +118,17 @@ function Result({ row }: { row: RecordRow }) {
             <ul>
               {row.relations
                 .filter((r) => r.typeId !== '8f151ba4de204e3c9cb499ddf96f48f1')
-                .map((r) => {
-                  const spaces = r.toEntity?.spaceIds || [];
-                  const contexts = spaces.includes(EDUCATION_SPACE)
-                    ? [EDUCATION_SPACE]
-                    : spaces;
-                  return (
-                    <li key={r.id}>
-                      {r.type.name}:{' '}
-                      {contexts.length === 1 ? (
-                        <a
-                          href={`https://www.geobrowser.io/space/${contexts[0]}/${r.toEntityId}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {r.toEntity?.name || 'Open reference'} ↗
-                        </a>
-                      ) : (
-                        <span>{r.toEntity?.name || 'Reference'}</span>
-                      )}
-                    </li>
-                  );
-                })}
+                .map((r) => (
+                  <li key={r.id}>
+                    {r.type.name}:{' '}
+                    <GeoReference
+                      id={r.toEntityId}
+                      name={r.toEntity?.name || 'Open reference'}
+                      spaces={r.toEntity?.spaceIds || []}
+                      context={EDUCATION_SPACE}
+                    />
+                  </li>
+                ))}
             </ul>
           </details>
         </>
@@ -147,6 +137,10 @@ function Result({ row }: { row: RecordRow }) {
   );
 }
 function Collection({ block }: { block: RecordRow }) {
+  const [page, setPage] = useState<
+    Awaited<ReturnType<typeof resultPage>>['page'] | null
+  >(null);
+  const generation = useRef(0);
   const [rows, setRows] = useState<RecordRow[]>([]),
     [busy, setBusy] = useState(true),
     [error, setError] = useState(''),
@@ -154,24 +148,45 @@ function Collection({ block }: { block: RecordRow }) {
     [facet, setFacet] = useState(''),
     [retry, setRetry] = useState(0);
   useEffect(() => {
-    let current = true;
+    const request = ++generation.current;
     setRows([]);
+    setPage(null);
     setBusy(true);
     setError('');
-    resultRows(block.id)
+    resultPage(block.id)
       .then((r) => {
-        if (current) setRows(r);
+        if (request === generation.current) {
+          setRows(r.rows);
+          setPage(r.page);
+        }
       })
       .catch((e) => {
-        if (current) setError(e.message);
+        if (request === generation.current) setError(e.message);
       })
       .finally(() => {
-        if (current) setBusy(false);
+        if (request === generation.current) setBusy(false);
       });
     return () => {
-      current = false;
+      generation.current++;
     };
   }, [block.id, retry]);
+  async function more() {
+    const request = ++generation.current;
+    setBusy(true);
+    setError('');
+    try {
+      const r = await resultPage(block.id, page);
+      if (request === generation.current) {
+        setRows(r.rows);
+        setPage(r.page);
+      }
+    } catch (e) {
+      if (request === generation.current)
+        setError(e instanceof Error ? e.message : 'Results unavailable.');
+    } finally {
+      if (request === generation.current) setBusy(false);
+    }
+  }
   const facets = [
     ...new Map(
       rows
@@ -230,12 +245,19 @@ function Collection({ block }: { block: RecordRow }) {
               </label>
             )}
           </div>
-          <p>{visible.length} results</p>
-          <CollectionPlot rows={visible} />
+          <p>
+            {visible.length} results{page?.next ? ' · More available' : ''}
+          </p>
+          {!page?.next && <CollectionPlot rows={visible} />}
           {visible.map((r) => (
             <Result key={r.id} row={r} />
           ))}
         </>
+      )}
+      {page?.next && (
+        <button disabled={busy} onClick={() => void more()}>
+          Load more results
+        </button>
       )}
       {!busy && !error && !rows.length && (
         <p>No collection results available.</p>

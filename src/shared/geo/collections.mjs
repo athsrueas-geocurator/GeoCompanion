@@ -3,7 +3,7 @@ export const REL = {
   blocks: 'beaba5cba67741a8b35377030613fc70',
   item: 'a99f9ce12ffa4dac8c61f6310d46064a',
 };
-export const EDGE_QUERY = `query CollectionEdges($space:UUID!,$id:UUID!,$type:UUID!,$after:Cursor){relationsConnection(first:25,after:$after,filter:{spaceId:{is:$space},fromEntityId:{is:$id},typeId:{is:$type}}){nodes{id spaceId fromEntityId typeId position toEntityId toEntity{id name spaceIds}}pageInfo{hasNextPage endCursor}}}`;
+export const EDGE_QUERY = `query CollectionEdges($space:UUID!,$id:UUID!,$type:UUID!,$after:Cursor){relationsConnection(first:25,after:$after,orderBy:[POSITION_ASC,ID_ASC],filter:{spaceId:{is:$space},fromEntityId:{is:$id},typeId:{is:$type}}){nodes{id spaceId fromEntityId typeId position toEntityId toEntity{id name spaceIds}}pageInfo{hasNextPage endCursor}}}`;
 export const validId = (id) =>
   typeof id === 'string' && /^[a-f0-9]{32}$/i.test(id);
 export function parseEdges(data, space, id, type) {
@@ -61,4 +61,38 @@ export async function completeEdges(space, id, type) {
   throw Error(
     'This collection is too large to open completely. Open it on Geo.',
   );
+}
+/** @param {string} space @param {string} id @param {string} type @param {any} previous */
+export async function edgeWindow(
+  space,
+  id,
+  type,
+  previous = null,
+  reader = readEdges,
+) {
+  if (
+    previous &&
+    (previous.space !== space || previous.id !== id || previous.type !== type)
+  )
+    throw Error('Collection changed. Refresh before continuing.');
+  if (previous && !previous.next) return previous;
+  let after = previous?.next || null;
+  const edges = [...(previous?.edges || [])],
+    seen = new Set(previous?.cursors || []);
+  for (let page = 0; page < 4; page++) {
+    const result = await reader(space, id, type, after);
+    edges.push(...result.edges);
+    after = result.next;
+    if (!after) break;
+    if (seen.has(after)) throw Error('The collection cursor repeated.');
+    seen.add(after);
+  }
+  return {
+    space,
+    id,
+    type,
+    edges: orderedEdges(edges),
+    cursors: [...seen],
+    next: after,
+  };
 }

@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { referenceSpaces, referenceChoices } from './references.mjs';
 import { validId } from './collections.mjs';
-export default function GeoReference({
-  id,
-  name,
-  spaces = [],
-  context,
-}: {
+type ReferenceProps = {
   id: string;
   name: string;
   spaces?: string[];
   context?: string;
-}) {
+};
+
+export default function GeoReference(props: ReferenceProps) {
+  // Membership changes start a new resolver, including any pending request.
+  const key = JSON.stringify([
+    props.id,
+    props.context,
+    [...new Set(props.spaces || [])].sort(),
+  ]);
+  return <Reference key={key} {...props} />;
+}
+
+function Reference({ id, name, spaces = [], context }: ReferenceProps) {
   const candidates = referenceSpaces(spaces, context),
     [choices, setChoices] = useState<
       { id: string; name: string; url: string }[] | null
