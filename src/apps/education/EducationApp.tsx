@@ -55,6 +55,24 @@ export default function EducationApp({
               Education<span>Evidence & initiatives</span>
             </div>
           </div>
+          <label className="mobile-workspace">
+            Explore education
+            <select
+              aria-label="Education view"
+              value={tab}
+              onChange={(e) => setTab(e.target.value)}
+            >
+              {groups.map((g) => (
+                <optgroup key={g.label} label={g.label}>
+                  {g.items.map(([id, , name]) => (
+                    <option value={id} key={id}>
+                      {name}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+          </label>
           <nav aria-label="Workspace">
             {groups.map((g) => (
               <div className="nav-group" key={g.label}>

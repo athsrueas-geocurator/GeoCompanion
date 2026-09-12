@@ -1,3 +1,5 @@
+- [x] September 12: system-aware dark mode and mobile navigation/filter/control improvements. Palette contrast tests and multi-route light/dark 320/390/1280px checks passed; see [appearance guidance](docs/APPEARANCE_ACCESSIBILITY.md).
+
 - [x] Replace hardcoded example spaces and raw entity gallery with dynamically discovered connection groups and space filters. Build, 26 tests and live Books-to-curation browser flow verified September 11; see CONNECTIONS.md.
 - [ ] Extend Connections to verified debate and outreach relationships when integration contracts are ready.
 

@@ -28,6 +28,8 @@ This is also an experiment in what an agent can help one person orchestrate. The
 | Indianapolis outreach | Separate navigation and an Indianapolis basemap | Verified service directory, schedules and map pins are not connected yet |
 | Preferences | Local reading settings and public-profile search/follows | Following is not authentication or ownership verification |
 
+The interface follows your system light/dark setting and adapts navigation and controls for phones. See [appearance and accessibility](docs/APPEARANCE_ACCESSIBILITY.md).
+
 ## Run locally
 
 Use Node.js 22.12+ and npm. Install the pinned dependency graph:
@@ -49,7 +51,7 @@ src/apps/outreach/         Outreach shell and basemap
 src/shared/branding/       Triangle brand and runtime space avatars
 src/shared/preferences/    Browser preferences, profile search and follows
 src/config/                Public endpoint and reference provenance
-public/                    Static assets, security headers, reference dataset
+public/                    Static assets, security headers, public service config
 scripts/                   Deployment and retired-import guard
 tests/                    Pure data-contract and adapter tests
 docs/                     Contributor workflow and documentation index

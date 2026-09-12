@@ -1,0 +1,126 @@
+/* System preference is the source of truth; no JS, stored override or extra request. */
+:root {
+  color-scheme: light dark;
+  --page: #f6f8f8;
+  --surface: #ffffff;
+  --surface-soft: #eaf1ef;
+  --text: #243638;
+  --muted: #52676b;
+  --accent: #17685e;
+  --teal: #173d40;
+  --blue: #294b73;
+  --line: #bccbc8;
+  --control-border: #748a86;
+  --focus: #17685e;
+  --strong: #173d40;
+  --on-strong: #f1f7f5;
+  --lime: #caf481;
+  --warning-bg: #fff3de;
+  --warning-text: #714d12;
+  --chart-primary: #176b59;
+  --chart-secondary: #535acb;
+  --chart-axis: #667575;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #101c1e;
+    --surface: #17272a;
+    --surface-soft: #203538;
+    --text: #e5efed;
+    --muted: #acc0bc;
+    --accent: #8cdbc5;
+    --teal: #b9e4d9;
+    --blue: #accdff;
+    --line: #465f61;
+    --control-border: #7f9b97;
+    --focus: #b3eedc;
+    --strong: #203b3e;
+    --warning-bg: #392e19;
+    --warning-text: #f3d69c;
+    --chart-primary: #85d7bd;
+    --chart-secondary: #b4b0ff;
+    --chart-axis: #93aba6;
+  }
+}
+html {
+  background: var(--page);
+  color: var(--text);
+  scroll-padding-block: 20px 100px;
+}
+input,
+select,
+textarea {
+  color: var(--text);
+  background-color: var(--surface);
+  accent-color: var(--accent);
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+:is(input, select, textarea):not([type='checkbox']):not([type='radio']) {
+  border-color: var(--control-border);
+}
+:where(button, a, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+summary {
+  cursor: pointer;
+}
+/* Foreground and surface must switch together when the OS theme changes. */
+button {
+  transition: none;
+}
+.curation-prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* Tiles and published media retain their supplied colors. Only map controls are themed. */
+.geo-leaflet.leaflet-container {
+  background: var(--surface-soft);
+}
+.outreach-leaflet {
+  height: 380px;
+  margin-top: 24px;
+  border-radius: 10px;
+  z-index: 0;
+}
+.geo-leaflet.leaflet-container .leaflet-bar a,
+.geo-leaflet.leaflet-container .leaflet-popup-content-wrapper,
+.geo-leaflet.leaflet-container .leaflet-popup-tip,
+.geo-leaflet.leaflet-container .leaflet-control-attribution {
+  background: var(--surface);
+  color: var(--text);
+}
+.geo-leaflet.leaflet-container .leaflet-control-attribution a,
+.geo-leaflet.leaflet-container a.leaflet-popup-close-button {
+  color: var(--accent);
+}
+.geo-leaflet.leaflet-container .leaflet-bar a:hover {
+  background: var(--surface-soft);
+}
+.geo-leaflet.leaflet-container .leaflet-bar a {
+  border-color: var(--control-border);
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: Highlight;
+  }
+  .app-card,
+  .atlas-grid article,
+  .coordination-panel {
+    border-color: CanvasText;
+  }
+}

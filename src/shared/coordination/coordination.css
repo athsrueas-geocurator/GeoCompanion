@@ -6,10 +6,10 @@
   font-size: 14px;
 }
 .coordination-toggle {
-  border: 1px solid #b9ceca;
+  border: 1px solid var(--line);
   border-radius: 24px;
-  background: #fff;
-  color: #174a49;
+  background: var(--surface);
+  color: var(--accent);
   padding: 10px 16px;
   box-shadow: 0 2px 12px #153d3d12;
 }
@@ -21,8 +21,8 @@
   max-height: 75vh;
   overflow: auto;
   padding: 20px;
-  background: #fff;
-  border: 1px solid #b9ceca;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 16px;
   box-shadow: 0 8px 35px #153d3d20;
 }
@@ -39,11 +39,11 @@
 }
 .coordination-note {
   font-size: 12px;
-  color: #526869;
+  color: var(--muted);
 }
 .shared-selection {
   padding: 10px;
-  background: #edf5f3;
+  background: var(--surface-soft);
 }
 .coordination-panel a {
   display: block;

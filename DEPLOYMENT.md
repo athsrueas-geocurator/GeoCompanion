@@ -52,3 +52,7 @@ VM service was deployed; Geo reconciliation and publication receipts remain plan
 Pages deployment `915cfab3.geocompanion.pages.dev` serves production asset `index-CQidbkU-.js`. Production HTTPS atlas returned 34 live initiatives with a successful direct browser POST to Geo; the studies selector returned 8 in preview. Desktop search and linked CUNY findings passed; 390px mobile viewport had no document overflow. Build and all 33 tests passed.
 
 `education.json` is absent from dist and new deployment routes return the SPA HTML rather than that dataset. The old custom-domain URL briefly retained its previous five-minute CDN cache; an exact-URL purge was unavailable to the current token (401). Current app chunks do not request it. No cache-purge permission expansion was requested. The existing Cloudflare-injected analytics beacon remains blocked by the site CSP; it does not block Geo reads.
+
+## September 12: system appearance and mobile improvements
+
+Pages deployment `cf232475.geocompanion.pages.dev` serves production asset `index-CVlH90sS.js`. Production HTTPS verified at 390px: dark atlas with 34 live entries, mobile navigation to the STAR dashboard, and an in-place switch to light colors; neither view overflowed the document. Geo POSTs succeeded. Build and 35 tests passed. See [appearance implementation and checks](docs/APPEARANCE_ACCESSIBILITY.md). No backend or credentials changes.

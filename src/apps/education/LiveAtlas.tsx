@@ -158,10 +158,14 @@ export default function LiveAtlas({
       generation.current++;
     };
   }, [kind, questions]);
-  const detail = useRef<HTMLDivElement>(null);
+  const detail = useRef<HTMLDialogElement>(null);
   useEffect(() => {
-    detail.current?.focus();
+    if (detail.current && !detail.current.open) detail.current.showModal();
   }, [selected?.id]);
+  function closeDetails() {
+    detail.current?.close();
+    setSelected(null);
+  }
   const options = (field: 'topics' | 'places') =>
     [
       ...new Map(rows.flatMap((r) => r[field]).map((r) => [r.id, r])).values(),
@@ -196,7 +200,7 @@ export default function LiveAtlas({
                 setKind(e.target.value as 'initiative' | 'study')
               }
             >
-              <option value="initiative">Programs & initiatives</option>
+              <option value="initiative">Initiatives</option>
               <option value="study">Studies</option>
             </select>
           </label>
@@ -269,17 +273,38 @@ export default function LiveAtlas({
         <button onClick={() => void load(next)}>Load more</button>
       )}
       {selected && (
-        <div
+        <dialog
           className="atlas-detail"
-          role="region"
           aria-label={selected.name}
           tabIndex={-1}
           ref={detail}
           onKeyDown={(e) => {
-            if (e.key === 'Escape') setSelected(null);
+            if (e.key !== 'Tab') return;
+            const controls = [
+              ...e.currentTarget.querySelectorAll<HTMLElement>(
+                'button, a[href], input, select, textarea, summary, [tabindex]:not([tabindex="-1"])',
+              ),
+            ].filter((el) => el.checkVisibility() && !el.matches(':disabled'));
+            const first = controls[0],
+              last = controls.at(-1);
+            if (
+              e.shiftKey &&
+              (document.activeElement === first ||
+                document.activeElement === e.currentTarget)
+            ) {
+              e.preventDefault();
+              last?.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first?.focus();
+            }
+          }}
+          onCancel={(e) => {
+            e.preventDefault();
+            closeDetails();
           }}
         >
-          <button className="atlas-close" onClick={() => setSelected(null)}>
+          <button className="atlas-close" onClick={closeDetails}>
             Close details
           </button>
           <h2>{selected.name}</h2>
@@ -336,7 +361,7 @@ export default function LiveAtlas({
           ) : (
             <Evidence key={selected.id} entry={selected} />
           )}
-        </div>
+        </dialog>
       )}
     </div>
   );

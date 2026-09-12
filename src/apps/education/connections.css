@@ -16,9 +16,9 @@
   min-width: 0;
   width: 100%;
   padding: 12px;
-  border: 1px solid #cad7d0;
+  border: 1px solid var(--line);
   border-radius: 7px;
-  background: white;
+  background: var(--surface);
 }
 .shared-toggle {
   display: flex;
@@ -28,7 +28,7 @@
 }
 .connection-summary {
   font-size: 13px;
-  color: #64786e;
+  color: var(--muted);
   margin: 24px 0;
 }
 .connection-grid {
@@ -38,9 +38,9 @@
 }
 .connection-grid article {
   padding: 24px;
-  border: 1px solid #d3dfd8;
+  border: 1px solid var(--line);
   border-radius: 12px;
-  background: white;
+  background: var(--surface);
   min-width: 0;
   overflow-wrap: anywhere;
 }
@@ -50,13 +50,13 @@
 }
 .connection-count {
   display: block;
-  color: #64786e;
+  color: var(--muted);
   font-size: 13px;
   margin: 12px 0;
 }
 .connection-grid summary {
   cursor: pointer;
-  color: #286c55;
+  color: var(--accent);
 }
 .connection-grid li {
   margin: 15px 0;
@@ -65,7 +65,7 @@
 .connection-grid li span {
   display: block;
   font-size: 12px;
-  color: #718278;
+  color: var(--muted);
 }
 .connection-grid ul {
   padding-left: 18px;

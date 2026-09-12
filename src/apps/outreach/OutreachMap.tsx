@@ -33,8 +33,8 @@ export default function OutreachMap() {
       )}
       <div
         ref={container}
+        className="geo-leaflet outreach-leaflet"
         aria-label="Indianapolis map, no verified service markers yet"
-        style={{ height: 380, marginTop: 24, borderRadius: 10 }}
       />
     </>
   );

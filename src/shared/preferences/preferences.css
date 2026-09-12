@@ -12,8 +12,8 @@
   line-height: 1.2;
 }
 .pref-section {
-  background: white;
-  border: 1px solid #cbd8d2;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 10px;
   padding: 25px;
   margin: 24px 0;
@@ -37,21 +37,21 @@
 .pref-section input,
 .pref-section select {
   padding: 12px;
-  border: 1px solid #aabbba;
+  border: 1px solid var(--line);
   border-radius: 6px;
   font: inherit;
   min-width: 0;
   width: 100%;
-  background: white;
-  color: #243638;
+  background: var(--surface);
+  color: var(--text);
 }
 .pref-help {
-  color: #52655f;
+  color: var(--muted);
   font-size: 0.875rem;
 }
 .pref-warning {
-  background: #fff3de;
-  color: #714d12;
+  background: var(--warning-bg);
+  color: var(--warning-text);
   padding: 14px;
   border-radius: 6px;
 }
@@ -64,7 +64,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  border-top: 1px solid #d5dfda;
+  border-top: 1px solid var(--line);
   padding: 18px 0;
 }
 .profile-list li > div {
@@ -74,7 +74,7 @@
 .profile-list small {
   display: block;
   font-size: 0.8rem;
-  color: #596d67;
+  color: var(--muted);
   margin: 6px 0;
   overflow-wrap: anywhere;
 }
@@ -84,7 +84,7 @@
 .pref-tag {
   font-size: 0.8rem;
   margin-left: 12px;
-  background: #e7f1e9;
+  background: var(--surface-soft);
   padding: 4px 8px;
   border-radius: 4px;
 }

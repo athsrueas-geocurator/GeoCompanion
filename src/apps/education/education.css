@@ -50,7 +50,7 @@
   margin: 24px 0;
 }
 .dataset-strip article {
-  border: 1px solid var(--line, #dce2e0);
+  border: 1px solid var(--line, var(--line));
   padding: 24px;
   border-radius: 10px;
 }
@@ -76,10 +76,10 @@
   flex-wrap: wrap;
   align-items: center;
   font-size: 14px;
-  color: #176b59;
+  color: var(--accent);
 }
 .study-legend span + span {
-  color: #535acb;
+  color: var(--chart-secondary);
 }
 .forest-chart {
   display: grid;
@@ -122,7 +122,7 @@
 }
 .study-table th,
 .study-table td {
-  border-bottom: 1px solid #dae0df;
+  border-bottom: 1px solid var(--line);
   padding: 14px 12px;
   vertical-align: top;
 }
@@ -133,9 +133,9 @@
 }
 .curation-focus {
   max-width: 820px;
-  border-left: 5px solid #176b59;
+  border-left: 5px solid var(--line);
   padding: 28px 36px;
-  background: #f0f6f3;
+  background: var(--surface-soft);
   margin: 24px 0 36px;
 }
 .curation-focus blockquote {
@@ -156,7 +156,7 @@
   margin-bottom: 36px;
 }
 .curation-path article {
-  border-top: 1px solid #cbd4cf;
+  border-top: 1px solid var(--line);
   padding-top: 20px;
 }
 .curation-path h2 {
@@ -165,7 +165,7 @@
 }
 .curation-path .number {
   font-size: 14px;
-  color: #176b59;
+  color: var(--accent);
 }
 .curation-path button {
   margin-top: 12px;
@@ -243,7 +243,7 @@
   min-width: 650px;
   text-align: center;
   font-size: 13px;
-  color: #536b6c;
+  color: var(--muted);
   margin: 0 0 14px !important;
   padding-left: 180px;
 }

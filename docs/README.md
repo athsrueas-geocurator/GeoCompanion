@@ -13,3 +13,5 @@ Unpublished editorial drafts, withdrawn assistant copy, billing notes and creden
 [Linux/browser experiments research](LINUX_BROWSER_RESEARCH.md): Reddit and X discovery leads, primary-source checks, unusual executable environments, egress tradeoffs and a proposed comparison experiment.
 
 [Real Linux host research](LINUX_HOST_RESEARCH.md): kernel network experiments, packetdrill, disconnected messaging, rendezvous boundaries and explicit byte budgets. Research only; no VM deployment.
+
+[System appearance and mobile accessibility](APPEARANCE_ACCESSIBILITY.md): shared theme tokens, W3C references, mobile navigation, touch controls and verification checklist.

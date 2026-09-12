@@ -11,7 +11,7 @@
 }
 .app-intro {
   font-size: 1rem;
-  color: #536763;
+  color: var(--muted);
   margin: 16px 0 32px;
   line-height: 1.6;
 }
@@ -21,13 +21,13 @@
   gap: 24px;
 }
 .app-card {
-  border: 1px solid #c5d4ce;
+  border: 1px solid var(--line);
   border-radius: 14px;
   display: flex;
   flex-direction: column;
   padding: 30px;
-  color: #1c3f39;
-  background: white;
+  color: var(--text);
+  background: var(--surface);
   text-decoration: none;
   min-height: 330px;
   transition:
@@ -39,7 +39,7 @@
   box-shadow: 0 12px 30px #17352e12;
 }
 .app-card:focus-visible {
-  outline: 3px solid #235d51;
+  outline: 3px solid var(--focus);
   outline-offset: 5px;
 }
 .app-monogram {
@@ -65,7 +65,7 @@
 .app-card p {
   font-size: 1rem;
   line-height: 1.65;
-  color: #536763;
+  color: var(--muted);
   margin: 14px 0 28px;
 }
 .app-enter {
@@ -75,9 +75,9 @@
   font-weight: 600;
 }
 .outreach-card {
-  background: #f0f5fb;
-  color: #24456c;
-  border-color: #c9d7e9;
+  background: var(--surface-soft);
+  color: var(--blue);
+  border-color: var(--line);
 }
 .outreach-main {
   max-width: 1200px;
@@ -86,7 +86,7 @@
 }
 .outreach-app {
   min-height: 100vh;
-  background: #f6f8fc;
+  background: var(--page);
 }
 .outreach-nav {
   display: flex;
@@ -96,21 +96,21 @@
 }
 .outreach-nav a {
   font-size: 0.95rem;
-  border: 1px solid #cad5e1;
+  border: 1px solid var(--line);
   border-radius: 7px;
   padding: 12px 16px;
-  background: white;
-  color: #294b73;
+  background: var(--surface);
+  color: var(--blue);
   text-decoration: none;
 }
 .outreach-nav a[aria-current='page'] {
-  background: #26496d;
-  color: white;
-  border-color: #26496d;
+  background: var(--strong);
+  color: var(--on-strong);
+  border-color: var(--line);
 }
 .outreach-empty {
-  background: white;
-  border: 1px solid #d4dde7;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 12px;
   padding: 30px;
 }
@@ -119,13 +119,13 @@
 }
 .outreach-empty > p {
   margin-top: 12px;
-  color: #536763;
+  color: var(--muted);
   line-height: 1.6;
 }
 .outreach-notice {
   margin-top: 30px;
-  background: #f0f5fb;
-  border-left: 3px solid #426c9b;
+  background: var(--surface-soft);
+  border-left: 3px solid var(--line);
   padding: 22px;
   max-width: 780px;
 }
@@ -138,7 +138,7 @@
   margin-top: 10px;
 }
 .outreach-app .eyebrow {
-  color: #416287;
+  color: var(--blue);
 }
 @media (max-width: 760px) {
   .app-home,
@@ -181,7 +181,7 @@
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #748681;
+  color: var(--muted);
   padding: 4px 12px 8px;
 }
 .sidebar .nav-group button {
@@ -241,7 +241,7 @@
   border-radius: 12px;
   display: grid;
   place-items: center;
-  background: #edf4f1;
+  background: var(--surface-soft);
   overflow: hidden;
 }
 .space-icon img {

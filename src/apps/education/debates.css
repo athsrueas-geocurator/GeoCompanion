@@ -1,15 +1,15 @@
 .editor-panel {
   margin: 25px 0;
   padding: 24px;
-  background: #eaf0f1;
-  border: 1px dashed #87a7a4;
+  background: var(--surface-soft);
+  border: 1px dashed var(--line);
   border-radius: 9px;
   display: grid;
   gap: 18px;
 }
 .editor-panel p {
   font-size: 0.875rem;
-  color: #5b7671;
+  color: var(--muted);
   margin-top: 8px;
   max-width: 850px;
 }
@@ -18,16 +18,16 @@
   display: grid;
   gap: 6px;
   font-size: 0.875rem;
-  color: #42665b;
+  color: var(--accent);
 }
 .editor-panel input,
 .editor-panel textarea,
 .pick-grid textarea {
   font: inherit;
-  color: #254a40;
-  border: 1px solid #b9cec2;
+  color: var(--text);
+  border: 1px solid var(--line);
   border-radius: 5px;
-  background: white;
+  background: var(--surface);
   padding: 10px;
   max-width: 100%;
   width: 100%;
@@ -45,23 +45,23 @@
 }
 .editor-actions span {
   font-size: 0.8rem;
-  color: #527364;
+  color: var(--muted);
 }
 .editorial-selection {
   padding: 28px;
   margin-top: 24px;
-  background: #173d40;
-  color: white;
+  background: var(--strong);
+  color: var(--on-strong);
   border-radius: 10px;
 }
 .editorial-selection > .eyebrow {
-  color: #bbd9a7;
+  color: var(--on-strong);
 }
 .editorial-selection > h2 {
   font-size: 1.5rem;
 }
 .editorial-selection > p {
-  color: #d0e0d7;
+  color: var(--on-strong);
   margin-top: 12px;
   white-space: pre-wrap;
 }
@@ -73,26 +73,26 @@
 }
 .pick-grid article {
   padding-top: 20px;
-  border-top: 1px solid #426060;
+  border-top: 1px solid var(--line);
   display: grid;
   align-content: start;
   gap: 14px;
 }
 .pick-number {
-  color: #c6ef91;
+  color: var(--on-strong);
   font-size: 0.85rem;
 }
 .pick-grid p {
   font-size: 0.95rem;
-  color: #d3e2d9;
+  color: var(--on-strong);
   white-space: pre-wrap;
 }
 .pick-grid a {
-  color: #c6ef91;
+  color: var(--on-strong);
   font-size: 0.875rem;
 }
 .pick-grid label {
-  color: #d0dfd8;
+  color: var(--on-strong);
 }
 .debate-list {
   padding: 0 24px;
@@ -106,18 +106,18 @@
 }
 .debate-rank {
   font-family: Manrope;
-  color: #849b90;
+  color: var(--muted);
   font-size: 0.875rem;
   padding-top: 22px;
 }
 .debate-kicker {
   font-size: 0.65rem;
   letter-spacing: 0.09em;
-  color: #3e7c65;
+  color: var(--accent);
   margin-bottom: 9px;
 }
 .debate-kicker span {
-  color: #89978f;
+  color: var(--muted);
   font-size: 0.75rem;
   letter-spacing: 0;
 }
@@ -134,10 +134,10 @@
   text-align: left;
   font-weight: 650;
   line-height: inherit;
-  color: #203d34;
+  color: var(--text);
 }
 .debate-content h3 button:hover {
-  color: #31835f;
+  color: var(--accent);
   text-decoration: underline;
 }
 .debate-actions {
@@ -157,24 +157,24 @@
 }
 .curation-count {
   font-size: 1.15rem;
-  color: #305f4a;
+  color: var(--accent);
   font-weight: 600;
   margin-bottom: 16px;
 }
 .curation-count small {
   font-size: 0.75rem;
-  color: #6e8177;
+  color: var(--muted);
   font-weight: 400;
 }
 .stance-label {
   display: flex;
   justify-content: space-between;
-  color: #5c7667;
+  color: var(--muted);
   font-size: 0.75rem;
 }
 .stance-bar {
   height: 7px;
-  background: #b09eb9;
+  background: var(--chart-secondary);
   border-radius: 5px;
   margin: 7px 0;
   overflow: hidden;
@@ -182,18 +182,18 @@
 .stance-bar span {
   display: block;
   height: 100%;
-  background: #4d9271;
+  background: var(--chart-primary);
 }
 .debate-signals > small {
   display: block;
-  color: #7c8e83;
+  color: var(--muted);
   font-size: 0.75rem;
 }
 .signal-details {
   grid-column: 2/-1;
-  border: 1px solid #dce6df;
+  border: 1px solid var(--line);
   border-radius: 6px;
-  background: #f5f8f5;
+  background: var(--surface-soft);
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -204,7 +204,7 @@
 }
 .signal-details p {
   font-size: 0.875rem;
-  color: #587063;
+  color: var(--muted);
   margin: 10px 0;
   line-height: 1.65;
 }
@@ -221,12 +221,12 @@
   gap: 10px;
   justify-content: space-between;
   padding: 9px 0;
-  border-bottom: 1px solid #dce6df;
+  border-bottom: 1px solid var(--line);
   font-size: 0.75rem;
 }
 .debate-method {
   border-top: 1px solid var(--line);
-  background: #f9fbf9;
+  background: var(--surface-soft);
   padding: 20px 24px;
 }
 .debate-method h3 {
@@ -235,7 +235,7 @@
 .debate-method p {
   font-size: 0.8rem;
   line-height: 1.6;
-  color: #6a7e72;
+  color: var(--muted);
   margin-top: 8px;
 }
 .category-label {

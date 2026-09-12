@@ -223,7 +223,7 @@ export default function EducationDashboard({
                   x2={x(0)}
                   y1="0"
                   y2={plot.length * 64}
-                  stroke="#8691a0"
+                  stroke="var(--chart-axis)"
                   strokeDasharray="4 4"
                 />
                 {[0, 5, 10]
@@ -243,8 +243,16 @@ export default function EducationDashboard({
                 {plot.map((r, i) => (
                   <g
                     key={r.id}
-                    stroke={r.arm === 'Small class' ? '#176b59' : '#535acb'}
-                    fill={r.arm === 'Small class' ? '#176b59' : '#535acb'}
+                    stroke={
+                      r.arm === 'Small class'
+                        ? 'var(--chart-primary)'
+                        : 'var(--chart-secondary)'
+                    }
+                    fill={
+                      r.arm === 'Small class'
+                        ? 'var(--chart-primary)'
+                        : 'var(--chart-secondary)'
+                    }
                   >
                     <title>
                       {r.name}: {r.effect} percentile points, SE {r.se}
@@ -276,7 +284,12 @@ export default function EducationDashboard({
           approximate, not a test of the difference between interventions. Grade
           cohorts overlap; do not sum their sample sizes.
         </p>
-        <div className="study-table">
+        <div
+          className="study-table"
+          role="region"
+          aria-label="Study results table"
+          tabIndex={0}
+        >
           <table>
             <caption>
               Estimates and source context · {visible.length} rows

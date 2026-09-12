@@ -2,9 +2,9 @@
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  background: white;
+  background: var(--surface);
   padding: 20px;
-  border: 1px solid var(--line, #dae3e2);
+  border: 1px solid var(--line, var(--line));
   border-radius: 12px;
 }
 .atlas-controls label {
@@ -20,15 +20,15 @@
 .atlas-controls input,
 .atlas-controls select {
   padding: 12px;
-  border: 1px solid #cad8d6;
+  border: 1px solid var(--line);
   border-radius: 6px;
-  background: white;
+  background: var(--surface);
   color: inherit;
 }
 .atlas-count {
   font-size: 13px;
   margin: 18px 0;
-  color: #526b70;
+  color: var(--muted);
 }
 .atlas-grid {
   display: grid;
@@ -36,8 +36,8 @@
   gap: 16px;
 }
 .atlas-grid article {
-  background: white;
-  border: 1px solid #d9e3e1;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 12px;
   padding: 22px;
 }
@@ -53,11 +53,11 @@
 }
 .atlas-grid p {
   line-height: 1.65;
-  color: #536b72;
+  color: var(--muted);
 }
 .atlas-grid a,
 .atlas-detail a {
-  color: #176a65;
+  color: var(--accent);
 }
 .atlas-tags {
   display: flex;
@@ -67,17 +67,24 @@
   margin: 14px 0;
 }
 .atlas-detail {
+  margin: 0;
+  max-width: none;
+  max-height: 90dvh;
+  color: var(--text);
   position: fixed;
   inset: 5vh 5vw 5vh auto;
   width: min(720px, 90vw);
   box-sizing: border-box;
   overflow: auto;
   padding: 30px;
-  background: white;
-  border: 1px solid #c5d6d2;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 14px;
   box-shadow: 0 10px 80px #143a4260;
   z-index: 100;
+}
+.atlas-detail::backdrop {
+  background: #06171999;
 }
 .atlas-close {
   float: right;
@@ -91,7 +98,7 @@
   line-height: 1.6;
 }
 .atlas-evidence article {
-  border-top: 1px solid #d9e3e1;
+  border-top: 1px solid var(--line);
   padding: 18px 0;
   line-height: 1.65;
 }

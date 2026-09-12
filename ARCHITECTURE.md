@@ -62,6 +62,10 @@ Query text, schema IDs and parsing rules stay with the feature adapter because t
 
 No background polling or VM proxy is added by these components. Cache policies are currently feature-specific, not one universal cache. Canonical profile writing is not bundled or persisted as a silent fallback. The map cache is public derived data, distinct from saved user preferences.
 
+## Appearance
+
+Shared `theme.css` defines semantic light/dark palettes using the system preference; `mobile.css` supplies common mobile controls and layout rules. Native color-scheme support, chart colors and map-control overrides avoid per-app theme drift. No appearance API requests or stored theme override. See [appearance/accessibility](docs/APPEARANCE_ACCESSIBILITY.md).
+
 ## Rendering and safety
 
 Remote data is untrusted. Curation uses React Markdown with HTML skipped; links are restricted to HTTP(S), and inline content images are links rather than automatic large downloads. Map labels use text nodes. Invalid or incomplete graph responses yield explicit errors or missing-data states. Unknown values are not converted into zero or false. Source details and limitations belong where they affect interpretation; infrastructure diagnostics stay out of visitor copy.
