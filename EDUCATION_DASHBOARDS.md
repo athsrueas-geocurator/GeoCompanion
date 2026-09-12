@@ -1,41 +1,29 @@
-## Chart rendering correction — September 11, 2026
+# Education dashboards
 
-> September 12 update: atlas/questions now read scoped Geo collections through `atlas-live.mjs`, with no shipped education JSON. Older snapshot/matrix descriptions below are historical where they conflict. Full original coverage is pending [publisher field reconciliation](docs/PUBLISHER_DATA_GAPS.md).
+## Current implementation — September 12, 2026
 
-Removed nonuniform SVG scaling: ResizeObserver now matches the SVG viewBox width to the rendered plot width while preserving 64px row spacing. Circles and diamonds retain their geometry; labels align with rows, and axis units are explicit. Small class precedes regular class + aide within each grade, matching the legend. Mobile keeps a 105px label column and fits the plot into the remaining width, superseding the older label-hiding and minimum-width rules.
+The local application discovers datasets through the ordered native catalog in Education datasets. Dataset membership, names, descriptions, result blocks, interpretation text, typed values and relationship labels come from Geo. No education dataset JSON or fixed result/member list is shipped. The browser reads Geo directly; Cloudflare delivers the interface.
 
-Browser verification: desktop and 390px mobile markers measured 12×12px; mobile page/viewport widths both 375px, chart 305px. Grade 1 filtering retained both labeled estimates. Numerical values and uncertainty formulas are unchanged. Build passes.
+`src/apps/education/DatasetExplorer.tsx` renders the catalog and selected collection. `dataset-data.mjs` validates scoped records and resolves the dataset's ordered Blocks and Collection item edges. `src/shared/geo/collections.mjs` provides cursor traversal. Catalog and block discovery still have a 1,000-edge completion bound; selected result collections load at most four new 25-edge pages per action and expose Load more. Complete coverage must not be inferred from a partial read.
 
-# Education dashboards and curation — September 11, 2026
+The collection filter is derived by `result-facets.mjs` from actual named relationships, grouped by relation type. Options are identified by both relation type and target ID, so the same entity appearing in different roles stays distinct. Counts represent unique loaded records, not independent studies. Renames retain identity; removed options cease filtering. Structural type/block/member links are excluded. Filters add no network requests and do not establish scientific comparability.
 
-## Current product slice
+## Numeric interpretation
 
-Education dashboards is the default view (`#dashboards`). Curation (`#curation`) presents Thomas's supplied resource-constrained education question, a path into evidence and debates, and preliminary notes on four requested books. Existing atlas, questions, debate editing, and live explorer remain available.
+`CollectionPlot.tsx` and `plot-contract.mjs` retain a deliberately constrained plot capability: numeric effect and nonnegative standard error, percentile-point unit, grade/arm dimensions, and a common known study, comparator and estimand. Names of dimensions come from Geo. Approximate intervals are calculated as effect ± 1.96 × standard error; this calculation is explained in an optional disclosure. A partially loaded collection cannot produce a plot.
 
-The STAR chart and table read the public Geo testnet directly in the browser. The query and typed-property mapping are in `src/apps/education/education-live.mjs`, derived from the publisher's verified STAR contract. All scalar values and relations are scoped to Education datasets `dac259bad48a11adf97fe36857d85206`; resolved display names may reflect other spaces. Grade and arm filtering uses mapped relation IDs, not names parsed out of prose.
+Other results remain readable with their published fields, descriptions and source links. Equal units alone do not establish comparability. Broader outcome/instrument and study-family contracts remain unfinished; no cross-program affordability ranking, summed overlapping cohort size, or conversion of modeled costs into observed costs is implemented.
 
-The chart uses percentile points, common regular-class comparator, and published standard errors. Approximate intervals are calculated as effect ± 1.96 × SE, not represented as source-reported intervals. Missing numbers remain unknown, incompatible or insufficient records remain in the table but outside the chart, and partial connections fail visibly. No cross-program efficiency ranking or matched observed cost series is implemented. Eight estimates are one study; cohort sample sizes must not be summed.
+## Refresh and references
 
-Study context and canonical property/grade/arm identifiers are maintained source configuration. Numeric values, follow-up, estimand, sample size and source locators refresh from Geo without rebuilding. Unknown ontology mappings need a deliberate adapter update.
+The shared reader bounds concurrent requests, deduplicates in-flight reads and caches successful responses for two minutes. Explicit refresh invalidates the cache; stale visible-tab returns revalidate without interval polling. New complete membership replaces old membership. Generation guards discard late results after selection changes. Missing or conflicting required fields cannot silently become numeric zeros.
 
-## Traffic and failure behavior
+Dataset references use the membership-aware GeoReference component: a known destination is a link; ambiguous destinations offer on-demand space choices. A changed target or membership resets pending reference UI, preventing an older lookup from adding stale destinations.
 
-One bounded POST (20 estimates, 30 values and 30 relations each), 25-second timeout, no automatic polling, 60-second in-memory cache, and a ten-second refresh cooldown. Returned pagination flags prevent incomplete records being silently used. Previously loaded data remains labeled when refresh fails. More-than-preview-limit data requires opening the complete Geo dataset; this is a deliberate bounded slice, not complete general pagination.
+Canonical personal writing belongs on the user's Geo profile and is handled separately by Curation. No assistant-authored book framing or static editorial fallback is part of the dashboard. See EDITORIAL.md.
 
-The reference atlas JSON is loaded only when the atlas or questions view is opened. No application endpoint or content path uses linux-cloud. Root `.env` stays excluded from the frontend. Study-source and book-source links open only after a visitor chooses them.
+## Verification and remaining work
 
-## Verification
+Local verification September 12: build and 59 tests pass. STAR displayed eight records. Head Start appeared as the 27th catalog entry without a member-list code change, with six selectable collections. Its first collection exposed Topics, Sources, Related entities and supporting/opposing argument filters; filtering four records to one succeeded. A 390px browser check found no page overflow. Earlier intercepted read-response checks verified membership removal and unit edits without writing to Geo; delayed-reference testing verified old destinations cannot reappear after selection changes.
 
-- Production TypeScript/Vite build passed; 10 tests passed.
-- Fresh live response: HTTP 200, CORS `*`, 16,638 response-text bytes. All eight entity IDs, effects, SEs, Ns and plotting eligibility matched `geo-publisher/data/education/star-experimental-extraction.json` and its registry.
-- Browser rendered actual data, grade 1 returned two rows, and grade 1 + small class returned the one 6.79-point estimate (SE 1.1, N 6,452).
-- Desktop chart/curation inspected. At a 390-pixel viewport override, dashboard and curation document width matched client width (375 CSS pixels after scrollbar), with no page overflow. Tables and mobile navigation scroll inside their own containers.
-- Browser rendering confirms public Geo reads work. Read-only browser timing inspection was unavailable; no fresh network trace is claimed. The new adapter's only request destination is the existing Geo endpoint, and deployment CSP allows that endpoint, not a VM.
-
-## Remaining bounty scope
-
-The publisher's `docs/education-bounty.md` and `docs/education-dashboard-data-contract.md` remain the acceptance sources. This release does not complete the bounty. Pending: additional study adapters, structured cross-program location/population/model filters, matched cost/outcome observations, justified compatible comparisons, and complete source reconciliation. Perry, Saga and Reading First can be reached through the published dataset space but do not yet have companion visualizations.
-
-## Editorial publication
-
-`BOOK_CURATION.md` contains the supplied framing and five preliminary attributed claims across Technopoly, Zen and the Art of Motorcycle Maintenance, The Knowledge Gap, and How Children Fail. These are description-based notes with explicit source limits, not full book extractions. The existing publisher task accepted the preliminary personal-profile publication request. Full breakdowns remain a Books-space task. Geo profile publication and direct frontend integration are pending verified IDs/query details; static companion notes do not prove Geo publication.
+These are local implementation checks, not a deployment claim. DEPLOYMENT.md records the actual production release. Remaining work is tracked in TODO.md and docs/LIVING_GEO_DESIGN.md: per-action bounds for other collection entry points, robust block capability classification, broader comparison contracts and remaining cache/refresh migrations. Publisher data gaps belong in its canonical publishing_queue.md; existing readable data should not be duplicated to accommodate a frontend limitation.

@@ -16,6 +16,7 @@ import './dataset-explorer.css';
 import CollectionPlot from './CollectionPlot';
 import useRevalidation from '../../shared/geo/useRevalidation';
 import GeoReference from '../../shared/geo/GeoReference';
+import { resultFacets, selectedFacet } from './result-facets.mjs';
 type RecordRow = {
   id: string;
   name: string;
@@ -187,21 +188,12 @@ function Collection({ block }: { block: RecordRow }) {
       if (request === generation.current) setBusy(false);
     }
   }
-  const facets = [
-    ...new Map(
-      rows
-        .flatMap((r) =>
-          r.relations.filter((e) =>
-            [F.grade, F.arm, F.comparison].includes(e.typeId),
-          ),
-        )
-        .map((e) => [e.toEntityId, e]),
-    ).values(),
-  ];
+  const facets = resultFacets(rows);
+  const activeFacet = selectedFacet(facets, facet);
   const terms = search.toLowerCase().trim().split(/\s+/).filter(Boolean);
   const visible = rows.filter(
     (r) =>
-      (!facet || r.relations.some((e) => e.toEntityId === facet)) &&
+      (!activeFacet || activeFacet.members.includes(r.id)) &&
       terms.every((t) =>
         `${r.name} ${r.description}`.toLowerCase().includes(t),
       ),
@@ -232,14 +224,18 @@ function Collection({ block }: { block: RecordRow }) {
               <label>
                 Filter
                 <select
-                  value={facet}
+                  value={activeFacet?.key || ''}
                   onChange={(e) => setFacet(e.target.value)}
                 >
                   <option value="">All results</option>
-                  {facets.map((f) => (
-                    <option key={f.toEntityId} value={f.toEntityId}>
-                      {f.toEntity?.name || 'Unnamed dimension'}
-                    </option>
+                  {facets.map((group) => (
+                    <optgroup key={group.id} label={group.name}>
+                      {group.options.map((option) => (
+                        <option key={option.key} value={option.key}>
+                          {option.name} ({option.members.length})
+                        </option>
+                      ))}
+                    </optgroup>
                   ))}
                 </select>
               </label>
