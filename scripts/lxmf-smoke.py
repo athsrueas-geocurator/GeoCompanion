@@ -12,6 +12,7 @@ parser.add_argument('--state', required=True)
 parser.add_argument('--recipient', required=True)
 parser.add_argument('--listen-only', action='store_true')
 parser.add_argument('--opportunistic', action='store_true')
+parser.add_argument('--count', type=int, choices=range(1,4), default=1)
 parser.add_argument('--message', default='Geo Companion: Linux messaging test. Please reply received.')
 args = parser.parse_args()
 recipient = bytes.fromhex(args.recipient)
@@ -65,13 +66,25 @@ if remote is None or not RNS.Transport.has_path(recipient):
     raise SystemExit('No recipient path within 60 seconds; keep Retichat open and retry')
 destination = RNS.Destination(remote, RNS.Destination.OUT, RNS.Destination.SINGLE, 'lxmf', 'delivery')
 method = LXMF.LXMessage.OPPORTUNISTIC if args.opportunistic else LXMF.LXMessage.DIRECT
-message = LXMF.LXMessage(destination, source, args.message, 'Geo Companion', desired_method=method, include_ticket=True)
-router.handle_outbound(message)
-deadline = time.monotonic() + 90
-while message.state not in (LXMF.LXMessage.DELIVERED, LXMF.LXMessage.FAILED) and time.monotonic() < deadline:
+messages = []
+started = time.monotonic()
+last_states = {}
+deadline = started + (args.count-1)*30 + 90
+while time.monotonic() < deadline:
+    if len(messages) < args.count and time.monotonic()-started >= len(messages)*30:
+        number = len(messages)+1
+        body = f'Test {number}/{args.count}: {args.message}' if args.count > 1 else args.message
+        message = LXMF.LXMessage(destination, source, body, 'Geo Companion', desired_method=method, include_ticket=True)
+        router.handle_outbound(message)
+        messages.append(message)
+        print(json.dumps({'event':'queued', 'number':number, 'elapsed_seconds':round(time.monotonic()-started)}), flush=True)
+    for number, message in enumerate(messages, 1):
+        if last_states.get(number) != message.state:
+            last_states[number] = message.state
+            print(json.dumps({'number':number, 'state':message.state, 'delivered':message.state == LXMF.LXMessage.DELIVERED, 'attempts':message.delivery_attempts}), flush=True)
+    if len(messages) == args.count and all(m.state in (LXMF.LXMessage.DELIVERED, LXMF.LXMessage.FAILED, LXMF.LXMessage.REJECTED) for m in messages):
+        break
     time.sleep(1)
-delivered = message.state == LXMF.LXMessage.DELIVERED
-print(json.dumps({'delivered': delivered, 'state': message.state}), flush=True)
-if delivered:
-    time.sleep(30)
-raise SystemExit(0 if delivered else 1)
+delivered = sum(m.state == LXMF.LXMessage.DELIVERED for m in messages)
+print(json.dumps({'delivered_count':delivered, 'queued_count':len(messages)}), flush=True)
+raise SystemExit(0 if delivered == args.count else 1)
