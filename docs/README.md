@@ -1,5 +1,7 @@
 # Documentation index
 
+[Maintenance coordinator](MAINTENANCE.md): proposed Linux task database, owner reminders, independent Cloudflare watchdog and strictly bounded free upkeep. Not deployed.
+
 [About, release notes and new-feature notices](RELEASES.md): Preferences pages, local unread state and authoritative deployment-time recording.
 
 [README teaching tour](../README.md#a-tour-from-publication-to-pixels): concrete code examples, how to build a similar dynamic app, current weaknesses and planned improvements.

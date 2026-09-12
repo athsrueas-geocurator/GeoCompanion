@@ -17,6 +17,8 @@
 
 # TODO
 
+- [ ] Implement the owner-requested maintenance coordinator: verified deadlines, bounded dependency checks, private alerts, independent missed-heartbeat observer and verified free renewal adapters. Design only; channel selection and account re-verification pending. See docs/MAINTENANCE.md.
+
 - [x] September 12: deploy version 0.2.0 About and Recent changes under Preferences, using Cloudflare completion timestamps and browser-local unread dots. Production verified seven entries, older-visit dot, clearing on reading, reload persistence and mobile dark layout; build, formatting and 65 tests passed. See docs/RELEASES.md for future commits.
 
 - [x] September 12: automatic content images by default with saved ask-before-download preference. Existing preferences migrate without losing follows; browser tests verified default load, manual gating and reload persistence. Build and 63 tests pass. See LOCAL_PREFERENCES.md.
