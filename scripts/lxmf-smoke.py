@@ -11,6 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--state', required=True)
 parser.add_argument('--recipient', required=True)
 parser.add_argument('--listen-only', action='store_true')
+parser.add_argument('--opportunistic', action='store_true')
 parser.add_argument('--message', default='Geo Companion: Linux messaging test. Please reply received.')
 args = parser.parse_args()
 recipient = bytes.fromhex(args.recipient)
@@ -63,7 +64,8 @@ remote = RNS.Identity.recall(recipient)
 if remote is None or not RNS.Transport.has_path(recipient):
     raise SystemExit('No recipient path within 60 seconds; keep Retichat open and retry')
 destination = RNS.Destination(remote, RNS.Destination.OUT, RNS.Destination.SINGLE, 'lxmf', 'delivery')
-message = LXMF.LXMessage(destination, source, args.message, 'Geo Companion', desired_method=LXMF.LXMessage.DIRECT, include_ticket=True)
+method = LXMF.LXMessage.OPPORTUNISTIC if args.opportunistic else LXMF.LXMessage.DIRECT
+message = LXMF.LXMessage(destination, source, args.message, 'Geo Companion', desired_method=method, include_ticket=True)
 router.handle_outbound(message)
 deadline = time.monotonic() + 90
 while message.state not in (LXMF.LXMessage.DELIVERED, LXMF.LXMessage.FAILED) and time.monotonic() < deadline:
