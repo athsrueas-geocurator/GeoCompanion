@@ -51,6 +51,18 @@ Deliver an updated field-level crosswalk plus a small verified query example for
 
 The publisher's `docs/education-dashboard-data-contract.md` and family registries describe more than STAR, including Perry, Reading First, CUNY/Ohio ASAP and Abecedarian. Companion's numeric dashboard currently remains STAR-specific. This is an integration backlog, not evidence that those families need republishing. Preserve each family's units, denominators, populations and timepoints when adding comparisons.
 
+The latest catalog inventory read (2026-09-12) found 27 Dataset entities, 28 dataset/catalog parents, and 52 blocks in the Education destination. The native Datasets page has one ordered `Datasets` block; catalog resources and study-result datasets are mixed in that graph and must be filtered by their source/context relations before frontend grouping.
+
+Publisher collection preparation has also been reconciled for WorkAdvance (23 existing Claims, 55 prepare-only operations) and Year Up (7 existing Claims, 22 prepare-only operations). Their drafts are not indexed Geo data and must not be queried by the frontend until explicitly published and independently verified. Career Academies currently has four factual Claims, but the local batch lacks the locator/typed-value coverage needed for a result table; keep those rows in context review rather than inventing dashboard metrics. See the publisher's `docs/education-result-collection-reconciliation.md` and `docs/education-result-candidate-reconciliation.md` for the evidence boundary.
+
+The same prepare-only state now covers Early College (26 operations), NCSS3 (23), TFA/Teaching Fellows (22), Viking ROADS (20), DCMP (27), PACE (27), Enhanced Reading (24), Texas Summer Bridge (26), and MSSI (26). These drafts reuse existing Claims and have passed the shared review-binding and live-comparison checks, but they are not frontend-queryable until publication and independent indexed verification. The complete local inventory is [prepared-collection-inventory-2026-09-12.md](../../geo-publisher/docs/prepared-collection-inventory-2026-09-12.md).
+
+Three additional catalog resources are prepared but not yet in the native catalog membership: Evidence for ESSA, National Student Clearinghouse Research Center Enrollment Insights, and State Longitudinal Data Systems. Their metadata batches and the append-only catalog membership extension passed complete all-space identity and schema checks; the frontend should query them only after the extension and resource records are published and independently indexed.
+
+Teacher Incentive Fund also has a prepare-only 24-operation result collection for eight Table VI.4 Claims. It preserves annual horizons from one experiment and omits standard errors because the report does not print them; add it to frontend collection discovery only after publication and indexed verification.
+
+The San Francisco ethnic-studies RDD now has a prepare-only 19-operation collection for three local-IV Claims. Keep its GPA-cutoff pilot separate from the later districtwide expansion; the attendance value uses proportion scale `0.21` while its displayed unit is 21 percentage points.
+
 ## Outreach: not a restoration from education JSON
 
 The approved destination is Public good, `f24e3bbd26304474b7e0c2a0877f4bfe`. A complete live destination query returned 14 space/navigation entities and no service directory rows. The publisher's `docs/indianapolis-outreach-directory.md` still records queued research/modeling with no verified rows or publication. Its `data/indianapolis-outreach-directory/` contains destination discovery, not a completed directory.
