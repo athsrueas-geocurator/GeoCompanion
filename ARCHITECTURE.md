@@ -15,13 +15,16 @@ flowchart LR
   Browser -->|avatar images| IPFS[Pinata IPFS gateway]
   Browser -->|visible map tiles| OSM[OpenStreetMap]
   Browser <--> Local[Local preferences and expiring map cache]
+  Browser <-->|Optional tiny selections| Worker[Cloudflare coordination Worker and rooms]
+  Browser -->|Opt-in usage categories| Worker
+  Worker --> Counts[D1 daily aggregate counts]
 ```
 
-There is no application server or wallet in this repository's runtime. Geo reads use `https://api-testnet.geobrowser.io/graphql`. This is testnet, not an implied production-network integration. Frontend bundles contain public space/property IDs, never wallet or Cloudflare secrets.
+The optional Cloudflare coordination backend handles two-person selections and opt-in aggregate usage counts; it does not fetch Geo content or hold a wallet. Linux-cloud is not involved. See [coordination design and limits](docs/COORDINATION.md). Geo reads use `https://api-testnet.geobrowser.io/graphql`. This is testnet, not an implied production-network integration. Frontend bundles contain public space/property IDs, never wallet or Cloudflare secrets.
 
 ## Startup and navigation
 
-1. `index.html` loads [main.tsx](src/main.tsx), which mounts React and the shared preferences provider.
+1. `index.html` loads [main.tsx](src/main.tsx), which mounts React, the shared preferences provider and the optional shared-exploration controls. The public coordination endpoint comes from `/coordination.json`.
 2. [App.tsx](src/app/App.tsx) reads the hash through [routes.mjs](src/app/routes.mjs). Root shows the selector; education and outreach modules are lazy imports. Unknown routes show a missing-page screen. Legacy education fragments remain supported.
 3. The selected app owns its navigation and transient state. Switching apps unmounts the previous app. Shared preferences survive via the provider and local storage.
 4. [Brand.tsx](src/shared/branding/Brand.tsx) supplies the same triangle everywhere. Selector icons read the primary space's scoped Avatar relation and image IPFS URL. Missing or failed images fall back to the triangle; a cover is not silently substituted.
@@ -63,7 +66,7 @@ No background polling or VM proxy is added by these components. Cache policies a
 
 Remote data is untrusted. Curation uses React Markdown with HTML skipped; links are restricted to HTTP(S), and inline content images are links rather than automatic large downloads. Map labels use text nodes. Invalid or incomplete graph responses yield explicit errors or missing-data states. Unknown values are not converted into zero or false. Source details and limitations belong where they affect interpretation; infrastructure diagnostics stay out of visitor copy.
 
-`public/_headers` restricts script, connection and image origins. The only application API destination is Geo; map images go to OSM and avatars to the selected IPFS gateway. Required map attribution remains visible. Adding a provider requires reviewing both code and CSP.
+`public/_headers` restricts script, connection and image origins. Content APIs go to Geo; optional coordination uses the explicitly allowed Cloudflare Worker HTTPS/WebSocket origin. Map images go to OSM and avatars to the selected IPFS gateway. Required map attribution remains visible. Adding a provider requires reviewing both code and CSP.
 
 ## Publisher integration
 

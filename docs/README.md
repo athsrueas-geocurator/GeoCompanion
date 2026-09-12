@@ -6,6 +6,6 @@ Feature contracts: [app boundaries](../APP_BOUNDARIES.md), [education dashboards
 
 Coordination: [publisher handoff](../PUBLISHER_HANDOFF.md), [publishing queue](../publishing_queue.md), and [low-egress proposal](../LOW_EGRESS_PROTOCOL.md). The collector remains planned.
 
-[Ideas to explore](EXPERIMENTS.md): shared exploration sessions, offline outreach, a small agent work queue, and search/selection telemetry. These are recorded directions, not deployed features.
+[Shared exploration and telemetry](COORDINATION.md): Cloudflare prototype, consent, protocol, limits, local tests and deployment. [Ideas to explore](EXPERIMENTS.md) retains offline outreach and deferred work queues, with embedded Linux in web apps next for research.
 
 Unpublished editorial drafts, withdrawn assistant copy, billing notes and credentials remain local-only. Historical references to those files do not make them publication input.

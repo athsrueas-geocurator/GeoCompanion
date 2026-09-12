@@ -15,7 +15,7 @@ export const outreachTabs = [
   'coordination',
 ];
 export function parseRoute(hash) {
-  const raw = hash.replace(/^#/, '');
+  const raw = hash.replace(/^#/, '').split('?')[0];
   if (educationTabs.includes(raw)) return { app: 'education', tab: raw };
   const path = raw.replace(/^\//, '').replace(/\/$/, '');
   if (!path) return { app: 'home', tab: '' };

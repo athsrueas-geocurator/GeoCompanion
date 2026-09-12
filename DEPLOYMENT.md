@@ -5,7 +5,10 @@ The existing Cloudflare Pages project is `geocompanion`, production branch `main
 - Public site: https://geocompanion.dpdns.org/
 - Pages address: https://geocompanion.pages.dev/
 - Source: [GeoCompanion](https://github.com/athsrueas-geocurator/GeoCompanion)
-- Last verified release before repository reorganization: `9e7b227f`, HTTPS 200 and outreach basemap checked.
+- Current frontend release: `0ce92d86` (September 12, 2026), including shared-exploration controls.
+- Coordination Worker: `https://geocompanion-coordination.thomasfreestone.workers.dev`, version `305ce72b-16f5-495e-a2eb-15b564513896`; HTTPS health and room creation verified.
+
+Two hosted browsers joined one room, sent and opened the Chicago map selection, then sent and opened the selected curated post. Mobile controls fit at 375px without horizontal overflow. The custom domain returned HTTPS 200 with `index-DxXxnyCW.js` and the coordination CSP. Telemetry was left off during production checks; `/insights` returned an empty list. Local runtime integration tests exercised actual D1 writes and aggregates instead.
 
 ## Procedure
 
@@ -26,6 +29,8 @@ After deployment, verify production HTTPS, the current asset in index.html, rele
 Rollback through a previously verified Cloudflare deployment, or rebuild and redeploy a known-good source commit. A source revert alone does not roll back hosting.
 
 ## Infrastructure boundaries
+
+Optional sessions and opt-in aggregate counts run on Cloudflare Workers, SQLite-backed Durable Objects and D1. Deploy with `npm run deploy:coordination`, then rebuild and deploy Pages. See [protocol, permissions, limits and local integration tests](docs/COORDINATION.md). The deployment script never changes the account subscription. The token could not read billing subscriptions; no account-level zero-cost guarantee is claimed.
 
 No VM app endpoint is involved. The proposed linux-cloud collector remains unimplemented. Caddy permissions on psi-ai-agent apply only to that separate host. Free-tier eligibility requires current provider and billing checks; budget alerts are not spending caps.
 

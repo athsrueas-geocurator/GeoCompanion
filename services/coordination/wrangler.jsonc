@@ -1,0 +1,40 @@
+{
+  "name": "geocompanion-coordination",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-12",
+  "workers_dev": true,
+  "triggers": {
+    "crons": ["0 4 * * *"],
+  },
+  "vars": {
+    "ALLOWED_ORIGINS": "https://geocompanion.dpdns.org,https://geocompanion.pages.dev",
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "ROOMS",
+        "class_name": "Room",
+      },
+      {
+        "name": "BUDGET",
+        "class_name": "Budget",
+      },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["Room", "Budget"],
+    },
+  ],
+  "d1_databases": [
+    {
+      "binding": "METRICS",
+      "database_name": "geocompanion-metrics",
+      "database_id": "f617e064-8168-4f30-8fc8-68a4881c1987",
+    },
+  ],
+  "observability": {
+    "enabled": false,
+  },
+}

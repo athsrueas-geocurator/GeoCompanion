@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { selectForSharing } from '../../shared/coordination/Coordination';
 import Markdown from 'react-markdown';
 import { FollowedProfiles } from '../../shared/preferences/Preferences';
 import {
@@ -20,6 +21,20 @@ export default function Curation() {
     [busy, setBusy] = useState(false),
     [listing, setListing] = useState(false),
     [revision, setRevision] = useState(0);
+  useEffect(() => {
+    selectForSharing(selected, PROFILE);
+  }, [selected, post]);
+  useEffect(() => {
+    function readSelection() {
+      const q = new URLSearchParams(location.hash.split('?')[1] || '');
+      const id = q.get('entity');
+      if (q.get('space') === PROFILE && id && /^[a-f0-9]{32}$/.test(id))
+        setSelected(id);
+    }
+    readSelection();
+    window.addEventListener('hashchange', readSelection);
+    return () => window.removeEventListener('hashchange', readSelection);
+  }, []);
   const forceNext = useRef(false),
     lastRefresh = useRef(0),
     listRequest = useRef<AbortController | null>(null);

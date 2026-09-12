@@ -1,0 +1,51 @@
+.coordination {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1100;
+  font-size: 14px;
+}
+.coordination-toggle {
+  border: 1px solid #b9ceca;
+  border-radius: 24px;
+  background: #fff;
+  color: #174a49;
+  padding: 10px 16px;
+  box-shadow: 0 2px 12px #153d3d12;
+}
+.coordination-panel {
+  position: absolute;
+  right: 0;
+  bottom: 52px;
+  width: min(360px, calc(100vw - 36px));
+  max-height: 75vh;
+  overflow: auto;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #b9ceca;
+  border-radius: 16px;
+  box-shadow: 0 8px 35px #153d3d20;
+}
+.coordination-panel h2 {
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+.coordination-panel button {
+  margin: 4px;
+  padding: 7px 10px;
+}
+.coordination-panel p {
+  margin: 12px 0;
+}
+.coordination-note {
+  font-size: 12px;
+  color: #526869;
+}
+.shared-selection {
+  padding: 10px;
+  background: #edf5f3;
+}
+.coordination-panel a {
+  display: block;
+  margin-top: 8px;
+}

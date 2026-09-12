@@ -247,7 +247,10 @@ Budget alerts alone do not enforce the $0 target. If the chosen configuration ca
 
 Details and open decisions: [Ideas to explore](docs/EXPERIMENTS.md). Recording these ideas does not enable telemetry or deploy a service.
 
-- [ ] Explore temporary shared Geo entity/map selection sessions using tiny coordination messages, without files or screen video.
+- [x] Prototype two-person selection sessions on Cloudflare, with one-hour expiry, explicit invitations and bounded messages. Local runtime and hosted room creation passed September 12; see [coordination](docs/COORDINATION.md).
 - [ ] Explore offline outreach directory access, starting with a browser-only approach.
 - [ ] Explore a bounded agent research/checking queue on linux-cloud, with compact status and Geo publication through the existing publisher.
-- [ ] Explore search/selection telemetry for editorial planning and public aggregate insights; define collection, visitor controls, retention and publication boundaries first.
+- [x] Prototype opt-in route/selection counts and public thresholded aggregates in D1. Local aggregation tests passed; raw searches and identities excluded. Production has no test telemetry seeded.
+- [ ] Define useful unmet-demand categories with the editor before expanding telemetry; no raw-search logging.
+- [ ] Research Linux embedded in web apps next, independently of the unused Google VM.
+- [ ] Verify room expiry after a full hour, hibernation/billing behavior under realistic traffic, daily scheduled retention cleanup and abuse resistance before expanding the prototype's quotas.

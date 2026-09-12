@@ -9,8 +9,11 @@
     "preview": "vite preview --host 127.0.0.1",
     "deploy": "node scripts/deploy.mjs",
     "test": "node --test tests/*.test.mjs",
-    "format": "prettier --write src tests scripts index.html package.json tsconfig.json vite.config.ts",
-    "format:check": "prettier --check src tests scripts index.html package.json tsconfig.json vite.config.ts"
+    "format": "prettier --write src tests scripts services index.html package.json tsconfig.json vite.config.ts",
+    "format:check": "prettier --check src tests scripts services index.html package.json tsconfig.json vite.config.ts",
+    "dev:coordination": "wrangler dev --config services/coordination/wrangler.jsonc --port 8787 --var ALLOWED_ORIGINS:http://127.0.0.1:5173",
+    "deploy:coordination": "node scripts/deploy-coordination.mjs",
+    "test:coordination": "node scripts/test-coordination.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -26,6 +29,7 @@
     "prettier": "3.6.2",
     "typescript": "~5.9.3",
     "vite": "8.3.0",
-    "wrangler": "^4.0.0"
+    "wrangler": "^4.0.0",
+    "ws": "8.21.0"
   }
 }

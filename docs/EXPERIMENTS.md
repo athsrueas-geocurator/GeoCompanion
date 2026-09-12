@@ -1,6 +1,10 @@
 # Ideas to explore
 
-These are user-selected directions for investigation, not deployed features or authorization to start collecting visitor activity. Implementation and prioritization remain open. See [TODO](../TODO.md) and the [current architecture](../ARCHITECTURE.md).
+These are user-selected directions. Shared exploration and opt-in coarse telemetry now have a [Cloudflare prototype](COORDINATION.md); the remaining ideas are research, not deployed features. Linux-cloud is unnecessary for the current runtime. See [TODO](../TODO.md) and the [current architecture](../ARCHITECTURE.md).
+
+## Next research: Linux embedded in web apps
+
+Investigate actual Linux emulation in a browser, what useful interactions it enables, initial download size, memory/CPU on phones, offline caching, and boundaries between emulation and browser-native runtimes. Keep this separate from deploying services on the Google VM. No emulator dependency or download is currently added to Geo Companion.
 
 ## Temporary shared exploration
 

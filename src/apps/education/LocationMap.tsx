@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { selectForSharing } from '../../shared/coordination/Coordination';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './location-map.css';
@@ -122,7 +123,7 @@ export default function LocationMap() {
         weight: 2,
       })
         .bindTooltip(label)
-        .on('click', () => setSelected(g.id))
+        .on('click', () => choose(g))
         .addTo(layer);
     }
     if (points.length)
@@ -131,8 +132,22 @@ export default function LocationMap() {
   const chosen = places.find((g) => g.id === selected);
   function choose(g: Place) {
     setSelected(g.id);
+    selectForSharing(g.id, GEOGRAPHY);
     if (g.point) map.current?.setView(g.point as L.LatLngTuple, 7);
   }
+  useEffect(() => {
+    function readSelection() {
+      const query = new URLSearchParams(location.hash.split('?')[1] || '');
+      if (query.get('space') !== GEOGRAPHY) return;
+      const place = snapshot?.locations.find(
+        (p) => p.id === query.get('entity'),
+      );
+      if (place) choose(place);
+    }
+    readSelection();
+    window.addEventListener('hashchange', readSelection);
+    return () => window.removeEventListener('hashchange', readSelection);
+  }, [snapshot]);
   return (
     <section className="location-view">
       <div className="eyebrow">EDUCATION GEOGRAPHY</div>
