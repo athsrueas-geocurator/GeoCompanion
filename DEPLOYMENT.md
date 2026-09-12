@@ -54,6 +54,8 @@ Rollback through a previously verified Cloudflare deployment, or rebuild and red
 
 ## Infrastructure boundaries
 
+September 12: [budgeted Reticulum neighbor transport](docs/NEIGHBOR_NODE.md) enabled on linux-cloud, with a dedicated UID, 50 MB monthly reservation ceiling and daily kernel quotas. It is separate from frontend delivery and the maintenance messenger. No Pages or Worker deployment accompanied that change.
+
 Optional sessions and opt-in aggregate counts run on Cloudflare Workers, SQLite-backed Durable Objects and D1. Deploy with `npm run deploy:coordination`, then rebuild and deploy Pages. See [protocol, permissions, limits and local integration tests](docs/COORDINATION.md). The deployment script never changes the account subscription. The token could not read billing subscriptions; no account-level zero-cost guarantee is claimed.
 
 No VM app endpoint is involved. The proposed linux-cloud collector remains unimplemented. Caddy permissions on psi-ai-agent apply only to that separate host. Free-tier eligibility requires current provider and billing checks; budget alerts are not spending caps.

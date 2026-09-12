@@ -17,6 +17,9 @@
 
 # TODO
 
+- [x] September 12: deploy user-authorized 5% neighbor budget on linux-cloud: separate Reticulum transport identity/UID, durable 50 MB monthly ceiling, daily kernel quota, systemd timer and CPU/memory bounds. Budget tests and live loopback quota cutoff passed; two backbone connections established. See docs/NEIGHBOR_NODE.md.
+- [ ] Observe neighbor-node rollover, restart recovery, useful transit and measured daily traffic; connect private budget-exhaustion alerts after Retichat reverse delivery is verified.
+
 - [ ] Implement the owner-requested maintenance coordinator: verified deadlines, bounded dependency checks, private alerts, independent missed-heartbeat observer and verified free renewal adapters. Design only; channel selection and account re-verification pending. See docs/MAINTENANCE.md.
 
 - [x] September 12: deploy version 0.2.0 About and Recent changes under Preferences, using Cloudflare completion timestamps and browser-local unread dots. Production verified seven entries, older-visit dot, clearing on reading, reload persistence and mobile dark layout; build, formatting and 65 tests passed. See docs/RELEASES.md for future commits.

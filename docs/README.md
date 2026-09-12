@@ -1,5 +1,7 @@
 # Documentation index
 
+[Budgeted neighbor node](NEIGHBOR_NODE.md): deployed Reticulum transport with a separate 5% monthly allocation, kernel quotas and durable daily reservations.
+
 [Maintenance coordinator](MAINTENANCE.md): proposed Linux task database, owner reminders, independent Cloudflare watchdog and strictly bounded free upkeep. Not deployed.
 
 [About, release notes and new-feature notices](RELEASES.md): Preferences pages, local unread state and authoritative deployment-time recording.

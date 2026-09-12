@@ -4,6 +4,8 @@ Design proposal, September 11, 2026. None of the collector, limits or synchroniz
 
 ## Objective
 
+September 12 authorized exception: a separate [budgeted Reticulum transport node](docs/NEIGHBOR_NODE.md) now contributes up to 5% of the conservative monthly planning allowance. It does not forward Geo/Companion content and is independent of the collector proposal below.
+
 VM outbound traffic must depend on a bounded publication schedule, not visitor count. Geo remains canonical; Cloudflare distributes the app and derived data. Linux computes compact history and indexes in a rebuildable SQLite database. Published editorial material remains in the user's Geo profile.
 
 ```mermaid

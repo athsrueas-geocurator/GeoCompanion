@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily neighbor allowance, UTC
+
+[Timer]
+OnCalendar=*-*-* 00:01:00 UTC
+Persistent=true
+Unit=geocompanion-neighbor.service
+
+[Install]
+WantedBy=timers.target
