@@ -8,6 +8,12 @@ test('root selects apps and legacy education links remain valid', () => {
     assert.deepEqual(parseRoute(`#${tab}`), { app: 'education', tab });
 });
 test('routes keep app views separate and reject unknown views', () => {
+  for (const tab of ['about', 'changes'])
+    assert.deepEqual(parseRoute(`#/preferences/${tab}`), {
+      app: 'preferences',
+      tab,
+    });
+  assert.equal(parseRoute('#/preferences/unknown').app, 'missing');
   for (const tab of educationTabs)
     assert.deepEqual(parseRoute(`#/education/${tab}`), {
       app: 'education',

@@ -17,6 +17,7 @@ import {
 } from './preference-storage.mjs';
 import { searchProfiles, resolveProfiles } from './profile-search.mjs';
 import './preferences.css';
+import { ReleaseProvider, ReleaseBubble, PreferencesNav } from './ReleaseNotes';
 type Profile = { id: string; name: string; pageId: string };
 type Preferences = {
   version: number;
@@ -92,15 +93,17 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     return () => removeEventListener('storage', sync);
   }, []);
   return (
-    <Context.Provider value={{ value, error, update, clear }}>
-      {children}
-    </Context.Provider>
+    <ReleaseProvider>
+      <Context.Provider value={{ value, error, update, clear }}>
+        {children}
+      </Context.Provider>
+    </ReleaseProvider>
   );
 }
 export function PreferencesLink() {
   return (
     <a className="geo-link" href="#/preferences">
-      Preferences & follows
+      Preferences & follows <ReleaseBubble />
     </a>
   );
 }
@@ -223,6 +226,7 @@ export default function PreferencesPage() {
         </a>
       </header>
       <main className="preferences-page">
+        <PreferencesNav />
         <h1>Preferences & follows</h1>
         <p className="app-intro">
           Manage your reading preferences and followed profiles.

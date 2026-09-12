@@ -22,6 +22,8 @@ export function parseRoute(hash) {
   if (path === 'preferences') return { app: 'preferences', tab: '' };
   const [app, tab, ...rest] = path.split('/');
   if (rest.length) return { app: 'missing', tab: '' };
+  if (app === 'preferences' && ['about', 'changes'].includes(tab))
+    return { app, tab };
   if (app === 'education' && (!tab || educationTabs.includes(tab)))
     return { app, tab: tab || 'dashboards' };
   if (app === 'outreach' && (!tab || outreachTabs.includes(tab)))

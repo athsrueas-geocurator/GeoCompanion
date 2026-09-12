@@ -1,5 +1,7 @@
 # Documentation index
 
+[About, release notes and new-feature notices](RELEASES.md): Preferences pages, local unread state and authoritative deployment-time recording.
+
 [README teaching tour](../README.md#a-tour-from-publication-to-pixels): concrete code examples, how to build a similar dynamic app, current weaknesses and planned improvements.
 
 [Living Geo design](LIVING_GEO_DESIGN.md): partially implemented native collections, edit-aware readers, capability-based views, caching and staged work.

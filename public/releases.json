@@ -1,0 +1,61 @@
+[
+  {
+    "id": "17c8ed73-1e10-4e4c-9f75-45efc71c1063",
+    "version": "0.1.0",
+    "deployedAt": "2026-09-12T15:04:50.448196Z",
+    "title": "Images, with a low-bandwidth option",
+    "changes": [
+      "Content images load automatically.",
+      "Choose click-to-load images in Reading preferences to save data."
+    ]
+  },
+  {
+    "id": "7889e066-6aa6-4cc7-812e-20e7050dca79",
+    "version": "0.1.0",
+    "deployedAt": "2026-09-12T14:27:56.829587Z",
+    "title": "More ways to explore education",
+    "changes": [
+      "Discover published datasets and filter results by their relationships.",
+      "Explore the original education Questions and their linked Answers.",
+      "Improved links, collection loading and handling of unavailable content."
+    ]
+  },
+  {
+    "id": "648e6635-e259-40cb-afe8-dd21c0c9b750",
+    "version": "0.1.0",
+    "deployedAt": "2026-09-12T13:07:41.105056Z",
+    "title": "Follow the research arguments",
+    "changes": [
+      "Explore supporting and opposing arguments, with links to their sources."
+    ]
+  },
+  {
+    "id": "cf232475-581c-46b6-ae27-4045e3677f3c",
+    "version": "0.1.0",
+    "deployedAt": "2026-09-12T12:11:08.284811Z",
+    "title": "Better on phones, light or dark",
+    "changes": [
+      "The interface follows your system theme.",
+      "Improved mobile navigation, controls and chart readability."
+    ]
+  },
+  {
+    "id": "915cfab3-8c88-40e1-a4d9-d704c992bc81",
+    "version": "0.1.0",
+    "deployedAt": "2026-09-12T11:33:42.560734Z",
+    "title": "A live evidence atlas",
+    "changes": [
+      "Explore published education initiatives and follow their linked findings."
+    ]
+  },
+  {
+    "id": "0ce92d86-3505-4cd3-baeb-8596c7b164c9",
+    "version": "0.1.0",
+    "deployedAt": "2026-09-12T04:27:06.171588Z",
+    "title": "Explore together",
+    "changes": [
+      "Invite another person to share selected views.",
+      "Optional community activity counts are available, with collection off by default."
+    ]
+  }
+]

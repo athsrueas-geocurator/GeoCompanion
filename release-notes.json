@@ -1,0 +1,8 @@
+{
+  "title": "About, recent changes and new-feature notices",
+  "changes": [
+    "Find a short introduction to Geo Companion in Preferences.",
+    "Browse dated release notes and version numbers.",
+    "A small dot highlights unseen releases until you open Recent changes."
+  ]
+}

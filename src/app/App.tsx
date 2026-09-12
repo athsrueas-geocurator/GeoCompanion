@@ -1,4 +1,5 @@
 import SpaceIcon from '../shared/branding/SpaceIcon';
+import PreferenceInfo from '../shared/preferences/ReleaseNotes';
 import Brand from '../shared/branding/Brand';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 
@@ -107,7 +108,7 @@ export default function App() {
       route.app === 'home'
         ? 'Geo Companion — Choose an app'
         : route.app === 'preferences'
-          ? 'Preferences & follows — Geo Companion'
+          ? `${route.tab === 'about' ? 'About' : route.tab === 'changes' ? 'Recent changes' : 'Preferences & follows'} — Geo Companion`
           : route.app === 'education'
             ? 'Education — Geo Companion'
             : route.app === 'outreach'
@@ -130,7 +131,11 @@ export default function App() {
         {route.app === 'home' ? (
           <Home />
         ) : route.app === 'preferences' ? (
-          <PreferencesPage />
+          route.tab ? (
+            <PreferenceInfo tab={route.tab} />
+          ) : (
+            <PreferencesPage />
+          )
         ) : route.app === 'education' ? (
           <EducationApp tab={route.tab} setTab={navigate} />
         ) : route.app === 'outreach' ? (
