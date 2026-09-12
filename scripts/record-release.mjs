@@ -22,7 +22,7 @@ if (
 )
   throw Error('Deployment credentials unavailable.');
 const response = await fetch(
-  `https://api.cloudflare.com/client/v4/accounts/${values.CLOUDFLARE_ACCOUNT_ID}/pages/projects/geocompanion/deployments?per_page=100`,
+  `https://api.cloudflare.com/client/v4/accounts/${values.CLOUDFLARE_ACCOUNT_ID}/pages/projects/geocompanion/deployments?per_page=25`,
   {
     headers: { Authorization: `Bearer ${values.CLOUDFLARE_API_TOKEN}` },
     signal: AbortSignal.timeout(25000),

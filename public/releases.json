@@ -1,5 +1,16 @@
 [
   {
+    "id": "903e66e4-3c98-4bb8-9a8b-ed32b0d23f71",
+    "version": "0.2.0",
+    "deployedAt": "2026-09-12T15:23:06.294309Z",
+    "title": "About, recent changes and new-feature notices",
+    "changes": [
+      "Find a short introduction to Geo Companion in Preferences.",
+      "Browse dated release notes and version numbers.",
+      "A small dot highlights unseen releases until you open Recent changes."
+    ]
+  },
+  {
     "id": "17c8ed73-1e10-4e4c-9f75-45efc71c1063",
     "version": "0.1.0",
     "deployedAt": "2026-09-12T15:04:50.448196Z",

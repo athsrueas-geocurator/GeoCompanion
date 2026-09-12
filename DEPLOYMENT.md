@@ -5,12 +5,18 @@ The existing Cloudflare Pages project is `geocompanion`, production branch `main
 - Public site: https://geocompanion.dpdns.org/
 - Pages address: https://geocompanion.pages.dev/
 - Source: [GeoCompanion](https://github.com/athsrueas-geocurator/GeoCompanion)
-- Current frontend release: `17c8ed73` (September 12, 2026), source `d4f77b9`, asset `index-CwxKWLOa.js`; includes image support and the saved bandwidth preference.
+- Current frontend: version `0.2.0`, feature deployment `903e66e4`, source `f7366a3`, asset `index-C-UJev1c.js`. Release-history metadata published as `809f5c87` (September 12, 2026).
 - Coordination Worker: `https://geocompanion-coordination.thomasfreestone.workers.dev`, version `305ce72b-16f5-495e-a2eb-15b564513896`; HTTPS health and room creation verified.
 
 Previous `648e6635` frontend verification: HTTPS 200 on the custom domain with `index-DiLjdSRM.js`; hosted research view returns 40 questions, including the six Krueger–Hanushek positions. Economic parent displays two supporting arguments and one opposing argument. Local checks cover 320/390/1280px, dark/light, shared Questions dialog/Escape, live search and cached return navigation. All 43 tests, formatting and build pass. See [dynamic argument contract](docs/DYNAMIC_ARGUMENTS.md). Deployment used the reviewed working tree based on `a985218`, with the implementation committed immediately afterward; no Worker, wallet or VM changes.
 
-## Current frontend verification — `17c8ed73`
+## Current frontend verification — version 0.2.0
+
+Feature deployment `903e66e4` completed at `2026-09-12T15:23:06.294309Z`, as reported by Cloudflare. Metadata-only deployment `809f5c87` published that exact time in the release history. An intermediate upload `34d9ceb6` contained the same feature assets before the metadata was recorded; it is not a separate feature release.
+
+Custom-domain HTTPS returned 200 with `index-C-UJev1c.js`. Production About displays version 0.2.0; Recent changes displays seven entries and the correct ISO deployment timestamp. An older browser read marker produced a dot on About, opening Recent changes cleared it, and reload preserved that state. Mobile dark mode had no document overflow. Build, formatting and all 65 tests passed. No Worker, publisher or VM deployment was involved. Follow [the release-recording workflow](docs/RELEASES.md) for future feature versions.
+
+## Previous frontend verification — `17c8ed73`
 
 Deployed source `d4f77b9` through the dist-only script. Custom-domain HTTPS returned 200 with `index-CwxKWLOa.js`. Production Preferences displayed automatic images by default; switching to ask mode survived reload, and the original setting was restored after the check. The 390px dark layout had no document overflow or in-app alerts. Existing CSP-blocked Cloudflare beacon console entries remain unrelated to the change.
 
