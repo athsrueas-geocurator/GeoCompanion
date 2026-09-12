@@ -242,6 +242,8 @@ Budget alerts alone do not enforce the $0 target. If the chosen configuration ca
 ## Repository organization
 
 - [x] Separate app shell, shared components, education and outreach modules. Add formatting commands and current architecture/development guides. Build, 28 adapter tests and formatting checks passed; local routes verified.
+- [x] Document the future-commit checklist, required feature/deployment records and handling of local-only commits after failed Git authentication; consistency and relative links checked September 12.
+- [ ] Push local commits once GitHub authentication is restored, checking remote changes first. Current deployment and source status are recorded in DEPLOYMENT.md.
 
 ## User-selected experiments
 

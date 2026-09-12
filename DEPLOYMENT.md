@@ -10,6 +10,8 @@ The existing Cloudflare Pages project is `geocompanion`, production branch `main
 
 Two hosted browsers joined one room, sent and opened the Chicago map selection, then sent and opened the selected curated post. Mobile controls fit at 375px without horizontal overflow. The custom domain returned HTTPS 200 with `index-DxXxnyCW.js` and the coordination CSP. Telemetry was left off during production checks; `/insights` returned an empty list. Local runtime integration tests exercised actual D1 writes and aggregates instead.
 
+Source for that release was committed after deployment as `d9a04d6`. Its GitHub push failed because Git credentials were unavailable; deployment succeeded independently. The preceding experiment-notes commit `6da8091` was also local-only at that check. These are observations from September 12, not proof of the remote's future state. Follow the [future-commit checklist](docs/DEVELOPMENT.md#checklist-for-future-commits) when recording subsequent releases.
+
 ## Procedure
 
 ```sh
