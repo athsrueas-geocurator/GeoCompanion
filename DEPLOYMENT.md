@@ -5,10 +5,16 @@ The existing Cloudflare Pages project is `geocompanion`, production branch `main
 - Public site: https://geocompanion.dpdns.org/
 - Pages address: https://geocompanion.pages.dev/
 - Source: [GeoCompanion](https://github.com/athsrueas-geocurator/GeoCompanion)
-- Current frontend release: `648e6635` (September 12, 2026), including dynamic research discovery and argument exploration.
+- Current frontend release: `7889e066` (September 12, 2026), source `ef778c4`, asset `index-DUCQLzRM.js`; native catalog/Questions, dynamic filters, reference handling and explicit block capabilities.
 - Coordination Worker: `https://geocompanion-coordination.thomasfreestone.workers.dev`, version `305ce72b-16f5-495e-a2eb-15b564513896`; HTTPS health and room creation verified.
 
-Latest frontend verification: HTTPS 200 on the custom domain with `index-DiLjdSRM.js`; hosted research view returns 40 questions, including the six Krueger–Hanushek positions. Economic parent displays two supporting arguments and one opposing argument. Local checks cover 320/390/1280px, dark/light, shared Questions dialog/Escape, live search and cached return navigation. All 43 tests, formatting and build pass. See [dynamic argument contract](docs/DYNAMIC_ARGUMENTS.md). Deployment used the reviewed working tree based on `a985218`, with the implementation committed immediately afterward; no Worker, wallet or VM changes.
+Previous `648e6635` frontend verification: HTTPS 200 on the custom domain with `index-DiLjdSRM.js`; hosted research view returns 40 questions, including the six Krueger–Hanushek positions. Economic parent displays two supporting arguments and one opposing argument. Local checks cover 320/390/1280px, dark/light, shared Questions dialog/Escape, live search and cached return navigation. All 43 tests, formatting and build pass. See [dynamic argument contract](docs/DYNAMIC_ARGUMENTS.md). Deployment used the reviewed working tree based on `a985218`, with the implementation committed immediately afterward; no Worker, wallet or VM changes.
+
+## Current frontend verification — `7889e066`
+
+Deployed source `ef778c4` through the existing dist-only script. Production custom-domain HTTPS returned 200 and the expected `index-DUCQLzRM.js` asset. Browser checks returned 27 datasets, eight STAR records with no in-app alerts, and 21 native Questions. 390px light and 1280px dark dashboard checks found no document overflow. Geo reads remain direct to `api-testnet.geobrowser.io`; no VM request path was observed. The existing Cloudflare-injected analytics beacon remains blocked by CSP and produces a console entry; the application reads succeeded.
+
+Local build, formatting and 62 tests passed. Intercepted read responses (no Geo writes) verified unsupported collection-source changes, missing linked dataset visibility and recovery after refresh. Block metadata no longer includes collection members; unsupported blocks retain links rather than being misidentified as empty tables. All earlier pushed collection/reference/filter changes are included in this frontend release. No Worker, VM or publisher deployment was performed.
 
 ## Earlier coordination release (`0ce92d86`)
 
