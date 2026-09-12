@@ -21,6 +21,7 @@ type Profile = { id: string; name: string; pageId: string };
 type Preferences = {
   version: number;
   textSize: string;
+  imageLoading: string;
   profiles: string[];
   defaultProfileId: string | null;
 };
@@ -245,6 +246,23 @@ export default function PreferencesPage() {
               <option value="large">Larger</option>
             </select>
           </label>
+          <label>
+            Content images
+            <select
+              aria-describedby="image-loading-help"
+              value={value.imageLoading}
+              onChange={(e) =>
+                update((p) => ({ ...p, imageLoading: e.target.value }))
+              }
+            >
+              <option value="automatic">Load automatically</option>
+              <option value="ask">Only when I choose</option>
+            </select>
+          </label>
+          <p id="image-loading-help">
+            Choose “Only when I choose” to save data. Each image will have a
+            Show image button.
+          </p>
         </section>
         <section className="pref-section">
           <h2>Search for a Geo user</h2>

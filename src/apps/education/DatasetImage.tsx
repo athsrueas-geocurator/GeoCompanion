@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BLOCK } from './block-capabilities.mjs';
 import { iconUrl } from '../../shared/branding/space-icons.mjs';
 import { EDUCATION_SPACE } from '../../config/geo.mjs';
+import { usePreferences } from '../../shared/preferences/Preferences';
 
 type Props = {
   record: {
@@ -12,13 +13,26 @@ type Props = {
   };
 };
 export default function DatasetImage({ record }: Props) {
+  const { value: preferences } = usePreferences();
+  const automatic = preferences.imageLoading !== 'ask';
   const value = record.fields.find((f) => f.id === BLOCK.imageUrl)?.value;
   const src = iconUrl(value);
-  // A changed image URL resets download consent and any prior error.
-  return <ImageContent key={`${record.id}:${src}`} record={record} src={src} />;
+  // Reset per-image permission when its URL or the saved policy changes.
+  return (
+    <ImageContent
+      key={`${record.id}:${src}:${automatic}`}
+      record={record}
+      src={src}
+      automatic={automatic}
+    />
+  );
 }
-function ImageContent({ record, src }: Props & { src: string | null }) {
-  const [show, setShow] = useState(false),
+function ImageContent({
+  record,
+  src,
+  automatic,
+}: Props & { src: string | null; automatic: boolean }) {
+  const [show, setShow] = useState(automatic),
     [failed, setFailed] = useState(false);
   const name = record.name === 'Untitled entry' ? 'Image' : record.name;
   return (
@@ -41,7 +55,7 @@ function ImageContent({ record, src }: Props & { src: string | null }) {
           <button
             onClick={() => {
               setFailed(false);
-              setShow(false);
+              setShow(automatic);
             }}
           >
             Try again

@@ -17,6 +17,8 @@
 
 # TODO
 
+- [x] September 12: automatic content images by default with saved ask-before-download preference. Existing preferences migrate without losing follows; browser tests verified default load, manual gating and reload persistence. Build and 63 tests pass. See LOCAL_PREFERENCES.md.
+
 - [x] September 12: study installed SDK 0.20.3 and upstream block/image renderer; census all 90 blocks in 27 catalog datasets (no unsupported kinds observed). Add click-to-load IPFS Image entity blocks; synthetic browser response verified 0 requests before click / 1 after, retaining eight STAR results. See docs/GEO_BLOCK_SUPPORT.md.
 - [ ] Implement saved filter/view semantics and bounded query/relation-source blocks based on upstream contracts; current collection view is not an exact replica of every Geo table setting.
 

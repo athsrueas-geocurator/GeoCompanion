@@ -4,6 +4,7 @@ export function emptyPreferences() {
   return {
     version: 1,
     textSize: 'standard',
+    imageLoading: 'automatic',
     profiles: [],
     defaultProfileId: null,
   };
@@ -37,6 +38,8 @@ export function validatePreferences(value) {
     !value ||
     value.version !== 1 ||
     !['standard', 'large'].includes(value.textSize) ||
+    (value.imageLoading !== undefined &&
+      !['automatic', 'ask'].includes(value.imageLoading)) ||
     !Array.isArray(value.profiles) ||
     value.profiles.length > MAX_PROFILES
   )
@@ -53,6 +56,7 @@ export function validatePreferences(value) {
   return {
     version: 1,
     textSize: value.textSize,
+    imageLoading: value.imageLoading ?? 'automatic',
     profiles,
     defaultProfileId: value.defaultProfileId,
   };

@@ -8,9 +8,38 @@ import {
   readPreferences,
   writePreferences,
   PREFERENCES_KEY,
+  validatePreferences,
 } from '../src/shared/preferences/preference-storage.mjs';
 const a = 'a'.repeat(32),
   b = 'b'.repeat(32);
+
+test('image loading defaults to automatic and migrates old preferences without losing follows', () => {
+  const old = {
+    version: 1,
+    textSize: 'large',
+    profiles: [a],
+    defaultProfileId: a,
+  };
+  const migrated = validatePreferences(old);
+  assert.equal(migrated.imageLoading, 'automatic');
+  assert.deepEqual(migrated.profiles, [a]);
+  assert.equal(migrated.textSize, 'large');
+  let saved;
+  writePreferences(
+    {
+      setItem: (_k, v) => {
+        saved = v;
+      },
+    },
+    { ...migrated, imageLoading: 'ask' },
+  );
+  assert.equal(
+    readPreferences({ getItem: () => saved }).value.imageLoading,
+    'ask',
+  );
+  assert.equal(emptyPreferences().imageLoading, 'automatic');
+  assert.throws(() => validatePreferences({ ...old, imageLoading: 'invalid' }));
+});
 test('identity input rejects lookalike domains and content links', () => {
   assert.equal(parseProfileId(`https://www.geobrowser.io/space/${a}`), a);
   assert.equal(parseProfileId(a.toUpperCase()), a);

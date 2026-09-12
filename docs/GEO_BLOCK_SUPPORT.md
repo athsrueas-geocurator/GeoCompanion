@@ -6,7 +6,7 @@ Reviewed September 12, 2026. A complete traversal of the current education catal
 
 - Native Text blocks: scoped Markdown, with raw HTML skipped.
 - Data blocks with one explicit Collection data source: ordered Collection item traversal and Companion's own cards, filters and eligible plots.
-- New in source: Image entities used as blocks, with a scoped Image URL. Supported immutable IPFS references use the existing Pinata gateway. The image loads only after Show image; errors provide retry, and unsupported URLs retain the Geo link. No new endpoint, SDK dependency, publisher write or wallet access was added. This currently applies to dataset blocks, not a full rewrite of the separate curation renderer.
+- Image entities used as blocks, with a scoped Image URL. Supported immutable IPFS references use the existing Pinata gateway. Images load automatically by default; the saved Content images → Only when I choose preference requires Show image before downloading; errors provide retry, and unsupported URLs retain the Geo link. No new endpoint, SDK dependency, publisher write or wallet access was added. This currently applies to dataset blocks, not a full rewrite of the separate curation renderer.
 
 ## What remains unsupported or partial
 
