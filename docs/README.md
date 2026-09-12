@@ -9,3 +9,5 @@ Coordination: [publisher handoff](../PUBLISHER_HANDOFF.md), [publishing queue](.
 [Shared exploration and telemetry](COORDINATION.md): Cloudflare prototype, consent, protocol, limits, local tests and deployment. [Ideas to explore](EXPERIMENTS.md) retains offline outreach and deferred work queues, with embedded Linux in web apps next for research.
 
 Unpublished editorial drafts, withdrawn assistant copy, billing notes and credentials remain local-only. Historical references to those files do not make them publication input.
+
+[Linux/browser experiments research](LINUX_BROWSER_RESEARCH.md): Reddit and X discovery leads, primary-source checks, unusual executable environments, egress tradeoffs and a proposed comparison experiment.

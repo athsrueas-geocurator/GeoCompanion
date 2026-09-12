@@ -4,6 +4,8 @@ These are user-selected directions. Shared exploration and opt-in coarse telemet
 
 ## Next research: Linux embedded in web apps
 
+The [September 12 research report](LINUX_BROWSER_RESEARCH.md) compares real-kernel emulation, Linux syscall compatibility, native Wasm tools and community experiments, with proposed Geo Companion applications. This is documented research, not a deployed emulator.
+
 Investigate actual Linux emulation in a browser, what useful interactions it enables, initial download size, memory/CPU on phones, offline caching, and boundaries between emulation and browser-native runtimes. Keep this separate from deploying services on the Google VM. No emulator dependency or download is currently added to Geo Companion.
 
 ## Temporary shared exploration

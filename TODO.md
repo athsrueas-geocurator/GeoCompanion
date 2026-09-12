@@ -254,5 +254,6 @@ Details and open decisions: [Ideas to explore](docs/EXPERIMENTS.md). Recording t
 - [ ] Explore a bounded agent research/checking queue on linux-cloud, with compact status and Geo publication through the existing publisher.
 - [x] Prototype opt-in route/selection counts and public thresholded aggregates in D1. Local aggregation tests passed; raw searches and identities excluded. Production has no test telemetry seeded.
 - [ ] Define useful unmet-demand categories with the editor before expanding telemetry; no raw-search logging.
-- [ ] Research Linux embedded in web apps next, independently of the unused Google VM.
+- [x] Research Linux embedded in web apps independently of the unused Google VM. September 12 report covers community experiments, primary-source distinctions, licensing/egress constraints and proposed tests: [research](docs/LINUX_BROWSER_RESEARCH.md).
+- [ ] Select a useful, reproducible education experiment and compare a minimal browser-native runner with a Linux-based runner; measure cold/warm transfer and actual mobile usability before integration.
 - [ ] Verify room expiry after a full hour, hibernation/billing behavior under realistic traffic, daily scheduled retention cleanup and abuse resistance before expanding the prototype's quotas.
