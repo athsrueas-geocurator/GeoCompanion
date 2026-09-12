@@ -99,6 +99,8 @@ export async function resultPage(id, previous = null) {
 }
 ```
 
+Block metadata reads only type and data-source relationships, so a large collection does not exhaust its metadata limit by including members there. Explicit Collection data source blocks become tables, typed Text blocks become notes, and unsupported blocks retain Geo links.
+
 `edgeWindow` reads at most four new pages per action. `hydrateResults` fetches unique member records in batches of 50 and resolves Study membership where needed for chart checks. The UI exposes Load more and withholds a comparison plot while collection coverage is partial. This bounds new membership reads; it does **not** impose a total byte budget on all detail requests.
 
 ### 3. Validate before caching or interpreting
@@ -168,20 +170,20 @@ Preferences and followed public identity IDs stay in the browser. Search queries
 
 | Gap in the current implementation | Consequence | Planned improvement / acceptance condition |
 | --- | --- | --- |
-| Block classification largely uses presence of Markdown | An unfamiliar image/query block may be mistaken for a result collection | Detect supported block capabilities explicitly; unsupported content gets a useful Geo link, not a false empty table |
+| Block capabilities now recognize explicit collection sources and typed text; other renderers are limited | Image/query/unknown blocks remain accessible as Geo links, rather than false empty tables | Add individually verified renderers without guessing from names or executing arbitrary queries |
 | Catalog/block discovery completes up to 1,000 edges; nested detail reads stop at 100 values/relations | Large valid content can become unavailable; result batching alone does not solve every bound | Incremental entry-point traversal and required-field pagination, with visible partial coverage and measured requests |
 | Several older adapters retain independent cache policies | Freshness, errors and concurrent reads differ across screens | Migrate against a shared lifecycle contract; verify removals and stale responses on every route |
 | Continuing results rehydrates accumulated IDs; response bodies lack a hard download cap | Larger collections can repeat expired reads or exceed intended transfer size | Fetch only missing/stale detail batches; measure cold/warm bytes and define per-view budgets |
 | Plot support is narrow | Most datasets have readable results rather than a tailored visualization | Add source-backed outcome/instrument/cohort contracts and comparison tests; never infer equivalence from equal units |
 | Discovery starts in known education/profile roots and selected relationship kinds | Relevant data elsewhere can be missed | Expand through explicit topic/dataset/source associations, preserving scoped provenance and bounded traversal |
-| Some malformed or removed catalog/block entries are filtered out | A missing card can be ambiguous to a reader | Distinguish verified removal from unreadable data and maintain explicit unavailable states |
+| Unreadable linked catalog entries/blocks now retain unavailable states | A linked entry can be unavailable until upstream fields are corrected or refreshed | Extend the same explicit handling to older adapters; successful membership removal must still remove the entry |
 | Outreach has no ready published directory and coordinate contract | A basemap cannot answer where help is available today | Publisher verifies scoped services, schedules, exceptions and public locations; frontend allowlists exclude copied contact details |
 | Tests cover adapters more deeply than full application transitions | Passing unit tests do not prove every live screen handles edits | Add repeatable end-to-end mutation/failure fixtures and production smoke checks |
 | Source and hosting releases are separate; documentation has accumulated historical notes | Pushed improvements can be mistaken for deployed behavior | Keep release/asset evidence in DEPLOYMENT.md and replace stale summaries during each change |
 
 Every confirmed missing-data dependency goes to the publisher's canonical [publishing queue](https://github.com/athsrueas-geocurator/geo_publisher/blob/main/publishing_queue.md), with scoped evidence, source files, missing fields and acceptance checks. An adapter limitation is not proof that data needs republishing. Missing Answers or editorial priorities must not be invented.
 
-The next integration priorities are block capabilities and bounded reads, consistent refresh across existing screens, then outreach's verified shared adapter for directory/schedule/map views. Author-selected featured collections, broader connection discovery and additional chart contracts follow the [living Geo design](docs/LIVING_GEO_DESIGN.md). These are plans, not claims of completion.
+The next integration priorities are additional block renderers and bounded reads, consistent refresh across existing screens, then outreach's verified shared adapter for directory/schedule/map views. Author-selected featured collections, broader connection discovery and additional chart contracts follow the [living Geo design](docs/LIVING_GEO_DESIGN.md). These are plans, not claims of completion.
 
 ## Build a similar application
 

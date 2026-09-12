@@ -17,6 +17,8 @@
 
 # TODO
 
+- [x] September 12: explicit block capability detection, lightweight type/source metadata reads, unsupported-content links and retained unavailable catalog/block entries. Browser intercepted-read tests verified changed-source and missing-dataset recovery; build, formatting and 62 tests pass. See EDUCATION_DASHBOARDS.md.
+
 - [x] September 12 local checkpoint: derive grouped result filters from published named relationships instead of fixed grade/arm/comparator IDs. Preserve role+target identity and unique loaded-record counts; rename/removal/role tests pass. Browser Head Start filter reduced four records to one; 390px had no overflow. Build and 59 tests pass. EDUCATION_DASHBOARDS.md now describes current implementation instead of retired static/editorial behavior. Not deployed.
 
 - [x] September 12 local checkpoint: result collections use ordered cursor pages, at most four new 25-edge pages per action, with explicit Load more controls. Partial collections do not produce a comparison chart. Continuation/context/cursor tests pass; all 56 tests and build pass. Other collection entry points still need per-action bounds.

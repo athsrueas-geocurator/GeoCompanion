@@ -17,6 +17,7 @@ import CollectionPlot from './CollectionPlot';
 import useRevalidation from '../../shared/geo/useRevalidation';
 import GeoReference from '../../shared/geo/GeoReference';
 import { resultFacets, selectedFacet } from './result-facets.mjs';
+import { blockKind } from './block-capabilities.mjs';
 type RecordRow = {
   id: string;
   name: string;
@@ -36,7 +37,12 @@ type RecordRow = {
   }[];
   unavailable: boolean;
 };
-type Summary = { id: string; name: string; description: string };
+type Summary = {
+  id: string;
+  name: string;
+  description: string;
+  unavailable?: boolean;
+};
 function Link({ id, children }: { id: string; children: React.ReactNode }) {
   return (
     <a
@@ -272,13 +278,13 @@ function Dataset({ id, tick }: { id: string; tick: number }) {
     setError('');
     setBlocks([]);
     datasetBlocks(id)
-      .then((b) => {
+      .then((b: RecordRow[]) => {
         if (!current) return;
         setBlocks(b);
         setSelected((old) =>
           b.some((x) => x.id === old)
             ? old
-            : b.find((x) => !field(x, F.markdown))?.id || '',
+            : b.find((x) => blockKind(x) === 'collection')?.id || '',
         );
       })
       .catch((e) => {
@@ -291,8 +297,11 @@ function Dataset({ id, tick }: { id: string; tick: number }) {
       current = false;
     };
   }, [id, tick]);
-  const tables = blocks.filter((b) => !field(b, F.markdown)),
-    notes = blocks.filter((b) => field(b, F.markdown));
+  const tables = blocks.filter((b) => blockKind(b) === 'collection'),
+    notes = blocks.filter((b) => blockKind(b) === 'text'),
+    other = blocks.filter((b) =>
+      ['unsupported', 'unavailable'].includes(blockKind(b)),
+    );
   return (
     <>
       {busy && <p role="status">Loading dataset…</p>}
@@ -326,6 +335,19 @@ function Dataset({ id, tick }: { id: string; tick: number }) {
           block={tables.find((b) => b.id === selected)!}
         />
       )}{' '}
+      {other.length > 0 && (
+        <section aria-label="More dataset content">
+          <h3>More content</h3>
+          <ul>
+            {other.map((b) => (
+              <li key={b.id}>
+                <Link id={b.id}>{b.name}</Link>
+                {b.unavailable && <span> — Could not load this entry.</span>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       {!busy && !error && !blocks.length && (
         <p>No readable content blocks are linked to this dataset.</p>
       )}
@@ -398,7 +420,14 @@ export default function DatasetExplorer() {
           <p>
             <Link id={chosen.id}>Open dataset</Link>
           </p>
-          <Dataset key={chosen.id} id={chosen.id} tick={tick} />
+          {chosen.unavailable ? (
+            <p role="alert">
+              This linked dataset could not be read. Open it on Geo or try
+              refreshing.
+            </p>
+          ) : (
+            <Dataset key={chosen.id} id={chosen.id} tick={tick} />
+          )}
         </>
       )}
     </div>

@@ -3,6 +3,7 @@ import {
   EDUCATION_CATALOG,
 } from '../../config/geo.mjs';
 import { geoReader } from '../../shared/geo/client.mjs';
+import { BLOCK, orderedBlockRecords } from './block-capabilities.mjs';
 import {
   completeEdges,
   edgeWindow,
@@ -25,6 +26,9 @@ export const F = {
 };
 const fields = `id name spaceIds values(first:100,filter:{spaceId:{is:$space}}){nodes{propertyId spaceId property{id name} text decimal integer boolean}pageInfo{hasNextPage}}`;
 export const RECORDS = `query DatasetRecords($space:UUID!,$ids:[UUID!]!){entitiesConnection(first:50,spaceId:$space,filter:{id:{in:$ids}}){nodes{${fields} relations(first:100,filter:{spaceId:{is:$space}}){nodes{id typeId spaceId type{id name}toEntityId toEntity{id name spaceIds}}pageInfo{hasNextPage}}}pageInfo{hasNextPage}}}`;
+// Collection members have their own cursor reader. Do not fetch them again
+// merely to determine whether a block is an explicit collection.
+export const BLOCK_RECORDS = `query DatasetBlockRecords($space:UUID!,$ids:[UUID!]!){entitiesConnection(first:50,spaceId:$space,filter:{id:{in:$ids}}){nodes{${fields} relations(first:100,filter:{spaceId:{is:$space},typeId:{in:["${BLOCK.types}","${BLOCK.source}"]}}){nodes{id typeId spaceId type{id name}toEntityId toEntity{id name spaceIds}}pageInfo{hasNextPage}}}pageInfo{hasNextPage}}}`;
 export function parseRecord(e) {
   const invalid = {
     id: e.id,
@@ -70,13 +74,13 @@ export function parseRecord(e) {
     unavailable: false,
   };
 }
-export async function datasetRecords(ids) {
+export async function datasetRecords(ids, query = RECORDS) {
   const rows = [];
   for (let i = 0; i < ids.length; i += 50) {
     const batch = ids.slice(i, i + 50);
     rows.push(
       ...(await geoReader.read(
-        RECORDS,
+        query,
         { space: SPACE, ids: batch },
         (d) => {
           const c = d.entitiesConnection;
@@ -94,13 +98,11 @@ export async function datasetRecords(ids) {
 }
 export async function datasetBlocks(id) {
   const edges = await completeEdges(SPACE, id, REL.blocks);
-  const records = new Map(
-    (await datasetRecords(edges.map((e) => e.toEntityId))).map((r) => [
-      r.id,
-      r,
-    ]),
+  const records = await datasetRecords(
+    [...new Set(edges.map((e) => e.toEntityId))],
+    BLOCK_RECORDS,
   );
-  return edges.map((e) => records.get(e.toEntityId)).filter(Boolean);
+  return orderedBlockRecords(edges, records);
 }
 export async function datasetCatalog() {
   const edges = await completeEdges(SPACE, EDUCATION_CATALOG, REL.item);
@@ -135,7 +137,18 @@ export async function datasetCatalog() {
     );
   }
   const byId = new Map(rows.map((r) => [r.id, r]));
-  return { rows: ids.map((id) => byId.get(id)).filter(Boolean), next: null };
+  return {
+    rows: ids.map(
+      (id) =>
+        byId.get(id) || {
+          id,
+          name: 'Dataset unavailable',
+          description: '',
+          unavailable: true,
+        },
+    ),
+    next: null,
+  };
 }
 export async function resultRows(id) {
   const edges = await completeEdges(SPACE, id, REL.item);
