@@ -2,27 +2,41 @@ import { useEffect, useRef, useState } from 'react';
 import { selectForSharing } from '../../shared/coordination/Coordination';
 import Markdown from 'react-markdown';
 import { FollowedProfiles } from '../../shared/preferences/Preferences';
-import {
-  BOOKS,
-  PROFILE,
-  START_POST,
-  readPosts,
-  readPost,
-} from './curation-live.mjs';
+import { PROFILE, readPosts, readPost } from './curation-live.mjs';
 import './curation.css';
+import GeoReference from '../../shared/geo/GeoReference';
+import useRevalidation from '../../shared/geo/useRevalidation';
 type Post = Awaited<ReturnType<typeof readPost>>;
 export default function Curation() {
   const [posts, setPosts] = useState<{ id: string; title: string }[]>([]),
     [next, setNext] = useState<string | null>(null),
-    [selected, setSelected] = useState(START_POST),
+    [selected, setSelected] = useState(() => {
+      try {
+        const id = localStorage.getItem('geocompanion.selected-post');
+        return id && /^[a-f0-9]{32}$/.test(id) ? id : '';
+      } catch {
+        return '';
+      }
+    }),
     [post, setPost] = useState<Post | null>(null),
     [error, setError] = useState(''),
     [listError, setListError] = useState(''),
     [busy, setBusy] = useState(false),
     [listing, setListing] = useState(false),
     [revision, setRevision] = useState(0);
+  useRevalidation(() => {
+    setRevision((r) => r + 1);
+    void list();
+  }, 300000);
   useEffect(() => {
-    selectForSharing(selected, PROFILE);
+    if (selected) selectForSharing(selected, PROFILE);
+    try {
+      if (selected)
+        localStorage.setItem('geocompanion.selected-post', selected);
+      else localStorage.removeItem('geocompanion.selected-post');
+    } catch {
+      /* Reading remains available without local storage. */
+    }
   }, [selected, post]);
   useEffect(() => {
     function readSelection() {
@@ -72,6 +86,11 @@ export default function Curation() {
   }, []);
   useEffect(() => {
     let active = true;
+    if (!selected) {
+      setPost(null);
+      setBusy(false);
+      return;
+    }
     const c = new AbortController(),
       timer = setTimeout(() => c.abort(), 20000);
     setBusy(true);
@@ -121,7 +140,8 @@ export default function Curation() {
       <label className="curation-selector">
         Published posts
         <select value={selected} onChange={(e) => setSelected(e.target.value)}>
-          {!posts.some((p) => p.id === selected) && (
+          <option value="">Choose a post</option>
+          {selected && !posts.some((p) => p.id === selected) && (
             <option value={selected}>Selected post</option>
           )}
           {posts.map((p) => (
@@ -142,11 +162,13 @@ export default function Curation() {
           <button onClick={() => void list()}>Retry post list</button>
         </p>
       )}
-      <p className="curation-source">
-        <a href={source} target="_blank" rel="noopener noreferrer">
-          Open this post on Geo ↗
-        </a>
-      </p>
+      {selected && (
+        <p className="curation-source">
+          <a href={source} target="_blank" rel="noopener noreferrer">
+            Open this post on Geo ↗
+          </a>
+        </p>
+      )}
       {busy && <p role="status">Loading…</p>}
       {error && <p role="alert">{error}</p>}
       {post && (
@@ -211,13 +233,12 @@ export default function Curation() {
                 {post.references.map((r) => (
                   <li key={r.id}>
                     <span>{r.relation}: </span>
-                    <a
-                      href={`https://www.geobrowser.io/space/${r.spaces.includes(BOOKS) ? BOOKS : PROFILE}/${r.targetId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {r.name} ↗
-                    </a>
+                    <GeoReference
+                      id={r.targetId}
+                      name={r.name}
+                      spaces={r.spaces}
+                      context={PROFILE}
+                    />
                   </li>
                 ))}
               </ul>

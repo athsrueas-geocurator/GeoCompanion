@@ -1,5 +1,7 @@
 # Education debates and public signals
 
+September 12 local integration: Public responses now reuses destination-scoped non-factual Claim discovery with cursor pagination, not title keywords or a Debate-tag requirement. It expands four pages per load action and offers more when needed. Counts retain their separate curation/stance/veracity meanings; expanding a record loads explicit argument/source relationships. Browser returned 40 Claims and live counts without errors; 54 tests and build pass. Cross-space topic/source discovery remains future work. The older tagged discovery below describes the previous release, not the current source.
+
 ## Research arguments — implemented September 12
 
 The default debate screen now uses [dynamic questions and arguments](docs/DYNAMIC_ARGUMENTS.md): scoped nonfactual Claim discovery, live topic filters, local search, on-demand explicit supporting/opposing/Related links and a bounded five-minute browser cache. The same argument reader is available in Questions & evidence details. The older tagged discovery described below remains only in the separate Public conversations tab; it is not the new research discovery path.

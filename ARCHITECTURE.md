@@ -2,6 +2,12 @@
 
 This document describes the implemented system. Proposed infrastructure is explicitly separated below. Feature-specific documents contain the exact query contracts.
 
+Next design: [living Geo collections and readers](docs/LIVING_GEO_DESIGN.md) replaces fixed selection with native collection discovery and handles edits, removals and changed relationships. It is proposed, not deployed.
+
+September 12 local implementation: the Questions route now uses `Questions.tsx` and `question-data.mjs` to traverse the original Questions dataset's native ordered collection. It reads actual Question/Answer types separately from Claim debates. `shared/geo` provides its coalesced, four-concurrent-request reader, two-minute bounded memory cache and collection pagination. Other adapters still use their existing policies. All 21 Questions, search, empty Answers and mobile dark rendering were checked locally; production remains the release recorded in DEPLOYMENT.md.
+
+The local dashboard route now uses `DatasetExplorer.tsx`/`dataset-data.mjs`: ordered native catalog membership (25 verified entries), dataset Blocks, result Collection items, scoped typed fields and published methods text. It retains an initial grade/arm percentile-point plot using live dimension names and verified study identity. Generic result reading supports additional families; chart generalization and comprehensive edit handling remain in progress. The older STAR component is currently unused, awaiting cleanup after validation.
+
 ## Runtime and ownership
 
 ```mermaid
@@ -35,7 +41,7 @@ The two available apps are intentionally registered in the shell. Their space av
 
 | Screen / component | Adapter | Operation and boundary |
 | --- | --- | --- |
-| EducationDashboard | [education-live.mjs](src/apps/education/education-live.mjs) | Space- and study-filtered estimate query; parse typed values, preserve units and uncertainty before plotting |
+| DatasetExplorer | [dataset-data.mjs](src/apps/education/dataset-data.mjs) | Native ordered catalog and result collection reads; typed fields, methods blocks and compatible grade/arm plot |
 | Curation | [curation-live.mjs](src/apps/education/curation-live.mjs) | Discover profile Posts, fetch selected post, read scoped Blocks and references, order positions lexicographically; resolve book names in Books space |
 | DebateBoard | [argument-data.mjs](src/apps/education/argument-data.mjs), [debates.mjs](src/apps/education/debates.mjs) | Default scoped research-question discovery and on-demand argument neighborhoods; separate legacy Public conversations tab retains tagged discovery/counts. See [dynamic contract](docs/DYNAMIC_ARGUMENTS.md) |
 | ConnectionExplorer | [connection-data.mjs](src/apps/education/connection-data.mjs) | Follow selected relation kinds from education/profile roots; group shared targets, preserve distinct source records, resolve actual space names |

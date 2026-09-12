@@ -1,14 +1,12 @@
-export const PROFILE = 'd00460c203779d21d96fcfc6102d7a72',
-  START_POST = 'fd024e4f126343af98c61c32ae6f917e';
+export const PROFILE = 'd00460c203779d21d96fcfc6102d7a72';
 const NAME = 'a126ca530c8e48d5b88882c734c38935',
   DESCRIPTION = '9b1f76ff9711404c861e59dc3fa7d037',
   MARKDOWN = 'e3e363d1dd294ccb8e6ff3b76d99bc33',
   BLOCKS = 'beaba5cba67741a8b35377030613fc70',
   TYPES = '8f151ba4de204e3c9cb499ddf96f48f1';
-export const BOOKS = '0477636ace64280fc43a9f440a502291';
 const values = `values(first:20,filter:{spaceId:{is:"${PROFILE}"}}){nodes{propertyId text}pageInfo{hasNextPage}}`;
 export const postListQuery = `query Posts($after:Cursor){entitiesConnection(first:20,after:$after,spaceId:"${PROFILE}",typeId:"f3d4461486b74d2583d89709c9d84f65"){nodes{id ${values}}pageInfo{hasNextPage endCursor}}}`;
-export const postQuery = `query Post($id:UUID!){entity(id:$id){id ${values} relations(first:100,orderBy:POSITION_ASC,filter:{spaceId:{is:"${PROFILE}"}}){nodes{id position type{id name} toEntity{id name spaceIds ${values} bookValues:values(first:2,filter:{spaceId:{is:"${BOOKS}"},propertyId:{is:"${NAME}"}}){nodes{text}pageInfo{hasNextPage}}}}pageInfo{hasNextPage}}}}`;
+export const postQuery = `query Post($id:UUID!){entity(id:$id){id ${values} relations(first:100,orderBy:POSITION_ASC,filter:{spaceId:{is:"${PROFILE}"}}){nodes{id position type{id name} toEntity{id name spaceIds ${values}}}pageInfo{hasNextPage}}}}`;
 function text(entity, property) {
   const v = entity.values;
   if (!v?.nodes || v.pageInfo?.hasNextPage)
@@ -44,12 +42,7 @@ export function normalizePost(entity) {
         id: r.id,
         relation: r.type.name || 'Reference',
         targetId: r.toEntity.id,
-        name: r.toEntity.spaceIds?.includes(BOOKS)
-          ? r.toEntity.bookValues?.nodes?.length === 1 &&
-            !r.toEntity.bookValues.pageInfo.hasNextPage
-            ? r.toEntity.bookValues.nodes[0].text
-            : 'Book on Geo'
-          : r.toEntity.name || 'Unnamed reference',
+        name: r.toEntity.name || 'Unnamed reference',
         spaces: r.toEntity.spaceIds ?? [],
       });
   }

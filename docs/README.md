@@ -1,5 +1,9 @@
 # Documentation index
 
+[Living Geo design](LIVING_GEO_DESIGN.md): proposed native collections, edit-aware readers, capability-based views, caching and staged implementation.
+
+[Hardcoded content audit](HARDCODED_CONTENT_AUDIT.md): remaining fixed study selections, reference destinations and discovery rules, with prioritized Geo-query replacements.
+
 [Dynamic questions and arguments](DYNAMIC_ARGUMENTS.md): static discovery rules, live graph semantics, browser computation, cache limits and publisher contract.
 
 Start with [README](../README.md), [architecture](../ARCHITECTURE.md), [development](DEVELOPMENT.md), [deployment](../DEPLOYMENT.md) and [TODO](../TODO.md).

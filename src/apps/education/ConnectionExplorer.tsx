@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { KINDS, loadConnections } from './connection-data.mjs';
 import './connections.css';
+import GeoReference from '../../shared/geo/GeoReference';
 type Data = {
   edges: unknown[];
   cursors: Record<string, string | null>;
@@ -9,7 +10,7 @@ type Data = {
   groups: {
     id: string;
     name: string;
-    targetSpace: string;
+    targetSpaces: string[];
     spaces: string[];
     kinds: string[];
     count: number;
@@ -156,13 +157,11 @@ export default function Connections() {
                   </li>
                 ))}
               </ul>
-              <a
-                href={`https://www.geobrowser.io/space/${g.targetSpace}/${g.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Open connected record ↗
-              </a>
+              <GeoReference
+                id={g.id}
+                name="Open connected record"
+                spaces={g.targetSpaces}
+              />
             </details>
           </article>
         ))}

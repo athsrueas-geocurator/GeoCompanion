@@ -10,7 +10,8 @@ import {
 import { safeUrl } from './data.mjs';
 import './live-atlas.css';
 import { Arguments } from './ArgumentExplorer';
-type Ref = { id: string; name: string };
+import GeoReference from '../../shared/geo/GeoReference';
+type Ref = { id: string; name: string; spaces?: string[] };
 type Entry = {
   id: string;
   name: string;
@@ -25,13 +26,12 @@ type Entry = {
 };
 function GeoLink({ entry }: { entry: Ref }) {
   return (
-    <a
-      href={`https://www.geobrowser.io/space/${SPACE}/${entry.id}`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {entry.name} ↗
-    </a>
+    <GeoReference
+      id={entry.id}
+      name={entry.name}
+      spaces={entry.spaces}
+      context={SPACE}
+    />
   );
 }
 function Evidence({ entry }: { entry: Entry }) {
@@ -266,7 +266,9 @@ export default function LiveAtlas({
                 <span key={p.id}>{p.name}</span>
               ))}
             </div>
-            <GeoLink entry={{ id: r.id, name: 'Open on Geo' }} />
+            <GeoLink
+              entry={{ id: r.id, name: 'Open on Geo', spaces: [SPACE] }}
+            />
           </article>
         ))}
       </div>
@@ -336,7 +338,13 @@ export default function LiveAtlas({
                 </a>
               )}
               <p>
-                <GeoLink entry={{ id: selected.id, name: 'Open on Geo' }} />
+                <GeoLink
+                  entry={{
+                    id: selected.id,
+                    name: 'Open on Geo',
+                    spaces: [SPACE],
+                  }}
+                />
               </p>
               {selected.sources.length > 0 && (
                 <details>

@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {
   normalizePost,
   readPost,
-  START_POST,
 } from '../src/apps/education/curation-live.mjs';
+const START_POST = 'a'.repeat(32);
 const connection = (nodes) => ({ nodes, pageInfo: { hasNextPage: false } });
 const value = (propertyId, text) => ({ propertyId, text });
 const entity = () => ({

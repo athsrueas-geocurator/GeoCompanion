@@ -1,5 +1,7 @@
 # Editorial authorship and reading
 
+September 12 local update (not yet deployed): initial post selection is now neutral or the reader's saved ID (`geocompanion.selected-post`), not a bundled featured-post ID. Reference links use returned target memberships and the shared resolver, removing the Books/profile destination assumption. Live browser checks verified the Zen reference and saved selection after reload. Older initial-selection details below describe the previous release; an editor-owned featured collection is still pending explicit user selection.
+
 The user personally writes, selects and orders their curation. Interview answers are drafts until the user selects exact publication text. Assistant-written summaries, third-person framing and isolated chat quotations are not substitutes for the user's writing. Earlier assistant-authored book notes were rejected and are not publication input.
 
 ## Implemented reader

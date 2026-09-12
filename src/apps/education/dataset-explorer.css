@@ -1,0 +1,51 @@
+.dataset-table-select {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+  max-width: 100%;
+}
+.dataset-table-select select {
+  width: 100%;
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+.result-record {
+  border-top: 1px solid var(--border);
+  padding: 1.3rem 0;
+  overflow-wrap: anywhere;
+}
+.result-record h3 {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.result-record dl > div {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) minmax(0, 2fr);
+  gap: 1rem;
+  padding: 0.4rem 0;
+}
+.result-record dd {
+  margin: 0;
+}
+.result-estimate strong {
+  font-size: 1.8rem;
+}
+.result-estimate span {
+  margin-left: 1rem;
+}
+.dataset-notes {
+  margin: 1rem 0;
+  overflow-wrap: anywhere;
+}
+.dataset-explorer select,
+.dataset-explorer input {
+  min-height: 44px;
+}
+.dataset-explorer .forest-labels > span {
+  height: 80px;
+  font-size: 11px;
+  line-height: 1.35;
+}
+.dataset-explorer .forest-labels small {
+  font-size: 10px;
+}

@@ -1,5 +1,7 @@
 # Connections
 
+September 12 local update (not yet deployed): discovery now also includes Supporting, Opposing and Related claims edges. Target memberships are preserved separately from asserting spaces; shared reference navigation no longer chooses the first space automatically. Broader active-dataset scope and shared cache migration remain pending.
+
 Replaces the generic entity gallery at the existing `#/education/live` route. The old “Original linked space” was Documentation (`784bfddae3f3976118c561bf28195b44`), retained from the user's initial example; it was not an application dataset and has been removed.
 
 The view groups incoming Sources, Location and Related entities edges by target ID: shared papers, studies, places and related reading. Counts represent distinct connected records, not independent studies, corroboration, importance or causal agreement. Individual edges preserve source-space provenance and their actual relation labels. Unnamed implementation records are omitted.

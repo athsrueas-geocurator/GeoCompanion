@@ -17,7 +17,7 @@ export const P = {
   location: '95d770021faf4f7cb7deb21a7d48cda0',
   topic: '806d52bc27e94c9193c057978b093351',
 };
-export const QUERY = `query Atlas($space:UUID!,$type:UUID!,$filter:EntityFilter!,$after:Cursor){entitiesConnection(spaceId:$space,typeId:$type,first:50,after:$after,filter:$filter){nodes{id name description values(first:100,filter:{spaceId:{is:$space}}){nodes{propertyId text boolean}pageInfo{hasNextPage}} relations(first:100,filter:{spaceId:{is:$space}}){nodes{typeId toEntityId toEntity{id name}}pageInfo{hasNextPage}}}pageInfo{hasNextPage endCursor}}}`;
+export const QUERY = `query Atlas($space:UUID!,$type:UUID!,$filter:EntityFilter!,$after:Cursor){entitiesConnection(spaceId:$space,typeId:$type,first:50,after:$after,filter:$filter){nodes{id name description values(first:100,filter:{spaceId:{is:$space}}){nodes{propertyId text boolean}pageInfo{hasNextPage}} relations(first:100,filter:{spaceId:{is:$space}}){nodes{typeId toEntityId toEntity{id name spaceIds}}pageInfo{hasNextPage}}}pageInfo{hasNextPage endCursor}}}`;
 const cache = new Map();
 const uuid = (x) => typeof x === 'string' && /^[a-f0-9]{32}$/.test(x);
 export function parsePage(payload) {
@@ -56,12 +56,17 @@ export function parsePage(payload) {
           .filter((r) => r.typeId === p && uuid(r.toEntityId))
           .map((r) => [
             r.toEntityId,
-            { id: r.toEntityId, name: r.toEntity?.name || 'Open entry' },
+            {
+              id: r.toEntityId,
+              name: r.toEntity?.name || 'Open entry',
+              spaces: r.toEntity?.spaceIds || [],
+            },
           ]),
       ).values(),
     ];
     return {
       id: e.id,
+      spaces: [SPACE],
       name: text(P.name) || e.name || 'Untitled entry',
       description: text(P.description),
       url: text(P.url),

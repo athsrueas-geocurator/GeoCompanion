@@ -1,4 +1,4 @@
-import { SPACE } from './education-live.mjs';
+import { EDUCATION_SPACE as SPACE } from '../../config/geo.mjs';
 import { PROFILE } from './curation-live.mjs';
 // Bootstrap from actual screen adapters, not a separate catalog of space names.
 export const ROOTS = [SPACE, PROFILE];
@@ -6,6 +6,9 @@ export const KINDS = {
   sources: '49c5d5e1679a4dbdbfd33f618f227c94',
   places: '95d770021faf4f7cb7deb21a7d48cda0',
   related: 'dfa6aebe1ca94bf29faccc4cc7afb24c',
+  supports: '1dc6a843458848198e7a6e672268f811',
+  opposes: '4e6ec5d14292498a84e5f607ca1a08ce',
+  relatedClaims: '504e5776788844f6a77dba3ee811d8f0',
 };
 export const QUERY = `query Connections($space:UUID!,$after:Cursor){relationsConnection(first:100,after:$after,filter:{spaceId:{is:$space},typeId:{in:${JSON.stringify(Object.values(KINDS))}}}){nodes{id spaceId type{id name}fromEntity{id name}toEntity{id name spaceIds}}pageInfo{hasNextPage endCursor}}}`;
 const cache = new Map();
@@ -38,12 +41,13 @@ export function groupConnections(edges) {
       groups.set(key, {
         id: key,
         name: e.toEntity.name,
-        targetSpace: e.toEntity.spaceIds?.[0] || e.spaceId,
+        targetSpaces: new Set(e.toEntity.spaceIds || []),
         spaces: new Set(),
         kinds: new Set(),
         links: [],
       });
     const g = groups.get(key);
+    for (const s of e.toEntity.spaceIds || []) g.targetSpaces.add(s);
     for (const s of [e.spaceId, ...(e.toEntity.spaceIds ?? [])])
       g.spaces.add(s);
     g.kinds.add(e.type.id);
@@ -60,6 +64,7 @@ export function groupConnections(edges) {
     .map((g) => ({
       ...g,
       spaces: [...g.spaces],
+      targetSpaces: [...g.targetSpaces],
       kinds: [...g.kinds],
       count: new Set(g.links.map((l) => l.sourceId)).size,
     }))

@@ -1,13 +1,14 @@
 import { lazy, Suspense } from 'react';
 import Brand from '../../shared/branding/Brand';
 import { PreferencesLink } from '../../shared/preferences/Preferences';
-import EducationDashboard from './EducationDashboard';
+import DatasetExplorer from './DatasetExplorer';
 import Debates from './DebateBoard';
 import '../../app/style.css';
 const Connections = lazy(() => import('./ConnectionExplorer'));
 const Curation = lazy(() => import('./Curation'));
 const LocationMap = lazy(() => import('./LocationMap'));
 const LiveAtlas = lazy(() => import('./LiveAtlas'));
+const Questions = lazy(() => import('./Questions'));
 const groups = [
   {
     label: 'Explore',
@@ -98,7 +99,7 @@ export default function EducationApp({
           </div>
           <Suspense fallback={<p role="status">Loading…</p>}>
             {tab === 'dashboards' ? (
-              <EducationDashboard openAtlas={() => setTab('atlas')} />
+              <DatasetExplorer />
             ) : tab === 'curation' ? (
               <Curation />
             ) : tab === 'debates' ? (
@@ -107,8 +108,10 @@ export default function EducationApp({
               <LocationMap />
             ) : tab === 'live' ? (
               <Connections />
+            ) : tab === 'questions' ? (
+              <Questions />
             ) : (
-              <LiveAtlas questions={tab === 'questions'} />
+              <LiveAtlas />
             )}
           </Suspense>
         </main>

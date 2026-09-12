@@ -17,6 +17,31 @@
 
 # TODO
 
+- [x] September 12 local checkpoint: replace Public conversations title-keyword/tag discovery with native classified Claim pagination and rename tab Public responses. Expansion reads actual arguments/sources; remove dormant published-reading-list state while retaining local drafts. Browser verified 40 Claims and response counts; 54 tests/build pass. Broader cross-space discovery remains pending.
+
+- [x] September 12 local checkpoint: remove retired STAR-only component/adapter and empty public editorial JSON; retain the static-publication guard without unreachable writer code. Replacement plot-contract tests cover zero/missing values and edited unit/study/comparator/estimand. All 53 tests and build pass.
+- [x] Browser mutation verification: intercept read responses only (no Geo mutation); collection member removal changed eight results to seven, restoration returned eight; unit edit removed chart while retaining eight readable records. Restoring response recovered the eight-point chart.
+- [x] Add stale visible-tab revalidation for dashboard and curation; no interval polling. Remaining adapters still require lifecycle migration.
+
+- [x] September 12 local checkpoint: replace Books/profile and first-space routing assumptions with shared membership-aware reference links in curation, atlas and Connections; retain ambiguous destinations as on-demand choices. Connections now includes supporting/opposing/related-Claim edges. Curation uses neutral or browser-saved selection rather than a fixed post. Browser verified live book/profile links and persisted selection; 53 tests and build pass. Not deployed.
+- [x] Confirm living catalog addition: publisher-added teacher coaching appeared as the 26th dataset through the existing reader with no member-list code change, September 12.
+
+- [x] September 12 local checkpoint: dashboard picker reads the publisher's ordered 25-member native catalog, opens dataset result blocks and methods text, and derives STAR grade/arm labels from Geo. STAR eight-point plot and Reading First/Perry collections read successfully. Not deployed; broader chart contracts, refresh lifecycle and remaining adapters still need work.
+- [ ] Finish dashboard validation: export/test chart eligibility, verify outcome/instrument compatibility beyond the current grade/arm contract, remove retired STAR component and unused space-wide discovery, add incremental collection coverage controls and selected-result detail revalidation.
+
+- [x] September 12: integrate original Questions through native dataset Blocks/Collection item traversal. All 21 records loaded live in source order; actual Answer targets are separate from Claims. Local browser search/dialog/Escape and dark 390px verified with direct Geo requests. Shared reader mutation/cache tests added; 48 tests and build pass. Not deployed yet.
+- [ ] Finish migrating remaining adapters to the shared reader; bound collection discovery per user action, add broader capability-based datasets, and verify live removal/refresh behavior across screens before claiming living-graph integration complete.
+
+- [x] September 12: design edit-aware Geo collection discovery and view capabilities. Verified native STAR collection structure and Question/Answers identities through read-only API calls; see [living Geo design](docs/LIVING_GEO_DESIGN.md). Implementation remains pending.
+- [ ] Prove native result-collection discovery on STAR, replacing fixed grade/arm lists with linked concepts; validate rename, reorder, removal and incomplete-field behavior before extending to a second family.
+- [ ] Implement scoped shared request/cache lifecycle and verified reference contexts incrementally, including refresh generations and deletion handling, following the living Geo design.
+
+- [x] September 12: audit remaining hardcoded content and discovery constraints against source baseline `eba5e11`. See [prioritized audit](docs/HARDCODED_CONTENT_AUDIT.md); this records findings, not completed migrations.
+- [ ] Resolve reference destination spaces from verified membership/provenance in curation, atlas and Connections instead of fixed or first-space assumptions.
+- [ ] Verify the publisher's canonical Question/Answers contract after its original-question identity review; add question discovery separately from non-factual debate Claims.
+- [ ] Add a verified editor-maintained Geo collection contract for featured curation selection; preserve user authorship and explicit selection.
+- [ ] Retire unused empty public editorial JSON, unreachable importer write code and dormant published-reading-list state after checking their remaining consumers.
+
 Use `[x]` only for completed work with evidence. Add dates and concise verification notes as items are finished. Historical suggestions in the pasted conversation are not completion evidence.
 
 ## Completed foundation

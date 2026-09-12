@@ -29,7 +29,7 @@ const payload = () => ({
               {
                 typeId: P.source,
                 toEntityId: source,
-                toEntity: { name: 'Paper' },
+                toEntity: { name: 'Paper', spaceIds: ['c'.repeat(32)] },
               },
             ],
             pageInfo: { hasNextPage: false },
@@ -45,7 +45,9 @@ test('atlas uses scoped description without inferring evidence ratings', () => {
   assert.equal(r.name, 'Scoped name');
   assert.equal(r.description, '');
   assert.equal(r.population, 'Adults');
-  assert.deepEqual(r.sources, [{ id: source, name: 'Paper' }]);
+  assert.deepEqual(r.sources, [
+    { id: source, name: 'Paper', spaces: ['c'.repeat(32)] },
+  ]);
   assert.equal(r.evidenceStrength, undefined);
 });
 test('atlas rejects incomplete nested data, conflicting values and GraphQL errors', () => {

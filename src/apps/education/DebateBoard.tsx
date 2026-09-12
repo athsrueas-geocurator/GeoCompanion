@@ -1,16 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { GEO_ENDPOINT } from '../../config/public-config';
 import {
-  DISCOVER_QUERY,
   VOTES_QUERY,
-  TERMS,
-  normalizeClaims,
   normalizeVotes,
   summarizeVotes,
   validEditorial,
 } from './debates.mjs';
 import './debates.css';
-import ArgumentExplorer from './ArgumentExplorer';
+import ArgumentExplorer, { Arguments } from './ArgumentExplorer';
+import { argumentReader } from './argument-data.mjs';
+import { discoverSignals } from './signal-discovery.mjs';
 type Claim = {
   id: string;
   name: string;
@@ -95,12 +94,12 @@ function PublicSignals({ openEvidence }: { openEvidence: () => void }) {
     [voteError, setVoteError] = useState(''),
     [checked, setChecked] = useState(0),
     [limited, setLimited] = useState(false),
-    [tick, setTick] = useState(0);
+    [tick, setTick] = useState(0),
+    [pages, setPages] = useState(4);
   const [search, setSearch] = useState(''),
     [sort, setSort] = useState('activity'),
     [selected, setSelected] = useState<string | null>(null);
   const [editor, setEditor] = useState(false),
-    [published, setPublished] = useState<Editorial>(EMPTY),
     [draft, setDraft] = useState<Editorial>(EMPTY),
     [notice, setNotice] = useState(''),
     [publishError, setPublishError] = useState('');
@@ -133,19 +132,15 @@ function PublicSignals({ openEvidence }: { openEvidence: () => void }) {
     async function load() {
       try {
         let value = cached;
-        if (tick > 0 || !value || Date.now() - value.checked > 60000) {
-          const payload = await request(
-            DISCOVER_QUERY,
-            {
-              filter: {
-                fromEntity: {
-                  or: TERMS.map((t) => ({ name: { includesInsensitive: t } })),
-                },
-              },
-            },
-            c.signal,
-          );
-          const found = normalizeClaims(payload) as Claim[];
+        if (
+          pages > 4 ||
+          tick > 0 ||
+          !value ||
+          Date.now() - value.checked > 60000
+        ) {
+          if (tick > 0) argumentReader.clear();
+          const discovery = await discoverSignals(pages);
+          const found = discovery.claims as Claim[];
           let counts: Vote[] = [],
             countsError = '';
           if (found.length)
@@ -165,7 +160,7 @@ function PublicSignals({ openEvidence }: { openEvidence: () => void }) {
             claims: found,
             votes: counts,
             voteError: countsError,
-            limited: payload.data.relations.length >= 101,
+            limited: discovery.limited,
             checked: Date.now(),
           };
           cached = value;
@@ -192,7 +187,7 @@ function PublicSignals({ openEvidence }: { openEvidence: () => void }) {
       c.abort();
       clearTimeout(timer);
     };
-  }, [tick]);
+  }, [tick, pages]);
   const summary = (id: string, kind: number) =>
     summarizeVotes(votes, id, kind) as {
       positive: number;
@@ -221,7 +216,7 @@ function PublicSignals({ openEvidence }: { openEvidence: () => void }) {
       ? Math.min(s.positive, s.negative) / (s.positive + s.negative)
       : -1;
   }
-  const editing = editor ? draft : published;
+  const editing = editor ? draft : EMPTY;
   const active = claims.find((c) => c.id === selected);
   const update = (value: Editorial) => {
     setDraft(value);
@@ -317,7 +312,7 @@ function PublicSignals({ openEvidence }: { openEvidence: () => void }) {
             <button className="primary" onClick={exportDraft}>
               Export local draft
             </button>
-            <button onClick={() => update(published)}>Clear draft</button>
+            <button onClick={() => update(EMPTY)}>Clear draft</button>
             <span role="status">
               {notice ||
                 'Select “Feature this claim” below to start a reading list.'}
@@ -587,21 +582,7 @@ function PublicSignals({ openEvidence }: { openEvidence: () => void }) {
                       </div>
                     </div>
                     <div>
-                      <h3>Sources</h3>
-                      {c.sources.length ? (
-                        <ul>
-                          {c.sources.map((s) => (
-                            <li key={`${s.id}:${s.space}`}>
-                              <Go id={s.id} space={s.space}>
-                                {s.name}
-                              </Go>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p>No sources linked.</p>
-                      )}
-                      {c.sourceLimit && <p>More sources may be available.</p>}
+                      <Arguments id={c.id} />
                       <button onClick={openEvidence}>
                         Explore the reference evidence atlas
                       </button>
@@ -613,6 +594,11 @@ function PublicSignals({ openEvidence }: { openEvidence: () => void }) {
             );
           })}
         </div>
+        {limited && (
+          <button disabled={busy} onClick={() => setPages((p) => p + 4)}>
+            Load more claims
+          </button>
+        )}
         <details className="debate-method">
           <summary>About these counts</summary>
           <p>
@@ -639,7 +625,7 @@ export default function Debates({
           Research arguments
         </button>
         <button aria-pressed={signals} onClick={() => setSignals(true)}>
-          Public conversations
+          Public responses
         </button>
       </div>
       {signals ? (

@@ -3,8 +3,6 @@ import assert from 'node:assert/strict';
 import {
   normalizeVotes,
   summarizeVotes,
-  normalizeClaims,
-  isEducationTitle,
   validEditorial,
 } from '../src/apps/education/debates.mjs';
 test('distinct vote kinds and missing tallies stay distinct', () => {
@@ -46,25 +44,6 @@ test('distinct vote kinds and missing tallies stay distinct', () => {
       },
     }),
   );
-});
-test('tag links deduplicate entities without losing contributing spaces', () => {
-  const fromEntity = {
-    id: 'a',
-    name: 'Schools should test AI tools',
-    description: null,
-    relationsList: [],
-  };
-  const rows = normalizeClaims({
-    data: {
-      relations: [
-        { spaceId: 'one', fromEntity },
-        { spaceId: 'two', fromEntity },
-      ],
-    },
-  });
-  assert.equal(rows.length, 1);
-  assert.deepEqual(rows[0].spaces, ['one', 'two']);
-  assert.equal(isEducationTitle('Abolish the Electoral College'), false);
 });
 test('editorial content is bounded and cannot insert duplicate picks', () => {
   const pick = { id: 'a'.repeat(32), note: 'My perspective' };
