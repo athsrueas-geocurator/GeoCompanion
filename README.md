@@ -2,6 +2,16 @@
 
 A lightweight, read-only companion to Geo, with separate education and Indianapolis outreach apps.
 
+## Why I built it this way
+
+I wanted to see how much I could build without creating another monthly bill. Free was the goal, but so were efficiency and accessibility. It should work in an ordinary browser, including on a phone, without someone needing a wallet or an account just to explore. I wanted to be thoughtful about what gets downloaded, what can be cached, and whether a server needs to be involved at all. Having access to a Linux box doesn't mean every request should pass through it.
+
+I also wanted to make something useful alongside Geo while keeping Geo at the center. The data, relationships, and my published writing belong there, where other people can explore them and build something else with them. This app should help people do things with that information: compare educational findings, follow a connection between a book and an idea, or eventually find out where someone can get help in Indianapolis. I want new information published on Geo to become useful here without having to rewrite the app every time.
+
+As a teacher, I spent a lot of time putting numbers on students when I would rather have been learning with them. That experience matters to how I think about this project. A dashboard needs to help us ask a better question or make a useful decision. Displaying more numbers isn't the goal. I'm interested in real levers for improving education when resources are scarce, and in helping outreach organizations coordinate around what people actually need.
+
+This is also an experiment in what an agent can help one person orchestrate. There is research, data organization, publishing, interface design, hosting, and all the work of getting those pieces to agree with one another. I wanted to see how far I could take an idea by working through those connections with an agent. My role is still to decide what matters, question the results, and write and curate my own thoughts. The technology should give me more room to do that thoughtfully.
+
 [Open the app](https://geocompanion.dpdns.org/) · [System architecture](ARCHITECTURE.md) · [Development guide](docs/DEVELOPMENT.md) · [Deployment](DEPLOYMENT.md) · [Remaining work](TODO.md)
 
 ## What works today
