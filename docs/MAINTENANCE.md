@@ -1,6 +1,6 @@
 # Maintenance coordinator — proposed September 12, 2026
 
-Status: design and implementation queue only. No daemon, reminder, message channel, renewal or automatic action has been enabled. The user has requested operational reminders and narrowly predefined upkeep; alert channel and delivery credentials remain to be selected.
+Status: maintenance design and implementation queue; no daemon, reminder, renewal or automatic action enabled. The owner selected Retichat/LXMF and Linux messaging installation plus a bounded test are underway; see [setup and verification boundaries](LXMF_SETUP.md). Successful phone delivery remains an acceptance gate.
 
 ## Purpose and ownership
 
