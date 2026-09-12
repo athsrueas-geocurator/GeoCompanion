@@ -6,8 +6,10 @@ Feature contracts: [app boundaries](../APP_BOUNDARIES.md), [education dashboards
 
 Coordination: [publisher handoff](../PUBLISHER_HANDOFF.md), [publishing queue](../publishing_queue.md), and [low-egress proposal](../LOW_EGRESS_PROTOCOL.md). The collector remains planned.
 
-[Shared exploration and telemetry](COORDINATION.md): Cloudflare prototype, consent, protocol, limits, local tests and deployment. [Ideas to explore](EXPERIMENTS.md) retains offline outreach and deferred work queues, with embedded Linux in web apps next for research.
+[Shared exploration and telemetry](COORDINATION.md): Cloudflare prototype, consent, protocol, limits, local tests and deployment. [Ideas to explore](EXPERIMENTS.md) retains offline outreach and deferred work queues. Current Linux research focuses on capabilities of a real host.
 
 Unpublished editorial drafts, withdrawn assistant copy, billing notes and credentials remain local-only. Historical references to those files do not make them publication input.
 
 [Linux/browser experiments research](LINUX_BROWSER_RESEARCH.md): Reddit and X discovery leads, primary-source checks, unusual executable environments, egress tradeoffs and a proposed comparison experiment.
+
+[Real Linux host research](LINUX_HOST_RESEARCH.md): kernel network experiments, packetdrill, disconnected messaging, rendezvous boundaries and explicit byte budgets. Research only; no VM deployment.

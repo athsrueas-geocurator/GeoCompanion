@@ -42,6 +42,10 @@ Before implementation, decide the visitor notice/control, collected fields, rete
 
 Keep Companion usage metrics distinct from Geo's votes, blockchain history and evidence of real-world demand. Repeated clicks, bots and a small self-selected audience can distort counts. Telemetry can suggest a research job for the queue; it should not automatically determine editorial priorities or publish a claim.
 
+## Current focus: experiments on a real Linux host
+
+The [host research](LINUX_HOST_RESEARCH.md) follows the user's clarification: investigate capabilities beyond what our browser and Cloudflare setup already provides. The strongest candidates are a controlled kernel network laboratory and a closed Reticulum/LXMF messaging experiment. Neither is deployed or required by the production app. Routine queues remain deferred; persistence alone does not establish their value.
+
 ## How to evaluate the experiments
 
 For each prototype, compare the benefit with a browser-only version first. Measure whole-transaction outbound traffic, including retries and connection maintenance, and whether it grows with visitors. Preserve Geo as the canonical source. The existing [low-egress protocol](../LOW_EGRESS_PROTOCOL.md) is a proposal, not proof that these experiments fit a measured budget.

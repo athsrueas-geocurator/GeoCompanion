@@ -62,6 +62,6 @@ docs/                     Contributor workflow and documentation index
 - [Geo SDK](https://github.com/geobrowser/geo-sdk): upstream publishing integration.
 - [Geo web application](https://github.com/geobrowser/geogenesis): upstream ontology and response semantics references.
 
-Cloudflare serves the frontend and a small optional [shared-exploration and usage-count service](docs/COORDINATION.md). Browsers read Geo and image/map providers directly. **The Google Cloud VM is not in the application request path.** The older collector proposal remains deferred; the next Linux research topic is embedding Linux inside browser experiences.
+Cloudflare serves the frontend and a small optional [shared-exploration and usage-count service](docs/COORDINATION.md). Browsers read Geo and image/map providers directly. **The Google Cloud VM is not in the application request path.** The older collector proposal remains deferred. Research now distinguishes [browser-based Linux experiences](docs/LINUX_BROWSER_RESEARCH.md) from [experiments that benefit from a real Linux host](docs/LINUX_HOST_RESEARCH.md), especially network testing and disconnected messaging.
 
 Canonical editorial writing belongs on the user's Geo profile. Local drafts, wallet keys and deployment tokens are never application source or build inputs. The root `.env` is ignored and Vite does not load it. See [editorial rules](EDITORIAL.md) and the [documentation index](docs/README.md).
