@@ -1,0 +1,134 @@
+.atlas-controls {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: white;
+  padding: 20px;
+  border: 1px solid var(--line, #dae3e2);
+  border-radius: 12px;
+}
+.atlas-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 13px;
+}
+.atlas-search {
+  flex: 1;
+  min-width: 200px;
+}
+.atlas-controls input,
+.atlas-controls select {
+  padding: 12px;
+  border: 1px solid #cad8d6;
+  border-radius: 6px;
+  background: white;
+  color: inherit;
+}
+.atlas-count {
+  font-size: 13px;
+  margin: 18px 0;
+  color: #526b70;
+}
+.atlas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+  gap: 16px;
+}
+.atlas-grid article {
+  background: white;
+  border: 1px solid #d9e3e1;
+  border-radius: 12px;
+  padding: 22px;
+}
+.atlas-title {
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  padding: 0;
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.atlas-grid p {
+  line-height: 1.65;
+  color: #536b72;
+}
+.atlas-grid a,
+.atlas-detail a {
+  color: #176a65;
+}
+.atlas-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+  margin: 14px 0;
+}
+.atlas-detail {
+  position: fixed;
+  inset: 5vh 5vw 5vh auto;
+  width: min(720px, 90vw);
+  box-sizing: border-box;
+  overflow: auto;
+  padding: 30px;
+  background: white;
+  border: 1px solid #c5d6d2;
+  border-radius: 14px;
+  box-shadow: 0 10px 80px #143a4260;
+  z-index: 100;
+}
+.atlas-close {
+  float: right;
+}
+.atlas-detail dt {
+  font-weight: 600;
+  margin-top: 12px;
+}
+.atlas-detail dd {
+  margin: 6px 0;
+  line-height: 1.6;
+}
+.atlas-evidence article {
+  border-top: 1px solid #d9e3e1;
+  padding: 18px 0;
+  line-height: 1.65;
+}
+.atlas-detail summary {
+  cursor: pointer;
+  margin: 12px 0;
+}
+.atlas-detail li {
+  margin-bottom: 10px;
+}
+.atlas-detail h2 {
+  clear: both;
+  padding-top: 18px;
+}
+.live-atlas button {
+  cursor: pointer;
+}
+.live-atlas button:disabled {
+  cursor: wait;
+}
+@media (max-width: 600px) {
+  .atlas-controls {
+    padding: 14px;
+  }
+  .atlas-controls label {
+    width: 100%;
+  }
+  .atlas-detail {
+    inset: 12px;
+    width: auto;
+    padding: 20px;
+  }
+  .live-atlas .page-heading {
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .live-atlas h1 {
+    font-size: 32px;
+  }
+}

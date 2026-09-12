@@ -46,3 +46,9 @@ metadata uploads and compact queries. It used uniquely named temporary Workers/D
 resources, not the production coordination service. See that experiment's
 `last-result.json` for measurements and cleanup status. No discovery UI or ongoing
 VM service was deployed; Geo reconciliation and publication receipts remain planned.
+
+## September 12: live atlas deployment
+
+Pages deployment `915cfab3.geocompanion.pages.dev` serves production asset `index-CQidbkU-.js`. Production HTTPS atlas returned 34 live initiatives with a successful direct browser POST to Geo; the studies selector returned 8 in preview. Desktop search and linked CUNY findings passed; 390px mobile viewport had no document overflow. Build and all 33 tests passed.
+
+`education.json` is absent from dist and new deployment routes return the SPA HTML rather than that dataset. The old custom-domain URL briefly retained its previous five-minute CDN cache; an exact-URL purge was unavailable to the current token (401). Current app chunks do not request it. No cache-purge permission expansion was requested. The existing Cloudflare-injected analytics beacon remains blocked by the site CSP; it does not block Geo reads.

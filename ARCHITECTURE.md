@@ -40,7 +40,7 @@ The two available apps are intentionally registered in the shell. Their space av
 | DebateBoard | [debates.mjs](src/apps/education/debates.mjs) | Discover education-related debate-tagged claims, then batch public counts; missing counts stay unavailable |
 | ConnectionExplorer | [connection-data.mjs](src/apps/education/connection-data.mjs) | Follow selected relation kinds from education/profile roots; group shared targets, preserve distinct source records, resolve actual space names |
 | LocationMap | [location-data.mjs](src/apps/education/location-data.mjs) | Page education location edges, deduplicate places, query Places-scoped coordinates, reject invalid/conflicting points |
-| Atlas and questions | [data.mjs](src/apps/education/data.mjs) | Validate and search `/data/education.json`, a bundled reference snapshot |
+| Atlas and questions | [atlas-live.mjs](src/apps/education/atlas-live.mjs), [LiveAtlas.tsx](src/apps/education/LiveAtlas.tsx) | Space-scoped paginated Geo programs, studies and non-factual claims; selection loads linked claims; five-minute bounded memory cache; no bundled snapshot |
 | Preferences and follows | [profile-search.mjs](src/shared/preferences/profile-search.mjs) | Name/ID queries narrow on input; verify personal spaces; save chosen IDs rather than a hardcoded identity list |
 | Selector icons | [space-icons.mjs](src/shared/branding/space-icons.mjs) | Space-scoped Avatar and IPFS URL lookup; only immutable CID image URLs accepted |
 | OutreachMap | [OutreachMap.tsx](src/apps/outreach/OutreachMap.tsx) | Lazy Leaflet basemap centered on Indianapolis; no operational dataset query or service pins yet |

@@ -6,5 +6,3 @@
   Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src https://geocompanion-coordination.thomasfreestone.workers.dev wss://geocompanion-coordination.thomasfreestone.workers.dev 'self' https://api-testnet.geobrowser.io; img-src 'self' data: https://tile.openstreetmap.org https://gateway.pinata.cloud; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
-/data/education.json
-  Cache-Control: public, max-age=300

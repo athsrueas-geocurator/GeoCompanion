@@ -24,7 +24,7 @@ This is also an experiment in what an agent can help one person orchestrate. The
 | Debates | Education-related claims and public response counts | Counts are not views, representative opinion or proof |
 | Connections | Shared sources, places and reading links; dynamic space filters | Rooted in education datasets and the editor profile, not all Geo |
 | Education map | Live location links, verified coordinate lookup and browser cache | Records without coordinates remain in the list |
-| Evidence atlas / questions | Searchable Education-Initiatives reference snapshot | These views are not live Geo data |
+| Evidence atlas / questions | Paginated live programs, studies and policy claims, with linked findings | Original assessment matrix and 21-question coverage require publisher reconciliation; see [field handoff](docs/PUBLISHER_DATA_GAPS.md) |
 | Indianapolis outreach | Separate navigation and an Indianapolis basemap | Verified service directory, schedules and map pins are not connected yet |
 | Preferences | Local reading settings and public-profile search/follows | Following is not authentication or ownership verification |
 

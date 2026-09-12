@@ -19,6 +19,10 @@ Use `[x]` only for completed work with evidence. Add dates and concise verificat
 
 ## Completed foundation
 
+- [x] Audit shipped snapshot dependencies September 12: atlas and questions use the identical local/hosted 76/106/21 reference file; live dashboard remains STAR-specific. See [audit](docs/LOCAL_DATA_AUDIT.md).
+- [x] Replace atlas/questions snapshot reads with scoped paginated live adapters; remove shipped education JSON. Build and 33 tests pass; browser search/detail checks recorded in the audit.
+- [ ] Complete original 76/106/21 field-level reconciliation and restore supported assessment/question features only after verified contracts. See [publisher handoff](docs/PUBLISHER_DATA_GAPS.md); a copy is in publisher docs/companion-data-reconciliation-2026-09-12.md.
+
 - [x] Add shared local preferences and live Geo user search with ID-only follows, bounded caching, multiple selections and removal. Build, 17 tests and browser flow verified September 11; see LOCAL_PREFERENCES.md.
 
 - [ ] Collect the user's own thoughts on each of the four books, with exact text selected by the user before publication. Assistant-written book curation was rejected and withdrawn.

@@ -1,5 +1,7 @@
 # Application boundaries
 
+> September 12 update: atlas/questions now read scoped Geo collections through `atlas-live.mjs`, with no shipped education JSON. Older snapshot/matrix descriptions below are historical where they conflict. Full original coverage is pending [publisher field reconciliation](docs/PUBLISHER_DATA_GAPS.md).
+
 | Area | Routes | Scope |
 | --- | --- | --- |
 | Selector | `#/` | Two app entries, live primary-space avatars |

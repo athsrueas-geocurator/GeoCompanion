@@ -1,5 +1,7 @@
 ## Chart rendering correction — September 11, 2026
 
+> September 12 update: atlas/questions now read scoped Geo collections through `atlas-live.mjs`, with no shipped education JSON. Older snapshot/matrix descriptions below are historical where they conflict. Full original coverage is pending [publisher field reconciliation](docs/PUBLISHER_DATA_GAPS.md).
+
 Removed nonuniform SVG scaling: ResizeObserver now matches the SVG viewBox width to the rendered plot width while preserving 64px row spacing. Circles and diamonds retain their geometry; labels align with rows, and axis units are explicit. Small class precedes regular class + aide within each grade, matching the legend. Mobile keeps a 105px label column and fits the plot into the remaining width, superseding the older label-hiding and minimum-width rules.
 
 Browser verification: desktop and 390px mobile markers measured 12×12px; mobile page/viewport widths both 375px, chart 305px. Grade 1 filtering retained both labeled estimates. Numerical values and uncertainty formulas are unchanged. Build passes.
