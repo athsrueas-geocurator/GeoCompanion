@@ -5,8 +5,12 @@ The existing Cloudflare Pages project is `geocompanion`, production branch `main
 - Public site: https://geocompanion.dpdns.org/
 - Pages address: https://geocompanion.pages.dev/
 - Source: [GeoCompanion](https://github.com/athsrueas-geocurator/GeoCompanion)
-- Current frontend release: `0ce92d86` (September 12, 2026), including shared-exploration controls.
+- Current frontend release: `648e6635` (September 12, 2026), including dynamic research discovery and argument exploration.
 - Coordination Worker: `https://geocompanion-coordination.thomasfreestone.workers.dev`, version `305ce72b-16f5-495e-a2eb-15b564513896`; HTTPS health and room creation verified.
+
+Latest frontend verification: HTTPS 200 on the custom domain with `index-DiLjdSRM.js`; hosted research view returns 40 questions, including the six Krueger–Hanushek positions. Economic parent displays two supporting arguments and one opposing argument. Local checks cover 320/390/1280px, dark/light, shared Questions dialog/Escape, live search and cached return navigation. All 43 tests, formatting and build pass. See [dynamic argument contract](docs/DYNAMIC_ARGUMENTS.md). Deployment used the reviewed working tree based on `a985218`, with the implementation committed immediately afterward; no Worker, wallet or VM changes.
+
+## Earlier coordination release (`0ce92d86`)
 
 Two hosted browsers joined one room, sent and opened the Chicago map selection, then sent and opened the selected curated post. Mobile controls fit at 375px without horizontal overflow. The custom domain returned HTTPS 200 with `index-DxXxnyCW.js` and the coordination CSP. Telemetry was left off during production checks; `/insights` returned an empty list. Local runtime integration tests exercised actual D1 writes and aggregates instead.
 

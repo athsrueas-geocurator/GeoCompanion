@@ -21,7 +21,7 @@ This is also an experiment in what an agent can help one person orchestrate. The
 | App selector | Compact cards, shared triangle brand, live primary-space avatar lookup | Missing avatars use the triangle |
 | Education dashboard | Live STAR estimates, filters and uncertainty plot | One study; not a comprehensive program ranking |
 | Curation | Published profile posts, ordered Markdown and linked books | Reads supported Geo fields; no frontend publishing |
-| Debates | Education-related claims and public response counts | Counts are not views, representative opinion or proof |
+| Debates | Live research questions, topic/search filters and explicit supporting/opposing argument exploration; separate public response view | Education datasets scope; arguments and model records are not independent studies or proof |
 | Connections | Shared sources, places and reading links; dynamic space filters | Rooted in education datasets and the editor profile, not all Geo |
 | Education map | Live location links, verified coordinate lookup and browser cache | Records without coordinates remain in the list |
 | Evidence atlas / questions | Paginated live programs, studies and policy claims, with linked findings | Original assessment matrix and 21-question coverage require publisher reconciliation; see [field handoff](docs/PUBLISHER_DATA_GAPS.md) |

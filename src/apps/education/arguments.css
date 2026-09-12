@@ -1,0 +1,150 @@
+.argument-explorer {
+  min-width: 0;
+}
+.argument-toolbar {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+.argument-toolbar label {
+  display: grid;
+  gap: 8px;
+  flex: 1 1 220px;
+  min-width: 0;
+}
+.argument-toolbar input,
+.argument-toolbar select {
+  width: 100%;
+  min-height: 44px;
+}
+.argument-workspace {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+  gap: 24px;
+  align-items: start;
+}
+.argument-workspace > * {
+  min-width: 0;
+}
+.argument-questions,
+.argument-columns ul {
+  padding: 0;
+  list-style: none;
+}
+.argument-questions {
+  max-height: 75dvh;
+  overflow-y: auto;
+  padding: 4px;
+}
+.argument-questions li {
+  margin-bottom: 8px;
+}
+.argument-questions button {
+  width: 100%;
+  text-align: left;
+  white-space: normal;
+  line-height: 1.5;
+}
+.argument-questions button[aria-pressed='true'] {
+  background: var(--strong);
+  color: var(--on-strong);
+}
+.argument-detail {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+  overflow-wrap: anywhere;
+}
+.argument-detail h2 {
+  font-size: clamp(22px, 2.2vw, 30px);
+  margin-top: 12px;
+  line-height: 1.3;
+}
+.argument-description {
+  line-height: 1.7;
+}
+.argument-detail a {
+  text-decoration: underline;
+}
+.argument-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+.argument-columns section {
+  min-width: 0;
+}
+.argument-columns li {
+  border-top: 1px solid var(--line);
+  padding: 16px 0;
+}
+.argument-columns p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+button.argument-title {
+  display: block;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  text-align: left;
+  padding: 8px 0;
+  color: var(--accent);
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: underline;
+  white-space: normal;
+}
+.argument-context {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.argument-context summary {
+  cursor: pointer;
+  min-height: 32px;
+}
+.argument-context li {
+  margin: 10px 0;
+}
+.argument-back {
+  margin-bottom: 12px;
+}
+.argument-placeholder {
+  padding: 28px;
+  border: 1px dashed var(--control-border);
+  border-radius: 12px;
+}
+.debate-mode {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.debate-mode button[aria-pressed='true'] {
+  background: var(--strong);
+  color: var(--on-strong);
+}
+@media (max-width: 1000px) {
+  .argument-columns {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .argument-workspace {
+    grid-template-columns: 1fr;
+  }
+  .argument-questions {
+    max-height: 32dvh;
+  }
+  .argument-detail {
+    padding: 16px;
+  }
+  .argument-toolbar label {
+    flex-basis: 100%;
+  }
+}

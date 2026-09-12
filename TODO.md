@@ -131,6 +131,9 @@ Budget alerts alone do not enforce the $0 target. If the chosen configuration ca
 
 ## Debates and editorial prototype
 
+- [x] Discover research questions dynamically and render explicit argument neighborhoods with shared browser caching. September 12: 40 live questions including all six Krueger–Hanushek Claims; both parents verified, 43 tests/build pass and 320/390/1280px layouts checked. See [static rules and dynamic data contract](docs/DYNAMIC_ARGUMENTS.md).
+- [ ] Extend research discovery across deliberately selected additional spaces/source neighborhoods; legacy Public conversations still uses its bounded keyword/tag heuristic.
+
 - [x] Queue personal-profile editorial publishing after education data; publisher guidance and canonical publishing_queue.md created on 2026-09-11. This records the plan only, not publication.
 
 - [ ] After the publisher completes its editorial pilot, replace the prototype's static editorial source with verified, profile-scoped Geo reads; preserve order, rationale, sources and error states.
@@ -218,6 +221,10 @@ Budget alerts alone do not enforce the $0 target. If the chosen configuration ca
 ## Deferred unless requested
 
 ## Indianapolis outreach directory
+
+- [ ] Enforce contact-source links only in outreach adapters, API contracts and caches: no contact names, phone/email values or copied contact details. Publisher queue/intake guidance updated September 12; the supplied raw package must not become a frontend fallback.
+
+- [x] Review the September 12 Open_Data package and update publisher queue item 4 with input hashes, 102-record reconciliation, schedule/evidence fixes, an eight-record pilot and map/query requirements. See [publisher intake](../geo-publisher/docs/indianapolis-outreach-intake-2026-09-12.md). This is a handoff, not publication or completed frontend integration.
 
 - [x] Implement root app selector, independent education/outreach routes, All apps navigation, legacy education links and explicit preparation states. Build, 12 tests and desktop browser interactions passed September 11; details in APP_BOUNDARIES.md.
 

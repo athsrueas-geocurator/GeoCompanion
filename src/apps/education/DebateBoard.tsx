@@ -10,6 +10,7 @@ import {
   validEditorial,
 } from './debates.mjs';
 import './debates.css';
+import ArgumentExplorer from './ArgumentExplorer';
 type Claim = {
   id: string;
   name: string;
@@ -86,11 +87,7 @@ function Go({
     </a>
   );
 }
-export default function Debates({
-  openEvidence,
-}: {
-  openEvidence: () => void;
-}) {
+function PublicSignals({ openEvidence }: { openEvidence: () => void }) {
   const [claims, setClaims] = useState<Claim[]>([]),
     [votes, setVotes] = useState<Vote[]>([]),
     [busy, setBusy] = useState(false),
@@ -625,6 +622,31 @@ export default function Debates({
           {limited && <p>Only part of the available results is shown.</p>}
         </details>
       </section>
+    </>
+  );
+}
+
+export default function Debates({
+  openEvidence,
+}: {
+  openEvidence: () => void;
+}) {
+  const [signals, setSignals] = useState(false);
+  return (
+    <>
+      <div className="debate-mode" aria-label="Debate view">
+        <button aria-pressed={!signals} onClick={() => setSignals(false)}>
+          Research arguments
+        </button>
+        <button aria-pressed={signals} onClick={() => setSignals(true)}>
+          Public conversations
+        </button>
+      </div>
+      {signals ? (
+        <PublicSignals openEvidence={openEvidence} />
+      ) : (
+        <ArgumentExplorer />
+      )}
     </>
   );
 }

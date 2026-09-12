@@ -342,13 +342,9 @@ export default function EducationDashboard({
           </table>
         </div>
         <div className="caveat">
-          <h3>What does this tell us about affordability?</h3>
-          <p>
-            These estimates do not supply matched observed costs. Affordability
-            and cost-effectiveness remain unknown here. STAR percentile points,
-            tutoring standard deviations, and Perry economic scenarios cannot be
-            ranked on a common axis without a justified comparison method.
-          </p>
+          <a href="#/education/debates">
+            Explore arguments about the evidence and its implications ↗
+          </a>
         </div>
       </section>
       <section className="dataset-strip" aria-label="Dataset collection">

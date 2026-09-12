@@ -1,5 +1,9 @@
 # Education debates and public signals
 
+## Research arguments — implemented September 12
+
+The default debate screen now uses [dynamic questions and arguments](docs/DYNAMIC_ARGUMENTS.md): scoped nonfactual Claim discovery, live topic filters, local search, on-demand explicit supporting/opposing/Related links and a bounded five-minute browser cache. The same argument reader is available in Questions & evidence details. The older tagged discovery described below remains only in the separate Public conversations tab; it is not the new research discovery path.
+
 ## Verified contract — 2026-09-11
 
 Endpoint: `https://api-testnet.geobrowser.io/graphql`. Native browser fetch, no private authentication, no VM proxy. Queries are in `src/apps/education/debates.mjs`. They were checked against live introspection and executed successfully.

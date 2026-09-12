@@ -37,7 +37,7 @@ The two available apps are intentionally registered in the shell. Their space av
 | --- | --- | --- |
 | EducationDashboard | [education-live.mjs](src/apps/education/education-live.mjs) | Space- and study-filtered estimate query; parse typed values, preserve units and uncertainty before plotting |
 | Curation | [curation-live.mjs](src/apps/education/curation-live.mjs) | Discover profile Posts, fetch selected post, read scoped Blocks and references, order positions lexicographically; resolve book names in Books space |
-| DebateBoard | [debates.mjs](src/apps/education/debates.mjs) | Discover education-related debate-tagged claims, then batch public counts; missing counts stay unavailable |
+| DebateBoard | [argument-data.mjs](src/apps/education/argument-data.mjs), [debates.mjs](src/apps/education/debates.mjs) | Default scoped research-question discovery and on-demand argument neighborhoods; separate legacy Public conversations tab retains tagged discovery/counts. See [dynamic contract](docs/DYNAMIC_ARGUMENTS.md) |
 | ConnectionExplorer | [connection-data.mjs](src/apps/education/connection-data.mjs) | Follow selected relation kinds from education/profile roots; group shared targets, preserve distinct source records, resolve actual space names |
 | LocationMap | [location-data.mjs](src/apps/education/location-data.mjs) | Page education location edges, deduplicate places, query Places-scoped coordinates, reject invalid/conflicting points |
 | Atlas and questions | [atlas-live.mjs](src/apps/education/atlas-live.mjs), [LiveAtlas.tsx](src/apps/education/LiveAtlas.tsx) | Space-scoped paginated Geo programs, studies and non-factual claims; selection loads linked claims; five-minute bounded memory cache; no bundled snapshot |
@@ -52,6 +52,7 @@ Query text, schema IDs and parsing rules stay with the feature adapter because t
 | Data | Cache / retention | Refresh behavior |
 | --- | --- | --- |
 | STAR estimates and debate results | Module memory, 1 minute | User refresh bypasses cache, with short cooldown |
+| Research questions and argument pages | Shared module memory, 5 minutes, 64 parsed pages; identical in-flight reads shared | On demand only; Refresh clears pages; no persistent content cache |
 | Profile search | Memory, 5 minutes, at most 50 query entries | Debounced input and abortable requests |
 | Curation reads | Memory, 5 minutes, at most 30 query entries | Explicit refresh bypasses cache |
 | Connections | Memory, 5 minutes, at most 40 query entries | Bounded cursor batches and explicit load more |

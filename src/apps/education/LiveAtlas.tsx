@@ -9,6 +9,7 @@ import {
 } from './atlas-live.mjs';
 import { safeUrl } from './data.mjs';
 import './live-atlas.css';
+import { Arguments } from './ArgumentExplorer';
 type Ref = { id: string; name: string };
 type Entry = {
   id: string;
@@ -307,57 +308,52 @@ export default function LiveAtlas({
           <button className="atlas-close" onClick={closeDetails}>
             Close details
           </button>
-          <h2>{selected.name}</h2>
-          {selected.description && <p>{selected.description}</p>}
-          <dl>
-            {selected.population && (
-              <>
-                <dt>Population</dt>
-                <dd>{selected.population}</dd>
-              </>
-            )}
-            {selected.design && (
-              <>
-                <dt>Study design</dt>
-                <dd>{selected.design}</dd>
-              </>
-            )}
-          </dl>
-          {safeUrl(selected.url) && (
-            <a
-              href={safeUrl(selected.url)!}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Original source ↗
-            </a>
-          )}
-          <p>
-            <GeoLink entry={{ id: selected.id, name: 'Open on Geo' }} />
-          </p>
-          {selected.sources.length > 0 && (
-            <details>
-              <summary>Sources</summary>
-              <ul>
-                {selected.sources.map((s) => (
-                  <li key={s.id}>
-                    <GeoLink entry={s} />
-                  </li>
-                ))}
-              </ul>
-            </details>
+          {!questions && (
+            <>
+              <h2>{selected.name}</h2>
+              {selected.description && <p>{selected.description}</p>}
+              <dl>
+                {selected.population && (
+                  <>
+                    <dt>Population</dt>
+                    <dd>{selected.population}</dd>
+                  </>
+                )}
+                {selected.design && (
+                  <>
+                    <dt>Study design</dt>
+                    <dd>{selected.design}</dd>
+                  </>
+                )}
+              </dl>
+              {safeUrl(selected.url) && (
+                <a
+                  href={safeUrl(selected.url)!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Original source ↗
+                </a>
+              )}
+              <p>
+                <GeoLink entry={{ id: selected.id, name: 'Open on Geo' }} />
+              </p>
+              {selected.sources.length > 0 && (
+                <details>
+                  <summary>Sources</summary>
+                  <ul>
+                    {selected.sources.map((s) => (
+                      <li key={s.id}>
+                        <GeoLink entry={s} />
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+            </>
           )}
           {questions ? (
-            <>
-              <h3>Related evidence</h3>
-              <ul>
-                {selected.related.map((r) => (
-                  <li key={r.id}>
-                    <GeoLink entry={r} />
-                  </li>
-                ))}
-              </ul>
-            </>
+            <Arguments key={selected.id} id={selected.id} />
           ) : (
             <Evidence key={selected.id} entry={selected} />
           )}

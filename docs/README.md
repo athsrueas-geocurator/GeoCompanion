@@ -1,5 +1,7 @@
 # Documentation index
 
+[Dynamic questions and arguments](DYNAMIC_ARGUMENTS.md): static discovery rules, live graph semantics, browser computation, cache limits and publisher contract.
+
 Start with [README](../README.md), [architecture](../ARCHITECTURE.md), [development](DEVELOPMENT.md), [deployment](../DEPLOYMENT.md) and [TODO](../TODO.md).
 
 Feature contracts: [app boundaries](../APP_BOUNDARIES.md), [education dashboards](../EDUCATION_DASHBOARDS.md), [debates](../DEBATES.md), [editorial](../EDITORIAL.md), [connections](../CONNECTIONS.md), [location map](../LOCATION_MAP.md), [preferences](../LOCAL_PREFERENCES.md), and [Geo integration](../GEO.md).
