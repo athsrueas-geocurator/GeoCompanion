@@ -12,6 +12,7 @@ parser.add_argument('--state', required=True)
 parser.add_argument('--recipient', required=True)
 parser.add_argument('--listen-only', action='store_true')
 parser.add_argument('--opportunistic', action='store_true')
+parser.add_argument('--propagation')
 parser.add_argument('--count', type=int, choices=range(1,4), default=1)
 parser.add_argument('--message', default='Geo Companion: Linux messaging test. Please reply received.')
 args = parser.parse_args()
@@ -57,15 +58,18 @@ router.announce(source.hash)
 if args.listen_only:
     time.sleep(180)
     raise SystemExit(0)
-RNS.Transport.request_path(recipient)
+path_target = bytes.fromhex(args.propagation) if args.propagation else recipient
+if len(path_target) != 16: raise SystemExit('Invalid propagation address')
+RNS.Transport.request_path(path_target)
 deadline = time.monotonic() + 60
-while not RNS.Transport.has_path(recipient) and time.monotonic() < deadline:
+while not RNS.Transport.has_path(path_target) and time.monotonic() < deadline:
     time.sleep(1)
 remote = RNS.Identity.recall(recipient)
-if remote is None or not RNS.Transport.has_path(recipient):
+if remote is None or not RNS.Transport.has_path(path_target):
     raise SystemExit('No recipient path within 60 seconds; keep Retichat open and retry')
 destination = RNS.Destination(remote, RNS.Destination.OUT, RNS.Destination.SINGLE, 'lxmf', 'delivery')
-method = LXMF.LXMessage.OPPORTUNISTIC if args.opportunistic else LXMF.LXMessage.DIRECT
+method = LXMF.LXMessage.PROPAGATED if args.propagation else (LXMF.LXMessage.OPPORTUNISTIC if args.opportunistic else LXMF.LXMessage.DIRECT)
+if args.propagation: router.set_outbound_propagation_node(path_target)
 messages = []
 started = time.monotonic()
 last_states = {}
@@ -81,10 +85,11 @@ while time.monotonic() < deadline:
     for number, message in enumerate(messages, 1):
         if last_states.get(number) != message.state:
             last_states[number] = message.state
-            print(json.dumps({'number':number, 'state':message.state, 'delivered':message.state == LXMF.LXMessage.DELIVERED, 'attempts':message.delivery_attempts}), flush=True)
+            print(json.dumps({'number':number, 'state':message.state, 'delivered':message.state == LXMF.LXMessage.DELIVERED, 'accepted_by_propagation':bool(args.propagation and message.state == LXMF.LXMessage.SENT), 'attempts':message.delivery_attempts}), flush=True)
     if len(messages) == args.count and all(m.state in (LXMF.LXMessage.DELIVERED, LXMF.LXMessage.FAILED, LXMF.LXMessage.REJECTED) for m in messages):
         break
     time.sleep(1)
 delivered = sum(m.state == LXMF.LXMessage.DELIVERED for m in messages)
-print(json.dumps({'delivered_count':delivered, 'queued_count':len(messages)}), flush=True)
-raise SystemExit(0 if delivered == args.count else 1)
+accepted = sum(args.propagation and m.state == LXMF.LXMessage.SENT for m in messages)
+print(json.dumps({'delivered_count':delivered, 'accepted_by_propagation_count':accepted, 'queued_count':len(messages)}), flush=True)
+raise SystemExit(0 if delivered+accepted == args.count else 1)

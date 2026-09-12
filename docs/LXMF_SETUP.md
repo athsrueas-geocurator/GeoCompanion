@@ -28,3 +28,9 @@ References: [LXMF sender example](https://github.com/markqvist/LXMF/blob/master/
 ## Foreground two-way success — September 12
 
 With the owner keeping Retichat open, one continuous Linux session queued three numbered direct LXMF messages at 0, 30 and 60 seconds. All three reached DELIVERED (state 8). Two signature-verified owner replies were observed during the same run. This establishes two-way foreground delivery; it does not prove locked-phone/APNs delivery or determine the exact cause of earlier failures. The bounded test exited successfully and left no maintenance daemon running. The separate budgeted neighbor transport remains independent.
+
+## Locked-phone propagation test — September 12
+
+The owner locked the phone. Direct-path discovery timed out before queuing messages. A separate three-message batch then used Retichat's published default RFed identity (`7e5ff856dc2aa0fbc9fc8831b62d2834`) to derive the standard LXMF propagation destination (`0f75ac15961b7d2b1577a57bdb1fda3c`). This node was reachable; all three messages, queued 30 seconds apart, reached SENT (state 4), meaning propagation acceptance, not recipient delivery or a visible notification. Owner confirmation of locked-screen alerts remains pending. No app settings were changed and no local propagation service was enabled.
+
+The smoke script accepts `--propagation PUBLIC_PROPAGATION_DESTINATION` to select this delivery method explicitly. It still requires the recipient's known public identity and a reachable propagation node. Reports distinguish server acceptance from delivered receipts. The original locked-phone run's final delivered-only count can be zero despite three propagation acceptances; subsequent reporting records both separately. No notification delivery guarantee follows from a SENT state.
