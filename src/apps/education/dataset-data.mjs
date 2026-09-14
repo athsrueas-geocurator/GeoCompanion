@@ -36,6 +36,7 @@ export const F = {
   discountRate: 'f9d6085e34014562aae4021009f5f390',
   deadweightLoss: '0baed391e467482889e44ca00658cf62',
   murderValuation: 'd15fb305b4244ffbbb1af981e84ebd6c',
+  economicPerspective: '4298a78f5ff54e3abf19207e9b8dea24',
 };
 const fields = `id name spaceIds values(first:100,filter:{spaceId:{is:$space}}){nodes{propertyId spaceId property{id name} text decimal integer boolean}pageInfo{hasNextPage}}`;
 export const RECORDS = `query DatasetRecords($space:UUID!,$ids:[UUID!]!){entitiesConnection(first:50,spaceId:$space,filter:{id:{in:$ids}}){nodes{${fields} relations(first:100,filter:{spaceId:{is:$space}}){nodes{id typeId spaceId type{id name}toEntityId toEntity{id name spaceIds}}pageInfo{hasNextPage}}}pageInfo{hasNextPage}}}`;

@@ -1,6 +1,13 @@
 import { field, F } from './dataset-data.mjs';
 
 // IDs are the published typed properties used by the Reading First/Perry contracts.
+export function isNumeric(value) {
+  return (
+    (typeof value === 'number' ||
+      (typeof value === 'string' && value.trim() !== '')) &&
+    Number.isFinite(Number(value))
+  );
+}
 export function meanPanels(rows) {
   return rows.flatMap((row) => {
     const actual = field(row, F.actualMean),
@@ -9,7 +16,7 @@ export function meanPanels(rows) {
       measure = field(row, F.outcome),
       followup = field(row, F.followup);
     if (
-      ![actual, estimated].every(Number.isFinite) ||
+      ![actual, estimated].every(isNumeric) ||
       typeof unit !== 'string' ||
       typeof measure !== 'string'
     )
@@ -39,7 +46,7 @@ export function pairedObserved(rows) {
     const arm = relation(row, F.studyArm),
       population = relation(row, F.population);
     if (
-      !Number.isFinite(value) ||
+      !isNumeric(value) ||
       typeof measure !== 'string' ||
       typeof followup !== 'string' ||
       typeof unit !== 'string' ||
@@ -79,18 +86,25 @@ export function economicScenarios(rows) {
   return rows.flatMap((row) => {
     const ratio = field(row, F.benefitCostRatio),
       irr = field(row, F.internalReturn);
-    const value = Number.isFinite(ratio)
+    const value = isNumeric(ratio)
       ? Number(ratio)
-      : Number.isFinite(irr)
+      : isNumeric(irr)
         ? Number(irr)
         : null;
     if (value === null) return [];
     return [
       {
         id: row.id,
-        kind: Number.isFinite(ratio)
+        kind: isNumeric(ratio)
           ? 'Benefit-cost ratio'
           : 'Internal rate of return',
+        perspective:
+          relation(row, F.economicPerspective)[0]?.toEntity?.name ||
+          'Not stated',
+        horizon:
+          typeof field(row, F.followup) === 'string'
+            ? field(row, F.followup)
+            : 'Not stated',
         value,
         discountRate: field(row, F.discountRate),
         deadweightLoss: field(row, F.deadweightLoss),
@@ -107,7 +121,7 @@ export function compatibleEffects(rows) {
       followup = field(row, F.followup);
     const grades = relation(row, F.grade);
     if (
-      !Number.isFinite(value) ||
+      !isNumeric(value) ||
       typeof unit !== 'string' ||
       typeof measure !== 'string' ||
       grades.length > 1

@@ -3,6 +3,7 @@ import {
   pairedObserved,
   economicScenarios,
   compatibleEffects,
+  isNumeric,
 } from './observation-adapters.mjs';
 type MeanPanel = {
   id: string;
@@ -47,7 +48,7 @@ export default function ObservationPanels({ rows }: { rows: any[] }) {
                     <td>{e.grade}</td>
                     <td>{e.followup}</td>
                     <td>{e.value}</td>
-                    <td>{Number.isFinite(e.se) ? e.se : 'Not reported'}</td>
+                    <td>{isNumeric(e.se) ? e.se : 'Not reported'}</td>
                     <td>{e.unit}</td>
                   </tr>
                 ))}
@@ -102,8 +103,8 @@ export default function ObservationPanels({ rows }: { rows: any[] }) {
                 <tr>
                   <th>Outcome</th>
                   <th>Follow-up</th>
-                  <th>Group 1</th>
-                  <th>Group 2</th>
+                  <th>First published arm</th>
+                  <th>Second published arm</th>
                   <th>Unit</th>
                 </tr>
               </thead>
@@ -112,8 +113,12 @@ export default function ObservationPanels({ rows }: { rows: any[] }) {
                   <tr key={p[0].row.id}>
                     <th scope="row">{p[0].measure}</th>
                     <td>{p[0].followup}</td>
-                    <td>{p[0].value}</td>
-                    <td>{p[1].value}</td>
+                    <td>
+                      {p[0].arm.toEntity?.name || 'Unnamed arm'}: {p[0].value}
+                    </td>
+                    <td>
+                      {p[1].arm.toEntity?.name || 'Unnamed arm'}: {p[1].value}
+                    </td>
                     <td>{p[0].unit}</td>
                   </tr>
                 ))}
@@ -132,6 +137,8 @@ export default function ObservationPanels({ rows }: { rows: any[] }) {
                 <tr>
                   <th>Model</th>
                   <th>Value</th>
+                  <th>Perspective</th>
+                  <th>Horizon</th>
                   <th>Discount rate</th>
                   <th>Tax deadweight loss</th>
                   <th>Crime valuation</th>
@@ -142,6 +149,8 @@ export default function ObservationPanels({ rows }: { rows: any[] }) {
                   <tr key={s.id}>
                     <th scope="row">{s.kind}</th>
                     <td>{s.value}</td>
+                    <td>{s.perspective}</td>
+                    <td>{s.horizon}</td>
                     <td>{s.discountRate ?? 'Not stated'}</td>
                     <td>{s.deadweightLoss ?? 'Not stated'}</td>
                     <td>{s.valuation ?? 'Not stated'}</td>

@@ -29,6 +29,19 @@ test('mean panels preserve typed zero means and reported context', () => {
     },
   ]);
 });
+test('mean panels accept the decimal strings returned by Geo GraphQL', () => {
+  const result = meanPanels([
+    row([
+      value(F.actualMean, '0'),
+      value(F.estimatedCounterfactual, '4.5'),
+      value(F.unit, 'points', false),
+      value(F.outcome, 'Reading', false),
+    ]),
+  ]);
+  assert.equal(result.length, 1);
+  assert.equal(result[0].actual, 0);
+  assert.equal(result[0].estimated, 4.5);
+});
 test('mean panels reject missing, text-like, and incompatible context', () => {
   const complete = [
     value(F.actualMean, 1),
@@ -82,11 +95,21 @@ test('Perry adapters require two distinct typed arms and preserve economic assum
     value(F.benefitCostRatio, 2.4),
     value(F.discountRate, 0.03),
     value(F.deadweightLoss, 0.5),
+    value(F.followup, 'Through age 40', false),
   ]);
+  model.relations = [
+    {
+      typeId: F.economicPerspective,
+      toEntityId: 'societal',
+      toEntity: { name: 'Societal perspective' },
+    },
+  ];
   assert.deepEqual(economicScenarios([model])[0], {
     id: 'a'.repeat(32),
     kind: 'Benefit-cost ratio',
     value: 2.4,
+    perspective: 'Societal perspective',
+    horizon: 'Through age 40',
     discountRate: 0.03,
     deadweightLoss: 0.5,
     valuation: null,
