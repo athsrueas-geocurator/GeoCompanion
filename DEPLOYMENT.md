@@ -1,5 +1,9 @@
 # Deployment
 
+## Current frontend verification — version 0.3.2
+
+Feature deployment `8933d4a0` completed at `2026-09-14T19:41:48.352672Z`; metadata-only deployment `4f520471` published release history. Source commit `45ad8c7`. Production HTTPS returned 200 with `index-hiHZLvTF.js`, and a production browser rendered the Outreach Near Eastside service from Geo, its official source link and public-stop map. Local search removed/restored the service; the narrow layout measured 375px client and scroll widths, with no horizontal overflow. All 74 tests, formatting and production build pass. Weekly/food filtering remains unavailable pending published verification fields. See [live pilot and publisher queue](docs/OUTREACH_LIVE.md). No Geo write, Worker or VM change occurred.
+
 ## Current frontend verification â€” version 0.3.1
 
 Feature deployment `fca83e06` completed at `2026-09-14T17:17:33.268957Z`; metadata-only deployment `b67e320f` then published the release history. Source commit `b3082e3` and release-record commit `4bb7540` are pushed to `main`. The custom domain loaded the new application successfully. Live browser checks used direct Geo reads: Reading First rendered seven compatible effects and four actual-versus-estimated-counterfactual means; Perry rendered 24 named treatment/control pairs and 24 societal benefit-cost scenarios with their published horizon, discount rate, deadweight-loss and crime-valuation assumptions. At 375px and 1265px rendered widths, the dark-mode Reading First panel had no document-width overflow; accessible tables remained visible, and keyboard navigation reached the result search control. No Geo mutation occurred. Local validation: 70 tests, formatting check, production build and `git diff --check` pass. No Worker, VM or Geo publication changed.

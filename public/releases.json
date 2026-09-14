@@ -1,5 +1,15 @@
 [
   {
+    "id": "8933d4a0-64ca-4fa2-989a-1956f93a2f4c",
+    "version": "0.3.2",
+    "deployedAt": "2026-09-14T19:41:48.352672Z",
+    "title": "First Indianapolis outreach services",
+    "changes": [
+      "Browse and search the first published outreach service.",
+      "Explore verified public service locations on the Indianapolis map."
+    ]
+  },
+  {
     "id": "fca83e06-edcb-415a-971f-19d1d55e3b59",
     "version": "0.3.1",
     "deployedAt": "2026-09-14T17:17:33.268957Z",
