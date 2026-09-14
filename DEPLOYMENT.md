@@ -1,5 +1,9 @@
 # Deployment
 
+## Frontend verification - version 0.3.4
+
+Feature `ff539a9a` completed at `2026-09-14T19:56:29.814834Z`; metadata `996e159f`. Source `c88a954`. Popup buttons now have explicit light surfaces, dark teal text and wider labels in both app maps. Local dark-mode screenshot and production popup check passed: computed text rgb(23,75,67), background rgb(237,245,243), width 211px. Production build passed. CSS-only fix; no data or API changes.
+
 
 ## Frontend verification - version 0.3.3
 

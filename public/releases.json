@@ -1,5 +1,14 @@
 [
   {
+    "id": "ff539a9a-c3f2-4591-8e93-a266227c384c",
+    "version": "0.3.4",
+    "deployedAt": "2026-09-14T19:56:29.814834Z",
+    "title": "Clearer map popups",
+    "changes": [
+      "Map selections now use readable, high-contrast colors and wider labels in both themes."
+    ]
+  },
+  {
     "id": "c393ceab-de4a-4ac8-8240-9ead7002734b",
     "version": "0.3.3",
     "deployedAt": "2026-09-14T19:52:36.711946Z",
