@@ -1,5 +1,16 @@
 [
   {
+    "id": "53225cb7-1ee2-44a5-ba87-046b2b65c8e1",
+    "version": "0.3.0",
+    "deployedAt": "2026-09-14T17:09:30.461253Z",
+    "title": "Live education comparisons and visual evidence",
+    "changes": [
+      "Compare selected education initiatives and see their shared sources.",
+      "Filter the live evidence atlas by published categories, including unclassified entries.",
+      "Explore published observed means, compatible effects, and clearly labeled economic scenarios."
+    ]
+  },
+  {
     "id": "903e66e4-3c98-4bb8-9a8b-ed32b0d23f71",
     "version": "0.2.0",
     "deployedAt": "2026-09-12T15:23:06.294309Z",

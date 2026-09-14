@@ -1,5 +1,9 @@
 # Deployment
 
+## Current frontend verification — version 0.3.0
+
+Feature deployment `53225cb7-1ee2-44a5-ba87-046b2b65c8e1` completed at `2026-09-14T17:09:30.461253Z`; metadata-only deployment `39772711` then published the release history. Source commit `08ee395` is pushed to `main`. The custom domain returned HTTPS 200 with `index-CtpmRJKY.js`, and `releases.json` lists the version-0.3.0 live-comparison release with the authoritative feature timestamp. Local validation: 69 tests, formatting check, production build and `git diff --check` pass. No Worker, VM or Geo publication changed.
+
 The existing Cloudflare Pages project is `geocompanion`, production branch `main`.
 
 - Public site: https://geocompanion.dpdns.org/
