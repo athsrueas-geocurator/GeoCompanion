@@ -30,3 +30,11 @@ export function economicScenarios(rows) {
     return [{ id: row.id, kind: Number.isFinite(ratio) ? 'Benefit-cost ratio' : 'Internal rate of return', value, discountRate: field(row, F.discountRate), deadweightLoss: field(row, F.deadweightLoss), valuation: field(row, F.murderValuation) }];
   });
 }
+export function compatibleEffects(rows) {
+  return rows.flatMap((row) => {
+    const value = field(row, F.effect), unit = field(row, F.unit), measure = field(row, F.outcome), followup = field(row, F.followup);
+    const grades = relation(row, F.grade);
+    if (!Number.isFinite(value) || typeof unit !== 'string' || typeof measure !== 'string' || grades.length > 1) return [];
+    return [{ id: row.id, value: Number(value), unit, measure, followup: typeof followup === 'string' ? followup : 'Not stated', grade: grades[0]?.toEntity?.name || 'Not grade-specific', se: field(row, F.se) }];
+  });
+}
