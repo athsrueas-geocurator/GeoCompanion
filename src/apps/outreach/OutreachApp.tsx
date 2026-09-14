@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
 const OutreachMap = lazy(() => import('./OutreachMap'));
 import Brand from '../../shared/branding/Brand';
+import SpaceIcon from '../../shared/branding/SpaceIcon';
+import { OUTREACH_SPACE } from '../../config/geo.mjs';
 const views = [
   [
     'directory',
@@ -32,6 +34,10 @@ export default function OutreachApp({ tab }: { tab: string }) {
       </header>
       <main className="outreach-main">
         <div className="eyebrow">INDIANAPOLIS & MARION COUNTY</div>
+        <div className="outreach-workspace">
+          <SpaceIcon spaceId={OUTREACH_SPACE} />
+          <span>Outreach</span>
+        </div>
         <h1>Outreach & resources</h1>
         <p className="app-intro">
           For outreach workers and community service providers.

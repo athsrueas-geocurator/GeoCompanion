@@ -317,3 +317,8 @@ Details and open decisions: [Ideas to explore](docs/EXPERIMENTS.md). Recording t
 - [ ] Choose between a bounded network-protocol lab and a closed LXMF bulletin experiment; inspect VM capabilities and budget before installation, then measure actual resource use and exported bytes.
 - [ ] Select a useful, reproducible education experiment and compare a minimal browser-native runner with a Linux-based runner; measure cold/warm transfer and actual mobile usability before integration.
 - [ ] Verify room expiry after a full hour, hibernation/billing behavior under realistic traffic, daily scheduled retention cleanup and abuse resistance before expanding the prototype's quotas.
+
+## Visual restoration
+
+- [ ] Restore live source-overlap comparisons and category/source summaries, then add compatible paired-mean, interval and economic-scenario renderers. Follow [visual restoration audit](docs/VISUAL_RESTORATION_AUDIT.md); do not restore bundled content.
+- [ ] Receive publisher mappings for attributed assessments, original category/method coverage, question continuums/evidence links and unresolved place scopes before recreating the old dot matrix or continuum bands. Audit and canonical queue updated September 13, 2026; no Geo publication or frontend deployment performed.

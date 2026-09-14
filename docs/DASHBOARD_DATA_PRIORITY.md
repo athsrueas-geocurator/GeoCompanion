@@ -1,0 +1,16 @@
+# GeoCompanion data priority
+
+This order follows the visual restoration audit. Publisher reconciliation and frontend renderer work proceed in parallel; unpublished drafts are never treated as live data.
+
+| Priority | Screen | Smallest data contract | Owner and acceptance |
+| --- | --- | --- | --- |
+| P0 | Source-overlap comparison and category coverage | Existing Initiative → Sources and Initiative → Category relations, with complete scoped pagination and stable IDs | Companion restores source-overlap counts and category filters now. Publisher reconciles remaining original categories/designs without duplicates. Category relation `06c899fb04334e679feb1fd56687c3d6` already exists on three audited initiatives and must be read by the atlas. |
+| P0 | Education comparison renderers | Perry paired means/proportions, separately labeled economic scenarios, and compatible Reading First estimates with study, population/cohort, measure, timepoint and arm context | Companion adds adapters and renderers. STAR keeps its narrower effect contract. Point-only plots are valid when SE is absent; uncertainty is never invented. |
+| P1 | App selector and workspace headers | One scoped Avatar relation from each primary space to an image entity and one immutable IPFS URL (`Avatar` `1155befffad549b7a2e0da4777b8792c`, URL `8a743832c0944a62b6650c3cc2f9c7bc`) | Publisher queues proper primary-space icons for Education `dac259bad48a11adf97fe36857d85206` and outreach `f24e3bbd26304474b7e0c2a0877f4bfe`; both currently return zero Avatar relations. The shared triangle fallback remains valid. |
+| P1 | Evidence atlas | Initiative/Study identities, source links, factual Claims, category links, and reviewed attributed assessments | Publisher supplies category/assessment mappings. Assessment labels require rubric, provenance, scope and linked evidence; missing classifications remain unclassified. |
+| P2 | Questions, debates and continuums | Actual Questions, source/evidence links, and nonfactual parent Claims with explicit Supporting/Opposing/Related edges | Do not invent Answers, continuum positions or universal rankings. Continuum bounds are editorial uncertainty, not statistical intervals. |
+| P3 | Indianapolis outreach | Approved directory membership, verified service/program records, public fixed locations, schedules and public contact-source links | Publisher verifies facts in Public good. No copied names, phone numbers, email addresses or contact-role Person entities; private encampments, undisclosed routes and unknown coordinates stay out. |
+
+Existing Perry, Reading First, Saga and coaching collections already support new renderer work. Seventeen prepared-only publisher batches are a separate publication/indexing queue and are not a prerequisite for using indexed results.
+
+Comparison rules are contract-specific: STAR effects require a shared study, comparator, estimand and compatible unit. Means and proportions additionally require matching population/cohort, measure, timepoint and distinct arms. Scenario plots require perspective, horizon, assumptions and currency context. Visualize source-reported benefit-cost ratios as labeled models when they are already on Geo; never synthesize new ratios or universal rankings.

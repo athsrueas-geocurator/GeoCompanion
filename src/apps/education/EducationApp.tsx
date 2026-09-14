@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
 import Brand from '../../shared/branding/Brand';
+import SpaceIcon from '../../shared/branding/SpaceIcon';
 import { PreferencesLink } from '../../shared/preferences/Preferences';
+import { EDUCATION_SPACE } from '../../config/geo.mjs';
 import DatasetExplorer from './DatasetExplorer';
 import Debates from './DebateBoard';
 import '../../app/style.css';
@@ -51,7 +53,7 @@ export default function EducationApp({
         <aside className="sidebar">
           <div className="side-label">WORKSPACE</div>
           <div className="space-name">
-            <span className="space-icon">E</span>
+            <SpaceIcon spaceId={EDUCATION_SPACE} />
             <div>
               Education<span>Evidence & initiatives</span>
             </div>

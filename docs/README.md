@@ -29,3 +29,5 @@ Unpublished editorial drafts, withdrawn assistant copy, billing notes and creden
 [Real Linux host research](LINUX_HOST_RESEARCH.md): kernel network experiments, packetdrill, disconnected messaging, rendezvous boundaries and explicit byte budgets. Research only; no VM deployment.
 
 [System appearance and mobile accessibility](APPEARANCE_ACCESSIBILITY.md): shared theme tokens, W3C references, mobile navigation, touch controls and verification checklist.
+
+- [Visual restoration audit](VISUAL_RESTORATION_AUDIT.md): historic charts, fresh Geo reads, renderer gaps and bounded publisher requirements.
