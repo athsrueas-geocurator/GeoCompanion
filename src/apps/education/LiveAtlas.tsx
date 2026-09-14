@@ -22,6 +22,7 @@ type Entry = {
   sources: Ref[];
   places: Ref[];
   topics: Ref[];
+  categories: Ref[];
   related: Ref[];
 };
 function GeoLink({ entry }: { entry: Ref }) {
@@ -116,6 +117,13 @@ export default function LiveAtlas({
   const [search, setSearch] = useState(''),
     [topic, setTopic] = useState(''),
     [place, setPlace] = useState(''),
+    [category, setCategory] = useState(''),
+    [comparison, setComparison] = useState<string[]>(() => {
+      try {
+        const saved = JSON.parse(localStorage.getItem('geo:initiative-comparison') || '[]');
+        return Array.isArray(saved) ? saved.filter((id) => typeof id === 'string') : [];
+      } catch { return []; }
+    }),
     [selected, setSelected] = useState<Entry | null>(null);
   const generation = useRef(0);
   async function load(
@@ -153,6 +161,7 @@ export default function LiveAtlas({
     setSelected(null);
     setTopic('');
     setPlace('');
+    setCategory('');
     void load(null, c.signal);
     return () => {
       c.abort();
@@ -167,11 +176,18 @@ export default function LiveAtlas({
     detail.current?.close();
     setSelected(null);
   }
-  const options = (field: 'topics' | 'places') =>
+  useEffect(() => {
+    localStorage.setItem('geo:initiative-comparison', JSON.stringify(comparison));
+  }, [comparison]);
+  const options = (field: 'topics' | 'places' | 'categories') =>
     [
       ...new Map(rows.flatMap((r) => r[field]).map((r) => [r.id, r])).values(),
     ].sort((a, b) => a.name.localeCompare(b.name));
-  const filtered = filterRows(rows, search, topic, place) as Entry[];
+  const filtered = filterRows(rows, search, topic, place, category) as Entry[];
+  const compared = comparison.map((id) => rows.find((row) => row.id === id)).filter(Boolean) as Entry[];
+  function toggleComparison(id: string) {
+    setComparison((old) => old.includes(id) ? old.filter((x) => x !== id) : [...old, id].slice(-3));
+  }
   return (
     <div className="live-atlas">
       <div className="page-heading">
@@ -240,7 +256,28 @@ export default function LiveAtlas({
             </select>
           </label>
         )}
+        {!questions && (
+          <label>
+            Category
+            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option value="">All categories</option>
+              {options('categories').map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+              <option value="unclassified">Unclassified</option>
+            </select>
+          </label>
+        )}
       </div>
+      {!questions && compared.length > 0 && (
+        <section className="atlas-comparison" aria-label="Selected initiative comparison">
+          <h2>Compare initiatives</h2>
+          <div className="atlas-comparison-table" role="region" tabIndex={0}>
+            <table><thead><tr><th>Initiative</th><th>Population</th><th>Study design</th><th>Sources</th><th /></tr></thead>
+              <tbody>{compared.map((r) => <tr key={r.id}><th scope="row">{r.name}</th><td>{r.population || 'Not stated'}</td><td>{r.design || 'Not stated'}</td><td>{r.sources.length}</td><td><button onClick={() => toggleComparison(r.id)}>Remove</button></td></tr>)}</tbody>
+            </table>
+          </div>
+          {compared.length > 1 && <p>Shared sources: {compared.reduce((shared, r) => shared.filter((id) => r.sources.some((s) => s.id === id)), compared[0].sources.map((s) => s.id)).length || 'None'}</p>}
+        </section>
+      )}
       <p className="atlas-count">
         {filtered.length} entries{next ? ' · More available' : ''}
       </p>
@@ -262,10 +299,12 @@ export default function LiveAtlas({
             </button>
             {r.description && <p>{r.description}</p>}
             <div className="atlas-tags">
+              {r.categories.map((p) => <button key={p.id} onClick={() => setCategory(p.id)}>{p.name}</button>)}
               {r.places.map((p) => (
                 <span key={p.id}>{p.name}</span>
               ))}
             </div>
+            {!questions && <button aria-pressed={comparison.includes(r.id)} onClick={() => toggleComparison(r.id)}>{comparison.includes(r.id) ? 'Remove from comparison' : 'Add to comparison'}</button>}
             <GeoLink
               entry={{ id: r.id, name: 'Open on Geo', spaces: [SPACE] }}
             />

@@ -66,6 +66,11 @@
   font-size: 12px;
   margin: 14px 0;
 }
+.atlas-tags button { border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: inherit; padding: 3px 8px; }
+.atlas-comparison { margin: 20px 0; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.atlas-comparison-table { overflow-x: auto; }
+.atlas-comparison table { border-collapse: collapse; width: 100%; min-width: 560px; text-align: left; }
+.atlas-comparison th, .atlas-comparison td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .atlas-detail {
   margin: 0;
   max-width: none;

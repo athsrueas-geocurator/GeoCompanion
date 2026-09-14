@@ -16,6 +16,7 @@ export const P = {
   source: '49c5d5e1679a4dbdbfd33f618f227c94',
   location: '95d770021faf4f7cb7deb21a7d48cda0',
   topic: '806d52bc27e94c9193c057978b093351',
+  category: '06c899fb04334e679feb1fd56687c3d6',
 };
 export const QUERY = `query Atlas($space:UUID!,$type:UUID!,$filter:EntityFilter!,$after:Cursor){entitiesConnection(spaceId:$space,typeId:$type,first:50,after:$after,filter:$filter){nodes{id name description values(first:100,filter:{spaceId:{is:$space}}){nodes{propertyId text boolean}pageInfo{hasNextPage}} relations(first:100,filter:{spaceId:{is:$space}}){nodes{typeId toEntityId toEntity{id name spaceIds}}pageInfo{hasNextPage}}}pageInfo{hasNextPage endCursor}}}`;
 const cache = new Map();
@@ -75,6 +76,7 @@ export function parsePage(payload) {
       sources: links(P.source),
       places: links(P.location),
       topics: links(P.topic),
+      categories: links(P.category),
       related: links(P.related),
     };
   });
@@ -141,12 +143,16 @@ export function mergeRows(previous, incoming) {
     ...new Map([...previous, ...incoming].map((r) => [r.id, r])).values(),
   ];
 }
-export function filterRows(rows, search = '', topic = '', place = '') {
+export function filterRows(rows, search = '', topic = '', place = '', category = '') {
   const terms = search.trim().toLowerCase().split(/\s+/).filter(Boolean);
   return rows.filter(
     (r) =>
       (!topic || r.topics.some((t) => t.id === topic)) &&
       (!place || r.places.some((t) => t.id === place)) &&
+      (!category ||
+        (category === 'unclassified'
+          ? r.categories.length === 0
+          : r.categories.some((t) => t.id === category))) &&
       terms.every((t) =>
         [
           r.name,
@@ -154,6 +160,7 @@ export function filterRows(rows, search = '', topic = '', place = '') {
           r.population,
           r.design,
           ...r.topics.map((t) => t.name),
+          ...r.categories.map((t) => t.name),
         ]
           .join(' ')
           .toLowerCase()
