@@ -1,7 +1,7 @@
 {
-  "title": "First Indianapolis outreach services",
+  "title": "Shared map controls",
   "changes": [
-    "Browse and search the first published outreach service.",
-    "Explore verified public service locations on the Indianapolis map."
+    "Education and outreach maps now share layer controls, location selection and Fit/Restore tools.",
+    "Search filters education map markers; overlapping locations offer individual selections."
   ]
 }

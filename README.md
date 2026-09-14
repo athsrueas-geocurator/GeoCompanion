@@ -18,7 +18,7 @@ This is also an experiment in what an agent can help one person orchestrate. The
 
 Build a small interface around a living knowledge graph: keep canonical content and relationships in Geo, fetch bounded slices in the browser, and derive useful views locally. Deploy interface changes when application behavior changes; ordinary edits to supported data should appear after refresh without a rebuild.
 
-**This README describes source on `main`, reviewed September 12, 2026. It is not a claim that every change is deployed.** The latest verified frontend is version `0.2.0`, feature deployment `903e66e4` from `f7366a3`, with release metadata published as `809f5c87`. Preferences now includes About, dated Recent changes and a local unread dot, alongside the image bandwidth setting and earlier dynamic-data improvements. See [Deployment](DEPLOYMENT.md) for verified hosting observations and [release workflow](docs/RELEASES.md) for recording future versions using actual deployment times. The endpoint currently used is Geo **testnet**.
+Source now includes shared map controls for education and outreach. See [Deployment](DEPLOYMENT.md) for the latest verified hosted version and [map layer plan](docs/MAP_LAYERS_PLAN.md) for implemented capabilities and remaining phases. The endpoint currently used is Geo **testnet**.
 
 | Feature | Current source behavior | Important boundary |
 | --- | --- | --- |

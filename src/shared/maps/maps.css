@@ -1,0 +1,69 @@
+.shared-map {
+  min-width: 0;
+}
+.map-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: start;
+  margin-bottom: 12px;
+}
+.map-toolbar button,
+.map-toolbar summary,
+.map-location-list summary {
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.map-toolbar details {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.map-layer-options {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+.map-layer-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.shared-map-canvas {
+  height: 450px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  z-index: 0;
+}
+.map-location-list {
+  margin: 12px 0;
+}
+.map-location-list button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  margin: 4px 0;
+}
+.map-selection {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.shared-map .leaflet-popup-content button {
+  display: block;
+  margin: 6px 0;
+  padding: 10px;
+  max-width: 230px;
+  white-space: normal;
+}
+@media (max-width: 760px) {
+  .shared-map-canvas {
+    height: 340px;
+  }
+  .map-toolbar {
+    font-size: 14px;
+  }
+}

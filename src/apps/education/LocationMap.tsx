@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { selectForSharing } from '../../shared/coordination/Coordination';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import MapCanvas from '../../shared/maps/MapCanvas';
 import './location-map.css';
 import {
   fetchLocations,
@@ -35,12 +34,8 @@ export default function LocationMap() {
     [busy, setBusy] = useState(false),
     [selected, setSelected] = useState(''),
     [search, setSearch] = useState(''),
-    [tileError, setTileError] = useState(false),
     [storageError, setStorageError] = useState(false);
-  const container = useRef<HTMLDivElement>(null),
-    map = useRef<L.Map | null>(null),
-    markers = useRef<L.LayerGroup | null>(null),
-    request = useRef<AbortController | null>(null),
+  const request = useRef<AbortController | null>(null),
     lastAttempt = useRef(0);
   async function refresh() {
     if (Date.now() - lastAttempt.current < 10000) return;
@@ -77,63 +72,14 @@ export default function LocationMap() {
     if (!snapshot || Date.now() - snapshot.at > TTL) void refresh();
     return () => request.current?.abort();
   }, []);
-  useEffect(() => {
-    if (!container.current) return;
-    const m = L.map(container.current, {
-      scrollWheelZoom: false,
-      maxZoom: 12,
-    }).setView([39, -96], 4);
-    map.current = m;
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 12,
-      keepBuffer: 0,
-      updateWhenIdle: true,
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    })
-      .on('tileerror', () => setTileError(true))
-      .addTo(m);
-    markers.current = L.layerGroup().addTo(m);
-    const observer = new ResizeObserver(() => m.invalidateSize());
-    observer.observe(container.current);
-    return () => {
-      observer.disconnect();
-      m.remove();
-      map.current = null;
-    };
-  }, []);
   const places = snapshot?.locations ?? [];
-  useEffect(() => {
-    const m = map.current,
-      layer = markers.current;
-    if (!m || !layer) return;
-    layer.clearLayers();
-    const points: L.LatLngTuple[] = [];
-    for (const g of places) {
-      if (!g.point) continue;
-      const p = g.point as L.LatLngTuple;
-      points.push(p);
-      const label = document.createElement('span');
-      label.textContent = g.name;
-      L.circleMarker(p, {
-        radius: 9,
-        color: '#195f55',
-        fillColor: '#e7b85b',
-        fillOpacity: 1,
-        weight: 2,
-      })
-        .bindTooltip(label)
-        .on('click', () => choose(g))
-        .addTo(layer);
-    }
-    if (points.length)
-      m.fitBounds(L.latLngBounds(points), { padding: [35, 35], maxZoom: 7 });
-  }, [snapshot]);
+  const visible = places.filter((g) =>
+    g.name.toLowerCase().includes(search.toLowerCase()),
+  );
   const chosen = places.find((g) => g.id === selected);
   function choose(g: Place) {
     setSelected(g.id);
     selectForSharing(g.id, GEOGRAPHY);
-    if (g.point) map.current?.setView(g.point as L.LatLngTuple, 7);
   }
   useEffect(() => {
     function readSelection() {
@@ -180,17 +126,26 @@ export default function LocationMap() {
       )}
       <div className="location-layout">
         <div>
-          <div
-            className="geo-leaflet"
-            ref={container}
-            aria-label="Education locations map"
+          <MapCanvas
+            center={[39, -96]}
+            zoom={4}
+            maxZoom={7}
+            layers={[
+              {
+                id: 'education-context',
+                label: 'Study locations',
+                features: visible.map((p) => ({
+                  ...p,
+                  detail: `${p.records.length} linked records`,
+                })),
+              },
+            ]}
+            selected={selected}
+            onSelect={(id) => {
+              const p = places.find((p) => p.id === id);
+              if (p) choose(p);
+            }}
           />
-          {tileError && (
-            <p role="status">
-              Some map tiles are unavailable. Locations and record links remain
-              available below.
-            </p>
-          )}
           <p className="muted">
             {places.filter((g) => g.point).length} mapped places ·{' '}
             {places.filter((g) => !g.point).length} not mapped.{' '}
@@ -212,21 +167,19 @@ export default function LocationMap() {
               placeholder="Filter loaded locations"
             />
           </label>
-          {places
-            .filter((g) => g.name.toLowerCase().includes(search.toLowerCase()))
-            .map((g) => (
-              <button
-                key={g.id}
-                aria-pressed={selected === g.id}
-                onClick={() => choose(g)}
-              >
-                <strong>{g.name}</strong>
-                <span>
-                  {g.records.length} linked records
-                  {!g.point ? ' · Not mapped' : ''}
-                </span>
-              </button>
-            ))}
+          {visible.map((g) => (
+            <button
+              key={g.id}
+              aria-pressed={selected === g.id}
+              onClick={() => choose(g)}
+            >
+              <strong>{g.name}</strong>
+              <span>
+                {g.records.length} linked records
+                {!g.point ? ' · Not mapped' : ''}
+              </span>
+            </button>
+          ))}
           {snapshot && !places.length && <p>No locations found.</p>}
         </div>
       </div>

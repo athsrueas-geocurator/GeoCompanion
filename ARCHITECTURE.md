@@ -92,3 +92,7 @@ Outreach belongs in the user-approved Public good space, but space membership al
 `npm run build` produces static `dist/`. `scripts/deploy.mjs` explicitly reads only Cloudflare deployment values from the local `.env`, checks the output, and uploads `dist/` to the existing Pages project. GitHub is source control; a Git push is not a verified Pages deployment. See [DEPLOYMENT.md](DEPLOYMENT.md).
 
 `linux-cloud` is not serving app requests, scheduled aggregates or public forwarding for this implementation. A conservative ongoing collector is proposed in [LOW_EGRESS_PROTOCOL.md](LOW_EGRESS_PROTOCOL.md), not deployed as an app dependency. A separate bounded metadata-upload experiment exists in Open_Data; see DEPLOYMENT.md for that distinction. There is no guaranteed zero-cost claim, spending cap or operational service implied by that design.
+
+## Shared point maps
+
+Education LocationMap and outreach OutreachMap adapt their validated records into `MapCanvas` point layers. The component retains one Leaflet instance, replaces visible groups without refitting after every update, and provides common selection/layer controls. Search remains app-owned. Geo fetches and privacy checks stay in the existing adapters. See [map roadmap](docs/MAP_LAYERS_PLAN.md).

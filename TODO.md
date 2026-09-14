@@ -329,3 +329,10 @@ Details and open decisions: [Ideas to explore](docs/EXPERIMENTS.md). Recording t
 
 - [x] Connect exact published directory membership to service cards, browser search, public source links and typed public-stop coordinates. Live API and local browser render the Outreach Near Eastside pilot. See [contract and outstanding publisher fields](docs/OUTREACH_LIVE.md).
 - [ ] Expand beyond the pilot and implement verified weekly/food filters after schedule verification, exceptions, service taxonomy and eligibility are published.
+
+## Shared map layers
+
+- [ ] Implement the staged [shared map layers plan](docs/MAP_LAYERS_PLAN.md), starting with shared controls, independent layers and overlap selection for existing live data. Reference map audited September 14; no new layer implementation or publication claimed.
+
+- [x] Shared point-map foundation: both apps use MapCanvas with layer toggles, fit/restore, selectable location list and coincident-point choices. Unit checks cover overlap grouping and removal; local browser verified live Indy layer toggling and selection.
+- [ ] Extend shared maps with published service categories, verified polygons/lines, saved layer choices and offline snapshots according to MAP_LAYERS_PLAN.md.
