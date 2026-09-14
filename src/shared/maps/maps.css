@@ -67,3 +67,37 @@
     font-size: 14px;
   }
 }
+/* Map annotations use a light surface in both themes for contrast over tiles. */
+.shared-map .leaflet-popup-content-wrapper,
+.shared-map .leaflet-popup-tip,
+.shared-map .leaflet-tooltip {
+  background: #ffffff;
+  color: #243638;
+}
+.shared-map .leaflet-popup-content {
+  min-width: 210px;
+  margin: 20px 24px 16px 16px;
+}
+.shared-map .leaflet-popup-content button {
+  width: 100%;
+  max-width: 280px;
+  background: #edf5f3;
+  color: #174b43;
+  border: 1px solid #7c9d96;
+  border-radius: 6px;
+  text-align: left;
+  line-height: 1.5;
+  font: inherit;
+  cursor: pointer;
+}
+.shared-map .leaflet-popup-content button:hover {
+  background: #dcece7;
+  color: #123b35;
+}
+.shared-map .leaflet-popup-content button:focus-visible {
+  outline: 3px solid #176b5b;
+  outline-offset: 2px;
+}
+.shared-map a.leaflet-popup-close-button {
+  color: #243638;
+}

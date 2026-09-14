@@ -1,7 +1,6 @@
 {
-  "title": "Shared map controls",
+  "title": "Clearer map popups",
   "changes": [
-    "Education and outreach maps now share layer controls, location selection and Fit/Restore tools.",
-    "Search filters education map markers; overlapping locations offer individual selections."
+    "Map selections now use readable, high-contrast colors and wider labels in both themes."
   ]
 }
