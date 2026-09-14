@@ -184,6 +184,8 @@ export default function LiveAtlas({
       ...new Map(rows.flatMap((r) => r[field]).map((r) => [r.id, r])).values(),
     ].sort((a, b) => a.name.localeCompare(b.name));
   const filtered = filterRows(rows, search, topic, place, category) as Entry[];
+  const categoryCounts = new Map<string, { entry: Ref; count: number }>();
+  rows.forEach((row) => row.categories.forEach((entry) => categoryCounts.set(entry.id, { entry, count: (categoryCounts.get(entry.id)?.count || 0) + 1 })));
   const compared = comparison.map((id) => rows.find((row) => row.id === id)).filter(Boolean) as Entry[];
   function toggleComparison(id: string) {
     setComparison((old) => old.includes(id) ? old.filter((x) => x !== id) : [...old, id].slice(-3));
@@ -206,6 +208,7 @@ export default function LiveAtlas({
           Refresh
         </button>
       </div>
+      {!questions && (categoryCounts.size > 0 || rows.length > 0) && <section className="atlas-category-summary" aria-label="Initiative categories"><h2>Categories</h2><div>{[...categoryCounts.values()].sort((a,b) => b.count - a.count || a.entry.name.localeCompare(b.entry.name)).map(({entry,count}) => <button key={entry.id} aria-pressed={category === entry.id} onClick={() => setCategory(category === entry.id ? '' : entry.id)}>{entry.name} <span>{count}</span></button>)}<button aria-pressed={category === 'unclassified'} onClick={() => setCategory(category === 'unclassified' ? '' : 'unclassified')}>Unclassified <span>{rows.filter((row) => row.categories.length === 0).length}</span></button></div></section>}
       <div className="atlas-controls">
         {!questions && (
           <label>
@@ -271,8 +274,8 @@ export default function LiveAtlas({
         <section className="atlas-comparison" aria-label="Selected initiative comparison">
           <h2>Compare initiatives</h2>
           <div className="atlas-comparison-table" role="region" tabIndex={0}>
-            <table><thead><tr><th>Initiative</th><th>Population</th><th>Study design</th><th>Sources</th><th /></tr></thead>
-              <tbody>{compared.map((r) => <tr key={r.id}><th scope="row">{r.name}</th><td>{r.population || 'Not stated'}</td><td>{r.design || 'Not stated'}</td><td>{r.sources.length}</td><td><button onClick={() => toggleComparison(r.id)}>Remove</button></td></tr>)}</tbody>
+            <table><thead><tr><th>Initiative</th><th>Finding or limitation</th><th>Population</th><th>Study design</th><th>Sources</th><th /></tr></thead>
+              <tbody>{compared.map((r) => <tr key={r.id}><th scope="row">{r.name}</th><td>{r.description || 'Not stated'}</td><td>{r.population || 'Not stated'}</td><td>{r.design || 'Not stated'}</td><td>{r.sources.length}</td><td><button onClick={() => toggleComparison(r.id)}>Remove</button></td></tr>)}</tbody>
             </table>
           </div>
           {compared.length > 1 && <p>Shared sources: {compared.reduce((shared, r) => shared.filter((id) => r.sources.some((s) => s.id === id)), compared[0].sources.map((s) => s.id)).length || 'None'}</p>}

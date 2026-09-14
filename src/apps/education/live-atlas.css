@@ -68,6 +68,12 @@
 }
 .atlas-tags button { border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: inherit; padding: 3px 8px; }
 .atlas-comparison { margin: 20px 0; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.atlas-category-summary { margin: 20px 0; }
+.atlas-category-summary h2 { font-size: 16px; }
+.atlas-category-summary div { display: flex; gap: 8px; flex-wrap: wrap; }
+.atlas-category-summary button { border: 1px solid var(--line); background: var(--surface); color: inherit; padding: 7px 10px; border-radius: 999px; }
+.atlas-category-summary button[aria-pressed="true"] { background: var(--accent); color: white; }
+.atlas-category-summary span { font-variant-numeric: tabular-nums; }
 .atlas-comparison-table { overflow-x: auto; }
 .atlas-comparison table { border-collapse: collapse; width: 100%; min-width: 560px; text-align: left; }
 .atlas-comparison th, .atlas-comparison td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
