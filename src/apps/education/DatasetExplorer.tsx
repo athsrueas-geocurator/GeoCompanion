@@ -14,6 +14,7 @@ import { safeUrl } from './data.mjs';
 import './live-atlas.css';
 import './dataset-explorer.css';
 import CollectionPlot from './CollectionPlot';
+import ObservationPanels from './ObservationPanels';
 import useRevalidation from '../../shared/geo/useRevalidation';
 import GeoReference from '../../shared/geo/GeoReference';
 import { resultFacets, selectedFacet } from './result-facets.mjs';
@@ -252,6 +253,7 @@ function Collection({ block }: { block: RecordRow }) {
             {visible.length} results{page?.next ? ' · More available' : ''}
           </p>
           {!page?.next && <CollectionPlot rows={visible} />}
+          {!page?.next && <ObservationPanels rows={visible} />}
           {visible.map((r) => (
             <Result key={r.id} row={r} />
           ))}

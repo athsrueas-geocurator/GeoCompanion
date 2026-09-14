@@ -23,6 +23,10 @@ export const F = {
   comparison: '061dbc4816b0413b83ebe771ef3d9875',
   related: 'dfa6aebe1ca94bf29faccc4cc7afb24c',
   estimand: 'ba643714da274c37a340a7f8396198dc',
+  actualMean: '698a64065ce14aa2b0022605e6b803c1',
+  estimatedCounterfactual: '7711cba8c1ed4db0bc3d3afc2709d240',
+  outcome: '0e1320cbf9b3b4f5fe066780d1803b13',
+  followup: 'c962e0fb4a3148e5ba125144691236a8',
 };
 const fields = `id name spaceIds values(first:100,filter:{spaceId:{is:$space}}){nodes{propertyId spaceId property{id name} text decimal integer boolean}pageInfo{hasNextPage}}`;
 export const RECORDS = `query DatasetRecords($space:UUID!,$ids:[UUID!]!){entitiesConnection(first:50,spaceId:$space,filter:{id:{in:$ids}}){nodes{${fields} relations(first:100,filter:{spaceId:{is:$space}}){nodes{id typeId spaceId type{id name}toEntityId toEntity{id name spaceIds}}pageInfo{hasNextPage}}}pageInfo{hasNextPage}}}`;
