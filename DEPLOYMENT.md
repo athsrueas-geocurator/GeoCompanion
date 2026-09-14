@@ -1,5 +1,9 @@
 # Deployment
 
+## Current frontend verification — version 0.3.1
+
+Feature deployment `fca83e06` completed at `2026-09-14T17:17:33.268957Z`; metadata-only deployment `b67e320f` then published the release history. Source commit `b3082e3` is pushed to `main`; the follow-up release-record commit remains local because this shell has no GitHub credential and `git push` fails with `unable to get password from user`. The custom domain loaded the new application successfully. Live browser checks used direct Geo reads: Reading First rendered seven compatible effects and four actual-versus-estimated-counterfactual means; Perry rendered 24 named treatment/control pairs and 24 societal benefit-cost scenarios with their published horizon, discount rate, deadweight-loss and crime-valuation assumptions. At 375px and 1265px rendered widths, the dark-mode Reading First panel had no document-width overflow; accessible tables remained visible, and keyboard navigation reached the result search control. No Geo mutation occurred. Local validation: 70 tests, formatting check, production build and `git diff --check` pass. No Worker, VM or Geo publication changed.
+
 ## Current frontend verification — version 0.3.0
 
 Feature deployment `53225cb7-1ee2-44a5-ba87-046b2b65c8e1` completed at `2026-09-14T17:09:30.461253Z`; metadata-only deployment `39772711` then published the release history. Source commit `08ee395` is pushed to `main`. The custom domain returned HTTPS 200 with `index-CtpmRJKY.js`, and `releases.json` lists the version-0.3.0 live-comparison release with the authoritative feature timestamp. Local validation: 69 tests, formatting check, production build and `git diff --check` pass. No Worker, VM or Geo publication changed.

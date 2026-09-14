@@ -1,5 +1,15 @@
 [
   {
+    "id": "fca83e06-edcb-415a-971f-19d1d55e3b59",
+    "version": "0.3.1",
+    "deployedAt": "2026-09-14T17:17:33.268957Z",
+    "title": "Corrected live education evidence",
+    "changes": [
+      "Reading First effect and mean panels now accept the typed decimal values returned by Geo.",
+      "Perry scenarios show their published perspective and horizon, and group rows name their published arms."
+    ]
+  },
+  {
     "id": "53225cb7-1ee2-44a5-ba87-046b2b65c8e1",
     "version": "0.3.0",
     "deployedAt": "2026-09-14T17:09:30.461253Z",

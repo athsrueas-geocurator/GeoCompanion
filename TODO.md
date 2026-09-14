@@ -17,6 +17,8 @@
 
 # TODO
 
+- [x] September 14: restore live Reading First/Perry observation panels. Geo decimal strings now remain typed numbers in reusable adapters; Reading First’s seven effects and four actual-versus-counterfactual means, plus Perry’s 24 named-arm pairs and 24 perspective/horizon-labelled scenarios, rendered on the deployed site. Tests (70), formatting, production build and keyboard/table checks passed. Browser verification found dark-mode, zero-overflow Reading First tables at 375px and 1265px. Version 0.3.1 feature deployment `fca83e06`; metadata deployment `b67e320f`. Source commit `b3082e3` is pushed; the release-record commit awaits local GitHub authentication. No Geo content was changed.
+
 - [x] September 12: deploy user-authorized 5% neighbor budget on linux-cloud: separate Reticulum transport identity/UID, durable 50 MB monthly ceiling, daily kernel quota, systemd timer and CPU/memory bounds. Budget tests and live loopback quota cutoff passed; two backbone connections established. See docs/NEIGHBOR_NODE.md.
 - [ ] Observe neighbor-node rollover, restart recovery, useful transit and measured daily traffic; connect private budget-exhaustion alerts after Retichat reverse delivery is verified.
 
