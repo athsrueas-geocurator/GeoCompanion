@@ -27,6 +27,15 @@ export const F = {
   estimatedCounterfactual: '7711cba8c1ed4db0bc3d3afc2709d240',
   outcome: '0e1320cbf9b3b4f5fe066780d1803b13',
   followup: 'c962e0fb4a3148e5ba125144691236a8',
+  observedProportion: '73b35a4ce05f45908118a089d9995bae',
+  observedMonetaryMean: '1400ffc3e5fe46a49c7a9ceb145c07af',
+  studyArm: '66e061cbcc3a49d48c99bb0db41c255c',
+  population: 'aa77da401d9b4ca3b250fd24c9b8701f',
+  benefitCostRatio: '45ce8dc80a74432e9a2483cd1c8e86e1',
+  internalReturn: '879d207046024b44be6e3d64c32c60da',
+  discountRate: 'f9d6085e34014562aae4021009f5f390',
+  deadweightLoss: '0baed391e467482889e44ca00658cf62',
+  murderValuation: 'd15fb305b4244ffbbb1af981e84ebd6c',
 };
 const fields = `id name spaceIds values(first:100,filter:{spaceId:{is:$space}}){nodes{propertyId spaceId property{id name} text decimal integer boolean}pageInfo{hasNextPage}}`;
 export const RECORDS = `query DatasetRecords($space:UUID!,$ids:[UUID!]!){entitiesConnection(first:50,spaceId:$space,filter:{id:{in:$ids}}){nodes{${fields} relations(first:100,filter:{spaceId:{is:$space}}){nodes{id typeId spaceId type{id name}toEntityId toEntity{id name spaceIds}}pageInfo{hasNextPage}}}pageInfo{hasNextPage}}}`;
