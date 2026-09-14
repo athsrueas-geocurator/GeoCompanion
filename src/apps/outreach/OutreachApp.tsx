@@ -1,5 +1,4 @@
-import { lazy, Suspense } from 'react';
-const OutreachMap = lazy(() => import('./OutreachMap'));
+import Directory from './Directory';
 import Brand from '../../shared/branding/Brand';
 import SpaceIcon from '../../shared/branding/SpaceIcon';
 import { OUTREACH_SPACE } from '../../config/geo.mjs';
@@ -53,32 +52,8 @@ export default function OutreachApp({ tab }: { tab: string }) {
             </a>
           ))}
         </nav>
-        <section className="outreach-empty" aria-labelledby="outreach-title">
-          {tab !== 'map' && (
-            <span className="app-status">Directory in preparation</span>
-          )}
-          <h2 id="outreach-title">{view[1]}</h2>
-          {tab === 'map' ? (
-            <>
-              <p>No verified service locations to show yet.</p>
-              <Suspense fallback={<p role="status">Loading map…</p>}>
-                <OutreachMap />
-              </Suspense>
-            </>
-          ) : (
-            <>
-              <p>{view[2]}</p>
-              <div className="outreach-notice">
-                <h3>Verified services aren’t available here yet.</h3>
-                <p>
-                  Provider contacts, eligibility, locations and schedules are
-                  being prepared for review. This workspace cannot yet tell you
-                  where help is available today.
-                </p>
-              </div>
-            </>
-          )}
-        </section>
+        <h2>{view[1]}</h2>
+        <Directory tab={tab} />
         <footer>
           <span>Geo Companion / Indianapolis Outreach</span>
         </footer>

@@ -29,7 +29,7 @@ Build a small interface around a living knowledge graph: keep canonical content 
 | Curation | Profile Post discovery, ordered text and membership-aware references | User-authored content stays on Geo; selected Post ID may be saved locally |
 | Arguments and public responses | Explicit argument relationships; separately fetched response counts | Connections or popularity do not prove a claim |
 | Connections and education map | Shared linked entities and public coordinates from Geo | Education/profile roots and supported relation kinds limit discovery |
-| Indianapolis outreach | Separate shell and lazy basemap | No published directory contract ready for operational reads or service pins |
+| Indianapolis outreach | Live directory, search and public-location map | First published pilot connected; verified schedule and food filters pending |
 | Preferences and optional shared exploration | Local preferences/followed IDs; explicit two-person selection messages and opt-in coarse counts | Following is not login; shared exploration is a bounded prototype |
 
 ## A tour from publication to pixels
@@ -177,13 +177,13 @@ Preferences and followed public identity IDs stay in the browser. Search queries
 | Plot support is narrow | Most datasets have readable results rather than a tailored visualization | Add source-backed outcome/instrument/cohort contracts and comparison tests; never infer equivalence from equal units |
 | Discovery starts in known education/profile roots and selected relationship kinds | Relevant data elsewhere can be missed | Expand through explicit topic/dataset/source associations, preserving scoped provenance and bounded traversal |
 | Unreadable linked catalog entries/blocks now retain unavailable states | A linked entry can be unavailable until upstream fields are corrected or refreshed | Extend the same explicit handling to older adapters; successful membership removal must still remove the entry |
-| Outreach has no ready published directory and coordinate contract | A basemap cannot answer where help is available today | Publisher verifies scoped services, schedules, exceptions and public locations; frontend allowlists exclude copied contact details |
+| Outreach currently has one published pilot; schedule verification and food classifications are incomplete | The directory and map cannot yet answer who is available today | Publisher verifies scoped services, schedules, exceptions and public locations; frontend allowlists exclude copied contact details |
 | Tests cover adapters more deeply than full application transitions | Passing unit tests do not prove every live screen handles edits | Add repeatable end-to-end mutation/failure fixtures and production smoke checks |
 | Source and hosting releases are separate; documentation has accumulated historical notes | Pushed improvements can be mistaken for deployed behavior | Keep release/asset evidence in DEPLOYMENT.md and replace stale summaries during each change |
 
 Every confirmed missing-data dependency goes to the publisher's canonical [publishing queue](https://github.com/athsrueas-geocurator/geo_publisher/blob/main/publishing_queue.md), with scoped evidence, source files, missing fields and acceptance checks. An adapter limitation is not proof that data needs republishing. Missing Answers or editorial priorities must not be invented.
 
-The next integration priorities are additional block renderers and bounded reads, consistent refresh across existing screens, then outreach's verified shared adapter for directory/schedule/map views. Author-selected featured collections, broader connection discovery and additional chart contracts follow the [living Geo design](docs/LIVING_GEO_DESIGN.md). These are plans, not claims of completion.
+The next integration priorities are additional block renderers and bounded reads, consistent refresh across existing screens, then verified outreach schedule and food views. Author-selected featured collections, broader connection discovery and additional chart contracts follow the [living Geo design](docs/LIVING_GEO_DESIGN.md). These are plans, not claims of completion.
 
 ## Build a similar application
 
@@ -217,7 +217,7 @@ src/app/                  App selector, hash routing, errors, global appearance
 src/config/               Public endpoint and trusted bootstrap/ontology configuration
 src/shared/geo/           New shared reader, collections, refresh and references
 src/apps/education/       Feature adapters, browser transforms and components
-src/apps/outreach/        Isolated shell and basemap; operational adapter pending
+src/apps/outreach/        Scoped live directory, contact-source links and public-location map
 src/shared/preferences/  Local settings and live public-profile lookup
 src/shared/coordination/  Consent, selection protocol and optional service client
 services/coordination/    Worker, rooms, aggregate schema and limits
@@ -236,3 +236,5 @@ See [Development](docs/DEVELOPMENT.md) for contributor checks and [documentation
 - [Geo SDK](https://github.com/geobrowser/geo-sdk) and [Geo application](https://github.com/geobrowser/geogenesis): upstream publishing and application/schema references. Reverify upstream contracts as they evolve.
 
 Free operation is a design target, not a guarantee. The VM experiment, optional coordination and public frontend have different traffic and quota boundaries. Avoid adding infrastructure merely because it is available; keep Geo as the reusable source of knowledge and make the companion useful through what it lets people do with that knowledge.
+
+Outreach integration and publisher follow-up: [live pilot contract](docs/OUTREACH_LIVE.md).

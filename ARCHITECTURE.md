@@ -4,7 +4,7 @@ This document describes the implemented system. Proposed infrastructure is expli
 
 This describes current source, not an automatic deployment of every committed change. Start with the [README teaching tour](README.md#a-tour-from-publication-to-pixels) for query and transformation examples. [DEPLOYMENT.md](DEPLOYMENT.md) records the actual hosted release.
 
-The [living Geo design](docs/LIVING_GEO_DESIGN.md) is partially implemented. Native Questions, ordered dataset catalog/result reads, dynamic relationship filters and membership-aware references are in the current source. The September 12 browser check observed 27 catalog entries and all 21 original Questions. Older per-feature readers, block capability handling, broader comparisons and outreach integration remain unfinished; see the [README gap assessment](README.md#weaknesses-and-planned-improvements).
+The [living Geo design](docs/LIVING_GEO_DESIGN.md) is partially implemented. Native Questions, ordered dataset catalog/result reads, dynamic relationship filters and membership-aware references are in the current source. The September 12 browser check observed 27 catalog entries and all 21 original Questions. Older per-feature readers, block capability handling, broader comparisons and complete outreach scheduling remain unfinished; see the [README gap assessment](README.md#weaknesses-and-planned-improvements).
 
 ## Runtime and ownership
 
@@ -48,7 +48,7 @@ The two available apps are intentionally registered in the shell. Their space av
 | Questions | [question-data.mjs](src/apps/education/question-data.mjs), [Questions.tsx](src/apps/education/Questions.tsx) | Native ordered Question collection and actual Answer targets; shared reader, separate from Claim debates |
 | Preferences and follows | [profile-search.mjs](src/shared/preferences/profile-search.mjs) | Name/ID queries narrow on input; verify personal spaces; save chosen IDs rather than a hardcoded identity list |
 | Selector icons | [space-icons.mjs](src/shared/branding/space-icons.mjs) | Space-scoped Avatar and IPFS URL lookup; only immutable CID image URLs accepted |
-| OutreachMap | [OutreachMap.tsx](src/apps/outreach/OutreachMap.tsx) | Lazy Leaflet basemap centered on Indianapolis; no operational dataset query or service pins yet |
+| OutreachMap | [OutreachMap.tsx](src/apps/outreach/OutreachMap.tsx) | Lazy Leaflet map of typed public stops from the scoped live directory; see [adapter contract](docs/OUTREACH_LIVE.md) |
 
 Query text, schema IDs and parsing rules stay with the feature adapter because these contracts differ. Presentation components handle selection, loading, errors and rendering. Tests exercise malformed data, scoping-related transforms, pagination and cache behavior rather than duplicating screen copy.
 
@@ -85,7 +85,7 @@ Remote data is untrusted. Curation uses React Markdown with HTML skipped; links 
 
 Publication flow: agree on dataset membership and existing ontology → publisher prepares and verifies authorized writes → inspect real API responses → implement bounded adapter and meaningful tests → render loading/empty/error states → verify browser destinations and deploy. New content matching an existing contract should appear through refresh/discovery without a frontend release; a new schema or application tool still requires code changes.
 
-Outreach belongs in the user-approved Public good space, but space membership alone is insufficient. The future reader must constrain exact directory dataset membership, service/program/location identity and public-location status. Do not expose private encampments, infer opening hours or label stale schedules as available today. See [outreach specification](https://github.com/athsrueas-geocurator/geo_publisher/blob/main/docs/indianapolis-outreach-directory.md).
+Outreach belongs in the user-approved Public good space, but space membership alone is insufficient. The outreach reader constrains exact directory dataset membership, service/program/location identity and public-location status. Do not expose private encampments, infer opening hours or label stale schedules as available today. See [outreach specification](https://github.com/athsrueas-geocurator/geo_publisher/blob/main/docs/indianapolis-outreach-directory.md).
 
 ## Deployment and planned infrastructure
 

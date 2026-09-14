@@ -285,7 +285,7 @@ Budget alerts alone do not enforce the $0 target. If the chosen configuration ca
 
 - [ ] Receive verified directory, schedules, coordination matrix, gap analysis and dataset-scoped query contract from the publisher.
 
-- [ ] Implement a separate outreach directory view after the contract is verified; never mix education/profile content or present stale schedules as help available today.
+- [x] Implement a separate outreach directory for the verified September 14 pilot; exact membership, scoped allowlist and public source links. No current-availability claims. See docs/OUTREACH_LIVE.md.
 
 ## Other deferred work
 
@@ -297,7 +297,7 @@ Budget alerts alone do not enforce the $0 target. If the chosen configuration ca
 - [x] Share triangle branding across root, education, outreach and preferences; compact selector with runtime primary-space Avatar lookup. Build and 28 tests passed, desktop/mobile checked.
 - [x] Add isolated outreach map route and Indianapolis basemap with explicit empty state. OSM tiles loaded directly.
 - [ ] Receive primary-space icons from publisher; verify rendered icons after publication.
-- [ ] Connect outreach map markers after dataset membership, public-location privacy and coordinate contract are verified. No service markers claimed yet.
+- [x] Connect the September 14 public-stop pilot map marker through verified directory membership and typed coordinates. Browser render and invalid/private-type coordinate tests pass.
 
 ## Repository organization
 
@@ -324,3 +324,8 @@ Details and open decisions: [Ideas to explore](docs/EXPERIMENTS.md). Recording t
 
 - [ ] Restore live source-overlap comparisons and category/source summaries, then add compatible paired-mean, interval and economic-scenario renderers. The Initiative atlas reads Category relation `06c899fb04334e679feb1fd56687c3d6`, preserves unclassified entries, shows live category counts, and stores up to three selected initiative IDs locally for a live source-overlap comparison. The dashboard now renders typed paired observations, source-modelled Perry scenarios, Reading First means and compatible effects; mobile/browser verification and source-to-render checks remain. Follow [visual restoration audit](docs/VISUAL_RESTORATION_AUDIT.md); do not restore bundled content.
 - [ ] Receive publisher mappings for attributed assessments, original category/method coverage, question continuums/evidence links and unresolved place scopes before recreating the old dot matrix or continuum bands. Audit and canonical queue updated September 13, 2026; no Geo publication or frontend deployment performed.
+
+## September 14: live Indianapolis pilot
+
+- [x] Connect exact published directory membership to service cards, browser search, public source links and typed public-stop coordinates. Live API and local browser render the Outreach Near Eastside pilot. See [contract and outstanding publisher fields](docs/OUTREACH_LIVE.md).
+- [ ] Expand beyond the pilot and implement verified weekly/food filters after schedule verification, exceptions, service taxonomy and eligibility are published.
