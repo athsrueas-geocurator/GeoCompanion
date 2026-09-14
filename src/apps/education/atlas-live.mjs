@@ -143,7 +143,13 @@ export function mergeRows(previous, incoming) {
     ...new Map([...previous, ...incoming].map((r) => [r.id, r])).values(),
   ];
 }
-export function filterRows(rows, search = '', topic = '', place = '', category = '') {
+export function filterRows(
+  rows,
+  search = '',
+  topic = '',
+  place = '',
+  category = '',
+) {
   const terms = search.trim().toLowerCase().split(/\s+/).filter(Boolean);
   return rows.filter(
     (r) =>

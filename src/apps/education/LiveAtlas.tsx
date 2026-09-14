@@ -120,9 +120,15 @@ export default function LiveAtlas({
     [category, setCategory] = useState(''),
     [comparison, setComparison] = useState<string[]>(() => {
       try {
-        const saved = JSON.parse(localStorage.getItem('geo:initiative-comparison') || '[]');
-        return Array.isArray(saved) ? saved.filter((id) => typeof id === 'string') : [];
-      } catch { return []; }
+        const saved = JSON.parse(
+          localStorage.getItem('geo:initiative-comparison') || '[]',
+        );
+        return Array.isArray(saved)
+          ? saved.filter((id) => typeof id === 'string')
+          : [];
+      } catch {
+        return [];
+      }
     }),
     [selected, setSelected] = useState<Entry | null>(null);
   const generation = useRef(0);
@@ -177,7 +183,10 @@ export default function LiveAtlas({
     setSelected(null);
   }
   useEffect(() => {
-    localStorage.setItem('geo:initiative-comparison', JSON.stringify(comparison));
+    localStorage.setItem(
+      'geo:initiative-comparison',
+      JSON.stringify(comparison),
+    );
   }, [comparison]);
   const options = (field: 'topics' | 'places' | 'categories') =>
     [
@@ -185,10 +194,21 @@ export default function LiveAtlas({
     ].sort((a, b) => a.name.localeCompare(b.name));
   const filtered = filterRows(rows, search, topic, place, category) as Entry[];
   const categoryCounts = new Map<string, { entry: Ref; count: number }>();
-  rows.forEach((row) => row.categories.forEach((entry) => categoryCounts.set(entry.id, { entry, count: (categoryCounts.get(entry.id)?.count || 0) + 1 })));
-  const compared = comparison.map((id) => rows.find((row) => row.id === id)).filter(Boolean) as Entry[];
+  rows.forEach((row) =>
+    row.categories.forEach((entry) =>
+      categoryCounts.set(entry.id, {
+        entry,
+        count: (categoryCounts.get(entry.id)?.count || 0) + 1,
+      }),
+    ),
+  );
+  const compared = comparison
+    .map((id) => rows.find((row) => row.id === id))
+    .filter(Boolean) as Entry[];
   function toggleComparison(id: string) {
-    setComparison((old) => old.includes(id) ? old.filter((x) => x !== id) : [...old, id].slice(-3));
+    setComparison((old) =>
+      old.includes(id) ? old.filter((x) => x !== id) : [...old, id].slice(-3),
+    );
   }
   return (
     <div className="live-atlas">
@@ -208,7 +228,43 @@ export default function LiveAtlas({
           Refresh
         </button>
       </div>
-      {!questions && (categoryCounts.size > 0 || rows.length > 0) && <section className="atlas-category-summary" aria-label="Initiative categories"><h2>Categories</h2><div>{[...categoryCounts.values()].sort((a,b) => b.count - a.count || a.entry.name.localeCompare(b.entry.name)).map(({entry,count}) => <button key={entry.id} aria-pressed={category === entry.id} onClick={() => setCategory(category === entry.id ? '' : entry.id)}>{entry.name} <span>{count}</span></button>)}<button aria-pressed={category === 'unclassified'} onClick={() => setCategory(category === 'unclassified' ? '' : 'unclassified')}>Unclassified <span>{rows.filter((row) => row.categories.length === 0).length}</span></button></div></section>}
+      {!questions && (categoryCounts.size > 0 || rows.length > 0) && (
+        <section
+          className="atlas-category-summary"
+          aria-label="Initiative categories"
+        >
+          <h2>Categories</h2>
+          <div>
+            {[...categoryCounts.values()]
+              .sort(
+                (a, b) =>
+                  b.count - a.count || a.entry.name.localeCompare(b.entry.name),
+              )
+              .map(({ entry, count }) => (
+                <button
+                  key={entry.id}
+                  aria-pressed={category === entry.id}
+                  onClick={() =>
+                    setCategory(category === entry.id ? '' : entry.id)
+                  }
+                >
+                  {entry.name} <span>{count}</span>
+                </button>
+              ))}
+            <button
+              aria-pressed={category === 'unclassified'}
+              onClick={() =>
+                setCategory(category === 'unclassified' ? '' : 'unclassified')
+              }
+            >
+              Unclassified{' '}
+              <span>
+                {rows.filter((row) => row.categories.length === 0).length}
+              </span>
+            </button>
+          </div>
+        </section>
+      )}
       <div className="atlas-controls">
         {!questions && (
           <label>
@@ -262,23 +318,67 @@ export default function LiveAtlas({
         {!questions && (
           <label>
             Category
-            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
               <option value="">All categories</option>
-              {options('categories').map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+              {options('categories').map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.name}
+                </option>
+              ))}
               <option value="unclassified">Unclassified</option>
             </select>
           </label>
         )}
       </div>
       {!questions && compared.length > 0 && (
-        <section className="atlas-comparison" aria-label="Selected initiative comparison">
+        <section
+          className="atlas-comparison"
+          aria-label="Selected initiative comparison"
+        >
           <h2>Compare initiatives</h2>
           <div className="atlas-comparison-table" role="region" tabIndex={0}>
-            <table><thead><tr><th>Initiative</th><th>Finding or limitation</th><th>Population</th><th>Study design</th><th>Sources</th><th /></tr></thead>
-              <tbody>{compared.map((r) => <tr key={r.id}><th scope="row">{r.name}</th><td>{r.description || 'Not stated'}</td><td>{r.population || 'Not stated'}</td><td>{r.design || 'Not stated'}</td><td>{r.sources.length}</td><td><button onClick={() => toggleComparison(r.id)}>Remove</button></td></tr>)}</tbody>
+            <table>
+              <thead>
+                <tr>
+                  <th>Initiative</th>
+                  <th>Finding or limitation</th>
+                  <th>Population</th>
+                  <th>Study design</th>
+                  <th>Sources</th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+                {compared.map((r) => (
+                  <tr key={r.id}>
+                    <th scope="row">{r.name}</th>
+                    <td>{r.description || 'Not stated'}</td>
+                    <td>{r.population || 'Not stated'}</td>
+                    <td>{r.design || 'Not stated'}</td>
+                    <td>{r.sources.length}</td>
+                    <td>
+                      <button onClick={() => toggleComparison(r.id)}>
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
-          {compared.length > 1 && <p>Shared sources: {compared.reduce((shared, r) => shared.filter((id) => r.sources.some((s) => s.id === id)), compared[0].sources.map((s) => s.id)).length || 'None'}</p>}
+          {compared.length > 1 && (
+            <p>
+              Shared sources:{' '}
+              {compared.reduce(
+                (shared, r) =>
+                  shared.filter((id) => r.sources.some((s) => s.id === id)),
+                compared[0].sources.map((s) => s.id),
+              ).length || 'None'}
+            </p>
+          )}
         </section>
       )}
       <p className="atlas-count">
@@ -302,12 +402,25 @@ export default function LiveAtlas({
             </button>
             {r.description && <p>{r.description}</p>}
             <div className="atlas-tags">
-              {r.categories.map((p) => <button key={p.id} onClick={() => setCategory(p.id)}>{p.name}</button>)}
+              {r.categories.map((p) => (
+                <button key={p.id} onClick={() => setCategory(p.id)}>
+                  {p.name}
+                </button>
+              ))}
               {r.places.map((p) => (
                 <span key={p.id}>{p.name}</span>
               ))}
             </div>
-            {!questions && <button aria-pressed={comparison.includes(r.id)} onClick={() => toggleComparison(r.id)}>{comparison.includes(r.id) ? 'Remove from comparison' : 'Add to comparison'}</button>}
+            {!questions && (
+              <button
+                aria-pressed={comparison.includes(r.id)}
+                onClick={() => toggleComparison(r.id)}
+              >
+                {comparison.includes(r.id)
+                  ? 'Remove from comparison'
+                  : 'Add to comparison'}
+              </button>
+            )}
             <GeoLink
               entry={{ id: r.id, name: 'Open on Geo', spaces: [SPACE] }}
             />

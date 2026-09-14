@@ -1,8 +1,157 @@
-import { meanPanels, pairedObserved, economicScenarios, compatibleEffects } from './observation-adapters.mjs';
-type MeanPanel = { id: string; measure: string; unit: string; followup: string; actual: number; estimated: number };
+import {
+  meanPanels,
+  pairedObserved,
+  economicScenarios,
+  compatibleEffects,
+} from './observation-adapters.mjs';
+type MeanPanel = {
+  id: string;
+  measure: string;
+  unit: string;
+  followup: string;
+  actual: number;
+  estimated: number;
+};
 export default function ObservationPanels({ rows }: { rows: any[] }) {
   const means = meanPanels(rows) as MeanPanel[];
-  const pairs = pairedObserved(rows), scenarios = economicScenarios(rows), effects = compatibleEffects(rows);
-  if (!means.length && !pairs.length && !scenarios.length && !effects.length) return null;
-  return <>{effects.length > 0 && <section className="observation-panel"><h3>Compatible reported effects</h3><p>Rows retain their reported measure, unit, grade and follow-up. Missing uncertainty remains blank.</p><div className="atlas-comparison-table" role="region" tabIndex={0}><table><thead><tr><th>Measure</th><th>Grade</th><th>Follow-up</th><th>Effect</th><th>SE</th><th>Unit</th></tr></thead><tbody>{effects.map((e:any) => <tr key={e.id}><th scope="row">{e.measure}</th><td>{e.grade}</td><td>{e.followup}</td><td>{e.value}</td><td>{Number.isFinite(e.se) ? e.se : 'Not reported'}</td><td>{e.unit}</td></tr>)}</tbody></table></div></section>}{means.length > 0 && <section className="observation-panel"><h3>Observed and estimated counterfactual means</h3><p>Values remain in their reported units; this does not turn means into causal effects.</p><div className="atlas-comparison-table" role="region" tabIndex={0}><table><thead><tr><th>Measure</th><th>Follow-up</th><th>Actual</th><th>Estimated counterfactual</th><th>Unit</th></tr></thead><tbody>{means.map((m) => <tr key={m.id}><th scope="row">{m.measure}</th><td>{m.followup}</td><td>{m.actual}</td><td>{m.estimated}</td><td>{m.unit}</td></tr>)}</tbody></table></div></section>}{pairs.length > 0 && <section className="observation-panel"><h3>Paired observed group means</h3><p>Paired by published outcome, population, follow-up and unit; these are descriptive group means.</p><div className="atlas-comparison-table" role="region" tabIndex={0}><table><thead><tr><th>Outcome</th><th>Follow-up</th><th>Group 1</th><th>Group 2</th><th>Unit</th></tr></thead><tbody>{pairs.map((p:any) => <tr key={p[0].row.id}><th scope="row">{p[0].measure}</th><td>{p[0].followup}</td><td>{p[0].value}</td><td>{p[1].value}</td><td>{p[0].unit}</td></tr>)}</tbody></table></div></section>}{scenarios.length > 0 && <section className="observation-panel"><h3>Published economic scenarios</h3><p>Source-modelled scenarios; not a cross-study ranking.</p><div className="atlas-comparison-table" role="region" tabIndex={0}><table><thead><tr><th>Model</th><th>Value</th><th>Discount rate</th><th>Tax deadweight loss</th><th>Crime valuation</th></tr></thead><tbody>{scenarios.map((s:any) => <tr key={s.id}><th scope="row">{s.kind}</th><td>{s.value}</td><td>{s.discountRate ?? 'Not stated'}</td><td>{s.deadweightLoss ?? 'Not stated'}</td><td>{s.valuation ?? 'Not stated'}</td></tr>)}</tbody></table></div></section>}</>;
+  const pairs = pairedObserved(rows),
+    scenarios = economicScenarios(rows),
+    effects = compatibleEffects(rows);
+  if (!means.length && !pairs.length && !scenarios.length && !effects.length)
+    return null;
+  return (
+    <>
+      {effects.length > 0 && (
+        <section className="observation-panel">
+          <h3>Compatible reported effects</h3>
+          <p>
+            Rows retain their reported measure, unit, grade and follow-up.
+            Missing uncertainty remains blank.
+          </p>
+          <div className="atlas-comparison-table" role="region" tabIndex={0}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Measure</th>
+                  <th>Grade</th>
+                  <th>Follow-up</th>
+                  <th>Effect</th>
+                  <th>SE</th>
+                  <th>Unit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {effects.map((e: any) => (
+                  <tr key={e.id}>
+                    <th scope="row">{e.measure}</th>
+                    <td>{e.grade}</td>
+                    <td>{e.followup}</td>
+                    <td>{e.value}</td>
+                    <td>{Number.isFinite(e.se) ? e.se : 'Not reported'}</td>
+                    <td>{e.unit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+      {means.length > 0 && (
+        <section className="observation-panel">
+          <h3>Observed and estimated counterfactual means</h3>
+          <p>
+            Values remain in their reported units; this does not turn means into
+            causal effects.
+          </p>
+          <div className="atlas-comparison-table" role="region" tabIndex={0}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Measure</th>
+                  <th>Follow-up</th>
+                  <th>Actual</th>
+                  <th>Estimated counterfactual</th>
+                  <th>Unit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {means.map((m) => (
+                  <tr key={m.id}>
+                    <th scope="row">{m.measure}</th>
+                    <td>{m.followup}</td>
+                    <td>{m.actual}</td>
+                    <td>{m.estimated}</td>
+                    <td>{m.unit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+      {pairs.length > 0 && (
+        <section className="observation-panel">
+          <h3>Paired observed group means</h3>
+          <p>
+            Paired by published outcome, population, follow-up and unit; these
+            are descriptive group means.
+          </p>
+          <div className="atlas-comparison-table" role="region" tabIndex={0}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Outcome</th>
+                  <th>Follow-up</th>
+                  <th>Group 1</th>
+                  <th>Group 2</th>
+                  <th>Unit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pairs.map((p: any) => (
+                  <tr key={p[0].row.id}>
+                    <th scope="row">{p[0].measure}</th>
+                    <td>{p[0].followup}</td>
+                    <td>{p[0].value}</td>
+                    <td>{p[1].value}</td>
+                    <td>{p[0].unit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+      {scenarios.length > 0 && (
+        <section className="observation-panel">
+          <h3>Published economic scenarios</h3>
+          <p>Source-modelled scenarios; not a cross-study ranking.</p>
+          <div className="atlas-comparison-table" role="region" tabIndex={0}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Value</th>
+                  <th>Discount rate</th>
+                  <th>Tax deadweight loss</th>
+                  <th>Crime valuation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {scenarios.map((s: any) => (
+                  <tr key={s.id}>
+                    <th scope="row">{s.kind}</th>
+                    <td>{s.value}</td>
+                    <td>{s.discountRate ?? 'Not stated'}</td>
+                    <td>{s.deadweightLoss ?? 'Not stated'}</td>
+                    <td>{s.valuation ?? 'Not stated'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+    </>
+  );
 }

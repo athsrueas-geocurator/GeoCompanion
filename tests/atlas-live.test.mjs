@@ -73,11 +73,18 @@ test('atlas preserves pagination and merges IDs, filters structured facets', () 
 });
 test('atlas categories are structured, include unclassified rows, and never rely on names', () => {
   const p = payload();
-  p.data.entitiesConnection.nodes[0].relations.nodes.push({ typeId: P.category, toEntityId: 'd'.repeat(32), toEntity: { name: 'Category', spaceIds: [] } });
+  p.data.entitiesConnection.nodes[0].relations.nodes.push({
+    typeId: P.category,
+    toEntityId: 'd'.repeat(32),
+    toEntity: { name: 'Category', spaceIds: [] },
+  });
   const categorized = parsePage(p).rows;
   assert.equal(filterRows(categorized, '', '', '', 'd'.repeat(32)).length, 1);
   assert.equal(filterRows(categorized, '', '', '', 'unclassified').length, 0);
-  assert.equal(filterRows(parsePage(payload()).rows, '', '', '', 'unclassified').length, 1);
+  assert.equal(
+    filterRows(parsePage(payload()).rows, '', '', '', 'unclassified').length,
+    1,
+  );
 });
 test('questions use scoped nonfactual property, evidence uses exact identifier', () => {
   assert.equal(modeFilter('questions').values.some.boolean.is, false);
