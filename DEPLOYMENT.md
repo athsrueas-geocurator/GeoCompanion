@@ -1,5 +1,10 @@
 # Deployment
 
+
+## Frontend verification - version 0.3.3
+
+Feature deployment `c393ceab` completed at `2026-09-14T19:52:36.711946Z`; metadata upload `dc79e10c`. Source `10fbdce`. Production HTTPS 200 serves `index-DLkGKej0.js`; the live browser renders shared controls and the Indy pilot. Local browser verified layer toggling, selection and education search from 12 locations to Chicago, with 375px client/scroll widths. All 76 tests, build and formatting pass. Area/category/offline phases remain planned; no Geo, Worker or VM changes.
+
 ## Current frontend verification — version 0.3.2
 
 Feature deployment `8933d4a0` completed at `2026-09-14T19:41:48.352672Z`; metadata-only deployment `4f520471` published release history. Source commit `45ad8c7`. Production HTTPS returned 200 with `index-hiHZLvTF.js`, and a production browser rendered the Outreach Near Eastside service from Geo, its official source link and public-stop map. Local search removed/restored the service; the narrow layout measured 375px client and scroll widths, with no horizontal overflow. All 74 tests, formatting and production build pass. Weekly/food filtering remains unavailable pending published verification fields. See [live pilot and publisher queue](docs/OUTREACH_LIVE.md). No Geo write, Worker or VM change occurred.
