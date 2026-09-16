@@ -1,4 +1,5 @@
 const AVATAR = '1155befffad549b7a2e0da4777b8792c',
+  COVER = '34f535072e6b42c5a84443981a77cfa2',
   URL_PROPERTY = '8a743832c0944a62b6650c3cc2f9c7bc';
 export function iconUrl(value) {
   if (typeof value !== 'string') return null;
@@ -9,14 +10,22 @@ export function iconUrl(value) {
 }
 export function iconQuery(spaceId) {
   if (!/^[a-f0-9]{32}$/.test(spaceId)) throw Error('Invalid space');
-  return `{spaces(first:1,filter:{id:{is:"${spaceId}"}}){page{relations(first:2,filter:{spaceId:{is:"${spaceId}"},typeId:{is:"${AVATAR}"}}){nodes{toEntity{values(first:2,filter:{spaceId:{is:"${spaceId}"},propertyId:{is:"${URL_PROPERTY}"}}){nodes{text}pageInfo{hasNextPage}}}}pageInfo{hasNextPage}}}}}`;
+  const field = (alias, type) =>
+    `${alias}:relations(first:2,filter:{spaceId:{is:"${spaceId}"},typeId:{is:"${type}"}}){nodes{toEntity{values(first:2,filter:{spaceId:{is:"${spaceId}"},propertyId:{is:"${URL_PROPERTY}"}}){nodes{text}pageInfo{hasNextPage}}}}pageInfo{hasNextPage}}`;
+  return `{spaces(first:1,filter:{id:{is:"${spaceId}"}}){page{${field('relations', AVATAR)} ${field('cover', COVER)}}}}`;
 }
 export function extractIcon(payload) {
   if (payload.errors?.length) throw Error('Icon unavailable');
-  const relations = payload.data?.spaces?.[0]?.page?.relations;
+  const page = payload.data?.spaces?.[0]?.page;
+  let relations = page?.relations;
   if (!relations || relations.pageInfo?.hasNextPage)
     throw Error('Incomplete icon');
-  if (!relations.nodes.length) return null;
+  if (!relations.nodes.length) {
+    relations = page.cover;
+    if (!relations) return null;
+    if (relations.pageInfo?.hasNextPage) throw Error('Incomplete cover');
+    if (!relations.nodes.length) return null;
+  }
   if (relations.nodes.length !== 1) throw Error('Conflicting icons');
   const values = relations.nodes[0].toEntity?.values;
   if (values?.pageInfo?.hasNextPage || values?.nodes?.length !== 1)

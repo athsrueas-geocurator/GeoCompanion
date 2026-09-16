@@ -1,8 +1,7 @@
 {
-  "title": "Space-aware app icons and shareable graph views",
+  "title": "Space covers as app icons",
   "changes": [
-    "App icons follow the leading space in their loaded data, using its live Geo avatar.",
-    "People and Research debates open with an initial education graph.",
-    "Share links to a chosen space and a focus node in the loaded network."
+    "Spaces without an avatar now use their Geo cover image, cropped into a beveled square.",
+    "The same icon treatment appears on app cards, workspace icons and featured-space buttons."
   ]
 }
