@@ -24,6 +24,7 @@ export default function ForceApplet({
     [images, setImages] = useState(value.imageLoading === 'automatic'),
     [error, setError] = useState(''),
     [imageStatus, setImageStatus] = useState(''),
+    [showDetails, setShowDetails] = useState(true),
     [active, setActive] = useState('');
   const flags = useRef({ paused, motion, labels, images, reduced, spacing });
   flags.current = { paused, motion, labels, images, reduced, spacing };
@@ -348,6 +349,14 @@ export default function ForceApplet({
           <summary>View controls</summary>
           <div className="force-options-body">
             <label>
+              <input
+                type="checkbox"
+                checked={showDetails}
+                onChange={(e) => setShowDetails(e.target.checked)}
+              />{' '}
+              Show entity details
+            </label>
+            <label>
               Highlight node
               <select
                 value={active}
@@ -431,7 +440,7 @@ export default function ForceApplet({
           current?.label ||
           'Hover or tap to highlight neighbors. Drag to pin. Scroll or pinch to zoom.'}
       </div>
-      {current && (
+      {showDetails && current && (
         <EntityPopup
           node={current}
           onClose={() => {

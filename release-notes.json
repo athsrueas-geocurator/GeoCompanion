@@ -1,8 +1,7 @@
 {
-  "title": "Working fullscreen and live entity detail tables",
+  "title": "Toggle graph detail tables",
   "changes": [
-    "The network explorer now enters true fullscreen using a supported container.",
-    "Hover over a node for its published properties and relationships; click or select to keep it open.",
-    "Entity details load on demand and reuse the browser cache."
+    "Show or hide entity detail tables from View controls while the graph stays open.",
+    "Neighborhood highlighting stays active when tables are hidden."
   ]
 }
