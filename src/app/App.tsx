@@ -1,7 +1,8 @@
 import SpaceIcon from '../shared/branding/SpaceIcon';
 import PreferenceInfo from '../shared/preferences/ReleaseNotes';
 import Brand from '../shared/branding/Brand';
-import { Mark } from '../shared/branding/Brand';
+import { APPS } from './apps.mjs';
+import { rememberedAppSpace } from '../shared/branding/app-space.mjs';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 
 import { parseRoute } from './routes.mjs';
@@ -42,40 +43,11 @@ function Home() {
           Explore a collection with the tools built for it.
         </p>
         <div className="app-grid">
-          {[
-            {
-              id: 'dac259bad48a11adf97fe36857d85206',
-              href: '#/education/dashboards',
-              title: 'Education',
-              text: 'Evidence, dashboards & curation',
-            },
-            {
-              id: 'f24e3bbd26304474b7e0c2a0877f4bfe',
-              href: '#/outreach/directory',
-              title: 'Indianapolis outreach',
-              text: 'Services, schedules & map',
-            },
-            {
-              id: '',
-              href: '#/people',
-              title: 'People & contributions',
-              text: 'Explore authorship connections',
-            },
-            {
-              id: '',
-              href: '#/research-debates',
-              title: 'Research debates',
-              text: 'Claims, arguments & sources',
-            },
-          ].map((app) => (
+          {APPS.map((app) => (
             <a className="app-card" href={app.href} key={app.href}>
-              {app.id ? (
-                <SpaceIcon spaceId={app.id} />
-              ) : (
-                <span className="space-icon" aria-hidden="true">
-                  <Mark />
-                </span>
-              )}
+              <SpaceIcon
+                spaceId={rememberedAppSpace(app.key, app.defaultSpace)}
+              />
               <span className="app-card-copy">
                 <h2>{app.title}</h2>
                 <p>{app.text}</p>
@@ -165,7 +137,7 @@ export default function App() {
         ) : route.app === 'outreach' ? (
           <OutreachApp tab={route.tab} />
         ) : ['people', 'research-debates'].includes(route.app) ? (
-          <GraphApp app={route.app} />
+          <GraphApp key={hash} app={route.app} />
         ) : (
           <>
             <Header />

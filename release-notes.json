@@ -1,8 +1,8 @@
 {
-  "title": "More resilient graph discovery",
+  "title": "Space-aware app icons and shareable graph views",
   "changes": [
-    "AI and World affairs now resolve unnamed author identities through their Geo profile pages.",
-    "An unnamed entity no longer prevents its whole network from rendering.",
-    "Graph exports preserve the original identities and record where resolved labels came from."
+    "App icons follow the leading space in their loaded data, using its live Geo avatar.",
+    "People and Research debates open with an initial education graph.",
+    "Share links to a chosen space and a focus node in the loaded network."
   ]
 }

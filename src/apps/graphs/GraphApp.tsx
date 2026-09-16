@@ -7,9 +7,19 @@ import type { GraphData } from '../../shared/graph/types';
 import { readGraph } from './graph-data.mjs';
 import { geoReader } from '../../shared/geo/client.mjs';
 import { EDUCATION_SPACE, OUTREACH_SPACE } from '../../config/geo.mjs';
+import { APPS } from '../../app/apps.mjs';
+import {
+  graphContributions,
+  rememberAppSpace,
+} from '../../shared/branding/app-space.mjs';
 export default function GraphApp({ app }: { app: string }) {
-  const [scope, setScope] = useState(''),
-    [input, setInput] = useState(''),
+  const params = new URLSearchParams(location.hash.split('?')[1] || '');
+  const requested = params.get('space') || '';
+  const startingSpace = /^[a-f0-9]{32}$/.test(requested)
+    ? requested
+    : APPS.find((a) => a.key === app)!.defaultSpace;
+  const [scope, setScope] = useState(startingSpace),
+    [input, setInput] = useState(startingSpace),
     [graph, setGraph] = useState<GraphData | null>(null),
     [next, setNext] = useState<string | null>(null),
     [busy, setBusy] = useState(false),
@@ -19,6 +29,9 @@ export default function GraphApp({ app }: { app: string }) {
     lock = useRef(false),
     cursors = useRef(new Set<string>());
   const people = app === 'people';
+  useEffect(() => {
+    if (graph) rememberAppSpace(app, graphContributions(graph), graph.scope);
+  }, [app, graph]);
   async function load(after: string | null = null) {
     if (lock.current) return;
     lock.current = true;
@@ -170,7 +183,11 @@ export default function GraphApp({ app }: { app: string }) {
           </p>
         )}
         {graph?.nodes.length ? (
-          <GraphWorkbench key={`${app}:${scope}:${revision}`} graph={graph} />
+          <GraphWorkbench
+            key={`${app}:${scope}:${revision}`}
+            graph={graph}
+            initialFocus={params.get('focus') || ''}
+          />
         ) : scope && !busy && !error ? (
           <p>
             No supported {people ? 'authorship' : 'argument or source'}{' '}

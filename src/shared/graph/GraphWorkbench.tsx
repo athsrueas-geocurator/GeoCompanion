@@ -18,9 +18,19 @@ function save(text: string, format: string) {
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
-export default function GraphWorkbench({ graph }: { graph: GraphData }) {
+export default function GraphWorkbench({
+  graph,
+  initialFocus = '',
+}: {
+  graph: GraphData;
+  initialFocus?: string;
+}) {
   const { value } = usePreferences();
-  const [focus, setFocus] = useState(graph.nodes[0]?.id || ''),
+  const [focus, setFocus] = useState(
+      graph.nodes.some((n) => n.id === initialFocus)
+        ? initialFocus
+        : graph.nodes[0]?.id || '',
+    ),
     [neighborhood, setNeighborhood] = useState(true),
     [relation, setRelation] = useState(''),
     [search, setSearch] = useState(''),

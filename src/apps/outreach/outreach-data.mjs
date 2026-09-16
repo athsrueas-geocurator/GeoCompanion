@@ -1,4 +1,5 @@
 import { weeklyHours } from './schedule.mjs';
+import { rememberAppSpace } from '../../shared/branding/app-space.mjs';
 import { OUTREACH_SPACE as SPACE } from '../../config/geo.mjs';
 import { geoReader } from '../../shared/geo/client.mjs';
 import { completeEdges, REL } from '../../shared/geo/collections.mjs';
@@ -146,6 +147,11 @@ export async function loadDirectory(force = false) {
     ),
   ];
   const linked = new Map((await records(linkedIds)).map((r) => [r.id, r]));
+  rememberAppSpace(
+    'outreach',
+    [...services, ...linked.values()].map((r) => ({ id: r.id, space: SPACE })),
+    SPACE,
+  );
   return services.map((s) => ({
     ...s,
     providers: s.providers.map((id) => linked.get(id)).filter(Boolean),

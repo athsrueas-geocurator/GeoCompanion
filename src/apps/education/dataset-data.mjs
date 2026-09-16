@@ -150,6 +150,11 @@ export async function datasetCatalog() {
       )),
     );
   }
+  rememberAppSpace(
+    'education',
+    rows.map((r) => ({ id: r.id, space: SPACE })),
+    SPACE,
+  );
   const byId = new Map(rows.map((r) => [r.id, r]));
   return {
     rows: ids.map(
@@ -245,3 +250,4 @@ export function estimate(record) {
     return null;
   return { value: Number(value), se: Number(se), unit };
 }
+import { rememberAppSpace } from '../../shared/branding/app-space.mjs';
