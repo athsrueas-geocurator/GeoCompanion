@@ -2,6 +2,7 @@
 
 - [x] Replace hardcoded example spaces and raw entity gallery with dynamically discovered connection groups and space filters. Build, 26 tests and live Books-to-curation browser flow verified September 11; see CONNECTIONS.md.
 - [ ] Extend Connections to verified debate and outreach relationships when integration contracts are ready.
+- [ ] Add two standalone apps, People & Contributions and Research Debates, to the root selector following the [community proposal and delivery gates](docs/PEOPLE_AND_DEBATE_EXPLORE.md). Share readers and graph components, but give each its own cross-space scope and navigation. Verify authorship/identity/history contracts first; model current relevance as a separate attributable, contestable Geo claim, not an inferred popularity or expertise score.
 
 - [x] Remove visitor-facing pipeline/source banners and routine fetch diagnostics throughout education, curation, maps and preferences. September 11: build and browser inspection; count-method detail is optional. User-authored Geo text unchanged.
 
