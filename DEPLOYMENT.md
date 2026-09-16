@@ -1,5 +1,10 @@
 # Deployment
 
+## Frontend verification - version 0.4.5
+
+Feature 92ef5e6b completed at 2026-09-16T03:22:18.989704Z; metadata b214b213. Source a52d6da. Shared app registry requires a starting Geo scope; distinct scoped entity contributions choose the app icon source with deterministic ties and a session-only winner cache. Production links verified for Health/Eric Topol and Education/STAR, including three explicit Load more actions for the screenshot debate. Returning Home after changing People from Health to Education changed its fallback mark to the live Education avatar. All 93 tests, TypeScript/build, formatting and diff checks passed. Captured production screenshots for the Discord walkthrough. No Geo writes. See docs/APP_ICON_POLICY.md for scope and caching limits.
+
+
 ## Frontend verification - version 0.4.4
 
 Feature 94165829 completed at 2026-09-16T03:16:00.252669Z; metadata 918e3791. Source 9306de6. Unnamed graph endpoints resolve by exact Space identity to its public profile page, preserving canonical edge IDs and label provenance. Production HTTPS browser verified AI and World affairs load, Kevin can be selected and Open on Geo targets the verified profile page. All 91 tests, TypeScript/build, formatting and diff checks passed. Read-only evidence and publisher-derived discovery design: [diagnosis](docs/GRAPH_DISCOVERY_DIAGNOSIS.md). No Geo data was changed or proposal submitted.

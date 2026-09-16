@@ -11,3 +11,7 @@ Only the winning space ID and timestamp are cached in sessionStorage for up to 2
 Home always passes the resulting space to SpaceIcon, which reads its live scoped Avatar and immutable IPFS URL. The existing five-minute icon cache applies. Missing/conflicting/unavailable icons use the shared triangle; do not invent an avatar or take another space's icon merely to fill a hole. Space editors can publish an Avatar using the normal reviewed publisher workflow. A network error alone is not evidence of a missing avatar.
 
 New-app checklist: register a data scope; emit deduplicable scoped contributions; use the shared icon path; preserve bounded reads; test tie/empty behavior; document what dataset is counted. The registry test prevents adding an app without a starting space.
+
+## Publisher review queue — September 16 UTC
+
+Health (`52c7ae149838b6d47ce0f3b2a5974546`): a direct read using `iconQuery` in `src/shared/branding/space-icons.mjs` returned HTTP 200, no GraphQL errors, and zero page Avatar relations asserted in that space, with `hasNextPage:false`. This is absence in that exact scope, not an all-space image absence claim. Review the existing page's other scoped relationships before proposing a new Avatar; reuse an existing approved image if appropriate. The app keeps the triangle until a readable scoped Avatar is available. No image publication is authorized by this queue alone.
