@@ -1,6 +1,6 @@
 # Geo Companion
 
-Current implementation: [graph explorers](docs/GRAPH_EXPLORERS.md). React Flow is the default; force-graph is an optional lazy-loaded pop-out.
+Current implementation: [graph explorers](docs/GRAPH_EXPLORERS.md) and [larger graphs with opt-in caching](docs/GRAPH_CACHE_DESIGN.md). React Flow is the default; force-graph is an optional lazy-loaded pop-out.
 
 A lightweight, read-only companion to Geo, with separate education and Indianapolis outreach apps.
 

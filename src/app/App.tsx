@@ -1,3 +1,4 @@
+import { CacheButton } from '../shared/cache/CachePanel';
 import SpaceIcon from '../shared/branding/SpaceIcon';
 import PreferenceInfo from '../shared/preferences/ReleaseNotes';
 import Brand from '../shared/branding/Brand';
@@ -42,6 +43,7 @@ function Home() {
         <p className="app-intro">
           Explore a collection with the tools built for it.
         </p>
+        <CacheButton />
         <div className="app-grid">
           {APPS.map((app) => (
             <a className="app-card" href={app.href} key={app.href}>

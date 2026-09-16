@@ -1,7 +1,8 @@
 {
-  "title": "Toggle graph detail tables",
+  "title": "Larger networks and optional local caching",
   "changes": [
-    "Show or hide entity detail tables from View controls while the graph stays open.",
-    "Neighborhood highlighting stays active when tables are hidden."
+    "Explore all published relationships and expand incoming and outgoing connections.",
+    "Show up to 1,000 nodes in the network explorer and load more without closing it.",
+    "Use Cache data from Geo on the home page to prepare app data, inspect progress, or continue in the background. Local caching is optional."
   ]
 }

@@ -1,6 +1,12 @@
 export function filterGraph(
   graph,
-  { search = '', relation = '', focus = '', neighborhood = true } = {},
+  {
+    search = '',
+    relation = '',
+    focus = '',
+    neighborhood = true,
+    limit = 80,
+  } = {},
 ) {
   let edges = graph.edges.filter((e) => !relation || e.type === relation);
   let nodes = graph.nodes;
@@ -24,7 +30,41 @@ export function filterGraph(
     nodes = nodes.filter((n) => ids.has(n.id));
   }
   const total = nodes.length;
-  nodes = nodes.slice(0, 80);
+  // Keep connected neighborhoods together instead of arbitrary API insertion order.
+  const allowed = new Set(nodes.map((n) => n.id)),
+    adjacent = new Map();
+  for (const e of edges)
+    if (allowed.has(e.source) && allowed.has(e.target)) {
+      for (const [a, b] of [
+        [e.source, e.target],
+        [e.target, e.source],
+      ]) {
+        if (!adjacent.has(a)) adjacent.set(a, new Set());
+        adjacent.get(a).add(b);
+      }
+    }
+  const seeds = [...nodes].sort(
+    (a, b) =>
+      (adjacent.get(b.id)?.size || 0) - (adjacent.get(a.id)?.size || 0) ||
+      a.id.localeCompare(b.id),
+  );
+  if (allowed.has(focus)) seeds.unshift(nodes.find((n) => n.id === focus));
+  const ordered = [],
+    seen = new Set(),
+    byId = new Map(nodes.map((n) => [n.id, n]));
+  const cap = [80, 250, 500, 1000].includes(Number(limit)) ? Number(limit) : 80;
+  for (const seed of seeds) {
+    const queue = [seed.id];
+    for (let i = 0; i < queue.length && ordered.length < cap; i++) {
+      const id = queue[i];
+      if (seen.has(id)) continue;
+      seen.add(id);
+      ordered.push(byId.get(id));
+      for (const n of adjacent.get(id) || []) if (!seen.has(n)) queue.push(n);
+    }
+    if (ordered.length >= cap) break;
+  }
+  nodes = ordered;
   const ids = new Set(nodes.map((n) => n.id));
   edges = edges.filter((e) => ids.has(e.source) && ids.has(e.target));
   return {

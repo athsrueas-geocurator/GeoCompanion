@@ -25,8 +25,9 @@ export function parseGraph(data, space, kinds) {
   for (const e of p.nodes) {
     if (
       !uuid(e.id) ||
+      !uuid(e.typeId) ||
       e.spaceId !== space ||
-      !kinds.includes(e.typeId) ||
+      (kinds && !kinds.includes(e.typeId)) ||
       !uuid(e.fromEntity?.id) ||
       !uuid(e.toEntity?.id) ||
       e.type?.id !== e.typeId
@@ -111,14 +112,97 @@ export async function resolveGraphLabels(graph, reader = geoReader) {
 export async function readGraph(space, app, after = null) {
   if (!uuid(space)) throw Error('Enter a 32-character Geo space ID.');
   const kinds =
-    app === 'people'
-      ? [ROLES.authors, ROLES.author]
-      : [ROLES.supports, ROLES.opposes, ROLES.related, ROLES.source];
+    app === 'all'
+      ? null
+      : app === 'people'
+        ? [ROLES.authors, ROLES.author]
+        : [ROLES.supports, ROLES.opposes, ROLES.related, ROLES.source];
   const graph = await geoReader.read(
-    GRAPH_QUERY,
-    { space, kinds, after },
+    kinds ? GRAPH_QUERY : BROAD_QUERY,
+    kinds ? { space, kinds, after } : { space, after },
     (d) => parseGraph(d, space, kinds),
     'graph-slice-2',
   );
+  return resolveGraphLabels(graph);
+}
+
+export const BROAD_QUERY = GRAPH_QUERY.replace(',$kinds:[UUID!]!', '').replace(
+  ',typeId:{in:$kinds}',
+  '',
+);
+export function mergeGraphs(a, b) {
+  if (a && a.scope !== b.scope) throw Error('Cannot merge different scopes.');
+  return {
+    ...b,
+    partial: !!a?.partial || b.partial,
+    nodes: [
+      ...new Map(
+        [...(a?.nodes || []), ...b.nodes].map((n) => [n.id, n]),
+      ).values(),
+    ],
+    edges: [
+      ...new Map(
+        [...(a?.edges || []), ...b.edges].map((e) => [e.id, e]),
+      ).values(),
+    ],
+  };
+}
+/** @param {string} space @param {string} id @param {string} direction @param {string|null} after */
+export async function expandGraph(space, id, direction, after = null) {
+  if (
+    !uuid(space) ||
+    !uuid(id) ||
+    !['incoming', 'outgoing'].includes(direction)
+  )
+    throw Error('Invalid graph expansion.');
+  const field = direction === 'incoming' ? 'toEntityId' : 'fromEntityId';
+  const query = BROAD_QUERY.replace(
+    '$after:Cursor',
+    '$id:UUID!,$after:Cursor',
+  ).replace('spaceId:{is:$space}', `spaceId:{is:$space},${field}:{is:$id}`);
+  const graph = await geoReader.read(
+    query,
+    { space, id, after },
+    (d) => {
+      const g = parseGraph(d, space, null);
+      if (
+        g.edges.some(
+          (e) => (direction === 'incoming' ? e.target : e.source) !== id,
+        )
+      )
+        throw Error('Invalid neighborhood.');
+      return g;
+    },
+    'graph-neighbors-1',
+  );
+  return resolveGraphLabels(graph);
+}
+
+/** Reuse downloaded continuation pages without automatically extending the network crawl. */
+export async function readGraphWindow(space, app) {
+  let graph = await readGraph(space, app);
+  const kinds =
+    app === 'all'
+      ? null
+      : app === 'people'
+        ? [ROLES.authors, ROLES.author]
+        : [ROLES.supports, ROLES.opposes, ROLES.related, ROLES.source];
+  const seen = new Set();
+  for (let i = 0; i < 39 && graph.next; i++) {
+    const after = graph.next;
+    if (seen.has(after)) throw Error('Cached cursor repeated.');
+    seen.add(after);
+    const page = await geoReader.peek(
+      kinds ? GRAPH_QUERY : BROAD_QUERY,
+      kinds ? { space, kinds, after } : { space, after },
+      'graph-slice-2',
+    );
+    if (!page) break;
+    graph = {
+      ...mergeGraphs(graph, page),
+      partial: page.partial,
+      next: page.next,
+    };
+  }
   return resolveGraphLabels(graph);
 }

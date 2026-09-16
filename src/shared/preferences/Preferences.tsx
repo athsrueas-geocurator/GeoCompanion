@@ -1,3 +1,4 @@
+import { CacheButton } from '../cache/CachePanel';
 import Brand from '../branding/Brand';
 import {
   createContext,
@@ -228,6 +229,7 @@ export default function PreferencesPage() {
       </header>
       <main className="preferences-page">
         <PreferencesNav />
+        <CacheButton />
         <h1>Preferences & follows</h1>
         <p className="app-intro">
           Manage your reading preferences and followed profiles.

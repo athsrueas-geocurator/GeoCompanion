@@ -4,7 +4,12 @@ import Brand from '../../shared/branding/Brand';
 import { PreferencesLink } from '../../shared/preferences/Preferences';
 import GraphWorkbench from '../../shared/graph/GraphWorkbench';
 import type { GraphData } from '../../shared/graph/types';
-import { readGraph } from './graph-data.mjs';
+import {
+  readGraph,
+  readGraphWindow,
+  expandGraph,
+  mergeGraphs,
+} from './graph-data.mjs';
 import { geoReader } from '../../shared/geo/client.mjs';
 import { EDUCATION_SPACE, OUTREACH_SPACE } from '../../config/geo.mjs';
 import { APPS } from '../../app/apps.mjs';
@@ -24,7 +29,9 @@ export default function GraphApp({ app }: { app: string }) {
     [next, setNext] = useState<string | null>(null),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(''),
-    [revision, setRevision] = useState(0);
+    [revision, setRevision] = useState(0),
+    [mode, setMode] = useState(app);
+  const expansion = useRef(new Map<string, string | null>());
   const generation = useRef(0),
     lock = useRef(false),
     cursors = useRef(new Set<string>());
@@ -39,7 +46,9 @@ export default function GraphApp({ app }: { app: string }) {
     setBusy(true);
     setError('');
     try {
-      const page = await readGraph(scope, app, after);
+      const page = after
+        ? await readGraph(scope, mode, after)
+        : await readGraphWindow(scope, mode);
       if (epoch !== generation.current) return;
       if (page.next && (page.next === after || cursors.current.has(page.next)))
         throw Error('The relationship list did not advance.');
@@ -81,6 +90,7 @@ export default function GraphApp({ app }: { app: string }) {
     generation.current++;
     lock.current = false;
     cursors.current.clear();
+    expansion.current.clear();
     setGraph(null);
     setNext(null);
     if (scope) void load();
@@ -88,7 +98,36 @@ export default function GraphApp({ app }: { app: string }) {
       generation.current++;
       lock.current = false;
     };
-  }, [scope, app, revision]);
+  }, [scope, app, mode, revision]);
+  async function expand(id: string) {
+    if (lock.current || !graph || graph.edges.length >= 2000) return;
+    lock.current = true;
+    setBusy(true);
+    setError('');
+    const epoch = generation.current;
+    try {
+      for (const direction of ['outgoing', 'incoming']) {
+        const key = `${id}:${direction}`;
+        if (expansion.current.has(key) && expansion.current.get(key) === null)
+          continue;
+        const after = expansion.current.get(key) || null;
+        const page = await expandGraph(scope, id, direction, after);
+        if (epoch !== generation.current) return;
+        if (page.next && page.next === after)
+          throw Error('Neighborhood cursor did not advance.');
+        expansion.current.set(key, page.next);
+        setGraph((old) => mergeGraphs(old, page));
+      }
+    } catch (e) {
+      if (epoch === generation.current)
+        setError(e instanceof Error ? e.message : 'Expansion failed.');
+    } finally {
+      if (epoch === generation.current) {
+        lock.current = false;
+        setBusy(false);
+      }
+    }
+  }
   return (
     <div className="graph-app-shell">
       <header>
@@ -117,6 +156,15 @@ export default function GraphApp({ app }: { app: string }) {
             setScope(id);
           }}
         />
+        <label>
+          Connection scope{' '}
+          <select value={mode} onChange={(e) => setMode(e.target.value)}>
+            <option value={app}>
+              {people ? 'Authorship' : 'Arguments and sources'}
+            </option>
+            <option value="all">All published relationships</option>
+          </select>
+        </label>
         <h2 className="graph-scope-title">Other spaces</h2>
         <div className="graph-tools">
           <button
@@ -184,8 +232,21 @@ export default function GraphApp({ app }: { app: string }) {
         )}
         {graph?.nodes.length ? (
           <GraphWorkbench
-            key={`${app}:${scope}:${revision}`}
+            key={`${app}:${scope}:${mode}:${revision}`}
             graph={graph}
+            busy={busy}
+            onExpand={expand}
+            onLoadMore={
+              next && graph.edges.length < 2000
+                ? () => void load(next)
+                : undefined
+            }
+            status={
+              error ||
+              (graph.edges.length >= 2000
+                ? 'Session limit reached. Choose a focused neighborhood in a new view.'
+                : '')
+            }
             initialFocus={params.get('focus') || ''}
           />
         ) : scope && !busy && !error ? (
@@ -194,12 +255,12 @@ export default function GraphApp({ app }: { app: string }) {
             relationships found in this scope.
           </p>
         ) : null}
-        {next && graph && graph.edges.length < 200 && (
+        {next && graph && graph.edges.length < 2000 && (
           <button disabled={busy} onClick={() => void load(next)}>
             Load more relationships
           </button>
         )}
-        {next && graph && graph.edges.length >= 200 && (
+        {next && graph && graph.edges.length >= 2000 && (
           <p>
             Showing a partial network. Choose a narrower space to explore
             further.

@@ -343,3 +343,5 @@ Details and open decisions: [Ideas to explore](docs/EXPERIMENTS.md). Recording t
 - [ ] Extend shared maps with published service categories, verified polygons/lines, saved layer choices and offline snapshots according to MAP_LAYERS_PLAN.md.
 
 - [ ] Complete the broader people/history and relevance-claim contracts. The standalone graph apps have an initial authorship/argument reader and dual renderers; see [implemented scope and remaining work](docs/GRAPH_EXPLORERS.md).
+
+- [ ] Extend the bounded cache warmers to older atlas, curation, map and argument readers; see docs/GRAPH_CACHE_DESIGN.md. Add graph layer presets, durable job resume, explicit cross-space expansion and optional network-byte budgets.

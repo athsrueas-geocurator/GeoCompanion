@@ -63,3 +63,7 @@ The exact-ID scoped query reads 32 values and 20 outgoing relationships, retaini
 ### Table visibility — 0.4.8
 
 View controls → Show entity details toggles the popup without closing the explorer or changing the active neighborhood. Enabled initially for each opening. Hiding unmounts the table, cancels pending debounce work and ignores late responses; no new detail query is started while hidden. Re-enabling uses the selected node and shared cache. This is an applet-local control, not a persisted preference.
+
+## Larger networks and caching — 0.5.0
+
+The earlier 80-node force/200-edge loading limits are superseded by [the graph and cache contract](GRAPH_CACHE_DESIGN.md). Force views offer up to 1,000 nodes, all published relationship kinds, and incoming/outgoing expansion. Structured diagrams retain their smaller limit. The opt-in home-page cache pass primes the existing adapters and graph pages in browser storage.

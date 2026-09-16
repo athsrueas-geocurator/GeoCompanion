@@ -21,9 +21,17 @@ function save(text: string, format: string) {
 export default function GraphWorkbench({
   graph,
   initialFocus = '',
+  onExpand,
+  onLoadMore,
+  busy = false,
+  status = '',
 }: {
   graph: GraphData;
   initialFocus?: string;
+  onExpand?: (id: string) => void;
+  onLoadMore?: () => void;
+  busy?: boolean;
+  status?: string;
 }) {
   const { value } = usePreferences();
   const [focus, setFocus] = useState(
@@ -38,16 +46,21 @@ export default function GraphWorkbench({
     [open, setOpen] = useState(false),
     [drawer, setDrawer] = useState(false),
     [fullError, setFullError] = useState(''),
-    [fullscreen, setFullscreen] = useState(false);
+    [fullscreen, setFullscreen] = useState(false),
+    [limit, setLimit] = useState(500);
   const dialog = useRef<HTMLDialogElement>(null),
     fullTarget = useRef<HTMLDivElement>(null),
     opener = useRef<HTMLButtonElement>(null);
   const filters = useMemo(
-    () => ({ focus, neighborhood, relation, search }),
-    [focus, neighborhood, relation, search],
+    () => ({ focus, neighborhood, relation, search, limit: open ? limit : 80 }),
+    [focus, neighborhood, relation, search, open, limit],
   );
   const visible = useMemo(
     () => filterGraph(graph, filters) as GraphData,
+    [graph, filters],
+  );
+  const flowGraph = useMemo(
+    () => filterGraph(graph, { ...filters, limit: 80 }) as GraphData,
     [graph, filters],
   );
   useEffect(() => {
@@ -135,6 +148,32 @@ export default function GraphWorkbench({
       >
         Show loaded network
       </button>
+      {open && (
+        <label>
+          Visible nodes{' '}
+          <select
+            value={limit}
+            onChange={(e) => setLimit(Number(e.target.value))}
+          >
+            {[80, 250, 500, 1000].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+      {onLoadMore && (
+        <button disabled={busy} onClick={onLoadMore}>
+          {busy ? 'Loading…' : 'Load more relationships'}
+        </button>
+      )}
+      {onExpand && (
+        <button disabled={busy || !focus} onClick={() => onExpand(focus)}>
+          Expand focus: incoming + outgoing
+        </button>
+      )}
+      {status && <p role="status">{status}</p>}
       <button
         onClick={() => save(exportGraph(visible, 'json', filters), 'json')}
       >
@@ -200,7 +239,7 @@ export default function GraphWorkbench({
         {visible.partial ? ' · Partial network' : ''}
       </p>
       {visible.nodes.length ? (
-        <FlowView graph={visible} onSelect={setSelected} />
+        <FlowView graph={flowGraph} onSelect={setSelected} />
       ) : (
         <p>No nodes match these filters.</p>
       )}
@@ -279,7 +318,13 @@ export default function GraphWorkbench({
               <Suspense
                 fallback={<p role="status">Loading interactive explorer…</p>}
               >
-                <ForceApplet graph={visible} onSelect={setSelected} />
+                <ForceApplet
+                  graph={visible}
+                  onSelect={(id) => {
+                    setSelected(id);
+                    setFocus(id);
+                  }}
+                />
               </Suspense>
             </GraphErrorBoundary>
           </div>
