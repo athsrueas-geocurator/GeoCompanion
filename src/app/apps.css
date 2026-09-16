@@ -255,7 +255,7 @@
   width: 52px;
   height: 52px;
   flex: 0 0 52px;
-  border-radius: 12px;
+  border-radius: 20%;
   display: grid;
   place-items: center;
   background: var(--surface-soft);
