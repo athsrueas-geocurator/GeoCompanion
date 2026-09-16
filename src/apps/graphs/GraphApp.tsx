@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import FeaturedSpaces from './FeaturedSpaces';
 import Brand from '../../shared/branding/Brand';
 import { PreferencesLink } from '../../shared/preferences/Preferences';
 import GraphWorkbench from '../../shared/graph/GraphWorkbench';
@@ -76,105 +77,118 @@ export default function GraphApp({ app }: { app: string }) {
     };
   }, [scope, app, revision]);
   return (
-    <main className="graph-app">
+    <div className="graph-app-shell">
       <header>
         <Brand />
         <div className="header-actions">
           <PreferencesLink />
-          <a href="#/">All apps</a>
+          <a className="geo-link" href="#/">
+            All apps
+          </a>
         </div>
       </header>
-      <div className="eyebrow">
-        {people ? 'PEOPLE & CONTRIBUTIONS' : 'RESEARCH DEBATES'}
-      </div>
-      <h1>{people ? 'People behind the work.' : 'Follow the argument.'}</h1>
-      <p>
-        {people
-          ? 'Explore published authorship connections.'
-          : 'Isolate claims, supporting and opposing arguments, and their sources.'}
-      </p>
-      <div className="graph-tools">
-        <button
-          onClick={() => {
-            setInput(EDUCATION_SPACE);
-            setScope(EDUCATION_SPACE);
-          }}
-        >
-          Explore education
-        </button>
-        <button
-          onClick={() => {
-            setInput(OUTREACH_SPACE);
-            setScope(OUTREACH_SPACE);
-          }}
-        >
-          Explore Indianapolis outreach
-        </button>
-      </div>
-      <form
-        className="graph-scope"
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (!/^[a-f0-9]{32}$/i.test(input.trim())) {
-            setError('Enter a 32-character Geo space ID.');
-            return;
-          }
-          setScope(input.trim().toLowerCase());
-        }}
-      >
-        <label>
-          Geo space ID
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            maxLength={32}
-          />
-        </label>
-        <button>Explore space</button>
-        <button
-          type="button"
-          disabled={busy || !scope}
-          onClick={() => {
-            geoReader.invalidate();
-            setRevision((r) => r + 1);
-          }}
-        >
-          Refresh
-        </button>
-      </form>
-      {people && (
-        <p className="muted">
-          Authorship does not imply endorsement. Editing history and reputation
-          are not shown.
+      <main className="graph-app" id="app-main" tabIndex={-1}>
+        <div className="eyebrow">
+          {people ? 'PEOPLE & CONTRIBUTIONS' : 'RESEARCH DEBATES'}
+        </div>
+        <h1>{people ? 'People behind the work.' : 'Follow the argument.'}</h1>
+        <p className="app-intro">
+          {people
+            ? 'Explore published authorship connections.'
+            : 'Isolate claims, supporting and opposing arguments, and their sources.'}
         </p>
-      )}
-      {busy && <p role="status">Loading relationships…</p>}
-      {error && (
-        <p role="alert">
-          {error}{' '}
-          <button disabled={busy} onClick={() => void load(next)}>
-            Retry
+        <FeaturedSpaces
+          scope={scope}
+          onSelect={(id) => {
+            setInput(id);
+            setScope(id);
+          }}
+        />
+        <h2 className="graph-scope-title">Other spaces</h2>
+        <div className="graph-tools">
+          <button
+            onClick={() => {
+              setInput(EDUCATION_SPACE);
+              setScope(EDUCATION_SPACE);
+            }}
+          >
+            Explore education
           </button>
-        </p>
-      )}
-      {graph?.nodes.length ? (
-        <GraphWorkbench key={`${app}:${scope}:${revision}`} graph={graph} />
-      ) : scope && !busy && !error ? (
-        <p>
-          No supported {people ? 'authorship' : 'argument or source'}{' '}
-          relationships found in this scope.
-        </p>
-      ) : null}
-      {next && graph && graph.edges.length < 200 && (
-        <button disabled={busy} onClick={() => void load(next)}>
-          Load more relationships
-        </button>
-      )}
-      {next && graph && graph.edges.length >= 200 && (
-        <p>
-          Showing a partial network. Choose a narrower space to explore further.
-        </p>
-      )}
-    </main>
+          <button
+            onClick={() => {
+              setInput(OUTREACH_SPACE);
+              setScope(OUTREACH_SPACE);
+            }}
+          >
+            Explore Indianapolis outreach
+          </button>
+        </div>
+        <form
+          className="graph-scope"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!/^[a-f0-9]{32}$/i.test(input.trim())) {
+              setError('Enter a 32-character Geo space ID.');
+              return;
+            }
+            setScope(input.trim().toLowerCase());
+          }}
+        >
+          <label>
+            Geo space ID
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              maxLength={32}
+            />
+          </label>
+          <button>Explore space</button>
+          <button
+            type="button"
+            disabled={busy || !scope}
+            onClick={() => {
+              geoReader.invalidate();
+              setRevision((r) => r + 1);
+            }}
+          >
+            Refresh
+          </button>
+        </form>
+        {people && (
+          <p className="muted">
+            Authorship does not imply endorsement. Editing history and
+            reputation are not shown.
+          </p>
+        )}
+        {busy && <p role="status">Loading relationships…</p>}
+        {error && (
+          <p role="alert">
+            {error}{' '}
+            <button disabled={busy} onClick={() => void load(next)}>
+              Retry
+            </button>
+          </p>
+        )}
+        {graph?.nodes.length ? (
+          <GraphWorkbench key={`${app}:${scope}:${revision}`} graph={graph} />
+        ) : scope && !busy && !error ? (
+          <p>
+            No supported {people ? 'authorship' : 'argument or source'}{' '}
+            relationships found in this scope.
+          </p>
+        ) : null}
+        {next && graph && graph.edges.length < 200 && (
+          <button disabled={busy} onClick={() => void load(next)}>
+            Load more relationships
+          </button>
+        )}
+        {next && graph && graph.edges.length >= 200 && (
+          <p>
+            Showing a partial network. Choose a narrower space to explore
+            further.
+          </p>
+        )}
+      </main>
+    </div>
   );
 }

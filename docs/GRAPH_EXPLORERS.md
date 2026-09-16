@@ -25,3 +25,15 @@ JSON and CSV export only the visible semantic nodes/edges, scope and partial sta
 - Publisher reconciliation should check known IDs and scoped collections before calling any missing feature a missing publication. Do not duplicate already published authors or claims.
 
 Tests cover identity-preserving filtering, invalid scopes/cursors, export safety and preference migration. Browser verification and actual deployment evidence belong in DEPLOYMENT.md.
+
+## Featured pins and shell correction — 0.4.1
+
+Both graph apps now have the same full-width header outside main as the other apps, a 48px maximum/32px mobile heading, shared intro spacing, and 16px graph inputs. The old padded main wrapped the header and inherited a smaller heading rule. Pin icons have an explicit 28px flex basis so the global 52px icon basis cannot distort them.
+
+Featured choices are queried, not enumerated. Geo's [featured-space reader](https://github.com/geobrowser/geogenesis/blob/master/apps/web/core/io/subgraph/fetch-featured-spaces.ts) uses a topic Tags relation, assigned in Root, to the Featured entity. Verified constants: Root `a19c345ab9866679b001d7d2138d88a1`, Tags `257090341ba5406f94e4d4af90042fba`, Featured `ec3086a54ddf43d8aaefd6cc6e1b0556`. This is not a boolean on Space. Live introspection confirmed Entity.spacesByTopicIdConnection and the relation connection.
+
+`src/shared/geo/featured-spaces.mjs` pages only those Root-assigned tags, follows each topic's claiming spaces, excludes tagged articles without a claiming space and Root itself, deduplicates by ID, and sorts by name. It does not clone Geo's hardcoded space-ranking table or crawl thousands of subtopics. Consequently it is a list of all spaces attached to Root-featured topics, not a promise of identical ordering/filtering to Geo's personalized sidebar. If multiple spaces claim one featured topic they are all available here. Names and avatars are read live through existing readers; no memberships, account pins or Geo content are changed.
+
+The September 16 UTC read returned 17 tag relations, six with claiming spaces: AI, Crypto, Health, Relationships, US Politics, World affairs. Both cursors completed. These observed names are evidence only and are not application configuration. The shared two-minute cache deduplicates requests, and failed/incomplete reads display a retry instead of a false empty list. Limits: 10 pages of 50 tags and 20 claiming spaces per topic; overflow is an explicit error. Geo edits take effect on the next uncached read.
+
+Verification: direct cold-load People and Health pin selection rendered live authorship data; mobile document and scroll widths both 375px, heading 32px, graph input 16px. Desktop header fills the 1265px document, brand remains 24.8px and heading 48px. Tests cover tag attribution, excluding non-space content, truncation, pagination and duplicate IDs. See DEPLOYMENT.md for hosting evidence.

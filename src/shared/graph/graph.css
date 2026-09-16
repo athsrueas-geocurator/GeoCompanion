@@ -15,7 +15,7 @@
   display: flex;
   gap: 6px;
   flex-direction: column;
-  font-size: 13px;
+  font-size: 0.875rem;
   max-width: 100%;
 }
 .graph-tools label:has(input[type='checkbox']) {
@@ -148,10 +148,7 @@
 .graph-app {
   max-width: 1400px;
   margin: auto;
-  padding: 32px;
-}
-.graph-app header {
-  padding: 0 0 24px;
+  padding: 48px 32px 100px;
 }
 .graph-scope {
   display: flex;
@@ -171,7 +168,7 @@
     flex-basis: 100%;
   }
   .graph-app {
-    padding: 20px 14px;
+    padding: 28px 16px 100px;
   }
   .graph-flow {
     height: 420px;
@@ -206,8 +203,73 @@
   box-sizing: border-box;
 }
 .graph-app h1 {
-  margin: 24px 0 12px;
+  margin: 12px 0 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.04em;
+  line-height: 1.15;
 }
 .graph-app > p {
   margin-bottom: 20px;
+}
+
+.graph-app .eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+}
+.graph-scope {
+  margin: 20px 0;
+}
+.graph-scope-title {
+  margin-top: 28px;
+}
+.featured-spaces {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.featured-spaces h2 {
+  margin-bottom: 16px;
+}
+.featured-space-pins {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.featured-space-pins button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  font-size: 1rem;
+  text-align: left;
+}
+.featured-space-pins button[aria-pressed='true'] {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.featured-space-pins .space-icon,
+.featured-space-pins .space-icon img {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+}
+.graph-tools label:not(:has(input[type='checkbox'])) {
+  flex: 0 1 290px;
+}
+.graph-tools input,
+.graph-tools select {
+  font-size: 1rem;
+}
+@media (max-width: 600px) {
+  .featured-spaces {
+    padding: 16px;
+  }
+  .featured-space-pins button {
+    flex: 1 1 140px;
+  }
+  .graph-tools label:not(:has(input[type='checkbox'])) {
+    flex-basis: 100%;
+  }
 }

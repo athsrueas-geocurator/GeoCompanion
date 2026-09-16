@@ -1,8 +1,7 @@
 {
-  "title": "Explore people and research relationships",
+  "title": "Consistent graph layouts and featured spaces",
   "changes": [
-    "New People & Contributions and Research Debates apps with readable, focused relationship diagrams.",
-    "Enable the optional force-graph explorer in Preferences for fullscreen exploration, pinning and layout controls.",
-    "Filter and export visible relationships as JSON or CSV, or save a force-graph image."
+    "Keep graph app headers, headings and controls consistent with the rest of Companion.",
+    "Explore pinned spaces discovered from Geo’s Featured tag in both graph apps."
   ]
 }
