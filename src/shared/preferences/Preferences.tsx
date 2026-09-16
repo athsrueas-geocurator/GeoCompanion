@@ -239,49 +239,80 @@ export default function PreferencesPage() {
         )}
         <section className="pref-section">
           <h2>Reading preferences</h2>
-          <label>
-            Text size
-            <select
-              value={value.textSize}
-              onChange={(e) =>
-                update((p) => ({ ...p, textSize: e.target.value }))
+          <fieldset className="preference-option">
+            <legend>Text size</legend>
+            <div className="preference-choices">
+              {(
+                [
+                  ['standard', 'Standard'],
+                  ['large', 'Larger'],
+                ] as const
+              ).map(([id, name]) => (
+                <label key={id} className="preference-choice">
+                  <input
+                    type="radio"
+                    name="text-size"
+                    value={id}
+                    checked={value.textSize === id}
+                    onChange={() => update((p) => ({ ...p, textSize: id }))}
+                  />
+                  <span>{name}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset
+            className="preference-option"
+            aria-describedby="image-loading-help"
+          >
+            <legend>Content images</legend>
+            <div className="preference-choices">
+              {(
+                [
+                  ['automatic', 'Automatic'],
+                  ['ask', 'Ask first'],
+                ] as const
+              ).map(([id, name]) => (
+                <label key={id} className="preference-choice">
+                  <input
+                    type="radio"
+                    name="image-loading"
+                    value={id}
+                    checked={value.imageLoading === id}
+                    onChange={() => update((p) => ({ ...p, imageLoading: id }))}
+                  />
+                  <span>{name}</span>
+                </label>
+              ))}
+            </div>
+            <p id="image-loading-help" className="pref-help">
+              Ask first saves data by letting you load images individually.
+            </p>
+          </fieldset>
+          <div className="preference-option preference-switch-row">
+            <div>
+              <h3 id="force-graph-label">Force-graph explorer</h3>
+              <p id="force-graph-help" className="pref-help">
+                Interactive networks with fullscreen and export tools.
+              </p>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={value.forceGraph}
+              aria-labelledby="force-graph-label"
+              aria-describedby="force-graph-help"
+              className="preference-switch"
+              onClick={() =>
+                update((p) => ({ ...p, forceGraph: !p.forceGraph }))
               }
             >
-              <option value="standard">Standard</option>
-              <option value="large">Larger</option>
-            </select>
-          </label>
-          <label>
-            Content images
-            <select
-              aria-describedby="image-loading-help"
-              value={value.imageLoading}
-              onChange={(e) =>
-                update((p) => ({ ...p, imageLoading: e.target.value }))
-              }
-            >
-              <option value="automatic">Load automatically</option>
-              <option value="ask">Only when I choose</option>
-            </select>
-          </label>
-          <p id="image-loading-help">
-            Choose “Only when I choose” to save data. Each image will have a
-            Show image button.
-          </p>
-          <label>
-            <input
-              type="checkbox"
-              checked={value.forceGraph}
-              onChange={(e) =>
-                update((p) => ({ ...p, forceGraph: e.target.checked }))
-              }
-            />
-            Enable optional force-graph explorer
-          </label>
-          <p>
-            Open interactive networks in a pop-out with fullscreen and export
-            tools.
-          </p>
+              <span className="switch-track" aria-hidden="true">
+                <span />
+              </span>
+              <span aria-hidden="true">{value.forceGraph ? 'On' : 'Off'}</span>
+            </button>
+          </div>
         </section>
         <section className="pref-section">
           <h2>Search for a Geo user</h2>

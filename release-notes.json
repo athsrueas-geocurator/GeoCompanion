@@ -1,7 +1,7 @@
 {
-  "title": "Consistent graph layouts and featured spaces",
+  "title": "Clearer preference controls",
   "changes": [
-    "Keep graph app headers, headings and controls consistent with the rest of Companion.",
-    "Explore pinned spaces discovered from Geo’s Featured tag in both graph apps."
+    "Choose text size and image loading with clearly grouped options.",
+    "Turn the force-graph explorer on or off with a labeled switch."
   ]
 }

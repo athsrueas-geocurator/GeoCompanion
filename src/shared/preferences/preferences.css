@@ -49,6 +49,108 @@
   color: var(--muted);
   font-size: 0.875rem;
 }
+.pref-section .preference-option {
+  min-width: 0;
+  margin: 24px 0 0;
+  padding: 18px;
+  border: 1px solid var(--control-border);
+  border-radius: 12px;
+  background: var(--page);
+}
+.preference-option legend {
+  padding: 0 6px;
+  font-weight: 650;
+  font-size: 1rem;
+}
+.preference-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.pref-section label.preference-choice {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--control-border);
+  border-radius: 8px;
+  min-height: 48px;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  background: var(--surface);
+}
+.preference-choice:has(input:checked) {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  font-weight: 650;
+}
+.pref-section .preference-choice input {
+  width: 18px;
+  height: 18px;
+  min-height: 18px;
+  flex: 0 0 18px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--accent);
+}
+.preference-option .pref-help {
+  margin: 12px 0 0;
+  line-height: 1.5;
+}
+.preference-switch-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+}
+.preference-switch-row > div {
+  min-width: 0;
+}
+.preference-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  min-height: 48px;
+  padding: 8px;
+}
+.switch-track {
+  display: inline-flex;
+  align-items: center;
+  width: 42px;
+  height: 26px;
+  padding: 3px;
+  border: 1px solid var(--control-border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+.switch-track > span {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--text);
+}
+.preference-switch[aria-checked='true'] .switch-track {
+  background: var(--accent);
+  justify-content: flex-end;
+}
+.preference-switch[aria-checked='true'] .switch-track > span {
+  background: var(--page);
+}
+@media (max-width: 420px) {
+  .pref-section .preference-option {
+    padding: 14px;
+  }
+  .preference-switch-row {
+    flex-wrap: wrap;
+  }
+  .preference-switch-row > div {
+    flex: 1 1 170px;
+  }
+  .pref-section label.preference-choice {
+    padding: 10px 8px;
+    gap: 6px;
+  }
+}
 .pref-warning {
   background: var(--warning-bg);
   color: var(--warning-text);
