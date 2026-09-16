@@ -1,8 +1,7 @@
 {
-  "title": "Larger networks and optional local caching",
+  "title": "Keep saved Geo data and update on return",
   "changes": [
-    "Explore all published relationships and expand incoming and outgoing connections.",
-    "Show up to 1,000 nodes in the network explorer and load more without closing it.",
-    "Use Cache data from Geo on the home page to prepare app data, inspect progress, or continue in the background. Local caching is optional."
+    "Saved Geo data stays until you clear it; it no longer expires or gets evicted to make room.",
+    "Enabled caching updates automatically on return visits. Turning it off pauses updates without deleting saved data."
   ]
 }

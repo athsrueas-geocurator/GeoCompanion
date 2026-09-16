@@ -1,16 +1,16 @@
 # Larger graph exploration and opt-in cache
 
-## Implemented contract (0.5.0)
+## Implemented contract (0.5.1)
 
-The home page and Preferences offer **Cache data from Geo**. It is off by default. Enabling storage does not start a crawl: Start caching is a separate deliberate action. The coordinator is mounted above app routes, so Continue in background preserves the running job during navigation. It requires the browser tab to remain open; it is not a server or service-worker job.
+The home page and Preferences offer **Cache data from Geo**. It is off by default. Enabling storage starts a bounded update pass. Enabled visits automatically start another pass; returning to a visible tab after 30 minutes also checks again. A running pass is never duplicated. The coordinator is mounted above app routes, so Continue in background preserves the running job during navigation. It requires the browser tab to remain open; it is not a server or service-worker job.
 
 The progress denominator grows as discovery adds tasks. Progress measures completed tasks, not bytes or an invented percentage of all Geo. Distinct discovered entity IDs are counted separately (currently graph/catalog/result tasks). The expandable activity log includes public GraphQL query text, cache hits, task completion, and errors. Errors do not become successful empty results. Stop takes effect after the current adapter task; a task may contain several requests. Re-running reconstructs the queue and reuses fresh cache entries.
 
 ### Reader and storage
 
-`src/shared/geo/client.mjs` continues to validate responses through feature parsers, share identical requests, and schedule at most four concurrent requests. With opt-in enabled, validated results are stored in IndexedDB by endpoint, parser version, exact query, and variables. Fresh reads are reused for 30 minutes. Memory-only caching remains the default. Detail/profile/image reader versions are excluded from persistence. Images, tiles, credentials and wallets are not downloaded by the warmer.
+`src/shared/geo/client.mjs` continues to validate responses through feature parsers, share identical requests, and schedule at most four concurrent requests. With opt-in enabled, validated results are stored in IndexedDB by endpoint, parser version, exact query, and variables. Saved records have no age-based deletion. Ordinary reads reuse records checked within 30 minutes; visit/manual update passes bypass stale snapshots and replace successfully validated query results. Failed refreshes leave saved records intact. Memory-only caching remains the default. Detail/profile/image reader versions are excluded from persistence. Images, tiles, credentials and wallets are not downloaded by the warmer.
 
-`local-cache.mjs` serializes writes and expires/evicts old entries to enforce a 16 MiB estimated serialized-data budget. This is a storage limit, not a network-byte quota or browser disk-size guarantee. Storage failures fall back to ordinary reads and are reported to the active job. Refresh invalidates memory and persistent data; generations prevent superseded requests from repopulating the cache. Disabling storage stops the job at its task boundary and clears saved entries. Browser eviction remains possible. This is not a complete offline app snapshot.
+`local-cache.mjs` serializes writes and enforces a 16 MiB estimated serialized-data budget without evicting saved entries. If a write would exceed the budget, it reports a storage warning and retains existing records. This is a storage limit, not a network-byte quota or browser disk-size guarantee. Storage failures fall back to ordinary reads and are reported to the active job. Refresh invalidates memory and bypasses previously saved results without deleting them; generations prevent superseded requests from overwriting fresh data. Disabling storage stops automatic jobs at their task boundary and pauses cache reads/writes, retaining saved entries. Only Clear saved cache explicitly deletes them. Browser eviction remains possible. This is not a complete offline app snapshot.
 
 ### App warmers
 
@@ -35,3 +35,7 @@ The force explorer offers 80, 250, 500 or 1,000 visible nodes (500 default), ind
 Automated tests exercise growing queues, failure continuation, stop boundaries, graph size choices, connected truncation, deduplication and scope rejection, alongside existing transport/cache tests. Browser checks cover the opt-in controls, queue progress, navigation, persistent reuse, graph expansion and force controls. See DEPLOYMENT.md for release evidence.
 
 Remaining work: optional layer presets that hide schema/layout relations, explicit multi-space traversal, a durable job resume after closing the tab, byte-budgeted network downloads, and migrating older per-feature caches. A larger graph still describes the loaded slice, not all of Geo; never fill absent edges by guessing from similar names.
+
+### Retention is not freshness
+
+Browser storage may still be cleared by the browser or user. Stored query results are replaced on successful revalidation, so removed memberships disappear from refreshed views. Unused old query keys remain until explicit clearing; storage-full warnings make this visible rather than silently deleting records. Old retained records are not treated as fresh live data after their freshness window.

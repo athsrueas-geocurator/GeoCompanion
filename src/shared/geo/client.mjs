@@ -1,9 +1,4 @@
-import {
-  storedRead,
-  storeRead,
-  clearLocalCache,
-  cacheEnabled,
-} from './local-cache.mjs';
+import { storedRead, storeRead, cacheEnabled } from './local-cache.mjs';
 const observers = new Set();
 export function observeReads(fn) {
   observers.add(fn);
@@ -23,7 +18,7 @@ export function createReader(
   const cache = new Map(),
     pending = new Map(),
     queue = [];
-  let clearing = Promise.resolve();
+  let minStoredAt = 0;
   let active = 0,
     generation = 0,
     bytes = 0;
@@ -40,7 +35,7 @@ export function createReader(
   }
   function invalidate() {
     generation++;
-    if (cacheEnabled()) clearing = clearLocalCache().catch(() => {});
+    minStoredAt = now();
     cache.clear();
     pending.clear();
     bytes = 0;
@@ -73,8 +68,7 @@ export function createReader(
         !/detail|profile|image/i.test(version) && cacheEnabled();
       if (persistent)
         try {
-          await clearing;
-          const saved = await storedRead(key);
+          const saved = await storedRead(key, minStoredAt);
           if (saved !== null && epoch === generation) {
             report({ name, status: 'Cached', query });
             return saved;
@@ -105,7 +99,8 @@ export function createReader(
         } catch {
           report({
             name,
-            status: 'Could not save locally; using memory',
+            status:
+              'Could not save locally (storage full or unavailable); existing saved data retained',
             query,
           });
         }
@@ -138,8 +133,7 @@ export function createReader(
     const old = cache.get(key);
     if (old && now() - old.at < 120000) return old.value;
     try {
-      await clearing;
-      return await storedRead(key);
+      return await storedRead(key, minStoredAt);
     } catch {
       return null;
     }

@@ -1,5 +1,6 @@
 // Opt-in persistent cache of validated reader results. Never caches failed reads.
 export const CACHE_SETTING = 'geocompanion.cache-enabled';
+// Freshness interval only; saved records are never deleted because of age.
 export const TTL = 30 * 60 * 1000;
 const MAX_BYTES = 16 * 1024 * 1024;
 let epoch = 0;
@@ -38,10 +39,13 @@ export async function clearLocalCache() {
   epoch++;
   await transact('readwrite', (s) => s.clear());
 }
-export async function storedRead(key) {
+export async function storedRead(key, minAt = 0) {
   if (!cacheEnabled()) return null;
   const row = await transact('readonly', (s) => s.get(key));
-  return row && Date.now() - row.at < TTL && row.at <= Date.now()
+  return row &&
+    Date.now() - row.at < TTL &&
+    row.at <= Date.now() &&
+    row.at >= minAt
     ? row.value
     : null;
 }
@@ -54,19 +58,15 @@ export function storeRead(key, value, at = Date.now()) {
     .then(async () => {
       if (!cacheEnabled() || generation !== epoch) return;
       const size = JSON.stringify(value).length * 2 + key.length * 2;
-      if (size > MAX_BYTES) return;
+      if (size > MAX_BYTES)
+        throw Error('This record exceeds the local cache limit.');
       const all = await transact('readonly', (s) => s.getAll());
-      const rows = all.filter((r) => r.key !== key).sort((a, b) => a.at - b.at);
-      let total = rows.reduce((n, r) => n + r.size, 0) + size;
-      const remove = [];
-      for (const row of rows)
-        if (Date.now() - row.at >= TTL || total > MAX_BYTES) {
-          remove.push(row.key);
-          total -= row.size;
-        }
+      const total =
+        all.filter((r) => r.key !== key).reduce((n, r) => n + r.size, 0) + size;
+      if (total > MAX_BYTES)
+        throw Error('Local cache is full. Clear saved cache to make room.');
       if (!cacheEnabled() || generation !== epoch) return;
       await transact('readwrite', (s) => {
-        for (const id of remove) s.delete(id);
         return s.put({ key, value, size, at });
       });
     });

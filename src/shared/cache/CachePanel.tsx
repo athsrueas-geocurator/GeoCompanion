@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { geoReader } from '../geo/client.mjs';
+import { useEffect, useState, useRef } from 'react';
 import {
   cacheEnabled,
   CACHE_SETTING,
@@ -16,6 +17,9 @@ export default function CachePanel() {
     [state, setState] = useState<any>(null),
     [error, setError] = useState(''),
     [starting, setStarting] = useState(false);
+  const running = useRef(false),
+    currentJob = useRef<any>(null),
+    lastStart = useRef(0);
   useEffect(() => {
     opener = () => setOpen(true);
     return () => {
@@ -27,28 +31,50 @@ export default function CachePanel() {
       localStorage.setItem(CACHE_SETTING, String(next));
       setEnabled(next);
       if (!next) {
-        job?.stop();
-        await clearLocalCache();
+        currentJob.current?.stop();
       }
     } catch {
       setError('Could not update browser storage.');
     }
   }
   async function start() {
-    if (!enabled || starting || state?.running) return;
+    if (!cacheEnabled() || running.current) return;
+    running.current = true;
+    lastStart.current = Date.now();
+    geoReader.invalidate();
     setStarting(true);
     setError('');
     try {
       const { prepareJob } = await import('./warm.mjs');
       const j = await prepareJob(setState);
+      currentJob.current = j;
       setJob(j);
+      if (!cacheEnabled()) return;
       await j.start();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Cache job failed.');
     } finally {
+      running.current = false;
       setStarting(false);
     }
   }
+  useEffect(() => {
+    if (!enabled) return;
+    void start();
+    const revisit = () => {
+      if (
+        document.visibilityState === 'visible' &&
+        Date.now() - lastStart.current >= 30 * 60 * 1000
+      )
+        void start();
+    };
+    document.addEventListener('visibilitychange', revisit);
+    window.addEventListener('online', revisit);
+    return () => {
+      document.removeEventListener('visibilitychange', revisit);
+      window.removeEventListener('online', revisit);
+    };
+  }, [enabled]);
   return (
     <>
       {!open && state && (
@@ -79,12 +105,12 @@ export default function CachePanel() {
             Enable local data cache
           </label>
           <p>
-            Optional download for faster exploration. Saved for 30 minutes, up
-            to 16 MB. Images and map tiles are not downloaded.
+            Keep data until you clear it. Update automatically when you revisit.
+            Turning this off pauses updates and keeps saved data.
           </p>
           <p>
-            The job continues while this tab stays open. More work may be
-            discovered as it runs.
+            Up to 16 MB; existing data is kept if storage fills. Your browser
+            may remove site data. Images and map tiles are not downloaded.
           </p>
           <button
             disabled={!enabled || starting || state?.running}
