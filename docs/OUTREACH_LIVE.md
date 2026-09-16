@@ -1,5 +1,7 @@
 # Live Indianapolis outreach pilot
 
+September 15 update: the directory now reads four published services, including separate We Bloom weekday and Saturday access. Version 0.3.5 adds typed Schedule reads and a weekly published-hours view. The historical one-service snapshot below is superseded by the [live data audit and remaining queue](DATA_AUDIT_2026-09-15.md). Schedule information supplements the original property allowlist; copied contact information remains excluded. Food-specific filtering and “open now” remain unavailable pending the necessary data.
+
 Verified September 14, 2026 against the public Geo API and a local browser. The first publication is Outreach, Inc.'s Near Eastside program-center access for youth ages 14–24. This is one service, not a comprehensive directory.
 
 ## Read path

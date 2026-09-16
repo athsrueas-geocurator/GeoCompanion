@@ -98,6 +98,7 @@ export function economicScenarios(rows) {
         kind: isNumeric(ratio)
           ? 'Benefit-cost ratio'
           : 'Internal rate of return',
+        name: row.name,
         perspective:
           relation(row, F.economicPerspective)[0]?.toEntity?.name ||
           'Not stated',
@@ -136,6 +137,37 @@ export function compatibleEffects(rows) {
         followup: typeof followup === 'string' ? followup : 'Not stated',
         grade: grades[0]?.toEntity?.name || 'Not grade-specific',
         se: field(row, F.se),
+      },
+    ];
+  });
+}
+
+// Individual estimates remain readable even without a comparable outcome dimension.
+export function reportedEstimates(rows) {
+  const plotted = new Set(compatibleEffects(rows).map((r) => r.id));
+  return rows.flatMap((row) => {
+    const f = row.fields.find((f) => f.id === F.effect);
+    const unit = field(row, F.unit);
+    if (
+      row.unavailable ||
+      plotted.has(row.id) ||
+      !f?.numeric ||
+      !isNumeric(f.value) ||
+      typeof unit !== 'string'
+    )
+      return [];
+    return [
+      {
+        id: row.id,
+        name: row.name,
+        value: Number(f.value),
+        unit,
+        estimand: field(row, F.estimand),
+        sourceTable: field(row, '84dacbddca6a44079edb5e11a4c66b40'),
+        p:
+          row.fields.find(
+            (f) => f.id === 'ba5f8fe9d1cd9a6094338d2f37b74a5e' && f.numeric,
+          )?.value ?? null,
       },
     ];
   });

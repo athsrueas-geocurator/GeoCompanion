@@ -1,3 +1,4 @@
+import { DAY_NAMES } from './schedule.mjs';
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { loadDirectory } from './outreach-data.mjs';
 import { OUTREACH_SPACE } from '../../config/geo.mjs';
@@ -10,6 +11,13 @@ type Entry = {
   point: number[] | null;
 };
 export type Service = Entry & {
+  hours?: {
+    days: number[];
+    from: number;
+    to: number;
+    startDate: string;
+    label: string;
+  } | null;
   providers: Entry[];
   locations: Entry[];
   sources: Entry[];
@@ -58,14 +66,10 @@ export default function Directory({ tab }: { tab: string }) {
       ),
     );
   }, [rows, search]);
-  if (tab === 'weekly' || tab === 'food')
+  if (tab === 'food')
     return (
       <section>
-        <p>
-          Verified{' '}
-          {tab === 'food' ? 'food-service filters' : 'weekly schedules'} are not
-          available yet.
-        </p>
+        <p>Verified food-service filters are not available yet.</p>
         <a href="#/outreach/directory">
           Browse services and current provider information →
         </a>
@@ -99,11 +103,61 @@ export default function Directory({ tab }: { tab: string }) {
           <Map services={visible} />
         </Suspense>
       )}
+      {tab === 'weekly' && !busy && !error && (
+        <section aria-label="Published weekly hours">
+          <p>
+            Published hours, Indianapolis time. Confirm hours, eligibility and
+            closures with the provider before traveling.
+          </p>
+          {DAY_NAMES.map((day, index) => {
+            const services = visible
+              .filter((s) => s.hours?.days.includes(index))
+              .sort((a, b) => a.hours!.from - b.hours!.from);
+            return (
+              <section key={day}>
+                <h3>{day}</h3>
+                {services.length ? (
+                  services.map((s) => (
+                    <p key={s.id}>
+                      <strong>{s.hours!.label}</strong> · {s.name} · From{' '}
+                      {s.hours!.startDate}{' '}
+                      {s.sources
+                        .filter((p) => p.url)
+                        .map((p) => (
+                          <a
+                            key={p.id}
+                            href={p.url!}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Confirm hours ↗
+                          </a>
+                        ))}
+                    </p>
+                  ))
+                ) : (
+                  <p>No published hours listed.</p>
+                )}
+              </section>
+            );
+          })}
+        </section>
+      )}
       <div className="outreach-cards">
         {visible.map((s) => (
           <article key={s.id}>
             <h3>{s.name}</h3>
             <p>{s.description}</p>
+            {s.hours ? (
+              <p>
+                Published hours:{' '}
+                {s.hours.days.map((d) => DAY_NAMES[d]).join(', ')} ·{' '}
+                {s.hours.label} (Indianapolis). From {s.hours.startDate}.
+                Confirm with provider.
+              </p>
+            ) : (
+              <p>Hours require confirmation.</p>
+            )}
             {s.providers.length > 0 && (
               <p>{s.providers.map((p) => p.name).join(' · ')}</p>
             )}

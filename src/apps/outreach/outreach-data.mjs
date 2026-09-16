@@ -1,3 +1,4 @@
+import { weeklyHours } from './schedule.mjs';
 import { OUTREACH_SPACE as SPACE } from '../../config/geo.mjs';
 import { geoReader } from '../../shared/geo/client.mjs';
 import { completeEdges, REL } from '../../shared/geo/collections.mjs';
@@ -7,6 +8,7 @@ export const P = {
   name: 'a126ca530c8e48d5b88882c734c38935',
   description: '9b1f76ff9711404c861e59dc3fa7d037',
   url: '412ff593e9154012a43d4c27ec5c68b6',
+  schedule: '3a907dcf5061409b99f0808a25cf6a2d',
   point: '52ea43b6fe4c4512a763e47986a26ef0',
   types: '8f151ba4de204e3c9cb499ddf96f48f1',
   service: '0e0ff96eb1b84385901f46151c09659f',
@@ -16,7 +18,7 @@ export const P = {
   source: '49c5d5e1679a4dbdbfd33f618f227c94',
 };
 // No arbitrary fields, contact properties, personal records or schedule inference.
-export const QUERY = `query OutreachRecords($space:UUID!,$ids:[UUID!]!){entitiesConnection(first:50,spaceId:$space,filter:{id:{in:$ids}}){nodes{id values(first:20,filter:{spaceId:{is:$space},propertyId:{in:["${P.name}","${P.description}","${P.url}","${P.point}"]}}){nodes{spaceId propertyId text point}pageInfo{hasNextPage}} relations(first:50,filter:{spaceId:{is:$space},typeId:{in:["${P.types}","${P.provider}","${P.location}","${P.source}"]}}){nodes{spaceId typeId toEntityId}pageInfo{hasNextPage}}}pageInfo{hasNextPage}}}`;
+export const QUERY = `query OutreachRecords($space:UUID!,$ids:[UUID!]!){entitiesConnection(first:50,spaceId:$space,filter:{id:{in:$ids}}){nodes{id values(first:20,filter:{spaceId:{is:$space},propertyId:{in:["${P.name}","${P.description}","${P.url}","${P.point}","${P.schedule}"]}}){nodes{spaceId propertyId text point schedule}pageInfo{hasNextPage}} relations(first:50,filter:{spaceId:{is:$space},typeId:{in:["${P.types}","${P.provider}","${P.location}","${P.source}"]}}){nodes{spaceId typeId toEntityId}pageInfo{hasNextPage}}}pageInfo{hasNextPage}}}`;
 export function publicUrl(value) {
   try {
     const u = new URL(value);
@@ -53,10 +55,12 @@ export function parseRecord(e) {
   for (const v of e.values.nodes) {
     if (
       v.spaceId !== SPACE ||
-      ![P.name, P.description, P.url, P.point].includes(v.propertyId)
+      ![P.name, P.description, P.url, P.point, P.schedule].includes(
+        v.propertyId,
+      )
     )
       throw Error('Unexpected service field.');
-    const value = v.point ?? v.text;
+    const value = v.schedule ?? v.point ?? v.text;
     if (fields.has(v.propertyId) && fields.get(v.propertyId) !== value)
       throw Error('Conflicting service details.');
     fields.set(v.propertyId, value);
@@ -90,6 +94,7 @@ export function parseRecord(e) {
     description: publicText(fields.get(P.description)),
     url: publicUrl(fields.get(P.url)),
     point: validPoint && links(P.types).includes(P.stop) ? point : null,
+    hours: weeklyHours(fields.get(P.schedule)),
     types: links(P.types),
     providers: links(P.provider),
     locations: links(P.location),
@@ -114,7 +119,7 @@ async function records(ids) {
             throw Error('Service records are unavailable.');
           return c.nodes.map(parseRecord);
         },
-        'outreach-records-1',
+        'outreach-records-2',
       )),
     );
   }

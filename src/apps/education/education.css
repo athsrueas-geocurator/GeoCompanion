@@ -104,10 +104,12 @@
   height: 100%;
   min-height: 0;
 }
+.observation-panel .atlas-comparison-table,
 .study-table {
   overflow: auto;
   margin: 25px 0;
 }
+.observation-panel table,
 .study-table table {
   border-collapse: collapse;
   width: 100%;
@@ -120,6 +122,8 @@
   padding: 12px 0;
   font-weight: 600;
 }
+.observation-panel th,
+.observation-panel td,
 .study-table th,
 .study-table td {
   border-bottom: 1px solid var(--line);

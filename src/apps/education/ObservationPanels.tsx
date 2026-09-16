@@ -1,4 +1,6 @@
+import './education.css';
 import {
+  reportedEstimates,
   meanPanels,
   pairedObserved,
   economicScenarios,
@@ -14,14 +16,57 @@ type MeanPanel = {
   estimated: number;
 };
 export default function ObservationPanels({ rows }: { rows: any[] }) {
+  const reported = reportedEstimates(rows);
   const means = meanPanels(rows) as MeanPanel[];
   const pairs = pairedObserved(rows),
     scenarios = economicScenarios(rows),
     effects = compatibleEffects(rows);
-  if (!means.length && !pairs.length && !scenarios.length && !effects.length)
+  if (
+    !means.length &&
+    !pairs.length &&
+    !scenarios.length &&
+    !effects.length &&
+    !reported.length
+  )
     return null;
   return (
     <>
+      {reported.length > 0 && (
+        <section className="observation-panel">
+          <h3>Reported estimates</h3>
+          <div
+            className="atlas-comparison-table"
+            role="region"
+            aria-label="Reported estimates"
+            tabIndex={0}
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th>Finding</th>
+                  <th>Estimate</th>
+                  <th>Unit</th>
+                  <th>Estimand</th>
+                  <th>Source table</th>
+                  <th>p-value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reported.map((r: any) => (
+                  <tr key={r.id}>
+                    <th scope="row">{r.name}</th>
+                    <td>{r.value}</td>
+                    <td>{r.unit}</td>
+                    <td>{r.estimand ?? 'Not stated'}</td>
+                    <td>{r.sourceTable ?? 'Not stated'}</td>
+                    <td>{r.p ?? '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
       {effects.length > 0 && (
         <section className="observation-panel">
           <h3>Compatible reported effects</h3>
@@ -135,7 +180,8 @@ export default function ObservationPanels({ rows }: { rows: any[] }) {
             <table>
               <thead>
                 <tr>
-                  <th>Model</th>
+                  <th>Published scenario</th>
+                  <th>Measure</th>
                   <th>Value</th>
                   <th>Perspective</th>
                   <th>Horizon</th>
@@ -147,7 +193,8 @@ export default function ObservationPanels({ rows }: { rows: any[] }) {
               <tbody>
                 {scenarios.map((s: any) => (
                   <tr key={s.id}>
-                    <th scope="row">{s.kind}</th>
+                    <th scope="row">{s.name}</th>
+                    <td>{s.kind}</td>
                     <td>{s.value}</td>
                     <td>{s.perspective}</td>
                     <td>{s.horizon}</td>

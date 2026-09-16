@@ -97,6 +97,7 @@ test('Perry adapters require two distinct typed arms and preserve economic assum
     value(F.deadweightLoss, 0.5),
     value(F.followup, 'Through age 40', false),
   ]);
+  model.name = 'Published societal scenario';
   model.relations = [
     {
       typeId: F.economicPerspective,
@@ -107,6 +108,7 @@ test('Perry adapters require two distinct typed arms and preserve economic assum
   assert.deepEqual(economicScenarios([model])[0], {
     id: 'a'.repeat(32),
     kind: 'Benefit-cost ratio',
+    name: 'Published societal scenario',
     value: 2.4,
     perspective: 'Societal perspective',
     horizon: 'Through age 40',

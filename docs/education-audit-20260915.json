@@ -1,0 +1,1157 @@
+{
+  "at": "2026-09-16T01:46:02.329Z",
+  "endpoint": "https://api-testnet.geobrowser.io/graphql",
+  "datasets": [
+    {
+      "id": "70b356b5a7d34c6795f25ea93cdf0305",
+      "name": "ABC/CARE: early-childhood outcomes and modeled economic returns",
+      "blocks": [
+        {
+          "id": "6cca7447555640cb911a65702a9a3eb6",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "e008d34703d44c448351bd46ba87b913",
+          "name": "Forecasting-method comparison",
+          "rows": 11,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 11
+        }
+      ]
+    },
+    {
+      "id": "c6368f3b003d4bd5a82d24664b7432f7",
+      "name": "Annual Survey of School System Finances (F-33)",
+      "blocks": [
+        {
+          "id": "23900d3d136b45ab929ef837a114a320",
+          "name": "F-33 catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "bf490a4a56e44533b3fb140b0adc509e",
+      "name": "Civil Rights Data Collection (CRDC)",
+      "blocks": [
+        {
+          "id": "6f090dc7fef54b9c8bf7253887ff6e22",
+          "name": "CRDC catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "fa615e21492c40b68c6f3483f1466bcb",
+      "name": "College Scorecard",
+      "blocks": [
+        {
+          "id": "31ec1a5cb1ae4d0f8256b33c681667c1",
+          "name": "College Scorecard catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "6bf3954ea2814e1db6f84bedbdba599c",
+      "name": "Common Core of Data (CCD) Public School and LEA Universe",
+      "blocks": [
+        {
+          "id": "44c758588b7b48cbb60496a704f298b4",
+          "name": "CCD catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "96de62907fc94c62b0e9a6076ccea75c",
+      "name": "Early Childhood Longitudinal Study, Kindergarten Class of 2010-11 (ECLS-K:2011)",
+      "blocks": [
+        {
+          "id": "bb3cefc2ff2041edb3527864b04ae1f7",
+          "name": "ECLS-K:2011 catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "26aa14b7c05c4b0d86260e3f405b1653",
+      "name": "EDFacts / Ed Data Express",
+      "blocks": [
+        {
+          "id": "f47c61f312fe448f8c15db44569d4411",
+          "name": "EDFacts catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "3f2f83ec99644b4fa9c710584408c383",
+      "name": "Education Initiatives glossary",
+      "blocks": [
+        {
+          "id": "4b154167467340d4a8bc88186c8a393f",
+          "name": "Outcome",
+          "rows": 14,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "a6672e82fbaf48be9280a1db22a0d563",
+          "name": "Evidence signal",
+          "rows": 5,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "f9630419ce50497d8560a85fbfb7b8e0",
+          "name": "Design glossary",
+          "rows": 1,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "3bae0b254d504867a7720a9ee6c34f35",
+          "name": "Input variable",
+          "rows": 14,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "a62abb193f78453facc30f6e45d9aae0",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "b1f70bc05d4e454dab2448a0e3172195",
+      "name": "Education Initiatives questions",
+      "blocks": [
+        {
+          "id": "d19cf5813cf9451d9ef7d793c9b7c9d9",
+          "name": "Questions",
+          "rows": 21,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "1745ad006731498f8c87ab5836a1a061",
+      "name": "Education Resources Information Center (ERIC)",
+      "blocks": [
+        {
+          "id": "6ca572f39b124ec0a0cda880328f7263",
+          "name": "ERIC catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "bde747c9dd7b4b34a4115b1f2cf0b468",
+      "name": "Head Start: randomized-access impacts through third grade",
+      "blocks": [
+        {
+          "id": "ac7a89598dfe43b897d0bb3e39772873",
+          "name": "Interpreting the findings",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "0e5090dfd1c040ba8064cd725bc48cd3",
+          "name": "Access and findings through first grade",
+          "rows": 4,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "a28c0bc735144f83822c2d64bef585f9",
+          "name": "Third-grade interpretation",
+          "rows": 4,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "0c714209bd454917a483ba5cfea835c8",
+          "name": "Third-grade cognition: age-four entry cohort (ITT)",
+          "rows": 5,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 5,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "22d47abb4dd3427da03823483c136c8e",
+          "name": "Third-grade cognition: age-three entry cohort (ITT)",
+          "rows": 5,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 5,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "545bc7a2c33f486c8180df2c8d83953c",
+          "name": "Third-grade behavior, relationships and promotion (ITT)",
+          "rows": 9,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 9,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "e5e6c5df9ed145bdb8b7daf06e2f73bb",
+          "name": "Third-grade participation-adjusted counterparts (IOT)",
+          "rows": 10,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 10,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "63e0be67eb5a41a693b9623d7b9c9ae8",
+      "name": "High School Longitudinal Study of 2009 (HSLS:09)",
+      "blocks": [
+        {
+          "id": "eb7428c70fa04b1980afcc1607db8e06",
+          "name": "HSLS:09 catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "66240fe8f30c45df935e46129b3fe2ca",
+      "name": "Integrated Postsecondary Education Data System (IPEDS)",
+      "blocks": [
+        {
+          "id": "c543c2a58e934589ae804e844ae87760",
+          "name": "IPEDS catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "86d8fd6722804e02b5ccf74de96ac3bb",
+      "name": "NAEP Data Explorer",
+      "blocks": [
+        {
+          "id": "83d913e1a1fd4f34aeeeed97c183d852",
+          "name": "NAEP catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "7fa1385bd4f749e79b77fbf852555492",
+      "name": "National Teacher and Principal Survey (NTPS) and Teacher Follow-up Survey (TFS)",
+      "blocks": [
+        {
+          "id": "6c1f78e3f0d7486397b7d37f047129b5",
+          "name": "NTPS and TFS catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "7e86c7f34c614db49497272063f43485",
+      "name": "Perry Preschool: costs, observed outcomes and modeled returns",
+      "blocks": [
+        {
+          "id": "598e8295c48f4cc18c4b165a68696a1c",
+          "name": "Program resource cost",
+          "rows": 1,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "c712fcddf2d44901967c1fe08a1d90cb",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "ab49118587994f00ad46c3f25fe059b1",
+          "name": "Modeled annual real returns",
+          "rows": 27,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 27
+        },
+        {
+          "id": "fcf8578fdf594e4dae03cf38747e804f",
+          "name": "Modeled benefit-cost ratios",
+          "rows": 24,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 24
+        },
+        {
+          "id": "85cfdc4ce9ac44458f6f245a5a5a90cd",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "d1d46ecf3c1446469d88a58d99c87dce",
+          "name": "Observed group proportions",
+          "rows": 24,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 12,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "44cc638572034708932896670acff7f0",
+          "name": "Observed yearly earnings",
+          "rows": 8,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 4,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "0435fd80c5344935929957662894e30f",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "769591fd2312445bb02d4974a08957eb",
+          "name": "Perry benefit horizons: age 40 versus age 65",
+          "rows": 2,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 2
+        },
+        {
+          "id": "02ae26fa17004ad68a20aad500e8a700",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "02b40a84dd87410f9ad78f0481ad237a",
+      "name": "Reading First: achievement and implementation impacts (Gamse et al., 2008)",
+      "blocks": [
+        {
+          "id": "afb866bcc2064a58a07e0fd2b3fedd2b",
+          "name": "Student achievement: reported impact and uncertainty",
+          "rows": 7,
+          "unavailable": 0,
+          "effects": 7,
+          "individual": 0,
+          "pairs": 0,
+          "means": 4,
+          "scenarios": 0
+        },
+        {
+          "id": "a24f95ac924c4fff9560bbe55d5de890",
+          "name": "Student achievement: standardized effects",
+          "rows": 4,
+          "unavailable": 0,
+          "effects": 4,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "9f550a80005446659786464bffb9aa2d",
+          "name": "Observed instructional practices: native units",
+          "rows": 16,
+          "unavailable": 0,
+          "effects": 16,
+          "individual": 0,
+          "pairs": 0,
+          "means": 12,
+          "scenarios": 0
+        },
+        {
+          "id": "41b82dbded59476b85de6fd7593a1b05",
+          "name": "Observed instructional practices: standardized effects",
+          "rows": 16,
+          "unavailable": 0,
+          "effects": 16,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "b5d7d3b9257041dc8faf646a1cb36ee9",
+          "name": "Observed engagement with print: native units",
+          "rows": 2,
+          "unavailable": 0,
+          "effects": 2,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "37ca50fbd9934e3ebb346975fb52dc18",
+          "name": "Observed engagement with print: standardized effects",
+          "rows": 2,
+          "unavailable": 0,
+          "effects": 2,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "39dc3e973acd4be18b1abf5ac997470f",
+          "name": "Self-reported implementation: native units",
+          "rows": 8,
+          "unavailable": 0,
+          "effects": 8,
+          "individual": 0,
+          "pairs": 0,
+          "means": 5,
+          "scenarios": 0
+        },
+        {
+          "id": "61cbfc3e81284b2284e18bd21c60dc2f",
+          "name": "Self-reported implementation: standardized effects",
+          "rows": 8,
+          "unavailable": 0,
+          "effects": 8,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "b9a81a6b17974b6c8ddbbcfead4b83cd",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "f3d7dd479fd4495d9fcd35d212bbb2e1",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "d3bcd7af4adc418db65850b90086d446",
+          "name": "Reading First standardization notes",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "65c3a84623724caa83a624cf80fa5fb9",
+          "name": "Reading First means: interpretation",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "b9d0f5e162044ecf9d23439654fe75a0",
+          "name": "Actual and counterfactual proportions",
+          "rows": 12,
+          "unavailable": 0,
+          "effects": 12,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "9afe0b6ef4604af9b45f82ec3d4773cd",
+          "name": "Actual and counterfactual means",
+          "rows": 21,
+          "unavailable": 0,
+          "effects": 21,
+          "individual": 0,
+          "pairs": 0,
+          "means": 21,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "52448bbbf0cd4c1bb8e949ebe9d628d2",
+      "name": "Saga tutoring: Chicago trial estimates (Guryan et al., 2023)",
+      "blocks": [
+        {
+          "id": "c87a25d13e7f4562983ded1112d94dc9",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "e64b7ea956f44e3c92fb6be52a10682e",
+          "name": "Saga Chicago tutoring: delivery and provider context",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "3fd5a3e82ccb4267bde900ce82fc077e",
+          "name": "Math effects: compare within each trial",
+          "rows": 4,
+          "unavailable": 0,
+          "effects": 4,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "ee140bdcaa014cfd8b478f396dca4890",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "7f72143a74644a7dacd2eae505df3aab",
+          "name": "Saga first-year outcomes: interpretation and coverage",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "ebea6acfc7fc49b792cd7a7d7e164d6b",
+          "name": "Saga first-year estimates: Mathematics",
+          "rows": 14,
+          "unavailable": 0,
+          "effects": 14,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "e65c1cfe372848258a2dbacb8d22b833",
+          "name": "Saga first-year estimates: Nonmath academic outcomes",
+          "rows": 12,
+          "unavailable": 0,
+          "effects": 12,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "026cc5a0242f42a29a3690b44dcb6b34",
+          "name": "Saga first-year estimates: School attendance and discipline",
+          "rows": 12,
+          "unavailable": 0,
+          "effects": 8,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "b2267ac057234947a63d166edac7226e",
+          "name": "Saga first-year estimates: Arrests",
+          "rows": 24,
+          "unavailable": 0,
+          "effects": 24,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "ce0b8161de7f4e09b3c873280fbeafb3",
+          "name": "Saga pooled outcomes: methods and coverage",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "85b9f64274de4918a642964294081ae6",
+          "name": "Saga pooled first-year findings",
+          "rows": 30,
+          "unavailable": 0,
+          "effects": 28,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "6a5d3a2eae10443aa22c2c67d457dd5b",
+          "name": "Saga pooled later follow-up findings",
+          "rows": 8,
+          "unavailable": 0,
+          "effects": 8,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "536cb4aaa4234aada321ff844278635b",
+          "name": "Saga trial-specific follow-up: methods and uncertainty",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "83c9c6a366e14992a951ec702dbc67a3",
+          "name": "Saga later outcomes by Chicago trial",
+          "rows": 16,
+          "unavailable": 0,
+          "effects": 16,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "813a4635194545a2863d847549af7691",
+          "name": "Saga year-two identification and bound assumptions",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "58dffa2c23d34480b7f8d65a0b5d15b0",
+          "name": "Saga year-two analysis: randomized-assignment participation effect",
+          "rows": 3,
+          "unavailable": 0,
+          "effects": 3,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "5e37dec9a0f5401a9b604a09beba69b3",
+          "name": "Saga year-two analysis: weighted per-year effect",
+          "rows": 4,
+          "unavailable": 0,
+          "effects": 4,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "caef4fd959e84ed1a35772e50fa549e0",
+          "name": "Saga year-two analysis: assumption-dependent persistent first-year bound",
+          "rows": 4,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "0d366d56f41346d5b1db303187cf6bcf",
+          "name": "Saga year-two analysis: assumption-dependent two-year participation bound",
+          "rows": 4,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "655b053c43344e9dab5dc048367490ab",
+      "name": "School Survey on Crime and Safety (SSOCS)",
+      "blocks": [
+        {
+          "id": "6a045d705aaf4a09bb8e8bfabf006f5f",
+          "name": "SSOCS catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "d4ed8f85a31949e0a08be2fa0ae61f93",
+      "name": "School-finance reforms: spending and adult outcomes (Jackson, Johnson and Persico, 2016)",
+      "blocks": [
+        {
+          "id": "35322d80a0d446c8ae87f95d45bc6860",
+          "name": "Educational attainment: preferred school-spending coefficients",
+          "rows": 3,
+          "unavailable": 0,
+          "effects": 3,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "92106c08724e42338cd587a30a3e45f9",
+          "name": "Probability of high school graduation: preferred school-spending coefficients",
+          "rows": 3,
+          "unavailable": 0,
+          "effects": 3,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "763d52dc44144a18910aa4a0971c0543",
+          "name": "Log wages, ages 20–45: preferred school-spending coefficients",
+          "rows": 3,
+          "unavailable": 0,
+          "effects": 3,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "8e7f49bd84e2435498a6b5ecd698cb18",
+          "name": "Log family income, ages 20–45: preferred school-spending coefficients",
+          "rows": 3,
+          "unavailable": 0,
+          "effects": 3,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "4813ebda16f74f6eb98d2d45264c06b1",
+          "name": "Probability of poverty, ages 20–45: preferred school-spending coefficients",
+          "rows": 3,
+          "unavailable": 0,
+          "effects": 3,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "fa143b7aa6e4406f92f557bec456995c",
+          "name": "School-finance reform estimates: methods and coverage",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "0c6aa9e01d0d478994f77ad7d1d0c3c5",
+          "name": "School-finance reforms: reported illustrative cost",
+          "rows": 1,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "a1e1eb23fdd74a63b6ff61b54a4498e5",
+          "name": "School-finance reforms: cost illustration and reproduction limits",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "04a4c7047b0b414b8920890c5ca2f8a0",
+      "name": "Stanford Education Data Archive (SEDA), Version 6.0",
+      "blocks": [
+        {
+          "id": "fc397c8fbbbf4d39b01b171ded7daeac",
+          "name": "SEDA catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "9220554acfd249a18920b301dcbb6cf0",
+      "name": "STAR class sizes and classroom aides: experimental results (Krueger, 1999)",
+      "blocks": [
+        {
+          "id": "8de2afc87d99401b99c6db5e8d25460b",
+          "name": "Achievement effects by grade and assigned class condition",
+          "rows": 8,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 8,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "87cf73fb46844e55846a8d6158b947f4",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "4874a8385a594633ab244f47889f9cab",
+      "name": "STAR class-size economics: modeled costs and earnings (Krueger, 2003)",
+      "blocks": [
+        {
+          "id": "7d8aeb49b7104ad7bedda3d7b16ad370",
+          "name": "Modeled costs and earnings: sensitivity scenarios",
+          "rows": 15,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "8676d367bcf14892944f14a22d273053",
+          "name": "Modeled real returns by wage-growth assumption",
+          "rows": 3,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 3
+        },
+        {
+          "id": "edc7888ea51a4296a0ce111aa46ad488",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "518cf9a33b8740e4b343b7d58d1eb3b5",
+          "name": "Untitled entry",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "46a483eddc824e4ea7b14cf9b8cc9180",
+      "name": "Teacher coaching: pooled instruction and achievement effects (Kraft et al., 2018)",
+      "blocks": [
+        {
+          "id": "7d95262f2079438caec0f14c1cb15448",
+          "name": "Reading the estimates",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "5b3d9603e11145148c8fba073b7c3ddb",
+          "name": "Instructional practice",
+          "rows": 3,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 3,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        },
+        {
+          "id": "ddb0f3143bbb4666b526cffce7cfbfd9",
+          "name": "Student achievement",
+          "rows": 6,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 6,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "3e4404bac6e842b598e0b0a809a4928f",
+      "name": "Third Grade Follow-up to the Head Start Impact Study (HSIS), United States, 2007-2008",
+      "blocks": []
+    },
+    {
+      "id": "aa8c1c45e8cb4a48a3375a1fc4776c2c",
+      "name": "Urban Institute Education Data Portal",
+      "blocks": [
+        {
+          "id": "5a7f371a4c234c2f9834d93da8a01f6b",
+          "name": "Urban Education Data Portal catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    },
+    {
+      "id": "547924b539e241d997f47963941b4367",
+      "name": "What Works Clearinghouse",
+      "blocks": [
+        {
+          "id": "8502d253b85a4054803d5e880bd00dbe",
+          "name": "What Works Clearinghouse catalog metadata",
+          "rows": 0,
+          "unavailable": 0,
+          "effects": 0,
+          "individual": 0,
+          "pairs": 0,
+          "means": 0,
+          "scenarios": 0
+        }
+      ]
+    }
+  ]
+}

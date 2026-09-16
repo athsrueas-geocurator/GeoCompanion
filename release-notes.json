@@ -1,6 +1,7 @@
 {
-  "title": "Clearer map popups",
+  "title": "More useful live study and outreach data",
   "changes": [
-    "Map selections now use readable, high-contrast colors and wider labels in both themes."
+    "Read published outreach hours in the weekly schedule, with provider confirmation links.",
+    "Inspect additional reported education estimates with their units, estimands and p-values."
   ]
 }
