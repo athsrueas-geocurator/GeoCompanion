@@ -1,7 +1,8 @@
 {
-  "title": "Clearer preference controls",
+  "title": "A full-window interactive network explorer",
   "changes": [
-    "Choose text size and image loading with clearly grouped options.",
-    "Turn the force-graph explorer on or off with a labeled switch."
+    "Explore animated directional networks in a canvas-first applet with compact controls.",
+    "Highlight neighbors by hovering, tapping or selecting a node; show Geo avatars where available.",
+    "Keep filters and exports in a drawer, with pause, image and reduced-motion controls."
   ]
 }

@@ -26,6 +26,7 @@ export default function GraphWorkbench({ graph }: { graph: GraphData }) {
     [search, setSearch] = useState(''),
     [selected, setSelected] = useState(''),
     [open, setOpen] = useState(false),
+    [drawer, setDrawer] = useState(false),
     [fullError, setFullError] = useState('');
   const dialog = useRef<HTMLDialogElement>(null),
     opener = useRef<HTMLButtonElement>(null);
@@ -176,7 +177,15 @@ export default function GraphWorkbench({ graph }: { graph: GraphData }) {
       {details}
       {list}
       {value.forceGraph ? (
-        <button ref={opener} onClick={() => setOpen(true)}>
+        <button
+          ref={opener}
+          onClick={() => {
+            setNeighborhood(false);
+            setSearch('');
+            setRelation('');
+            setOpen(true);
+          }}
+        >
           Open force-graph explorer ↗
         </button>
       ) : (
@@ -192,7 +201,17 @@ export default function GraphWorkbench({ graph }: { graph: GraphData }) {
         {open && value.forceGraph && (
           <>
             <div className="graph-dialog-heading">
-              <h2 id="force-title">Explore the network</h2>
+              <h2 id="force-title">Network explorer</h2>
+              <span className="force-count">
+                {visible.nodes.length} nodes · {visible.edges.length} links
+                {visible.partial ? ' · Partial' : ''}
+              </span>
+              <button
+                aria-expanded={drawer}
+                onClick={() => setDrawer((v) => !v)}
+              >
+                Filters & data
+              </button>
               <button
                 onClick={async () => {
                   try {
@@ -210,12 +229,21 @@ export default function GraphWorkbench({ graph }: { graph: GraphData }) {
               </button>
               <button onClick={() => setOpen(false)}>Close explorer</button>
             </div>
-            {fullError && <p role="status">{fullError}</p>}
-            {controls('')}
-            <p>
-              {visible.nodes.length} nodes · {visible.edges.length}{' '}
-              relationships{visible.partial ? ' · Partial network' : ''}
-            </p>
+            {fullError && (
+              <p className="force-fullscreen-notice" role="status">
+                {fullError}
+              </p>
+            )}
+            {drawer && (
+              <aside
+                className="force-data-drawer"
+                aria-label="Network filters and data"
+              >
+                {controls('')}
+                {details}
+                {list}
+              </aside>
+            )}
             <GraphErrorBoundary>
               <Suspense
                 fallback={<p role="status">Loading interactive explorer…</p>}
@@ -223,8 +251,6 @@ export default function GraphWorkbench({ graph }: { graph: GraphData }) {
                 <ForceApplet graph={visible} onSelect={setSelected} />
               </Suspense>
             </GraphErrorBoundary>
-            {details}
-            {list}
           </>
         )}
       </dialog>
