@@ -1,5 +1,15 @@
 [
   {
+    "id": "159d1816-6d6a-468b-85f5-27024ea86965",
+    "version": "0.3.5",
+    "deployedAt": "2026-09-16T01:54:33.591717Z",
+    "title": "More useful live study and outreach data",
+    "changes": [
+      "Read published outreach hours in the weekly schedule, with provider confirmation links.",
+      "Inspect additional reported education estimates with their units, estimands and p-values."
+    ]
+  },
+  {
     "id": "ff539a9a-c3f2-4591-8e93-a266227c384c",
     "version": "0.3.4",
     "deployedAt": "2026-09-14T19:56:29.814834Z",

@@ -39,6 +39,8 @@ Version 0.3.5 reads the typed Schedule property `3a907dcf5061409b99f0808a25cf6a2
 
 ## Publisher queue and remaining frontend work
 
+Production follow-up after deployment: membership increased to **eight services** automatically. The weekly view also renders Gleaners Tuesday/Wednesday 10 AM–3 PM, Thursday 2–7 PM and Saturday 9 AM–noon, plus HealthNet at Outreach Inc. Wednesday 1–4:30 PM. The four-service snapshot above records the earlier audit, not a fixed inventory. New Gleaners records do not yet display a verified linked public stop; keep them off the map until the public-stop contract is met.
+
 1. Reconcile newer study execution/index status against the live catalog; add executed datasets to the catalog if that relation is missing. Do not republish on a broad-search miss alone.
 2. For comparable education charts, supply explicit measure, estimand, unit, population/follow-up and comparison context plus numeric uncertainty where the primary source supports it. Individual tables remain useful when comparison is inappropriate.
 3. Keep the outreach query contract current with all four members and the split weekday/Saturday schedules. Add typed service/meal categories, schedule verification/validity, closures, eligibility and capacity before food filtering or current-availability claims.
@@ -46,3 +48,5 @@ Version 0.3.5 reads the typed Schedule property `3a907dcf5061409b99f0808a25cf6a2
 5. Directory block-filter sources remain unsupported; collection-item membership is the supported path. Coordination is still service cards rather than a complete director matrix.
 
 Validation: 79 tests, production build and formatting checks; browser checks of live Head Start estimates and all four outreach services with weekday ordering. No static operational data fallback was introduced.
+
+Deployment: version 0.3.5 feature `159d1816` completed at `2026-09-16T01:54:33.591717Z`, source `31a3864`; metadata deployment `5e9874b3`. The production browser subsequently verified eight services and their ordered hours. No Geo, Worker or VM changes occurred.
