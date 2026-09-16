@@ -1,5 +1,16 @@
 [
   {
+    "id": "41f103f7-6097-47fe-911e-7eb6aaf86b18",
+    "version": "0.4.0",
+    "deployedAt": "2026-09-16T02:26:55.603001Z",
+    "title": "Explore people and research relationships",
+    "changes": [
+      "New People & Contributions and Research Debates apps with readable, focused relationship diagrams.",
+      "Enable the optional force-graph explorer in Preferences for fullscreen exploration, pinning and layout controls.",
+      "Filter and export visible relationships as JSON or CSV, or save a force-graph image."
+    ]
+  },
+  {
     "id": "159d1816-6d6a-468b-85f5-27024ea86965",
     "version": "0.3.5",
     "deployedAt": "2026-09-16T01:54:33.591717Z",

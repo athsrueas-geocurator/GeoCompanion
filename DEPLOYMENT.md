@@ -1,5 +1,10 @@
 # Deployment
 
+## Frontend verification - version 0.4.0
+
+Feature deployment `41f103f7` completed at `2026-09-16T02:26:55.603001Z`; metadata deployment `599c40cc`. Source `63ab27b`. Two standalone graph apps now use React Flow by default and a Preferences-enabled force-graph pop-out. Production HTTPS and direct Geo debate rendering verified; local browser verified authorship, STAR opposing-argument focus, preference persistence, force canvas and pause. Mobile dialog measured 374px inside a 375px document without horizontal overflow. Embedded-browser fullscreen was unavailable; the fallback message and expanded dialog worked, so native fullscreen success is not claimed. All 83 tests, TypeScript/build, formatting and diff checks pass. Current scope and follow-ups: [graph explorers](docs/GRAPH_EXPLORERS.md). No Geo writes, VM or Worker deployment.
+
+
 ## Frontend verification - version 0.3.4
 
 Feature `ff539a9a` completed at `2026-09-14T19:56:29.814834Z`; metadata `996e159f`. Source `c88a954`. Popup buttons now have explicit light surfaces, dark teal text and wider labels in both app maps. Local dark-mode screenshot and production popup check passed: computed text rgb(23,75,67), background rgb(237,245,243), width 211px. Production build passed. CSS-only fix; no data or API changes.
