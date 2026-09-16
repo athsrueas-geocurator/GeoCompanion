@@ -1,5 +1,16 @@
 [
   {
+    "id": "233a69f7-1a34-4005-a750-8eb65e1919c1",
+    "version": "0.4.7",
+    "deployedAt": "2026-09-16T04:00:34.959073Z",
+    "title": "Working fullscreen and live entity detail tables",
+    "changes": [
+      "The network explorer now enters true fullscreen using a supported container.",
+      "Hover over a node for its published properties and relationships; click or select to keep it open.",
+      "Entity details load on demand and reuse the browser cache."
+    ]
+  },
+  {
     "id": "d8de2b23-5cbd-4b64-ab2f-372a2c1a7ae4",
     "version": "0.4.6",
     "deployedAt": "2026-09-16T03:29:52.322258Z",

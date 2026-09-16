@@ -1,5 +1,10 @@
 # Deployment
 
+## Frontend verification - version 0.4.7
+
+Feature 233a69f7 completed at 2026-09-16T04:00:34.959073Z; metadata b51229a2. Source 5aeda04. Production HTTPS browser verified native fullscreen entry (Exit fullscreen control), successful exit (Fullscreen control), and a live STAR entity table with source, description and supporting/opposing relationships. Fullscreen uses a div inside the dialog; calling requestFullscreen on the dialog was the actual previous defect. All 95 tests, build, formatting and diff checks pass. The table is bounded to 32 scoped values and 20 scoped outgoing relations with truncation disclosure, 300ms hover delay, stale-response guard and shared memory caching. Screenshot: outputs/fullscreen-entity-table.png (local artifact). No Geo writes.
+
+
 ## Frontend verification - version 0.4.6
 
 Initial feature d8de2b23 completed at 2026-09-16T03:29:52.322258Z; metadata f5eade6f. Source 6cf37a5, with proportional corner-radius refinement 9e600e7 deployed as b3077fc4. Verified Health scoped Cover against the live API and all six featured-space images in the production browser. Space icons prefer Avatar, then Cover when Avatar is absent, then the shared triangle. Centered square crops and inset bevels are shared across app cards and space buttons. Icon parser tests and TypeScript/build pass. This supersedes the previous Health Avatar publishing request; no Geo change was needed.
