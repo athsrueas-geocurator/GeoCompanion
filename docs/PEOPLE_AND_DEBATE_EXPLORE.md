@@ -2,6 +2,8 @@
 
 Status: proposed September 15, 2026 from community ideas supplied by the user. This document records the direction; it does not claim new API capabilities, published records or a deployed graph view.
 
+Renderer research: [library comparison, measured bundles and visual references](GRAPH_LIBRARY_RESEARCH.md). Proposed prototype shortlist is React Flow for debate cards and D3/SVG versus Sigma for people neighborhoods; no production dependency selected yet.
+
 ## Reader experience
 
 User correction: these are **two new standalone apps**, not extensions of Education or Indianapolis Outreach. Add separate compact cards to the root app selector, with their own routes, navigation and scope selection. Working titles:

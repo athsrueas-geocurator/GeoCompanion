@@ -1,0 +1,139 @@
+{
+  "at": "2026-09-16T02:02:42.660Z",
+  "method": "esbuild minified browser ESM ES2022; React and ReactDOM external; gzip level 9; import entries in measure.mjs; no application code/data/images/layout plugins",
+  "results": [
+    {
+      "name": "d3-force only",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 13887,
+          "gzip": 5490,
+          "brotli": 4972
+        }
+      ]
+    },
+    {
+      "name": "D3 force + zoom + drag + selection",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 62358,
+          "gzip": 21363,
+          "brotli": 18775
+        }
+      ]
+    },
+    {
+      "name": "force-graph",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 181066,
+          "gzip": 60231,
+          "brotli": 51150
+        }
+      ]
+    },
+    {
+      "name": "Sigma + Graphology",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 159034,
+          "gzip": 37926,
+          "brotli": 32886
+        }
+      ]
+    },
+    {
+      "name": "Sigma + Graphology + ForceAtlas2",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 169713,
+          "gzip": 40930,
+          "brotli": 35531
+        }
+      ]
+    },
+    {
+      "name": "Cytoscape",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 443818,
+          "gzip": 142012,
+          "brotli": 119997
+        }
+      ]
+    },
+    {
+      "name": "React Flow",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 179696,
+          "gzip": 59534,
+          "brotli": 51828
+        },
+        {
+          "kind": "css",
+          "bytes": 15869,
+          "gzip": 2658,
+          "brotli": 2300
+        }
+      ]
+    },
+    {
+      "name": "React Flow + Dagre",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 228004,
+          "gzip": 76263,
+          "brotli": 66705
+        },
+        {
+          "kind": "css",
+          "bytes": 15869,
+          "gzip": 2658,
+          "brotli": 2300
+        }
+      ]
+    },
+    {
+      "name": "G6",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 1472210,
+          "gzip": 424266,
+          "brotli": 344449
+        }
+      ]
+    },
+    {
+      "name": "Reagraph",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 1379031,
+          "gzip": 394307,
+          "brotli": 326816
+        }
+      ]
+    },
+    {
+      "name": "Cosmos",
+      "files": [
+        {
+          "kind": "js",
+          "bytes": 693696,
+          "gzip": 183220,
+          "brotli": 151678
+        }
+      ]
+    }
+  ]
+}
