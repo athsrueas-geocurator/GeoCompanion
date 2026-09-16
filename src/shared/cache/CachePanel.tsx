@@ -1,5 +1,5 @@
 import { geoReader } from '../geo/client.mjs';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useSyncExternalStore } from 'react';
 import {
   cacheEnabled,
   CACHE_SETTING,
@@ -7,8 +7,34 @@ import {
 } from '../geo/local-cache.mjs';
 import './cache.css';
 let opener: (() => void) | undefined;
-export function CacheButton() {
-  return <button onClick={() => opener?.()}>Cache data from Geo</button>;
+let cacheStatus: {
+  running: boolean;
+  done: number;
+  total: number;
+  errors: number;
+  label: string;
+} | null = null;
+const statusListeners = new Set<() => void>();
+function subscribeStatus(listener: () => void) {
+  statusListeners.add(listener);
+  return () => {
+    statusListeners.delete(listener);
+  };
+}
+export function CacheButton({ showStatus = false }: { showStatus?: boolean }) {
+  const status = useSyncExternalStore(subscribeStatus, () => cacheStatus);
+  return (
+    <div className={showStatus ? 'cache-settings-status' : undefined}>
+      <button onClick={() => opener?.()}>Cache data from Geo</button>
+      {showStatus && status && (
+        <p role="status">
+          {status.running ? 'Caching' : status.label} · {status.done}/
+          {status.total} tasks
+          {status.errors ? ` · ${status.errors} errors` : ''}
+        </p>
+      )}
+    </div>
+  );
 }
 export default function CachePanel() {
   const [open, setOpen] = useState(false),
@@ -17,6 +43,10 @@ export default function CachePanel() {
     [state, setState] = useState<any>(null),
     [error, setError] = useState(''),
     [starting, setStarting] = useState(false);
+  useEffect(() => {
+    cacheStatus = state;
+    for (const listener of statusListeners) listener();
+  }, [state]);
   const running = useRef(false),
     currentJob = useRef<any>(null),
     lastStart = useRef(0);
@@ -77,12 +107,6 @@ export default function CachePanel() {
   }, [enabled]);
   return (
     <>
-      {!open && state && (
-        <button className="cache-reopen" onClick={() => setOpen(true)}>
-          {state.running ? 'Caching' : 'Cache results'} · {state.done}/
-          {state.total}
-        </button>
-      )}
       {open && (
         <section
           className="cache-panel"

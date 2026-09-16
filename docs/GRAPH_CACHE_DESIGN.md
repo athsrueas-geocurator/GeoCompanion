@@ -39,3 +39,7 @@ Remaining work: optional layer presets that hide schema/layout relations, explic
 ### Retention is not freshness
 
 Browser storage may still be cleared by the browser or user. Stored query results are replaced on successful revalidation, so removed memberships disappear from refreshed views. Unused old query keys remain until explicit clearing; storage-full warnings make this visible rather than silently deleting records. Old retained records are not treated as fresh live data after their freshness window.
+
+### Status placement — 0.5.2
+
+Background cache progress and completion live in the Preferences cache card, in normal document flow. There is no floating status/reopen button on app pages. Home retains its explicit Cache data from Geo opener; both openers reach the same coordinator and activity log. Hiding the panel or changing routes does not cancel a job.

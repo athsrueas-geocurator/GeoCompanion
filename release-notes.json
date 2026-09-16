@@ -1,7 +1,7 @@
 {
-  "title": "Keep saved Geo data and update on return",
+  "title": "Cache status in Preferences",
   "changes": [
-    "Saved Geo data stays until you clear it; it no longer expires or gets evicted to make room.",
-    "Enabled caching updates automatically on return visits. Turning it off pauses updates without deleting saved data."
+    "Cache progress and results now appear in Preferences instead of floating over every page.",
+    "Background caching continues when the progress window is closed."
   ]
 }

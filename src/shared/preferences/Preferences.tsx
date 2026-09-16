@@ -229,7 +229,7 @@ export default function PreferencesPage() {
       </header>
       <main className="preferences-page">
         <PreferencesNav />
-        <CacheButton />
+        <CacheButton showStatus />
         <h1>Preferences & follows</h1>
         <p className="app-intro">
           Manage your reading preferences and followed profiles.

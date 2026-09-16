@@ -46,11 +46,16 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
-.cache-reopen {
-  position: fixed;
-  bottom: 18px;
-  left: 18px;
-  z-index: 1000;
+.cache-settings-status {
+  margin: 16px 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.cache-settings-status p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
 }
 .cache-heading h2 {
   font-size: 22px;
