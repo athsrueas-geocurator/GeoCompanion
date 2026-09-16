@@ -1,5 +1,10 @@
 # Deployment
 
+## Frontend verification - version 0.4.4
+
+Feature 94165829 completed at 2026-09-16T03:16:00.252669Z; metadata 918e3791. Source 9306de6. Unnamed graph endpoints resolve by exact Space identity to its public profile page, preserving canonical edge IDs and label provenance. Production HTTPS browser verified AI and World affairs load, Kevin can be selected and Open on Geo targets the verified profile page. All 91 tests, TypeScript/build, formatting and diff checks passed. Read-only evidence and publisher-derived discovery design: [diagnosis](docs/GRAPH_DISCOVERY_DIAGNOSIS.md). No Geo data was changed or proposal submitted.
+
+
 ## Frontend verification - version 0.4.3
 
 Feature 9e31e73e completed at 2026-09-16T03:07:01.814194Z; metadata 99f7e8f9. Source 61e8cf8. Full-window canvas applet adds directed links, motion controls, neighborhood highlighting, scoped Geo avatars and image export. Local Health check rendered 70 entities, 50 relationships and four opted-in images. Mobile dialog measured 390 x 844 with no horizontal overflow; toolbar and drawer remain accessible. Production HTTPS Health graph and applet verified. All 89 tests, TypeScript/build, formatting and diff checks passed. Native fullscreen remains browser-dependent; the viewport applet does not require it. Bounded discovery and cross-space follow-ups are documented in docs/GRAPH_EXPLORERS.md.

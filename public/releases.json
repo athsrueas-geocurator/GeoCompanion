@@ -1,5 +1,16 @@
 [
   {
+    "id": "94165829-31fb-4e43-919f-db3fa2c73796",
+    "version": "0.4.4",
+    "deployedAt": "2026-09-16T03:16:00.252669Z",
+    "title": "More resilient graph discovery",
+    "changes": [
+      "AI and World affairs now resolve unnamed author identities through their Geo profile pages.",
+      "An unnamed entity no longer prevents its whole network from rendering.",
+      "Graph exports preserve the original identities and record where resolved labels came from."
+    ]
+  },
+  {
     "id": "9e31e73e-f325-4770-b7c0-16837926ebe1",
     "version": "0.4.3",
     "deployedAt": "2026-09-16T03:07:01.814194Z",
