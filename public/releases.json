@@ -1,5 +1,15 @@
 [
   {
+    "id": "d8de2b23-5cbd-4b64-ab2f-372a2c1a7ae4",
+    "version": "0.4.6",
+    "deployedAt": "2026-09-16T03:29:52.322258Z",
+    "title": "Space covers as app icons",
+    "changes": [
+      "Spaces without an avatar now use their Geo cover image, cropped into a beveled square.",
+      "The same icon treatment appears on app cards, workspace icons and featured-space buttons."
+    ]
+  },
+  {
     "id": "92ef5e6b-75f3-40dc-baea-4b0d9220100e",
     "version": "0.4.5",
     "deployedAt": "2026-09-16T03:22:18.989704Z",

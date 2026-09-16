@@ -1,5 +1,10 @@
 # Deployment
 
+## Frontend verification - version 0.4.6
+
+Initial feature d8de2b23 completed at 2026-09-16T03:29:52.322258Z; metadata f5eade6f. Source 6cf37a5, with proportional corner-radius refinement 9e600e7 deployed as b3077fc4. Verified Health scoped Cover against the live API and all six featured-space images in the production browser. Space icons prefer Avatar, then Cover when Avatar is absent, then the shared triangle. Centered square crops and inset bevels are shared across app cards and space buttons. Icon parser tests and TypeScript/build pass. This supersedes the previous Health Avatar publishing request; no Geo change was needed.
+
+
 ## Frontend verification - version 0.4.5
 
 Feature 92ef5e6b completed at 2026-09-16T03:22:18.989704Z; metadata b214b213. Source a52d6da. Shared app registry requires a starting Geo scope; distinct scoped entity contributions choose the app icon source with deterministic ties and a session-only winner cache. Production links verified for Health/Eric Topol and Education/STAR, including three explicit Load more actions for the screenshot debate. Returning Home after changing People from Health to Education changed its fallback mark to the live Education avatar. All 93 tests, TypeScript/build, formatting and diff checks passed. Captured production screenshots for the Discord walkthrough. No Geo writes. See docs/APP_ICON_POLICY.md for scope and caching limits.
