@@ -20,6 +20,8 @@ export function parseRoute(hash) {
   const path = raw.replace(/^\//, '').replace(/\/$/, '');
   if (!path) return { app: 'home', tab: '' };
   if (path === 'preferences') return { app: 'preferences', tab: '' };
+  if (['people', 'research-debates'].includes(path))
+    return { app: path, tab: '' };
   const [app, tab, ...rest] = path.split('/');
   if (rest.length) return { app: 'missing', tab: '' };
   if (app === 'preferences' && ['about', 'changes'].includes(tab))

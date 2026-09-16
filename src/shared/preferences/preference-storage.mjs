@@ -5,6 +5,7 @@ export function emptyPreferences() {
     version: 1,
     textSize: 'standard',
     imageLoading: 'automatic',
+    forceGraph: false,
     profiles: [],
     defaultProfileId: null,
   };
@@ -40,6 +41,7 @@ export function validatePreferences(value) {
     !['standard', 'large'].includes(value.textSize) ||
     (value.imageLoading !== undefined &&
       !['automatic', 'ask'].includes(value.imageLoading)) ||
+    (value.forceGraph !== undefined && typeof value.forceGraph !== 'boolean') ||
     !Array.isArray(value.profiles) ||
     value.profiles.length > MAX_PROFILES
   )
@@ -57,6 +59,7 @@ export function validatePreferences(value) {
     version: 1,
     textSize: value.textSize,
     imageLoading: value.imageLoading ?? 'automatic',
+    forceGraph: value.forceGraph ?? false,
     profiles,
     defaultProfileId: value.defaultProfileId,
   };

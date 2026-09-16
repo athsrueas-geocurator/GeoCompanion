@@ -23,6 +23,7 @@ type Preferences = {
   version: number;
   textSize: string;
   imageLoading: string;
+  forceGraph: boolean;
   profiles: string[];
   defaultProfileId: string | null;
 };
@@ -266,6 +267,20 @@ export default function PreferencesPage() {
           <p id="image-loading-help">
             Choose “Only when I choose” to save data. Each image will have a
             Show image button.
+          </p>
+          <label>
+            <input
+              type="checkbox"
+              checked={value.forceGraph}
+              onChange={(e) =>
+                update((p) => ({ ...p, forceGraph: e.target.checked }))
+              }
+            />
+            Enable optional force-graph explorer
+          </label>
+          <p>
+            Open interactive networks in a pop-out with fullscreen and export
+            tools.
           </p>
         </section>
         <section className="pref-section">

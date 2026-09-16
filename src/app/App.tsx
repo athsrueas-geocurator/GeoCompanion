@@ -1,6 +1,7 @@
 import SpaceIcon from '../shared/branding/SpaceIcon';
 import PreferenceInfo from '../shared/preferences/ReleaseNotes';
 import Brand from '../shared/branding/Brand';
+import { Mark } from '../shared/branding/Brand';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 
 import { parseRoute } from './routes.mjs';
@@ -11,6 +12,7 @@ import PreferencesPage, {
 } from '../shared/preferences/Preferences';
 const EducationApp = lazy(() => import('../apps/education/EducationApp'));
 const OutreachApp = lazy(() => import('../apps/outreach/OutreachApp'));
+const GraphApp = lazy(() => import('../apps/graphs/GraphApp'));
 function Header() {
   return (
     <header>
@@ -53,9 +55,27 @@ function Home() {
               title: 'Indianapolis outreach',
               text: 'Services, schedules & map',
             },
+            {
+              id: '',
+              href: '#/people',
+              title: 'People & contributions',
+              text: 'Explore authorship connections',
+            },
+            {
+              id: '',
+              href: '#/research-debates',
+              title: 'Research debates',
+              text: 'Claims, arguments & sources',
+            },
           ].map((app) => (
-            <a className="app-card" href={app.href} key={app.id}>
-              <SpaceIcon spaceId={app.id} />
+            <a className="app-card" href={app.href} key={app.href}>
+              {app.id ? (
+                <SpaceIcon spaceId={app.id} />
+              ) : (
+                <span className="space-icon" aria-hidden="true">
+                  <Mark />
+                </span>
+              )}
               <span className="app-card-copy">
                 <h2>{app.title}</h2>
                 <p>{app.text}</p>
@@ -113,7 +133,11 @@ export default function App() {
             ? 'Education — Geo Companion'
             : route.app === 'outreach'
               ? 'Indianapolis Outreach — Geo Companion'
-              : 'Page not found — Geo Companion';
+              : route.app === 'people'
+                ? 'People & Contributions — Geo Companion'
+                : route.app === 'research-debates'
+                  ? 'Research Debates — Geo Companion'
+                  : 'Page not found — Geo Companion';
     window.scrollTo(0, 0);
   }, [hash]);
   const navigate = (tab: string) => {
@@ -140,6 +164,8 @@ export default function App() {
           <EducationApp tab={route.tab} setTab={navigate} />
         ) : route.app === 'outreach' ? (
           <OutreachApp tab={route.tab} />
+        ) : ['people', 'research-debates'].includes(route.app) ? (
+          <GraphApp app={route.app} />
         ) : (
           <>
             <Header />

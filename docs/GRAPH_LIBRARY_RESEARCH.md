@@ -1,5 +1,7 @@
 # Graph visualization research
 
+Current implementation: [graph explorers](GRAPH_EXPLORERS.md). The user selected React Flow as default and optional force-graph; earlier renderer recommendations below are historical.
+
 Researched September 15, 2026 (measurements September 16 UTC) for the proposed standalone [People & Contributions and Research Debates apps](PEOPLE_AND_DEBATE_EXPLORE.md). No production dependency or deployment changed.
 
 ## Recommendation

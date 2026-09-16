@@ -1,7 +1,8 @@
 {
-  "title": "More useful live study and outreach data",
+  "title": "Explore people and research relationships",
   "changes": [
-    "Read published outreach hours in the weekly schedule, with provider confirmation links.",
-    "Inspect additional reported education estimates with their units, estimands and p-values."
+    "New People & Contributions and Research Debates apps with readable, focused relationship diagrams.",
+    "Enable the optional force-graph explorer in Preferences for fullscreen exploration, pinning and layout controls.",
+    "Filter and export visible relationships as JSON or CSV, or save a force-graph image."
   ]
 }

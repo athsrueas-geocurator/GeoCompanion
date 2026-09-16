@@ -1,5 +1,7 @@
 # How Geo Companion works
 
+Current implementation: [graph explorers](docs/GRAPH_EXPLORERS.md). React Flow is the default; force-graph is an optional lazy-loaded pop-out.
+
 This document describes the implemented system. Proposed infrastructure is explicitly separated below. Feature-specific documents contain the exact query contracts.
 
 This describes current source, not an automatic deployment of every committed change. Start with the [README teaching tour](README.md#a-tour-from-publication-to-pixels) for query and transformation examples. [DEPLOYMENT.md](DEPLOYMENT.md) records the actual hosted release.
