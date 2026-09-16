@@ -14,7 +14,42 @@ As a teacher, I spent a lot of time putting numbers on students when I would rat
 
 This is also an experiment in what an agent can help one person orchestrate. There is research, data organization, publishing, interface design, hosting, and all the work of getting those pieces to agree with one another. I wanted to see how far I could take an idea by working through those connections with an agent. My role is still to decide what matters, question the results, and write and curate my own thoughts. The technology should give me more room to do that thoughtfully.
 
-[Open the app](https://geocompanion.dpdns.org/) · [Architecture](ARCHITECTURE.md) · [Development](docs/DEVELOPMENT.md) · [Deployment record](DEPLOYMENT.md) · [Unfinished work](TODO.md)
+[Open the app](https://geocompanion.dpdns.org/) · [Architecture](ARCHITECTURE.md) · [Development](docs/DEVELOPMENT.md) · [Deployment record](DEPLOYMENT.md) · [Unfinished work](TODO.md) · [Credits](#credits-and-acknowledgments)
+
+## Credits and acknowledgments
+
+Geo Companion is possible because of the people building Geo, publishing knowledge, and maintaining the open-source tools below. Thank you for making these building blocks available.
+
+### Geo and the people behind the knowledge
+
+**[Geo](https://www.geobrowser.io/)** is the foundation: the shared knowledge graph, public API, spaces, entities, relationships, and published content that these views explore. Credit belongs to the Geo team and community, space editors and members, and the authors and curators who contribute the knowledge. Companion supplies an additional interface; it is an independent project, not an official Geo product.
+
+The [Geo application](https://github.com/geobrowser/geogenesis) provides upstream application and schema references. The [Geo SDK](https://github.com/geobrowser/geo-sdk) supports the separate publishing workflow; it is not a dependency of this browser reader. Space icons, cover images, entity images, and authored writing are read from their published Geo records, with media retrieved through IPFS. Their creators retain credit and applicable rights.
+
+Researchers, dataset producers, and outreach organizations deserve credit for the underlying findings and service information. Individual records link back to their sources; inclusion in a visualization does not make that content Companion-authored or imply endorsement. Related research and publishing repositories are listed [below](#related-repositories-and-responsibilities).
+
+### Graphs and maps
+
+| Project / community | How Companion uses it |
+| --- | --- |
+| **[React Flow, by xyflow](https://reactflow.dev/)** (`@xyflow/react`) | Interactive relationship diagrams, custom nodes, navigation, and accessible graph controls. The Turbo Flow example inspired the card styling; the implementation uses the open-source package. |
+| **[force-graph, by vasturiano](https://github.com/vasturiano/force-graph)** | Animated canvas networks, node interaction, directional edges, and custom drawing in the optional explorer. Its examples helped shape the full-window experience. |
+| **[Dagre](https://github.com/dagrejs/dagre)** | Automatic layout of the structured React Flow diagrams. |
+| **[D3](https://d3js.org/)** and its contributors | Force simulation and other visualization foundations used through force-graph's dependency stack. |
+| **[Leaflet](https://leafletjs.com/)** | Interactive geographic maps and map layers. |
+| **[OpenStreetMap contributors](https://www.openstreetmap.org/copyright)** | Basemap data and the public map tiles used by the application. Attribution is also displayed on the maps. |
+
+### Interface, infrastructure, and development
+
+- **[React and React DOM](https://react.dev/)** build and render the interface; **[react-markdown / remark](https://github.com/remarkjs/react-markdown)** renders published Markdown.
+- **[IPFS](https://ipfs.tech/)** supplies content-addressed media infrastructure; **[Pinata](https://pinata.cloud/)** supplies the configured public IPFS gateway.
+- **[Cloudflare](https://developers.cloudflare.com/)** supplies Pages hosting and the optional Workers, Durable Objects, and D1 coordination services. **[Wrangler](https://github.com/cloudflare/workers-sdk)** handles deployment and local service development.
+- **[DM Sans](https://fonts.google.com/specimen/DM+Sans)** and **[Manrope](https://fonts.google.com/specimen/Manrope)**, their designers and contributors, and **[Google Fonts](https://fonts.google.com/)** provide the interface typography.
+- **[Vite](https://vite.dev/)** and its React plugin, **[TypeScript](https://www.typescriptlang.org/)**, **[Node.js](https://nodejs.org/)**, **[npm](https://www.npmjs.com/)**, and **[Prettier](https://prettier.io/)** support development, builds, testing, and formatting. **[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)** supplies the installed React and Leaflet type definitions; **[ws](https://github.com/websockets/ws)** supports coordination test tooling.
+- **[GitHub](https://github.com/)** hosts the source and collaboration history. **[OpenAI Codex](https://openai.com/codex/)** assisted with research, implementation, testing, and documentation under the project owner's direction.
+- Thanks to the **Geo community members whose suggestions shaped the People and Research Debates apps**, and to everyone maintaining the transitive dependencies these tools rely on.
+
+The [package manifest](package.json) and [lockfile](package-lock.json) record direct and transitive JavaScript dependencies and resolved versions. This acknowledgment is not a replacement for their licenses and copyright notices. The repository's [MIT license](LICENSE) covers its own code; upstream software, fonts, maps, images, research, and Geo content retain their respective licenses and terms. Preserve upstream notices and visible attribution when reusing this project.
 
 ## What this project teaches
 
