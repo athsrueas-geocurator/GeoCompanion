@@ -1,7 +1,8 @@
 {
-  "title": "Space covers as app icons",
+  "title": "Working fullscreen and live entity detail tables",
   "changes": [
-    "Spaces without an avatar now use their Geo cover image, cropped into a beveled square.",
-    "The same icon treatment appears on app cards, workspace icons and featured-space buttons."
+    "The network explorer now enters true fullscreen using a supported container.",
+    "Hover over a node for its published properties and relationships; click or select to keep it open.",
+    "Entity details load on demand and reuse the browser cache."
   ]
 }

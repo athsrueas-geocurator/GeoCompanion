@@ -3,6 +3,7 @@ import ForceGraph from 'force-graph';
 import { usePreferences } from '../preferences/Preferences';
 import { loadNodeImages, neighborhood, toForceData } from './force-data.mjs';
 import type { GraphData } from './types';
+import EntityPopup from './EntityPopup';
 export default function ForceApplet({
   graph,
   onSelect,
@@ -143,13 +144,15 @@ export default function ForceApplet({
         .linkDirectionalParticleSpeed(0.003)
         .autoPauseRedraw(true)
         .onNodeHover((n) => {
+          el.style.cursor = n ? 'pointer' : 'grab';
+          // Keep the preview readable while moving from the canvas into its table.
+          if (!n || latched.current) return;
           highlight.current = neighborhood(
             graph,
             n ? String(n.id) : latched.current,
           );
           setActive(n ? String(n.id) : latched.current);
           refresh();
-          el.style.cursor = n ? 'pointer' : 'grab';
         })
         .onNodeClick((n) => {
           latched.current = String(n.id);
@@ -428,6 +431,15 @@ export default function ForceApplet({
           current?.label ||
           'Hover or tap to highlight neighbors. Drag to pin. Scroll or pinch to zoom.'}
       </div>
+      {current && (
+        <EntityPopup
+          node={current}
+          onClose={() => {
+            latched.current = '';
+            mark('');
+          }}
+        />
+      )}
     </div>
   );
 }

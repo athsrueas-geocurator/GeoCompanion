@@ -37,8 +37,10 @@ export default function GraphWorkbench({
     [selected, setSelected] = useState(''),
     [open, setOpen] = useState(false),
     [drawer, setDrawer] = useState(false),
-    [fullError, setFullError] = useState('');
+    [fullError, setFullError] = useState(''),
+    [fullscreen, setFullscreen] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null),
+    fullTarget = useRef<HTMLDivElement>(null),
     opener = useRef<HTMLButtonElement>(null);
   const filters = useMemo(
     () => ({ focus, neighborhood, relation, search }),
@@ -54,12 +56,27 @@ export default function GraphWorkbench({
   useEffect(() => {
     if (open) dialog.current?.showModal();
     else if (dialog.current?.open) {
-      if (document.fullscreenElement === dialog.current)
+      if (document.fullscreenElement === fullTarget.current)
         void document.exitFullscreen().catch(() => {});
       dialog.current.close();
       opener.current?.focus();
     }
   }, [open]);
+  useEffect(() => {
+    const change = () => {
+      setFullscreen(document.fullscreenElement === fullTarget.current);
+      setFullError('');
+    };
+    document.addEventListener('fullscreenchange', change);
+    return () => {
+      document.removeEventListener('fullscreenchange', change);
+      if (
+        document.fullscreenElement === fullTarget.current &&
+        document.fullscreenElement
+      )
+        void document.exitFullscreen().catch(() => {});
+    };
+  }, []);
   const node = visible.nodes.find((n) => n.id === selected);
   const kinds = [
     ...new Map(graph.edges.map((e) => [e.type, e.label])).entries(),
@@ -212,7 +229,7 @@ export default function GraphWorkbench({
         onClose={() => setOpen(false)}
       >
         {open && value.forceGraph && (
-          <>
+          <div ref={fullTarget} className="graph-fullscreen-content">
             <div className="graph-dialog-heading">
               <h2 id="force-title">Network explorer</h2>
               <span className="force-count">
@@ -228,9 +245,10 @@ export default function GraphWorkbench({
               <button
                 onClick={async () => {
                   try {
-                    if (document.fullscreenElement)
+                    setFullError('');
+                    if (document.fullscreenElement === fullTarget.current)
                       await document.exitFullscreen();
-                    else await dialog.current?.requestFullscreen();
+                    else await fullTarget.current?.requestFullscreen();
                   } catch {
                     setFullError(
                       'Fullscreen is unavailable. The expanded explorer is still usable.',
@@ -238,7 +256,7 @@ export default function GraphWorkbench({
                   }
                 }}
               >
-                Fullscreen
+                {fullscreen ? 'Exit fullscreen' : 'Fullscreen'}
               </button>
               <button onClick={() => setOpen(false)}>Close explorer</button>
             </div>
@@ -264,7 +282,7 @@ export default function GraphWorkbench({
                 <ForceApplet graph={visible} onSelect={setSelected} />
               </Suspense>
             </GraphErrorBoundary>
-          </>
+          </div>
         )}
       </dialog>
     </section>
