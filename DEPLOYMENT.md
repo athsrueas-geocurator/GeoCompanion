@@ -1,5 +1,13 @@
 # Deployment
 
+## 0.5.1 — Persistent retention and revisit updates
+
+Feature `530128b0` completed 2026-09-16T05:14:54.830882Z; metadata `bb3067f5`; source `21d6e7f`.
+Saved records no longer expire or undergo age/capacity eviction. The 30-minute interval is freshness only. Enabled visits start bounded refresh passes, and visible return after 30 minutes refreshes again. Disabling pauses updates without deleting records; explicit Clear remains the deletion operation. At the 16 MiB budget, writes report failure rather than discarding retained entries. Refresh failures preserve prior records.
+
+98 tests and TypeScript/Vite build passed. Browser verified enabled startup begins caching automatically and turning off stops the pass. Production HTTPS shows the new retention and opt-out controls. Browser storage eviction is still outside application control. See docs/GRAPH_CACHE_DESIGN.md.
+
+
 ## 0.5.0 — Larger networks and optional local caching
 
 Feature deployment `a053b619` completed 2026-09-16T05:00:25.634101Z; release metadata deployment `707c4db5`. Source commit `10f039d`.
