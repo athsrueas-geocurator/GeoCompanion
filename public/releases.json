@@ -1,5 +1,15 @@
 [
   {
+    "id": "1ac970b2-d4e9-4dd1-b7be-f7cafc3e6b30",
+    "version": "0.4.2",
+    "deployedAt": "2026-09-16T02:49:37.193751Z",
+    "title": "Clearer preference controls",
+    "changes": [
+      "Choose text size and image loading with clearly grouped options.",
+      "Turn the force-graph explorer on or off with a labeled switch."
+    ]
+  },
+  {
     "id": "0be681a2-bd02-48cf-9f5e-4ba90dfeab39",
     "version": "0.4.1",
     "deployedAt": "2026-09-16T02:36:51.596124Z",

@@ -1,5 +1,10 @@
 # Deployment
 
+## Frontend verification - version 0.4.2
+
+Feature `1ac970b2` completed at `2026-09-16T02:49:37.193751Z`; metadata `cf6b65b5`. Source `3b9b4fa`. Reading preferences now have bordered native radio groups and an accessible force-graph On/Off switch, with help text contained in the relevant setting. Verified locally at 375px with Larger text: no horizontal overflow, all controls update and persist after reload. Production HTTPS browser renders the new controls. TypeScript/build, six targeted preference/theme tests, formatting and diff checks passed. Storage and data behavior unchanged.
+
+
 ## Frontend verification - version 0.4.1
 
 Feature deployment `0be681a2` completed at `2026-09-16T02:36:51.596124Z`; metadata deployment `3906de24`. Source `a55d886`. Graph apps now use the normal full-width header and consistent responsive type sizes, and discover pinned spaces from Root's Featured topic tags. Production browser verified all six live pins and a 1265px header with a 48px heading. Local Health pin selection rendered live authorship; loaded mobile document and scroll widths were both 375px with 32px heading and 16px graph inputs. All 86 tests, build, formatting and diff checks pass. See [featured flag semantics and limits](docs/GRAPH_EXPLORERS.md). No Geo writes or account-level pins were changed.
