@@ -1,5 +1,16 @@
 # Deployment
 
+## 0.4.8 — Toggle graph detail tables
+
+Deployed September 16, 2026 at 04:09:29 UTC (Cloudflare completion time).
+Feature deployment: `68fd488a`; release metadata deployment: `bb9918da`.
+Source commit: `6025460`.
+
+View controls now includes **Show entity details**, allowing the table to be hidden or restored while the graph remains open. Neighborhood highlighting stays active. Hiding the table prevents new detail reads; the setting resets when the applet is reopened.
+
+Validation: TypeScript/Vite build passed; browser verification confirmed the table appeared, disappeared, and reappeared without closing the graph. The toggle is present on the production HTTPS site.
+
+
 ## Frontend verification - version 0.4.7
 
 Feature 233a69f7 completed at 2026-09-16T04:00:34.959073Z; metadata b51229a2. Source 5aeda04. Production HTTPS browser verified native fullscreen entry (Exit fullscreen control), successful exit (Fullscreen control), and a live STAR entity table with source, description and supporting/opposing relationships. Fullscreen uses a div inside the dialog; calling requestFullscreen on the dialog was the actual previous defect. All 95 tests, build, formatting and diff checks pass. The table is bounded to 32 scoped values and 20 scoped outgoing relations with truncation disclosure, 300ms hover delay, stale-response guard and shared memory caching. Screenshot: outputs/fullscreen-entity-table.png (local artifact). No Geo writes.

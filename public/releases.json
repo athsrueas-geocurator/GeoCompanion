@@ -1,5 +1,15 @@
 [
   {
+    "id": "68fd488a-4dab-448d-8963-3dd07369492d",
+    "version": "0.4.8",
+    "deployedAt": "2026-09-16T04:09:29.185515Z",
+    "title": "Toggle graph detail tables",
+    "changes": [
+      "Show or hide entity detail tables from View controls while the graph stays open.",
+      "Neighborhood highlighting stays active when tables are hidden."
+    ]
+  },
+  {
     "id": "233a69f7-1a34-4005-a750-8eb65e1919c1",
     "version": "0.4.7",
     "deployedAt": "2026-09-16T04:00:34.959073Z",
