@@ -132,7 +132,10 @@ export default function GraphWorkbench({ graph }: { graph: GraphData }) {
             Isolate connections
           </button>{' '}
           <a
-            href={`https://www.geobrowser.io/space/${node.space}/${node.id}`}
+            href={
+              node.geoUrl ||
+              `https://www.geobrowser.io/space/${node.space}/${node.id}`
+            }
             target="_blank"
             rel="noopener noreferrer"
           >

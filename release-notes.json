@@ -1,8 +1,8 @@
 {
-  "title": "A full-window interactive network explorer",
+  "title": "More resilient graph discovery",
   "changes": [
-    "Explore animated directional networks in a canvas-first applet with compact controls.",
-    "Highlight neighbors by hovering, tapping or selecting a node; show Geo avatars where available.",
-    "Keep filters and exports in a drawer, with pause, image and reduced-motion controls."
+    "AI and World affairs now resolve unnamed author identities through their Geo profile pages.",
+    "An unnamed entity no longer prevents its whole network from rendering.",
+    "Graph exports preserve the original identities and record where resolved labels came from."
   ]
 }

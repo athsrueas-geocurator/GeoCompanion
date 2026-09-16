@@ -18,6 +18,8 @@ JSON and CSV export only the visible semantic nodes/edges, scope and partial sta
 
 ## Remaining work and publisher needs
 
+September 16 label resolution: [AI/World affairs diagnosis and discovery plan](GRAPH_DISCOVERY_DIAGNOSIS.md). Valid unnamed endpoints no longer reject the entire page; exact-ID Space-to-page resolution supplies available profile labels without changing relation identity.
+
 - People currently means explicit authorship. Public user edit history, identity-to-Person mappings, curator roles, affiliations and expertise assessments need separately verified contracts. Never infer them from names or degree.
 - Research currently shows explicit sources/supporting/opposing/related edges. Community-voted current-relevance assessments need the attributable claim structure described in [the proposal](PEOPLE_AND_DEBATE_EXPLORE.md). No popularity-to-relevance inference is implemented.
 - Resolve entity memberships before broad cross-space navigation; current links retain the scope in which the relation was read.

@@ -41,11 +41,15 @@ const cell = (value) => {
 };
 export function exportGraph(graph, format, filters = {}) {
   // Export semantic data only; never simulation objects, private preferences or inferred edges.
-  const nodes = graph.nodes.map(({ id, label, space }) => ({
-    id,
-    label,
-    space,
-  }));
+  const nodes = graph.nodes.map(
+    ({ id, label, space, labelSource, labelEntityId }) => ({
+      id,
+      label,
+      space,
+      labelSource,
+      labelEntityId,
+    }),
+  );
   const edges = graph.edges.map(
     ({ id, source, target, label, type, space }) => ({
       id,

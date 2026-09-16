@@ -1,0 +1,222 @@
+{
+  "at": "2026-09-16T03:11:39.854Z",
+  "endpoint": "https://api-testnet.geobrowser.io/graphql",
+  "query": "query GraphSlice($space:UUID!,$kinds:[UUID!]!,$after:Cursor){relationsConnection(first:50,after:$after,filter:{spaceId:{is:$space},typeId:{in:$kinds}}){nodes{id spaceId typeId type{id name} fromEntity{id name} toEntity{id name}}pageInfo{hasNextPage endCursor}}}",
+  "pages": [
+    {
+      "name": "AI",
+      "variables": {
+        "space": "41e851610e13a19441c4d980f2f2ce6b",
+        "kinds": [
+          "91a9e2f6e51a48f7997661de8561b690",
+          "edb97803943444999c2cf0bc1fd8e067"
+        ],
+        "after": null
+      },
+      "status": 200,
+      "ms": 169,
+      "count": 50,
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiMWIzZDU4MWItZTFiMy00MmQ3LWIxNzktNzhiYjU3NWEyNDE4Il1d"
+      },
+      "unnamedRelations": [
+        {
+          "id": "16fe9c1fffdc4acd9159e3f476be8914",
+          "spaceId": "41e851610e13a19441c4d980f2f2ce6b",
+          "typeId": "91a9e2f6e51a48f7997661de8561b690",
+          "type": {
+            "id": "91a9e2f6e51a48f7997661de8561b690",
+            "name": "Authors"
+          },
+          "fromEntity": {
+            "id": "c08eb24cf39b4e7985b70e76dde31bd4",
+            "name": "Kevin — GPT-6 Astra is AGI"
+          },
+          "toEntity": {
+            "id": "e8173628fb65f0957475a58933040614",
+            "name": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Crypto",
+      "variables": {
+        "space": "c9f267dcb0d270718c2a3c45a64afd32",
+        "kinds": [
+          "91a9e2f6e51a48f7997661de8561b690",
+          "edb97803943444999c2cf0bc1fd8e067"
+        ],
+        "after": null
+      },
+      "status": 200,
+      "ms": 107,
+      "count": 50,
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiMjY3NTI1MDgtZTYxZS00ZTZkLTk3ZDUtYjQ0MDc3YzRhZTFkIl1d"
+      },
+      "unnamedRelations": []
+    },
+    {
+      "name": "Health",
+      "variables": {
+        "space": "52c7ae149838b6d47ce0f3b2a5974546",
+        "kinds": [
+          "91a9e2f6e51a48f7997661de8561b690",
+          "edb97803943444999c2cf0bc1fd8e067"
+        ],
+        "after": null
+      },
+      "status": 200,
+      "ms": 70,
+      "count": 50,
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiODMxMzk5ZjMtZDYzNi00Yzg3LWFiNTktNDU0ZDhjMGQxMmIwIl1d"
+      },
+      "unnamedRelations": []
+    },
+    {
+      "name": "Relationships",
+      "variables": {
+        "space": "224406e0de3c48d78ef12774111b8b2f",
+        "kinds": [
+          "91a9e2f6e51a48f7997661de8561b690",
+          "edb97803943444999c2cf0bc1fd8e067"
+        ],
+        "after": null
+      },
+      "status": 200,
+      "ms": 210,
+      "count": 50,
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiOTNmNTFjMGMtZjU0Ni00ZGZjLTg0ZDMtZWU3MmI0NGY3NDM5Il1d"
+      },
+      "unnamedRelations": []
+    },
+    {
+      "name": "US Politics",
+      "variables": {
+        "space": "4582fbbee28a16589154f7e36f1ee3c5",
+        "kinds": [
+          "91a9e2f6e51a48f7997661de8561b690",
+          "edb97803943444999c2cf0bc1fd8e067"
+        ],
+        "after": null
+      },
+      "status": 200,
+      "ms": 100,
+      "count": 50,
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiODI4MmEwYjQtOTZiZC00MzAwLThlMTItNDQyYjExZDhjMWE0Il1d"
+      },
+      "unnamedRelations": []
+    },
+    {
+      "name": "World affairs",
+      "variables": {
+        "space": "89bd89bf28ff8a0963faf92a8c905e20",
+        "kinds": [
+          "91a9e2f6e51a48f7997661de8561b690",
+          "edb97803943444999c2cf0bc1fd8e067"
+        ],
+        "after": null
+      },
+      "status": 200,
+      "ms": 220,
+      "count": 50,
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiNGRlM2Q1NzQtMjAzZi00N2Y5LTk5ODYtMTA0MzM2ZTI0ZWQzIl1d"
+      },
+      "unnamedRelations": [
+        {
+          "id": "307852e11e6c4f848c3ef1fd9b80a782",
+          "spaceId": "89bd89bf28ff8a0963faf92a8c905e20",
+          "typeId": "91a9e2f6e51a48f7997661de8561b690",
+          "type": {
+            "id": "91a9e2f6e51a48f7997661de8561b690",
+            "name": "Authors"
+          },
+          "fromEntity": {
+            "id": "8f903ed062154740aba339e6b0e177fc",
+            "name": "Kevin — The United States should leave NATO"
+          },
+          "toEntity": {
+            "id": "e8173628fb65f0957475a58933040614",
+            "name": null
+          }
+        }
+      ]
+    }
+  ],
+  "target": {
+    "at": "2026-09-16T03:11:54.781Z",
+    "query": "query InspectTarget($id:UUID!){entity(id:$id){id name spaceIds types{id name} values(first:30){nodes{spaceId propertyId text}pageInfo{hasNextPage endCursor}} relations(first:20){nodes{id spaceId typeId toEntityId toEntity{id name}}pageInfo{hasNextPage endCursor}}}space(id:$id){id type page{id name}topic{id name}}}",
+    "variables": {
+      "id": "e8173628fb65f0957475a58933040614"
+    },
+    "status": 200,
+    "data": {
+      "entity": {
+        "id": "e8173628fb65f0957475a58933040614",
+        "name": null,
+        "spaceIds": [
+          "e8173628fb65f0957475a58933040614"
+        ],
+        "types": [],
+        "relations": {
+          "nodes": [
+            {
+              "id": "4cd19a0e118a56b3847b80d925c17aa9",
+              "spaceId": "e8173628fb65f0957475a58933040614",
+              "typeId": "88b3d6ad288c529ca2120e1c24819185",
+              "toEntityId": "2ff7ea098b9e50bc9be78a0cafa268d0",
+              "toEntity": {
+                "id": "2ff7ea098b9e50bc9be78a0cafa268d0",
+                "name": "System"
+              }
+            },
+            {
+              "id": "7128d46c798d5c8f8cfa8c6077f2397a",
+              "spaceId": "e8173628fb65f0957475a58933040614",
+              "typeId": "88b3d6ad288c529ca2120e1c24819185",
+              "toEntityId": "f4ce7263ed1456c5aafe8b74428ce812",
+              "toEntity": {
+                "id": "f4ce7263ed1456c5aafe8b74428ce812",
+                "name": "Space"
+              }
+            },
+            {
+              "id": "7945be73bdac5e228592e23cc8634406",
+              "spaceId": "e8173628fb65f0957475a58933040614",
+              "typeId": "88b3d6ad288c529ca2120e1c24819185",
+              "toEntityId": "09d28123178f5828b85a81979389c746",
+              "toEntity": {
+                "id": "09d28123178f5828b85a81979389c746",
+                "name": "EOA Space"
+              }
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false,
+            "endCursor": "WyJwcmltYXJ5X2tleV9hc2MiLFsiNzk0NWJlNzMtYmRhYy01ZTIyLTg1OTItZTIzY2M4NjM0NDA2Il1d"
+          }
+        }
+      },
+      "space": {
+        "id": "e8173628fb65f0957475a58933040614",
+        "type": "PERSONAL",
+        "page": {
+          "id": "3d2b574689854e65a01cc6a97834e1bc",
+          "name": "Kevin"
+        },
+        "topic": null
+      }
+    }
+  }
+}

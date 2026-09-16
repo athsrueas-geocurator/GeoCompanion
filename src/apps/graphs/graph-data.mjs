@@ -9,6 +9,8 @@ export const ROLES = {
 };
 export const GRAPH_QUERY = `query GraphSlice($space:UUID!,$kinds:[UUID!]!,$after:Cursor){relationsConnection(first:50,after:$after,filter:{spaceId:{is:$space},typeId:{in:$kinds}}){nodes{id spaceId typeId type{id name} fromEntity{id name} toEntity{id name}}pageInfo{hasNextPage endCursor}}}`;
 const uuid = (id) => typeof id === 'string' && /^[a-f0-9]{32}$/.test(id);
+const readable = (name) => typeof name === 'string' && !!name.trim();
+export const GRAPH_SPACES_QUERY = `query GraphEndpointSpaces($ids:[UUID!]!){spaces(first:20,filter:{id:{in:$ids}}){id type page{id name}}}`;
 export function parseGraph(data, space, kinds) {
   const p = data?.relationsConnection;
   if (
@@ -30,22 +32,21 @@ export function parseGraph(data, space, kinds) {
       e.type?.id !== e.typeId
     )
       throw Error('A relationship has an invalid scope or identity.');
-    if (
-      [e.fromEntity.name, e.toEntity.name, e.type.name].some(
-        (name) => typeof name !== 'string' || !name.trim(),
-      )
-    )
-      throw Error(
-        'A relationship is missing a readable label. Refresh to try again.',
-      );
     for (const n of [e.fromEntity, e.toEntity])
-      nodes.set(n.id, { id: n.id, label: n.name, space });
+      nodes.set(n.id, {
+        id: n.id,
+        label: readable(n.name) ? n.name.trim() : `Unnamed entity · ${n.id}`,
+        labelSource: readable(n.name) ? 'entity' : 'identifier',
+        space,
+      });
     edges.push({
       id: e.id,
       source: e.fromEntity.id,
       target: e.toEntity.id,
       type: e.typeId,
-      label: e.type.name,
+      label: readable(e.type.name)
+        ? e.type.name.trim()
+        : `Relationship · ${e.typeId}`,
       space,
     });
   }
@@ -57,17 +58,67 @@ export function parseGraph(data, space, kinds) {
     next: p.pageInfo.hasNextPage ? p.pageInfo.endCursor : null,
   };
 }
+// A relation endpoint can be a Space identity whose separate page carries its name.
+// Resolve by exact identity, never by a title fragment or a guessed person's name.
+export async function resolveGraphLabels(graph, reader = geoReader) {
+  const ids = graph.nodes
+    .filter((n) => n.labelSource === 'identifier')
+    .map((n) => n.id);
+  const resolved = new Map();
+  for (let i = 0; i < ids.length; i += 20) {
+    const batch = ids.slice(i, i + 20);
+    const spaces = await reader.read(
+      GRAPH_SPACES_QUERY,
+      { ids: batch },
+      (d) => {
+        if (!Array.isArray(d?.spaces))
+          throw Error('Space names could not be read.');
+        const seen = new Set();
+        for (const s of d.spaces) {
+          if (
+            !batch.includes(s.id) ||
+            seen.has(s.id) ||
+            (s.page && !uuid(s.page.id))
+          )
+            throw Error('A space name has an invalid identity.');
+          seen.add(s.id);
+        }
+        return d.spaces;
+      },
+      'graph-space-labels-1',
+    );
+    for (const s of spaces) {
+      if (readable(s.page?.name)) resolved.set(s.id, s.page);
+    }
+  }
+  return {
+    ...graph,
+    nodes: graph.nodes.map((n) => {
+      const page = resolved.get(n.id);
+      return page
+        ? {
+            ...n,
+            label: page.name.trim(),
+            labelSource: 'space-page',
+            labelEntityId: page.id,
+            geoUrl: `https://www.geobrowser.io/space/${n.id}/${page.id}`,
+          }
+        : n;
+    }),
+  };
+}
 /** @param {string} space @param {string} app @param {string|null} after */
-export function readGraph(space, app, after = null) {
+export async function readGraph(space, app, after = null) {
   if (!uuid(space)) throw Error('Enter a 32-character Geo space ID.');
   const kinds =
     app === 'people'
       ? [ROLES.authors, ROLES.author]
       : [ROLES.supports, ROLES.opposes, ROLES.related, ROLES.source];
-  return geoReader.read(
+  const graph = await geoReader.read(
     GRAPH_QUERY,
     { space, kinds, after },
     (d) => parseGraph(d, space, kinds),
-    'graph-slice-1',
+    'graph-slice-2',
   );
+  return resolveGraphLabels(graph);
 }

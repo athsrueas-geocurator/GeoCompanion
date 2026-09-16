@@ -18,6 +18,8 @@
 
 # TODO
 
+- [ ] Extend graph discovery with bounded incoming/outgoing focused expansion, collection entry points and explicit cross-space scope selection; follow [the verified diagnosis and design](docs/GRAPH_DISCOVERY_DIAGNOSIS.md). Do not propose AI-space repairs for the resolved frontend-only profile-label error.
+
 Live-data follow-up: see the [September 15 audit](docs/DATA_AUDIT_2026-09-15.md) for publisher execution/index reconciliation, education comparison metadata, and outreach eligibility/meal/closure fields. Version 0.3.5 exposes individual estimates and published weekly hours without inferring comparability or current availability.
 
 - [x] September 14: restore live Reading First/Perry observation panels. Geo decimal strings now remain typed numbers in reusable adapters; Reading First’s seven effects and four actual-versus-counterfactual means, plus Perry’s 24 named-arm pairs and 24 perspective/horizon-labelled scenarios, rendered on the deployed site. Tests (70), formatting, production build and keyboard/table checks passed. Browser verification found dark-mode, zero-overflow Reading First tables at 375px and 1265px. Version 0.3.1 feature deployment `fca83e06`; metadata deployment `b67e320f`. Source commit `b3082e3` and release record `4bb7540` are pushed. No Geo content was changed.

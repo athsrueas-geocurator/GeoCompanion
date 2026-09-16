@@ -1,4 +1,11 @@
-export type GraphNode = { id: string; label: string; space: string };
+export type GraphNode = {
+  id: string;
+  label: string;
+  space: string;
+  labelSource?: string;
+  labelEntityId?: string;
+  geoUrl?: string;
+};
 export type GraphEdge = {
   id: string;
   source: string;
