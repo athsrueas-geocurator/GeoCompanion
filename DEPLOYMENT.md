@@ -1,5 +1,11 @@
 # Deployment
 
+## 0.5.2 — Cache status in Preferences
+
+Feature `496c2b9a` completed 2026-09-16T14:57:47.224015Z; metadata `eeeab845`; source `f206d9b`.
+Removed the globally floating cache status button. Preferences now shows progress/results inline beside its cache opener. The home opener remains; the coordinator continues across navigation. Browser verified inline running status in Preferences, no status overlay on Home during the same job, and production Preferences over HTTPS. TypeScript/Vite build and staged diff checks passed. No cache retention or query behavior changed.
+
+
 ## 0.5.1 — Persistent retention and revisit updates
 
 Feature `530128b0` completed 2026-09-16T05:14:54.830882Z; metadata `bb3067f5`; source `21d6e7f`.

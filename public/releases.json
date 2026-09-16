@@ -1,5 +1,15 @@
 [
   {
+    "id": "496c2b9a-30f5-43de-9327-76f955c862f9",
+    "version": "0.5.2",
+    "deployedAt": "2026-09-16T14:57:47.224015Z",
+    "title": "Cache status in Preferences",
+    "changes": [
+      "Cache progress and results now appear in Preferences instead of floating over every page.",
+      "Background caching continues when the progress window is closed."
+    ]
+  },
+  {
     "id": "530128b0-b8bc-43b3-9177-06ea7337b7bd",
     "version": "0.5.1",
     "deployedAt": "2026-09-16T05:14:54.830882Z",
