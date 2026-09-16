@@ -1,5 +1,10 @@
 # Deployment
 
+## Frontend verification - version 0.4.1
+
+Feature deployment `0be681a2` completed at `2026-09-16T02:36:51.596124Z`; metadata deployment `3906de24`. Source `a55d886`. Graph apps now use the normal full-width header and consistent responsive type sizes, and discover pinned spaces from Root's Featured topic tags. Production browser verified all six live pins and a 1265px header with a 48px heading. Local Health pin selection rendered live authorship; loaded mobile document and scroll widths were both 375px with 32px heading and 16px graph inputs. All 86 tests, build, formatting and diff checks pass. See [featured flag semantics and limits](docs/GRAPH_EXPLORERS.md). No Geo writes or account-level pins were changed.
+
+
 ## Frontend verification - version 0.4.0
 
 Feature deployment `41f103f7` completed at `2026-09-16T02:26:55.603001Z`; metadata deployment `599c40cc`. Source `63ab27b`. Two standalone graph apps now use React Flow by default and a Preferences-enabled force-graph pop-out. Production HTTPS and direct Geo debate rendering verified; local browser verified authorship, STAR opposing-argument focus, preference persistence, force canvas and pause. Mobile dialog measured 374px inside a 375px document without horizontal overflow. Embedded-browser fullscreen was unavailable; the fallback message and expanded dialog worked, so native fullscreen success is not claimed. All 83 tests, TypeScript/build, formatting and diff checks pass. Current scope and follow-ups: [graph explorers](docs/GRAPH_EXPLORERS.md). No Geo writes, VM or Worker deployment.
