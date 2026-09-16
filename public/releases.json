@@ -1,5 +1,16 @@
 [
   {
+    "id": "9e31e73e-f325-4770-b7c0-16837926ebe1",
+    "version": "0.4.3",
+    "deployedAt": "2026-09-16T03:07:01.814194Z",
+    "title": "A full-window interactive network explorer",
+    "changes": [
+      "Explore animated directional networks in a canvas-first applet with compact controls.",
+      "Highlight neighbors by hovering, tapping or selecting a node; show Geo avatars where available.",
+      "Keep filters and exports in a drawer, with pause, image and reduced-motion controls."
+    ]
+  },
+  {
     "id": "1ac970b2-d4e9-4dd1-b7be-f7cafc3e6b30",
     "version": "0.4.2",
     "deployedAt": "2026-09-16T02:49:37.193751Z",

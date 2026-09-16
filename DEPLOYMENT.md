@@ -1,5 +1,10 @@
 # Deployment
 
+## Frontend verification - version 0.4.3
+
+Feature 9e31e73e completed at 2026-09-16T03:07:01.814194Z; metadata 99f7e8f9. Source 61e8cf8. Full-window canvas applet adds directed links, motion controls, neighborhood highlighting, scoped Geo avatars and image export. Local Health check rendered 70 entities, 50 relationships and four opted-in images. Mobile dialog measured 390 x 844 with no horizontal overflow; toolbar and drawer remain accessible. Production HTTPS Health graph and applet verified. All 89 tests, TypeScript/build, formatting and diff checks passed. Native fullscreen remains browser-dependent; the viewport applet does not require it. Bounded discovery and cross-space follow-ups are documented in docs/GRAPH_EXPLORERS.md.
+
+
 ## Frontend verification - version 0.4.2
 
 Feature `1ac970b2` completed at `2026-09-16T02:49:37.193751Z`; metadata `cf6b65b5`. Source `3b9b4fa`. Reading preferences now have bordered native radio groups and an accessible force-graph On/Off switch, with help text contained in the relevant setting. Verified locally at 375px with Larger text: no horizontal overflow, all controls update and persist after reload. Production HTTPS browser renders the new controls. TypeScript/build, six targeted preference/theme tests, formatting and diff checks passed. Storage and data behavior unchanged.
