@@ -1,5 +1,14 @@
 # Deployment
 
+## 0.5.0 — Larger networks and optional local caching
+
+Feature deployment `a053b619` completed 2026-09-16T05:00:25.634101Z; release metadata deployment `707c4db5`. Source commit `10f039d`.
+
+Verified production HTTPS home page and opt-in cache controls (disabled by default). Local browser verification: bounded pass completed 197 tasks, discovering 5,623 distinct entity IDs with zero task errors; reload reused saved graph pages to render 253 nodes and 200 links. Incoming/outgoing expansion increased that slice to 257 nodes and 205 links. Continue in background leaves the coordinator mounted across app routes. These are observed slices, not space totals. 98 tests, TypeScript/Vite build and staged diff checks passed. No Geo writes.
+
+See [graph and cache design](docs/GRAPH_CACHE_DESIGN.md) for limits, storage/freshness rules, adapter coverage, and remaining work. Cache progress counts tasks; storage is bounded to an estimated 16 MiB and a 30-minute fresh-read window. This release does not promise a complete offline snapshot or work after the tab closes.
+
+
 ## 0.4.8 — Toggle graph detail tables
 
 Deployed September 16, 2026 at 04:09:29 UTC (Cloudflare completion time).

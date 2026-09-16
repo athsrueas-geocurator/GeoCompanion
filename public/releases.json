@@ -1,5 +1,16 @@
 [
   {
+    "id": "a053b619-1619-4fa3-9452-faed367b18b3",
+    "version": "0.5.0",
+    "deployedAt": "2026-09-16T05:00:25.634101Z",
+    "title": "Larger networks and optional local caching",
+    "changes": [
+      "Explore all published relationships and expand incoming and outgoing connections.",
+      "Show up to 1,000 nodes in the network explorer and load more without closing it.",
+      "Use Cache data from Geo on the home page to prepare app data, inspect progress, or continue in the background. Local caching is optional."
+    ]
+  },
+  {
     "id": "68fd488a-4dab-448d-8963-3dd07369492d",
     "version": "0.4.8",
     "deployedAt": "2026-09-16T04:09:29.185515Z",

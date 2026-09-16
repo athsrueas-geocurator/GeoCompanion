@@ -1,6 +1,6 @@
 # How Geo Companion works
 
-Current implementation: [graph explorers](docs/GRAPH_EXPLORERS.md). React Flow is the default; force-graph is an optional lazy-loaded pop-out.
+Current implementation: [graph explorers](docs/GRAPH_EXPLORERS.md). Version 0.5.0 adds [larger networks and opt-in persistent cache jobs](docs/GRAPH_CACHE_DESIGN.md); that contract supersedes the historical memory-only cache and graph-size descriptions below. React Flow is the default; force-graph is an optional lazy-loaded pop-out.
 
 This document describes the implemented system. Proposed infrastructure is explicitly separated below. Feature-specific documents contain the exact query contracts.
 
