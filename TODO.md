@@ -345,3 +345,6 @@ Details and open decisions: [Ideas to explore](docs/EXPERIMENTS.md). Recording t
 - [ ] Complete the broader people/history and relevance-claim contracts. The standalone graph apps have an initial authorship/argument reader and dual renderers; see [implemented scope and remaining work](docs/GRAPH_EXPLORERS.md).
 
 - [ ] Extend the bounded cache warmers to older atlas, curation, map and argument readers; see docs/GRAPH_CACHE_DESIGN.md. Add graph layer presets, durable job resume, explicit cross-space expansion and optional network-byte budgets.
+
+- [x] 0.5.3: release live native-table dossier overview and refresh, with alias-aware record/subject counts; 103 tests, build and HTTPS asset verification passed.
+- [ ] Complete mobile/light-mode visual verification of dossier overview (browser unavailable during 0.5.3 deployment).

@@ -1,5 +1,16 @@
 [
   {
+    "id": "cd04f8b6-7814-42cb-ad12-1f3082035d88",
+    "version": "0.5.3",
+    "deployedAt": "2026-09-17T04:27:23.984779Z",
+    "title": "Explore the original education collection",
+    "changes": [
+      "Explore categories, methods and outcome tags with interactive charts and linked records.",
+      "The overview reads native Geo tables and distinguishes source records from distinct subjects.",
+      "Source-reported economic models appear separately from observed effects."
+    ]
+  },
+  {
     "id": "496c2b9a-30f5-43de-9327-76f955c862f9",
     "version": "0.5.2",
     "deployedAt": "2026-09-16T14:57:47.224015Z",

@@ -1,5 +1,11 @@
 # Deployment
 
+## 0.5.3 — Live original-collection overview
+
+Feature deployment `cd04f8b6` completed `2026-09-17T04:27:23.984779Z`; metadata deployment `d0c05f9e`; source commit `ee5255f`.
+Category, method and outcome charts discover native dossier table rows and canonical subjects. Explicit overview refresh replaces successful reads; historical assessments remain narrative. Source-reported economic models have a separate renderer.
+All 103 tests and TypeScript/Vite build passed. Live HTTPS returned 200 and entry/dossier assets matched the built release. Earlier desktop browser verification passed; browser tooling was unavailable this deployment session, so repeat mobile/light-mode visual verification remains outstanding. See docs/DOSSIER_OVERVIEW.md.
+
 ## 0.5.2 — Cache status in Preferences
 
 Feature `496c2b9a` completed 2026-09-16T14:57:47.224015Z; metadata `eeeab845`; source `f206d9b`.
