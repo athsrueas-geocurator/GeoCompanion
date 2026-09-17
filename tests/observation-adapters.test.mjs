@@ -4,6 +4,9 @@ import {
   meanPanels,
   pairedObserved,
   economicScenarios,
+  compatibleEffects,
+  modeledEconomicResults,
+  reportedEstimates,
 } from '../src/apps/education/observation-adapters.mjs';
 import { F } from '../src/apps/education/dataset-data.mjs';
 const row = (fields) => ({ id: 'a'.repeat(32), fields, relations: [] });
@@ -28,6 +31,44 @@ test('mean panels preserve typed zero means and reported context', () => {
       followup: 'Spring',
     },
   ]);
+});
+test('a published model status excludes generic values from observed-effect views', () => {
+  const model = row([
+    value(F.netFinancialGain, 15456),
+    value(F.unit, '2018 USD per participant; net financial gain', false),
+    value(F.observationKind, 'Source-reported model', false),
+    value('97e14050fc49467bb3aaf4d7eccbbb69', 2018),
+  ]);
+  model.name = 'Source model result';
+  assert.equal(compatibleEffects([model]).length, 0);
+  assert.equal(reportedEstimates([model]).length, 0);
+  assert.deepEqual(modeledEconomicResults([model]), [
+    {
+      id: 'a'.repeat(32),
+      name: 'Source model result',
+      value: 15456,
+      unit: '2018 USD per participant; net financial gain',
+      priceYear: 2018,
+      sourceTable: null,
+    },
+  ]);
+});
+test('corrected tutoring learning effects cannot enter benefit-cost scenarios', () => {
+  const rows = [
+    { id: '9b94180ac02b464a9bd1a2c873d75e97', value: 0.37 },
+    { id: '25f0ec3189e4427cbdb294d2016b692d', value: 0.288 },
+  ].map(({ id, value }) => ({
+    id,
+    name: 'Tutoring pooled learning effect',
+    fields: [
+      { id: F.effect, value, numeric: true },
+      { id: F.unit, value: 'standard deviations', numeric: false },
+    ],
+    relations: [],
+    unavailable: false,
+  }));
+  assert.equal(economicScenarios(rows).length, 0);
+  assert.deepEqual(reportedEstimates(rows).map((row) => row.id), rows.map((row) => row.id));
 });
 test('mean panels accept the decimal strings returned by Geo GraphQL', () => {
   const result = meanPanels([

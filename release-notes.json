@@ -1,7 +1,8 @@
 {
-  "title": "Cache status in Preferences",
+  "title": "Explore the original education collection",
   "changes": [
-    "Cache progress and results now appear in Preferences instead of floating over every page.",
-    "Background caching continues when the progress window is closed."
+    "Explore categories, methods and outcome tags with interactive charts and linked records.",
+    "The overview reads native Geo tables and distinguishes source records from distinct subjects.",
+    "Source-reported economic models appear separately from observed effects."
   ]
 }

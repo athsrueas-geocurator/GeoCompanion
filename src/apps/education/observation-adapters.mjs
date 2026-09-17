@@ -114,6 +114,34 @@ export function economicScenarios(rows) {
     ];
   });
 }
+function isSourceReportedModel(row) {
+  return field(row, F.observationKind) === 'Source-reported model';
+}
+// This is deliberately narrower than a title or unit-text heuristic. The
+// publisher adds the controlled field only after source review, so generic
+// numeric estimates stay out unless Geo explicitly classifies them as models.
+export function modeledEconomicResults(rows) {
+  return rows.flatMap((row) => {
+    const value = field(row, F.netFinancialGain),
+      unit = field(row, F.unit);
+    if (
+      !isSourceReportedModel(row) ||
+      !isNumeric(value) ||
+      typeof unit !== 'string'
+    )
+      return [];
+    return [
+      {
+        id: row.id,
+        name: row.name,
+        value: Number(value),
+        unit,
+        priceYear: field(row, '97e14050fc49467bb3aaf4d7eccbbb69'),
+        sourceTable: field(row, '84dacbddca6a44079edb5e11a4c66b40'),
+      },
+    ];
+  });
+}
 export function compatibleEffects(rows) {
   return rows.flatMap((row) => {
     const value = field(row, F.effect),
@@ -122,6 +150,7 @@ export function compatibleEffects(rows) {
       followup = field(row, F.followup);
     const grades = relation(row, F.grade);
     if (
+      isSourceReportedModel(row) ||
       !isNumeric(value) ||
       typeof unit !== 'string' ||
       typeof measure !== 'string' ||
@@ -150,6 +179,7 @@ export function reportedEstimates(rows) {
     const unit = field(row, F.unit);
     if (
       row.unavailable ||
+      isSourceReportedModel(row) ||
       plotted.has(row.id) ||
       !f?.numeric ||
       !isNumeric(f.value) ||

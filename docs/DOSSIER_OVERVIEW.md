@@ -1,0 +1,9 @@
+# Live original-collection overview
+
+September 16 local implementation; not yet deployed. `DossierOverview.tsx` adds an on-demand overview to the evidence atlas. `dossier-data.mjs` discovers collection Data blocks under the published Education source-record page, completes ordered membership cursors, and hydrates rows through the shared browser reader/cache. Only the root page and semantic property IDs are configured; row IDs, group labels, counts and table IDs are discovered.
+
+The publisher contract is `../geo-publisher/docs/original-dossier-tables-publication-2026-09-17.md`. Fields are source-attributed Text annotations, not universal ontology classifications. Initiative method lists and source outcome tags split on the reviewed delimiter; source method labels remain verbatim. References identifies the canonical subject. Preserve source aliases as separate records while counting unique subjects separately. Assessments are intentionally not parsed from Markdown.
+
+Live reader verification returned 182 records, 177 distinct subjects, and 13 initiative categories. Browser verification displayed 76 initiative records/subjects and category charts. Three regression tests cover alias counting, label/list semantics and conflicting-field rejection. TypeScript/Vite build passed. No publication or Cloudflare deployment was performed. Browser queries go directly to Geo through the existing shared reader, with no VM forwarding.
+
+Remaining: connect overview selection to main atlas detail/comparison navigation, add explicit refresh integration and cache-job warming, verify mobile/light mode before deployment, and add source-overlap visuals from canonical bibliography relations. The overview currently loads on request and uses shared cache freshness on subsequent loads. It does not poll while left open.

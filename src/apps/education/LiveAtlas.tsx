@@ -11,6 +11,7 @@ import { safeUrl } from './data.mjs';
 import './live-atlas.css';
 import { Arguments } from './ArgumentExplorer';
 import GeoReference from '../../shared/geo/GeoReference';
+import DossierOverview from './DossierOverview';
 type Ref = { id: string; name: string; spaces?: string[] };
 type Entry = {
   id: string;
@@ -228,6 +229,7 @@ export default function LiveAtlas({
           Refresh
         </button>
       </div>
+      {!questions && <DossierOverview />}
       {!questions && (categoryCounts.size > 0 || rows.length > 0) && (
         <section
           className="atlas-category-summary"

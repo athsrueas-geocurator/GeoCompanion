@@ -4,6 +4,7 @@ import {
   meanPanels,
   pairedObserved,
   economicScenarios,
+  modeledEconomicResults,
   compatibleEffects,
   isNumeric,
 } from './observation-adapters.mjs';
@@ -20,12 +21,14 @@ export default function ObservationPanels({ rows }: { rows: any[] }) {
   const means = meanPanels(rows) as MeanPanel[];
   const pairs = pairedObserved(rows),
     scenarios = economicScenarios(rows),
+    modeled = modeledEconomicResults(rows),
     effects = compatibleEffects(rows);
   if (
     !means.length &&
     !pairs.length &&
     !scenarios.length &&
     !effects.length &&
+    !modeled.length &&
     !reported.length
   )
     return null;
@@ -201,6 +204,39 @@ export default function ObservationPanels({ rows }: { rows: any[] }) {
                     <td>{s.discountRate ?? 'Not stated'}</td>
                     <td>{s.deadweightLoss ?? 'Not stated'}</td>
                     <td>{s.valuation ?? 'Not stated'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+      {modeled.length > 0 && (
+        <section className="observation-panel">
+          <h3>Source-reported modeled economic results</h3>
+          <p>
+            These are source models, not observed treatment effects or a
+            cross-study ranking.
+          </p>
+          <div className="atlas-comparison-table" role="region" tabIndex={0}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Finding</th>
+                  <th>Modeled value</th>
+                  <th>Unit and scope</th>
+                  <th>Price year</th>
+                  <th>Source table</th>
+                </tr>
+              </thead>
+              <tbody>
+                {modeled.map((m: any) => (
+                  <tr key={m.id}>
+                    <th scope="row">{m.name}</th>
+                    <td>{m.value}</td>
+                    <td>{m.unit}</td>
+                    <td>{m.priceYear ?? 'Not stated'}</td>
+                    <td>{m.sourceTable ?? 'Not stated'}</td>
                   </tr>
                 ))}
               </tbody>
